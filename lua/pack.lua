@@ -4,7 +4,8 @@ local split = vim.split
 local glob = vim.fn.glob
 local homepath = os.getenv("HOME")
 
-local paths = split(glob('~/.config/nvim/lua/config/*/plugins.lua'),'\n')
+-- local paths = split(glob('~/.config/nvim/lua/config/*/plugins.lua'),'\n')
+local paths = split(glob('~/.config/nvim/lua/*/plugins.lua'),'\n')
 local list = {}
 for i in ipairs(paths) do
 	list[i] = string.sub(paths[i],#homepath+19,-5)
