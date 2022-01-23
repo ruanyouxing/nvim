@@ -13,7 +13,8 @@ local tools = {
 	 }},
 	 "rcarriga/nvim-notify",
 	 'vimwiki/vimwiki',
-	 {"ellisonleao/glow.nvim",run=':GlowInstall'},
+	 {"ellisonleao/glow.nvim",run=':GlowInstall'}, 
+	 'numToStr/Navigator.nvim',
 	 'dstein64/vim-startuptime',
  }
 return tools

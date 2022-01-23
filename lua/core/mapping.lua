@@ -25,6 +25,11 @@ nmap('lg',cmd('lua _lazygit_toggle()'))
 nmap('R',cmd("Lspsaga rename"))
 
 
+require('Navigator').setup()
+nmap(alt('h'),cmd('lua require("Navigator").left()'))
+nmap(alt('j'),cmd('lua require("Navigator").down()'))
+nmap(alt('k'),cmd('lua require("Navigator").up()'))
+nmap(alt('l'),cmd('lua require("Navigator").right()'))
 nmap(ctrl('a'),"ggVG")
 
 --Window navigations

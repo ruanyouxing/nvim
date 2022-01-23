@@ -2,7 +2,7 @@ local themes = {
 	{"rose-pine/neovim",as = 'rose-pine'},
 	{"catppuccin/nvim",as = "catppuccin"},
 	"folke/tokyonight.nvim",
-	--"projekt0n/circles.nvim",
+	"projekt0n/circles.nvim",
 	{"nvim-lualine/lualine.nvim", requires = {
 		'arkav/lualine-lsp-progress'
 	}},
