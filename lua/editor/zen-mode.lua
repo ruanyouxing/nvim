@@ -2,9 +2,9 @@ local zen_mode = require('zen-mode')
 
 local cfg= {
   window = {
-    backdrop = 0.8,  
-    width = 120,  
-    height = 1,  
+    backdrop = 0.8,
+    width = 120,
+    height = 1,
     options = {
     },
   },
@@ -15,7 +15,7 @@ local cfg= {
       showcmd = false, -- disables the command in the last line of the screen
     },
     twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-    gitsigns = { enabled = false},  
+    gitsigns = { enabled = false},
     tmux = { enabled = false }, -- disables the tmux statusline
     kitty = {
       enabled = false,

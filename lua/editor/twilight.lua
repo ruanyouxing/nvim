@@ -5,8 +5,8 @@ local cfg = {
     inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
   },
   context = 10, -- amount of lines we will try to show around the current line
-  treesitter = true,  
-  expand = {   
+  treesitter = true,
+  expand = {
     "function",
     "method",
     "table",

@@ -1,5 +1,4 @@
 vim.cmd[[packadd nvim-gps]]
-vim.cmd[[packadd symbols-outline.nvim]]
 local lualine = require('lualine')
 local gps = require('nvim-gps')
 
