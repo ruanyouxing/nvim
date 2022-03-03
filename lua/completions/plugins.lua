@@ -13,6 +13,7 @@ local completions = {
 	'ray-x/lsp_signature.nvim',
 	'folke/trouble.nvim',
 	{'onsails/lspkind-nvim', after = 'nvim-cmp'},
+	'github/copilot.vim',
 }
 
 return completions
