@@ -1,14 +1,14 @@
 vim.cmd[[packadd toggleterm.nvim]]
 
 require('toggleterm').setup({
-	size=15,
+	size=7,
 	border = "curved",
 	hide_numbers = true,
 	shade_filetypes = {"none","fzf"},
 	shade_terminals = true,
 	shading_factor = 1,
 	start_in_insert = true,
-	direction ="float",
+	direction ="horizontal",
 	persist_size = true,
 	shell="fish",
 	close_on_exit = true,

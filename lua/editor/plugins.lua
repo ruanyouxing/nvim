@@ -32,6 +32,5 @@ local editor = {
 	 {'Pocco81/AutoSave.nvim'},
 	 {gitlab("yorickpeterse/nvim-window"),as = 'nvim-window',opt = true},
 	 'edluffy/specs.nvim',
-	{'glepnir/lspsaga.nvim',after = 'nvim-lspconfig'},
 }
 return editor

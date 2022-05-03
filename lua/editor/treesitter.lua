@@ -1,5 +1,5 @@
 require("nvim-treesitter.configs").setup {
-   ensure_installed = 'maintained',
+   ensure_installed = 'all',
    sync_install = true,
 
    ignore_install = {"beancount","d","dart","elm","erlang","fennel","foam","fortran","glsl","glimmer","hcl","gdresource","hjson","julia","kotlin","ledger","ocaml","ocaml_interface","ocamllex","pascal","pioasm","prisma","pug","scala","supercollider","surface","teal","tlaplus","turtle","verilog","yang","zig","r","rasi","sparql","swift","gomod","gowork","gdscript","go","fusion","devicetree","cuda","commonlisp","clojure","cmake","c_sharp","graphql","heex","svelte","vue","vim","godot_resource","nix","fish","llvm","ninja","perl","scss","tsx","elixir","make","ruby","ql","query",},

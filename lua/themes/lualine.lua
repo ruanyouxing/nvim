@@ -1,6 +1,6 @@
 vim.cmd[[packadd nvim-gps]]
-local lualine = require('lualine')
 local gps = require('nvim-gps')
+local lualine = require('lualine')
 
 local function gps_content()
 if gps.is_available() then
@@ -14,7 +14,8 @@ local symbols_outline = {
         sections = {
             lualine_a = {'mode'},
             lualine_b = {'filetype'},
-            lualine_c = {},
+            lualine_c = {
+	    },
             lualine_x = {},
             lualine_y = {},
             lualine_z = {'location'}
@@ -34,8 +35,8 @@ local cfg = {
             lualine_a = {"mode"},
             lualine_b = {{"branch"}, {"diff"}},
             lualine_c = {
-                {'lsp_progress'}, {gps_content, cond = gps.is_available}
-            },
+		    {'lsp_progress'}, {gps_content, cond = gps.is_available}
+	    },
             lualine_x = {
                 {
                     "diagnostics",
@@ -44,7 +45,7 @@ local cfg = {
                 }
             },
             lualine_y = {"filetype", "encoding", "fileformat"},
-            lualine_z = {"progress", "location"}
+ --           lualine_z = {progress", "location"}
         },
         inactive_sections = {
             lualine_a = {},

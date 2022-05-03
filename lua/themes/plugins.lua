@@ -9,6 +9,7 @@ local themes = {
 	'Mofiqul/vscode.nvim',
 	'shaunsingh/nord.nvim',
 	{'Mofiqul/dracula.nvim',as = 'dracula'},
+	{'SmiteshP/nvim-gps'}
 
 }
 

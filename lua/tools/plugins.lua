@@ -3,18 +3,17 @@ local tools = {
 	 requires = {"kyazdani42/nvim-web-devicons"},},
 	{"akinsho/toggleterm.nvim",opt = true},
 	"glepnir/dashboard-nvim",
-	"SmiteshP/nvim-gps",
-	{"iamcco/markdown-preview.nvim",run = 'cd app && yarn install'},
 	 {"nvim-telescope/telescope.nvim",
 	 requires = { --Extensions
 		 {"sharkdp/fd"},
 		 {"BurntSushi/ripgrep"},
-		 {'nvim-telescope/telescope-media-files.nvim'},
 	 }},
 	 "rcarriga/nvim-notify",
 	 'vimwiki/vimwiki',
-	 'numToStr/Navigator.nvim',
 	 'dstein64/vim-startuptime',
+	 {'iamcco/markdown-preview.nvim',run = 'cd app && yarn install'},
+	 {'lewis6991/impatient.nvim', config = function() require'impatient'.enable_profile() end},
+	 'xiyaowong/nvim-transparent'
  }
 return tools
 

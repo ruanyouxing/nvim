@@ -54,19 +54,6 @@ capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
 
-local function switch_source_header_splitcmd(bufnr, splitcmd)
-    bufnr = nvim_lsp.util.validate_bufnr(bufnr)
-    local params = {uri = vim.uri_from_bufnr(bufnr)}
-    vim.lsp.buf_request(bufnr, "textDocument/switchSourceHeader", params,
-                        function(err, result)
-        if err then error(tostring(err)) end
-        if not result then
-            print("Corresponding file can’t be determined")
-            return
-        end
-        vim.api.cmd(splitcmd .. " " .. vim.uri_to_fname(result))
-    end)
-end
 
 lsp_installer.on_server_ready(function(server)
     local opts = {}

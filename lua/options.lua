@@ -22,8 +22,8 @@ set.incsearch=true
 set.ignorecase=true
 set.smartcase=true
 set.hlsearch=true
-set.cursorline=true
-set.cursorcolumn=true
+set.cursorline=false
+set.cursorcolumn=false
 set.background='dark'
 set.pumheight=11
 set.encoding="utf-8"
@@ -33,7 +33,7 @@ vim.o.termguicolors = true
 g.loaded_matchit = 1
 g.matchup_surround_enabled = 1
 
-vim.cmd('colorscheme nord')
+vim.cmd('colorscheme catppuccin')
 g.smartindent=true
 g.syntax_on=true
 g.python_host_prog= '/usr/bin/python'

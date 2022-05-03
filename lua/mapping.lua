@@ -7,7 +7,7 @@ local opts= {silent=true,noremap=true}
 local function nmap(key,cmd) return map('n',key,cmd,opts) end
 --local function imap(key,cmd) return map('i',key,cmd,opts) end
 
--- local function vmap(key,cmd) return map('v',key,cmd,opts) end
+local function vmap(key,cmd) return map('v',key,cmd,opts) end
 -- local function tmap(key,cmd) return map('t',key,cmd,opts) end
 local function ctrl(key) return string.format('<C-%s>',key) end
 local function alt(key) return string.format('<A-%s>',key) end
@@ -19,17 +19,10 @@ vim.opt.timeoutlen = 97
 function mapping.config()
 nmap('<Space>','<NOP>')
 vim.g.mapleader =  " "
-nmap('gd',cmd("Lspsaga preview_definition"))
-nmap('gh',cmd("Lspsaga lsp_finder"))
+vmap("<leader>",'<NOP>')
 nmap('lg',cmd('lua _lazygit_toggle()'))
-nmap('R',cmd("Lspsaga rename"))
 
 
-require('Navigator').setup()
-nmap(alt('h'),cmd('lua require("Navigator").left()'))
-nmap(alt('j'),cmd('lua require("Navigator").down()'))
-nmap(alt('k'),cmd('lua require("Navigator").up()'))
-nmap(alt('l'),cmd('lua require("Navigator").right()'))
 nmap(ctrl('a'),"ggVG")
 
 --Window navigations

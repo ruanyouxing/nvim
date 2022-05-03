@@ -2,13 +2,7 @@ local actions = require('telescope.actions')
 local trouble = require('trouble')
 local telescope = require('telescope')
 local cfg ={
-extensions = {
-    media_files = {
-      -- defaults to {"png", "jpg", "mp5", "webm", "pdf"}
-      filetypes = {"png", "webp", "jpg", "jpeg"},
-      find_cmd = "fd" -- find command (defaults to `fd`)
-    },
-  },
+extensions = {},
   mappings = {
 	i = {
 		["<esc>"] = actions.close,
@@ -20,4 +14,3 @@ extensions = {
 
 
 telescope.setup(cfg)
-telescope.load_extension('media_files')
