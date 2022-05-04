@@ -17,7 +17,6 @@ local servers = {
   'bashls',
   'clangd',
   'cssls',
-  'hls',
   'html',
   'ltex',
   'pyright',
