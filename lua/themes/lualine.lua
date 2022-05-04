@@ -14,8 +14,7 @@ local symbols_outline = {
         sections = {
             lualine_a = {'mode'},
             lualine_b = {'filetype'},
-            lualine_c = {
-	    },
+            lualine_c = { require('auto-session-library').current_session_name},
             lualine_x = {},
             lualine_y = {},
             lualine_z = {'location'}

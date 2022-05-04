@@ -5,6 +5,7 @@ end
 
 local editor = {
 	 {'windwp/nvim-autopairs', opt = true},
+	 'rmagatti/auto-session',
 	 {'gelguy/wilder.nvim',
 		 requires = {'roxma/nvim-yarp',
 			 'roxma/vim-hug-neovim-rpc',
@@ -28,7 +29,7 @@ local editor = {
 	         {'windwp/nvim-ts-autotag',after = 'nvim-treesitter'},
 	         {'p00f/nvim-ts-rainbow',after = 'nvim-treesitter'},
 	 	 {'andymass/vim-matchup',after = 'nvim-treesitter'},
-		 {'romgrk/nvim-treesitter-context',opts = true},
+		 {'romgrk/nvim-treesitter-context'},
 	 }},
 	 {'Pocco81/AutoSave.nvim'},
 	 {gitlab("yorickpeterse/nvim-window"),as = 'nvim-window',opt = true},
