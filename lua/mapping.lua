@@ -30,7 +30,6 @@ nmap(ctrl('b'),ctrl('w'))
 
 nmap(ctrl('n'),cmd("NvimTreeToggle"))
 nmap(ctrl(string.sub(alt('p'),4,-2)),cmd("Telescope"))
-nmap(ctrl('j'),cmd('lua require("nvim-window").pick()'))
 nmap(ctrl('r'),cmd("source %"))
 nmap(ctrl('s'),cmd('AerialToggle'))
 -- nmap(ctrl('s'),cmd("w!"))

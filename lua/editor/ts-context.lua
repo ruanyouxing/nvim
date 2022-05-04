@@ -1,4 +1,3 @@
-vim.cmd[[packadd nvim-treesitter-context]]
 require'treesitter-context'.setup{
     enable = true,
     throttle = true,
