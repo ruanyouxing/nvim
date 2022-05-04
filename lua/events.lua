@@ -1,7 +1,6 @@
 local events = {}
 
 local cmd = vim.api.nvim_command
-
 function events.initialize(augroup)
 for group_name, definition in pairs(augroup) do
         cmd("augroup " .. group_name)
@@ -21,7 +20,6 @@ local augroup =  {
 	},
 	specs = {
 		{'CursorMoved','*','lua require("specs").show_specs()'},
-		{'CursorMovedI','*','lua require("specs").show_specs()'}
 	},
 	autoload = {
 	--	{'InsertLeave','*.lua','source %'},
