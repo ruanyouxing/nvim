@@ -19,7 +19,6 @@ require("aerial").setup({
   highlight_closest = true,
   highlight_on_hover = false,
   highlight_on_jump = 300,
-  icons = {},
   ignore = {
     unlisted_buffers = true,
     filetypes = {},

@@ -1,10 +1,6 @@
-function gitlab(repo)
-	return 'https://gitlab.com/'..repo
-
-end
 
 local editor = {
-	 {'windwp/nvim-autopairs', opt = true},
+	 'windwp/nvim-autopairs',
 	 'rmagatti/auto-session',
 	 {'gelguy/wilder.nvim',
 		 requires = {'roxma/nvim-yarp',
@@ -15,11 +11,9 @@ local editor = {
 		vim.g.better_escape_shortcut = "jk"
 		vim.g.escape_interval = "100"
 	 end},
-	 {'terrortylor/nvim-comment',opt = true},
 	 'itchyny/vim-cursorword',
 	 'lukas-reineke/indent-blankline.nvim',
-	-- {'simrat39/symbols-outline.nvim',after = 'nvim-lspconfig'},
-	 'stevearc/aerial.nvim',
+	 {'stevearc/aerial.nvim',after = 'nvim-lspconfig'},
 	 'akinsho/bufferline.nvim',
 	 {'dstein64/nvim-scrollview',event = 'BufRead'},
 	 {'folke/zen-mode.nvim', requires = 'folke/twilight.nvim',},
@@ -31,8 +25,9 @@ local editor = {
 	 	 {'andymass/vim-matchup',after = 'nvim-treesitter'},
 		 {'romgrk/nvim-treesitter-context'},
 	 }},
-	 {'Pocco81/AutoSave.nvim'},
-	 {gitlab("yorickpeterse/nvim-window"),as = 'nvim-window',opt = true},
+	 'Pocco81/AutoSave.nvim',
 	 'edluffy/specs.nvim',
+	 'abecodes/tabout.nvim',
+	 'terrortylor/nvim-comment',
 }
 return editor
