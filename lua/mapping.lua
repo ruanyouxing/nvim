@@ -21,8 +21,7 @@ nmap('<Space>','<NOP>')
 vim.g.mapleader =  " "
 vmap("<leader>",'<NOP>')
 nmap('lg',cmd('lua _lazygit_toggle()'))
-
-
+nmap('U','UndoTreeToggle')
 nmap(ctrl('a'),"ggVG")
 
 --Window navigations

@@ -23,7 +23,7 @@ end
 
 
 function pack.load_plugin_list()
-local plugin_path = split(glob('~/.config/nvim/lua/*/plugins.lua'),'\n')
+local plugin_path = split(glob('~/.config/nvim/lua/plugins.lua'),'\n')
 local list = {}
 for i in ipairs(plugin_path) do
 	list[i] = string.sub(plugin_path[i],#homepath+19,-5)
@@ -54,24 +54,10 @@ function pack.config()
 end
 
 
-local function load_config()
-local config_dir = '~/.config/nvim/lua'
-
-local paths = split(glob(config_dir..'/*/*lua'),'\n')
-	for i in pairs(paths) do
-		local files = paths[i].sub(paths[i],#homepath+19,-5)
-		require(files)
-	end
-end
-
-local load_core = function()
     pack.bootstrap()
     pack.config()
     pack.load_plugin_list()
     mapping.config()
-    load_config()
     opts.config()
     events.load_groups()
-end
 
-load_core()
