@@ -1,6 +1,7 @@
 config = {}
 
 function config.cmp()
+	vim.cmd[[packadd nvim-cmp]]
 	function highlight(name,guifg,guibg)
 		return (name..' '..guifg..' '..guibg)
 	end

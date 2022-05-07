@@ -10,8 +10,7 @@ local plugins = {
 	 {'Pocco81/AutoSave.nvim',config = editor.autosave()},
 	 {'rmagatti/auto-session',config = editor.autosession()},
 	 {'lukas-reineke/indent-blankline.nvim', config = editor.blankline()},
-	 {'max397574/better-escape.nvim',opt = false,event = 'InsertEnter',config = editor.better_escape(),
-		requires = {"rhysd/accelerated-jk"}},
+	 {'max397574/better-escape.nvim',event = 'InsertEnter',config = editor.better_escape()},
 	 {'akinsho/bufferline.nvim', config = editor.bufferline()},
 	 {'norcalli/nvim-colorizer.lua',opt = true, config = editor.colorizer()},
 	 {'terrortylor/nvim-comment', config = editor.comments()},
@@ -78,6 +77,7 @@ local plugins = {
 	{'folke/trouble.nvim', config = completion.trouble()},
 
 
+	 'rhysd/accelerated-jk',
 	 'github/copilot.vim',
 	 'onsails/lspkind-nvim',
 	 {'dstein64/nvim-scrollview',event = 'BufRead'},
@@ -86,6 +86,5 @@ local plugins = {
 	 'dstein64/vim-startuptime',
 	 'vimwiki/vimwiki',
 }
-
 
 return plugins

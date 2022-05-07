@@ -146,6 +146,7 @@ function config.blankline()
 end
 
 function config.better_escape()
+	vim.cmd[[packadd better-escape.nvim]]
 	require('better_escape').setup({
 		mapping = {'jk','jj'},
 		timeout = 100,
