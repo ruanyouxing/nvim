@@ -10,11 +10,15 @@ local function nmap(key,cmd) return map('n',key,cmd,opts) end
 local function vmap(key,cmd) return map('v',key,cmd,opts) end
 -- local function tmap(key,cmd) return map('t',key,cmd,opts) end
 local function ctrl(key) return string.format('<C-%s>',key) end
+local function plug(cmd) return string.format('<Plug>%s',cmd) end
 local function alt(key) return string.format('<A-%s>',key) end
 local function leader(key) return string.format('<leader>%s',key) end
 local function cmd(command) return string.format(':%s<CR>',command) end
 vim.opt.timeoutlen = 97
 
+
+nmap('j',plug('(accelerated_jk_j)'))
+nmap('k',plug('(accelerated_jk_k)'))
 
 function mapping.config()
 nmap('<Space>','<NOP>')
