@@ -33,7 +33,7 @@ vim.o.termguicolors = true
 g.loaded_matchit = 1
 g.matchup_surround_enabled = 1
 
-vim.cmd('colorscheme catppuccin')
+vim.cmd('colorscheme nord')
 g.smartindent=true
 g.syntax_on=true
 g.python_host_prog= '/usr/bin/python'

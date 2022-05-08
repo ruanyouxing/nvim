@@ -9,17 +9,8 @@ local homepath = os.getenv("HOME")
 local pack = {}
 
 
-function pack.bootstrap()
-local data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
-local packer_dir = data_dir .. "/pack/packer/opt/packer.nvim"
-local state = vim.loop.fs_stat(packer_dir)
-if not state then
-	local cmd = "!git clone https://github.com/wbthomason/packer.nvim " .. packer_dir
-	vim.cmd(cmd)
-	vim.loop.fs_mkdir(data_dir .. "lua",511,
-	function() assert("make compile path failed")end)
-end
-end
+-- function pack.bootstrap()
+-- end
 
 
 function pack.load_plugin_list()
@@ -40,6 +31,17 @@ return use(repos)
 end
 
 function pack.config()
+local data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
+local packer_dir = data_dir .. "/pack/packer/opt/packer.nvim"
+local state = vim.loop.fs_stat(packer_dir)
+if not state then
+	local cmd = "!git clone https://github.com/wbthomason/packer.nvim " .. packer_dir
+	vim.cmd(cmd)
+	vim.loop.fs_mkdir(data_dir .. "lua",511,
+	function() assert("make compile path failed")end)
+end
+
+
 	vim.cmd('packadd packer.nvim')
 	require('packer').startup({function(use)
 	  use {'wbthomason/packer.nvim',opt = true}
@@ -54,10 +56,18 @@ function pack.config()
 end
 
 
-    pack.bootstrap()
+
+    -- pack.bootstrap()
     pack.config()
     pack.load_plugin_list()
     mapping.config()
     opts.config()
     events.load_groups()
+    require('editor')
+    require('tools')
+    require('completion')
+    require('themes')
+    require('lsp')
+
+
 
