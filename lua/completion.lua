@@ -1,6 +1,6 @@
 
 
-function highlight(name,guifg,guibg)
+local function highlight(name,guifg,guibg)
 	return (name..' '..guifg..' '..guibg)
 end
      highlight('CmpItemKindSnippet','guifg=#BF616A', 'guibg=NONE')
@@ -68,7 +68,8 @@ end
 		    nvim_lua = "[Lua]",
 		    path = "[Path]",
 		    luasnip = "[Snip]",
-		    spell = "[Spell]"
+		    spell = "[Spell]",
+		    copilot = "[GC]",
 		})[entry.source.name]
 
 		return vim_item
@@ -82,7 +83,7 @@ end
 	    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
 	    ["<C-f>"] = cmp.mapping.scroll_docs(4),
 	    ["<C-e>"] = cmp.mapping.close(),
-	    ["<Down>"] = cmp.mapping(function(fallback)
+	    ["<S-Space>"] = cmp.mapping(function(fallback)
 		if cmp.visible() then
 			cmp.select_next_item()
 		elseif has_words_before() then
@@ -91,24 +92,13 @@ end
 			fallback()
 		end
 	    end,{'i','s'}),
-	    ["<Up>"] = cmp.mapping(function(fallback)
+	    ["<S-Tab>"] = cmp.mapping(function(fallback)
 		if cmp.visible() then
 			cmp.select_prev_item()
 		else
 			fallback()
 		end
 	    end, {'i','s'}),
-	    ["<Tab>"] = cmp.mapping(function(fallback)
-		    if cmp.visible() then
-			    cmp.select_next_item()
-		    elseif require('luasnip').expand_or_jumpable() then
-		    	vim.fn.feedkeys(vim.api.nvim_replace_termcodes('<Plug>luasnip-expand-or-jump',true, true ,true),'')
-		elseif vim.b._copilot_suggestion ~= nil then 
-			vim.fn.feedkeys(vim.api.nvim_replace_termcodes(vim.fn['copilot#Accept'](),true,true,true)'')
-		else 
-			fallback()
-		    end
-	    end,{'i','s'}),
 	    ["<A-h>"] = function(fallback)
 		if require("luasnip").jumpable(-1) then
 		    vim.fn.feedkeys(t("<Plug>luasnip-jump-prev"), "")
@@ -137,7 +127,8 @@ end
 	    {name = "path"},
 	    {name = "spell"},
 	    {name = "buffer"},
-	    {name = 'cmp_tabnine'}
+	    {name = "copilot", group_index = 2},
+	    {name = "cmp_tabnine"}
 	}
     }
 
@@ -326,4 +317,3 @@ local cfg = {
     use_diagnostic_signs = true
 }
 require('trouble').setup(cfg)
-

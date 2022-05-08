@@ -59,12 +59,14 @@ local plugins = {
 	{'hrsh7th/nvim-cmp',
 	requires = {
 		{'saadparwaiz1/cmp_luasnip',after = 'LuaSnip'},
+		{'octaltree/cmp-look',after = 'nvim-cmp'},
 		{'hrsh7th/cmp-nvim-lsp',after = 'cmp_luasnip'},
 		{'hrsh7th/cmp-nvim-lua',after ='cmp-nvim-lsp'},
 		{'hrsh7th/cmp-buffer',after = 'nvim-cmp'},
 		{'f3fora/cmp-spell',after = 'nvim-cmp'},
 		{'hrsh7th/cmp-path',after = 'nvim-cmp'},
-		{'zbirenbaum/copilot-cmp',after = 'nvim-cmp'},
+		{'zbirenbaum/copilot.lua',after = 'nvim-cmp',event = 'VimEnter'},
+		{'zbirenbaum/copilot-cmp',after = {'nvim-cmp','copilot.lua'}},
 		{'tzachar/cmp-tabnine', run = './install.sh'},
 		{'L3MON4D3/LuaSnip'},
 		{'rafamadriz/friendly-snippets',after = 'nvim-cmp'}}},
@@ -82,5 +84,4 @@ local plugins = {
 	 'dstein64/vim-startuptime',
 	 'vimwiki/vimwiki',
 }
-
 return plugins
