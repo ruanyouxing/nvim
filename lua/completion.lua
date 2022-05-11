@@ -119,6 +119,18 @@ end
 		require("luasnip").lsp_expand(args.body)
 	    end
 	},
+	sorting = {
+	    comparator = {
+		    cmp.config.compare.offset,
+		    cmp.config.compare.exact,
+		    cmp.config.compare.score,
+		    require "cmp-under-comparator".under,
+		    cmp.config.compare.kind,
+		    cmp.config.compare.sort_text,
+		    cmp.config.compare.length,
+		    cmp.config.compare.order,
+	    }
+	},
 	-- You should specify your *installed* sources.
 	sources = {
 	    {name = "nvim_lsp"},
@@ -128,6 +140,14 @@ end
 	    {name = "spell"},
 	    {name = "buffer"},
 	    {name = "copilot", group_index = 2},
+	    {
+		    name = 'look',
+		    keyword_length = 2,
+		    option = {
+			convert_case = true,
+			loud = true
+		}
+	    },
 	    {name = "cmp_tabnine"}
 	}
     }
