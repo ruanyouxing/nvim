@@ -97,7 +97,7 @@ require('toggleterm').setup({
 	start_in_insert = true,
 	direction ="horizontal",
 	persist_size = true,
-	shell="fish",
+	shell="zsh",
 	close_on_exit = true,
 })
 
@@ -112,6 +112,6 @@ end
 
 
 require('transparent').setup({
-	enable = false,
+	enable = true,
 	extra_groups = "all",
 })
