@@ -7,8 +7,7 @@ g.dashboard_footer_icon = '  '
 g.dashboard_custom_section={
 	a={description={' Find files'},command='Telescope find_files'},
 	b={description={' Terminal'},command='ToggleTerm'},
-	c={description={' Configure'},command='e ~/.config/nvim'},
-	d={description={'舘Telescope'},command='Telescope'},
+	c={description={'舘Telescope'},command='Telescope'},
 }
 g.dashboard_custom_header = {
 
@@ -95,7 +94,7 @@ require('toggleterm').setup({
 	shade_terminals = true,
 	shading_factor = 1,
 	start_in_insert = true,
-	direction ="horizontal",
+	direction ="float",
 	persist_size = true,
 	shell="zsh",
 	close_on_exit = true,
@@ -113,5 +112,5 @@ end
 
 require('transparent').setup({
 	enable = true,
-	extra_groups = "all",
+	extra_groups = 'all',
 })
