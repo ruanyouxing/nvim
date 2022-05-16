@@ -5,7 +5,6 @@ fzy-lua-native
 hop.nvim
 nvim-dap
 nvim-dap-ui
-nvim-treesitter-textobjects
 sniprun
 split-term.vim
 about.nvim

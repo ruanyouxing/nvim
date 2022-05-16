@@ -17,6 +17,7 @@ local plugins = {
 	 {"nvim-treesitter/nvim-treesitter",run = ':TSUpdateSync',
 	 requires = {
 		 {"nvim-treesitter/nvim-treesitter-refactor",after = 'nvim-treesitter'},
+		 {'nvim-treesitter/nvim-treesitter-textobjects'},
 	         {'windwp/nvim-ts-autotag',after = 'nvim-treesitter'},
 	         {'p00f/nvim-ts-rainbow',after = 'nvim-treesitter'},
 		 {'andymass/vim-matchup',after = 'nvim-treesitter'}}},
