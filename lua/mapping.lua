@@ -20,23 +20,24 @@ function mapping.commands()
 	local function ctrl(key) return string.format('<C-%s>',key) end
 	local function alt(key) return string.format('<A-%s>',key) end
 	local function leader(key) return string.format('<leader>%s',key) end
-	nmap(ctrl('b'),ctrl('w'))
 	nmap('lg','lua _lazygit_toggle()')
+	nmap('T','TroubleToggle')
 	nmap('U','UndotreeShow')
 
-	nmap(ctrl('n'),"NvimTreeToggle")
 	nmap(ctrl(string.sub(alt('p'),4,-2)),"Telescope")
+	nmap(ctrl('b'),ctrl('w'))
+	nmap(ctrl('n'),"NvimTreeToggle")
 	nmap(ctrl('r'),"source %")
 	nmap(ctrl('s'),'AerialToggle')
-	nmap('T','TroubleToggle')
-	nmap(ctrl('w'),'lua require("bufdelete").bufdelete(0, true)')
+	nmap(leader('p'),"PackerSync")
 	nmap(ctrl('q'),'q!')
+	nmap(ctrl('t'),'enew')
+	nmap(ctrl('w'),'lua require("bufdelete").bufdelete(0, true)')
 	nmap(ctrl('x'),"redo")
 	nmap(ctrl('z'),"u")
 	nmap(ctrl('['),'BufferLineCyclePrev')
 	nmap(ctrl(']'),'BufferLineCycleNext')
 
-	nmap(leader('p'),"PackerSync")
 	nmap(leader('t'),"ToggleTerm")
 end
 return mapping
