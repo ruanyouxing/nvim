@@ -26,18 +26,18 @@ function mapping.commands()
 
 	nmap(ctrl(string.sub(alt('p'),4,-2)),"Telescope")
 	nmap(ctrl('b'),ctrl('w'))
-	nmap(ctrl('n'),"NvimTreeToggle")
+	nmap(ctrl('n'),'NvimTreeToggle')
 	nmap(ctrl('r'),"source %")
 	nmap(ctrl('s'),'AerialToggle')
 	nmap(leader('p'),"PackerSync")
 	nmap(ctrl('q'),'q!')
-	nmap(ctrl('t'),'enew')
+	nmap(ctrl('t'),'Telescope find_files')
 	nmap(ctrl('w'),'lua require("bufdelete").bufdelete(0, true)')
-	nmap(ctrl('x'),"redo")
+	nmap(ctrl('y'),"redo")
 	nmap(ctrl('z'),"u")
 	nmap(ctrl('['),'BufferLineCyclePrev')
 	nmap(ctrl(']'),'BufferLineCycleNext')
-
+	
 	nmap(leader('t'),"ToggleTerm")
 end
 return mapping
