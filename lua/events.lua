@@ -1,34 +1,25 @@
 local events = {}
-
-local cmd = vim.api.nvim_command
-function events.initialize(augroup)
-for group_name, definition in pairs(augroup) do
-        cmd("augroup " .. group_name)
-        cmd("autocmd!")
-        for _, def in ipairs(definition) do
-            local command = table.concat(vim.tbl_flatten {"autocmd", def}, " ")
-            cmd(command)
-        end
-        cmd("augroup END")
-    end
-
-end
-
-local augroup =  {
-	yank = {
-		{'TextYankPost','*','silent! lua vim.highlight.on_yank(higroup="IncSearch",timeout=301)'}
-	},
-	specs = {
-		{'CursorMoved','*','lua require("specs").show_specs()'},
-	},
-	autoload = {
-	--	{'InsertLeave','*.lua','source %'},
-		{'TextChanged','.Xresources','!xrdb ~/.Xresources'}
-	},
-}
-
-function events.load_groups()
-	events.initialize(augroup)
-end
+	local autocmd = vim.api.nvim_create_autocmd
+	local augroups = vim.api.nvim_create_augroup
+	local all = "*"
+	local function silent(cmd) return "silent! ".. cmd end
+	augroups('yank',{clear = true})
+	augroups('autoload',{clear = true})
+	augroups('specs',{clear = true})
+	autocmd({"TextYankPost"}, {
+		pattern = all,
+		command = silent("lua vim.highlight.on_yank(higroup=\"IncSearch\",timeout=301)"),
+		group = "yank"
+	})
+	autocmd({"TextChanged"}, {
+		pattern = {".Xresources"},
+		command = silent("!xrdb ~/.Xresources"),
+		group = "autoload"
+	})
+	autocmd({"CursorMoved"},{
+		pattern = all,
+		command  = silent("lua require('specs').show_specs()"),
+		group = "specs"
+	})
 
 return events

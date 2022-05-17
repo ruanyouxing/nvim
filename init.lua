@@ -1,5 +1,4 @@
 local opts = require('options')
-local events = require('events')
 local mapping = require('mapping')
 local split = vim.split
 local glob = vim.fn.glob
@@ -63,7 +62,7 @@ end
     mapping.shortcuts()
     mapping.commands()
     opts.config()
-    events.load_groups()
+    require('events')
     require('editor')
     require('tools')
     require('completion')
