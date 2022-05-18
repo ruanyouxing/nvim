@@ -6,6 +6,11 @@ local events = {}
 	augroups('yank',{clear = true})
 	augroups('autoload',{clear = true})
 	augroups('specs',{clear = true})
+	autocmd(
+		{"CursorMoved"},
+		{pattern = "*",
+		command = "IndentBlanklineRefresh"
+	})
 	autocmd({"TextYankPost"}, {
 		pattern = all,
 		command = silent("lua vim.highlight.on_yank(higroup=\"IncSearch\",timeout=301)"),
