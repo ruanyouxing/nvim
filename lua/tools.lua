@@ -69,19 +69,18 @@ require('notify')('Welcome!')
 
 
 local actions = require('telescope.actions')
-local trouble = require('trouble')
-local telescope = require('telescope')
-local cfg ={
-extensions = {},
-  mappings = {
-	i = {
-		["<esc>"] = actions.close,
-		["<c-t>"] = trouble.open_with_trouble,
-	}
-
-  }
-}
-telescope.setup(cfg)
+require('telescope').load_extension('zoxide')
+require('telescope').setup({
+	extensions = {},
+	  mappings = {
+		i = {
+			["<esc>"] = actions.close,
+		},
+		n  = {
+			["q"] = actions.close,
+		}
+	  }
+})
 
 
 vim.cmd[[packadd toggleterm.nvim]]
@@ -99,16 +98,6 @@ require('toggleterm').setup({
 	shell="zsh",
 	close_on_exit = true,
 })
-
-local Terminal=require('toggleterm.terminal').Terminal
-local lazygit=Terminal:new({cmd ="lazygit",hidden=true,direction="float",
-	float_opts={border="double",
-	},
-})
-function _lazygit_toggle()
-	lazygit:toggle()
-end
-
 
 require('transparent').setup({
 	enable = true,

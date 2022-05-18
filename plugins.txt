@@ -7,10 +7,8 @@ nvim-dap
 nvim-dap-ui
 sniprun
 split-term.vim
-about.nvim
 telescope-frecency.nvim
 telescope-fzf-native.nvim
-telescope-zoxide
 vim-cool
 vim-east-align
 vim-eft

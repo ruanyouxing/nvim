@@ -20,7 +20,16 @@ function mapping.commands()
 	local function ctrl(key) return string.format('<C-%s>',key) end
 	local function alt(key) return string.format('<A-%s>',key) end
 	local function leader(key) return string.format('<leader>%s',key) end
-	nmap('lg','lua _lazygit_toggle()')
+	local function nfunc(key,func) return vim.keymap.set('n',key,func) end
+
+	nfunc('lg',function()
+		local Terminal=require('toggleterm.terminal').Terminal
+		local lazygit=Terminal:new({cmd ="lazygit",hidden=true,direction="float",
+			float_opts={border="double",
+			},
+		})
+			lazygit:toggle()
+	end)
 	nmap('T','TroubleToggle')
 	nmap('U','UndotreeShow')
 
@@ -32,12 +41,13 @@ function mapping.commands()
 	nmap(leader('p'),"PackerSync")
 	nmap(ctrl('q'),'q!')
 	nmap(ctrl('t'),'Telescope find_files')
-	nmap(ctrl('w'),'lua require("bufdelete").bufdelete(0, true)')
+	nfunc(ctrl('w'),function() require("bufdelete").bufdelete(0, true) end)
 	nmap(ctrl('y'),"redo")
 	nmap(ctrl('z'),"u")
 	nmap(ctrl('['),'BufferLineCyclePrev')
 	nmap(ctrl(']'),'BufferLineCycleNext')
 	
 	nmap(leader('t'),"ToggleTerm")
+	nfunc(leader('z'),function() require'telescope'.extensions.zoxide.list{} end)
 end
 return mapping

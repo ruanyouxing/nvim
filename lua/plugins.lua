@@ -37,7 +37,8 @@ local plugins = {
 	 {"rcarriga/nvim-notify"},
 	 {"nvim-telescope/telescope.nvim",
 	 requires = {{"sharkdp/fd"},
-		    {"BurntSushi/ripgrep"}}},
+		    {"BurntSushi/ripgrep"},
+	    	    {'jvgrootveld/telescope-zoxide'}}},
 	 {"akinsho/toggleterm.nvim"},
 	 {'xiyaowong/nvim-transparent'},
 
@@ -73,7 +74,8 @@ local plugins = {
 		{'tzachar/cmp-tabnine', run = './install.sh'},
 		{'lukas-reineke/cmp-under-comparator'},
 		{'rafamadriz/friendly-snippets',after = 'nvim-cmp'}}},
-		{'L3MON4D3/LuaSnip'},
+		{'L3MON4D3/LuaSnip', requires = 
+		{'michaelb/sniprun',run = './install.sh'}},
 	{'RishabhRD/nvim-lsputils', requires = 'RishabhRD/popfix'},
 	{'ray-x/lsp_signature.nvim'},
 	{'folke/trouble.nvim'},
