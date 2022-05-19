@@ -329,6 +329,10 @@ require('nvim_comment').setup({
 	operator_mapping = "gc"
 })
 
+require('pretty-fold.preview').setup({
+	default_keybindings = true,
+   	border = {' ', '', ' ', ' ', ' ', ' ', ' ', ' '},
+})
 
 require("gitsigns").setup({
 	signs = {

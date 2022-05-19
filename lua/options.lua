@@ -1,4 +1,3 @@
-options  = {}
 	local g = vim.g
 	local set = vim.opt
 	set.linespace = 0
@@ -6,6 +5,7 @@ options  = {}
 
 	set.termguicolors = true
 	set.title = true
+	set.foldmethod='manual'
 	set.list=true
 	set.wrapscan=true
 	set.swapfile=false
@@ -33,8 +33,7 @@ options  = {}
 	g.loaded_matchit = 1
 	g.matchup_surround_enabled = 1
 
-	vim.cmd('colorscheme nord')
 	g.smartindent=true
 	g.syntax_on=true
 	g.python_host_prog= '/usr/bin/python'
-return options
+vim.cmd('colorscheme nord')
