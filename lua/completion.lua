@@ -80,8 +80,6 @@ end
 	    ["<CR>"] = cmp.mapping.confirm({select = true}),
 	    ["<C-p>"] = cmp.mapping.select_prev_item(),
 	    ["<C-n>"] = cmp.mapping.select_next_item(),
-	    ["<C-d>"] = cmp.mapping.scroll_docs(-4),
-	    ["<C-f>"] = cmp.mapping.scroll_docs(4),
 	    ["<C-e>"] = cmp.mapping.close(),
 	    ["<S-Space>"] = cmp.mapping(function(fallback)
 		if cmp.visible() then
@@ -132,7 +130,7 @@ end
 	    }
 	},
 	-- You should specify your *installed* sources.
-	sources = {
+	sources = cmp.config.sources({
 	    {name = "nvim_lsp"},
 	    {name = "nvim_lua"},
 	    {name = "luasnip"},
@@ -149,7 +147,7 @@ end
 		}
 	    },
 	    {name = "cmp_tabnine"}
-	}
+	}),
     }
 
 local locations = require('lsputil.locations')
