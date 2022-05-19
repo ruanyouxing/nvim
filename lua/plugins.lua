@@ -9,8 +9,11 @@ local plugins = {
 	 {'akinsho/bufferline.nvim'},
 	 {'norcalli/nvim-colorizer.lua',opt = true},
 	 {'sindrets/diffview.nvim'},
-	 {'lewis6991/gitsigns.nvim',requires = 'nvim-lua/plenary.nvim'},
+	 {'lewis6991/gitsigns.nvim',
+	 	requires = 'nvim-lua/plenary.nvim'},
 	 {'terrortylor/nvim-comment'},
+	 {'anuvyklack/pretty-fold.nvim',
+ 		requires = 'anuvyklack/nvim-keymap-amend'},
 	 {"kyazdani42/nvim-tree.lua",
 	 	 requires = {"kyazdani42/nvim-web-devicons"}},
 	 {'edluffy/specs.nvim'},
@@ -79,8 +82,6 @@ local plugins = {
 	{'RishabhRD/nvim-lsputils', requires = 'RishabhRD/popfix'},
 	{'ray-x/lsp_signature.nvim'},
 	{'folke/trouble.nvim'},
-
-
 	 'rhysd/accelerated-jk',
 	  'github/copilot.vim',
 	 'onsails/lspkind-nvim',

@@ -56,6 +56,3 @@ end
     require('completion')
     require('themes')
     require('lsp')
-
-
-
