@@ -12,8 +12,6 @@ local plugins = {
 	 {'lewis6991/gitsigns.nvim',
 	 	requires = 'nvim-lua/plenary.nvim'},
 	 {'terrortylor/nvim-comment'},
-	 {'anuvyklack/pretty-fold.nvim',
- 		requires = 'anuvyklack/nvim-keymap-amend'},
 	 {"kyazdani42/nvim-tree.lua",
 	 	 requires = {"kyazdani42/nvim-web-devicons"}},
 	 {'edluffy/specs.nvim'},
@@ -53,14 +51,11 @@ local plugins = {
 
 	{"catppuccin/nvim",as = "catppuccin"},
 	{"projekt0n/circles.nvim"},
-	{'Mofiqul/dracula.nvim',as = 'dracula'},
 	{"nvim-lualine/lualine.nvim",
 	requires = {'arkav/lualine-lsp-progress',
 		   {'SmiteshP/nvim-gps'}}},
 	{'shaunsingh/nord.nvim'},
-	{"rose-pine/neovim",as = 'rose-pine'},
 	{"folke/tokyonight.nvim"},
-	{'Mofiqul/vscode.nvim'},
 
 
 	{'hrsh7th/nvim-cmp',
@@ -74,7 +69,6 @@ local plugins = {
 		{'hrsh7th/cmp-nvim-lua',after ='cmp-nvim-lsp'},
 		{'hrsh7th/cmp-path',after = 'nvim-cmp'},
 		{'f3fora/cmp-spell',after = 'nvim-cmp'},
-		{'tzachar/cmp-tabnine', run = './install.sh'},
 		{'lukas-reineke/cmp-under-comparator'},
 		{'rafamadriz/friendly-snippets',after = 'nvim-cmp'}}},
 		{'L3MON4D3/LuaSnip', requires = 

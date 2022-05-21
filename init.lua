@@ -49,6 +49,7 @@ end
     pack.load_plugin_list()
     mapping.shortcuts()
     mapping.commands()
+    mapping.func()
     require('options')
     require('events')
     require('editor')

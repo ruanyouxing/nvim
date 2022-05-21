@@ -62,7 +62,6 @@ end
 					      vim_item.kind)
 
 		vim_item.menu = ({
-		    cmp_tabnine = "[T9]",
 		    buffer = "[Buf]",
 		    nvim_lsp = "[LSP]",
 		    nvim_lua = "[Lua]",
@@ -146,7 +145,6 @@ end
 			loud = true
 		}
 	    },
-	    {name = "cmp_tabnine"}
 	}),
     }
 
@@ -295,13 +293,6 @@ require("luasnip").config.set_config({
 })
 require("luasnip/loaders/from_vscode").load()
 
-local tabnine = require('cmp_tabnine.config')
-tabnine:setup({
-	max_lines = 1000,
-	max_num_results = 20,
-	sort = true,
-	show_prediction_strength = true,
-})
 
 local cfg = {
     position = "bottom",

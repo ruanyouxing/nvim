@@ -1,3 +1,32 @@
+local g = vim.g
+g["dashboard_default_executive"]='Telescope'
+g["dashboard_fzf_engine"]='ag'
+g.dashboard_footer_icon = '  '
+g.dashboard_custom_section={
+	a={description={' Find files'},command='Telescope find_files'},
+	b={description={' Terminal'},command='ToggleTerm'},
+	c={description={'舘Telescope'},command='Telescope'},
+}
+g.dashboard_custom_header = {
+
+[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀]],
+[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠟⠉⠉⠉⠉⠉⠉⠉⠙⠻⢶⣄⠀⠀⠀⠀⠀]],
+[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣷⡀⠀⠀⠀]],
+[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⣠⣶⠛⠛⠛⠛⠛⠛⠳⣦⡀⠀⠘⣿⡄⠀⠀]],
+[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠁⠀⢹⣿⣦⣀⣀⣀⣀⣀⣠⣼⡇⠀⠀⠸⣷⠀⠀]],
+[[⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠉⠛⠿⠿⠿⠿⠛⠋⠁⠀⠀⠀⠀⣿⡄ ]],
+[[⠀⠀      ⢠⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀]],
+[[      ⠀⠀⣸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀]],
+[[⠀⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀]],
+[[⠀⠀⠀⠀⠀⠀⢰⣿⠀⠀⠀⠀⣠⡶⠶⠿⠿⠿⠿⢷⣦⠀⠀⠀⠀⠀⠀⠀⣿⠀]],
+[[⠀    ⠀⣸⡇⠀⠀⠀⠀⣿⡀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⣿⠀]],
+[[⣠⡿⠛⠛⠛⠛⠻⠀⠀⠀⠀⠀⢸⣇⠀⠀⠀⠀⠀⠀⣿⠇⠀⠀⠀⠀⠀⠀⣿⠀]],
+[[ ⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⠀⠀⢀⣤⣤⣴⣿⠀⠀⠀⠀⠀⠀⠀⣿⠀]],
+[[  ⢷⣶⣦⣤⣤⣤⣴⣶⣾⠿⠛⠁⢀⣶⡟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⠀]],
+[[          ⠀⠀⠀⠀⠈⣿⣆⡀⠀⠀⠀⠀⠀⠀⢀⣠⣴⡾⠃⠀]],
+[[          ⠀⠀⠀⠀⠀⠈⠛⠻⢿⣿⣾⣿⡿⠿⠟⠋⠁⠀⠀⠀]],
+[[                              ]],
+}
 
 local catppuccin=require('catppuccin')
  catppuccin.setup({
@@ -82,7 +111,9 @@ require('lualine').setup({
 	    lualine_a = {"mode"},
 	    lualine_b = {{"branch"}, {"diff"}},
 	    lualine_c = {
-		    {'lsp_progress'}, {gps_content, cond = gps.is_available},{require('auto-session-library').current_session_name}
+		    {'lsp_progress'}, {
+						gps_content, cond = gps.is_available},
+				{require('auto-session-library').current_session_name}
 	    },
 	    lualine_x = {
 		{
@@ -121,50 +152,10 @@ g.nord_italic = true
 g.nord_cursorline_transparent = true
 
 
--- Set theme variant
--- Matches terminal theme if unset
--- @usage 'main' | 'moon' | 'dawn'
-g.rose_pine_variant = 'main'
-
-g.rose_pine_bold_vertical_split_line = false
-g.rose_pine_inactive_background = false
-g.rose_pine_disable_background = false
-g.rose_pine_disable_float_background = false
-g.rose_pine_disable_italics = false
-
-local p = require('rose-pine.palette')
-g.rose_pine_colors = {
-	punctuation = p.subtle,
-	comment = p.subtle,
-	hint = p.iris,
-	info = p.foam,
-	warn = p.gold,
-	error = p.love,
-
-	-- Or set all headings to one colour: `headings = p.text`
-	headings = {
-		h1 = p.iris,
-		h2 = p.foam,
-		h3 = p.rose,
-		h4 = p.gold,
-		h5 = p.pine,
-		h6 = p.foam,
-	},
-}
-
--- Set colorscheme after options
-
-
-vim.g.tokyonight_style="night"
-vim.g.tokyonight_hide_inactive_statusline=1
-vim.g.tokyonight_italic_funtions=1
-vim.g.tokoynight_italic_variables=1
-vim.g.tokoynight_sidebars={"qf","vista_kind","terminal","packer"}
-
-
-
-vim.g.vscode_style = 'dark'
-vim.g.vscode_italic_comment = 1
---vim.g.vscode_transparent = 0
+g.tokyonight_style="night"
+g.tokyonight_hide_inactive_statusline=1
+g.tokyonight_italic_funtions=1
+g.tokoynight_italic_variables=1
+g.tokoynight_sidebars={"qf","vista_kind","terminal","packer"}
 
 

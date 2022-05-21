@@ -28,6 +28,7 @@ set.background='dark'
 set.pumheight=11
 set.encoding="utf-8"
 set.fileencoding="utf-8"
+set.fillchars.append='-'
 vim.o.termguicolors = true
 
 g.loaded_matchit = 1

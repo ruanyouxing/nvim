@@ -1,6 +1,9 @@
 local mapping = {}
-local map = vim.api.nvim_set_keymap
+local map = vim.keymap.set
 local opts= {silent=true,noremap=true}
+local function ctrl(key) return string.format('<C-%s>',key) end
+local function alt(key) return string.format('<A-%s>',key) end
+local function leader(key) return string.format('<leader>%s',key) end
 vim.opt.timeoutlen = 97
 
 function mapping.shortcuts()
@@ -17,22 +20,6 @@ end
 
 function mapping.commands()
 	local function nmap(key,cmd) return map('n',key,string.format(':%s<CR>',cmd),opts) end
-	local function ctrl(key) return string.format('<C-%s>',key) end
-	local function alt(key) return string.format('<A-%s>',key) end
-	local function leader(key) return string.format('<leader>%s',key) end
-	local function nfunc(key,func) return vim.keymap.set('n',key,func) end
-
-	nfunc('lg',function()
-		local Terminal=require('toggleterm.terminal').Terminal
-		local lazygit=Terminal:new({
-			cmd ="lazygit",
-			hidden=true,
-			direction="float",
-			float_opts={border="double",
-			},
-		})
-			lazygit:toggle()
-	end)
 	nmap('T','TroubleToggle')
 	nmap('U','UndotreeShow')
 
@@ -43,17 +30,31 @@ function mapping.commands()
 	nmap(leader('p'),"PackerSync")
 	nmap(ctrl('q'),'q!')
 	nmap(ctrl('t'),'Telescope find_files')
-	nfunc(ctrl('w'),function()
-		require("bufdelete").bufdelete(0, true)
-	end)
 	nmap(ctrl('y'),"redo")
 	nmap(ctrl('z'),"u")
 	nmap(ctrl('['),'BufferLineCyclePrev')
 	nmap(ctrl(']'),'BufferLineCycleNext')
 	
 	nmap(leader('t'),"ToggleTerm")
-	nfunc(leader('z'),function()
-		require'telescope'.extensions.zoxide.list{}
-	end)
+	nmap(leader('z'),"Telescope zoxide list")
 end
+
+function mapping.func()
+	local function nmap(key,func) return map('n',key,func) end
+	nmap(ctrl('w'),function()
+		require("bufdelete").bufdelete(0, true)
+	end)
+	nmap('lg',function()
+		local Terminal=require('toggleterm.terminal').Terminal
+		local lazygit=Terminal:new({
+			cmd ="lazygit",
+			hidden=true,
+			direction="float",
+			float_opts={border="double",
+			},
+		})
+			lazygit:toggle()
+	end)
+
+end 
 return mapping
