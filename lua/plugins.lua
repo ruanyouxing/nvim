@@ -32,8 +32,11 @@ local plugins = {
 	 {'folke/zen-mode.nvim'},
 
 
-	 {"glepnir/dashboard-nvim"},
-	 {'lewis6991/impatient.nvim', config = function() require'impatient'.enable_profile() end},
+	 {"goolord/alpha-nvim"},
+	 {'lewis6991/impatient.nvim',
+	 	config = function() 
+			require'impatient'.enable_profile()
+		end},
 	 {'iamcco/markdown-preview.nvim',run = 'cd app && yarn install'},
 	 {"rcarriga/nvim-notify"},
 	 {"nvim-telescope/telescope.nvim",

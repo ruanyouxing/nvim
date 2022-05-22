@@ -3,9 +3,8 @@ local split = vim.split
 local glob = vim.fn.glob
 local homepath = os.getenv("HOME")
 
-local pack = {}
 
-function pack.load_plugin_list()
+local function load_plugin_list()
 	local plugin_path = split(glob('~/.config/nvim/lua/plugins.lua'),'\n')
 	local list = {}
 	for i in ipairs(plugin_path) do
@@ -22,7 +21,7 @@ function pack.load_plugin_list()
 	return use(repos)
 end
 
-function pack.config()
+local function pack_config()
 	local data_dir = string.format("%s/site/", vim.fn.stdpath("data"))
 	local packer_dir = data_dir .. "/pack/packer/opt/packer.nvim"
 	local state = vim.loop.fs_stat(packer_dir)
@@ -45,8 +44,8 @@ function pack.config()
 	}
 }})
 end
-    pack.config()
-    pack.load_plugin_list()
+    pack_config()
+    load_plugin_list()
     mapping.shortcuts()
     mapping.commands()
     mapping.func()

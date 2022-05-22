@@ -7,32 +7,36 @@ local events = {}
 	augroups('autoload',{clear = true})
 	augroups('specs',{clear = true})
 	autocmd(
-		{"cursormoved"},
+		{"CursorMoved"},
 		{pattern = "*",
 		command = "IndentBlanklineRefresh"
 	})
-	autocmd({"textyankpost"}, {
+	autocmd({"TextYankPost"}, {
 		pattern = all,
 		command = silent("lua vim.highlight.on_yank(higroup=\"incsearch\",timeout=301)"),
 		group = "yank"
 	})
-	autocmd({"textchanged"}, {
+	autocmd({"TextChanged"}, {
 		pattern = {".xresources"},
 		command = silent("!xrdb ~/.xresources"),
 		group = "autoload"
 	})
-	autocmd({"bufwinleave"},{
+	autocmd({"BufWinLeave"},{
 		pattern = all,
 		command = silent('mkview'),
 	})
-	autocmd({"bufenter"},{
+	autocmd({"BufEnter"},{
 		pattern = all,
 		command = silent('loadview'),
 	})
-	autocmd({"cursormoved"},{
+	autocmd({"CursorMoved"},{
 		pattern = all,
 		command  = silent("lua require('specs').show_specs()"),
 		group = "specs"
+	})
+	autocmd({"VimEnter"},{
+		pattern = all,
+		command = silent("TwilightEnable"),
 	})
 
 return events

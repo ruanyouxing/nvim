@@ -1,6 +1,3 @@
-
-
-
 vim.notify = require('notify')
 
 require("notify").setup({
@@ -61,13 +58,9 @@ require('toggleterm').setup({
 	shade_terminals = true,
 	shading_factor = 1,
 	start_in_insert = true,
-	direction ="float",
+	direction ="horizontal",
 	persist_size = true,
 	shell="zsh",
 	close_on_exit = true,
 })
 
-require('transparent').setup({
-	enable = true,
-	extra_groups = 'all',
-})

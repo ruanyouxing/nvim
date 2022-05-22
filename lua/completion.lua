@@ -294,7 +294,7 @@ require("luasnip").config.set_config({
 require("luasnip/loaders/from_vscode").load()
 
 
-local cfg = {
+require('trouble').setup({
     position = "bottom",
     height = 6,
     width = 50,
@@ -337,5 +337,4 @@ local cfg = {
 	other = "﫠"
     },
     use_diagnostic_signs = true
-}
-require('trouble').setup(cfg)
+})
