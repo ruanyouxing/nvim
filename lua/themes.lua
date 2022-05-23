@@ -28,16 +28,21 @@ dashboard.section.buttons.val = {
     dashboard.button( "r", "  > Recent"   , ":Telescope oldfiles<CR>"),
     dashboard.button( "q", "  > Quit", ":qa<CR>"),
 }
+
 local function footer()
+ -- local plugins = #vim.tbl_keys(packer_plugins)
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
-    return '  '..datetime
+    return '  '
+   -- ..plugins
+   -- ..' plugins '
+    ..datetime
     .. "   "
     .. "   v"
     .. vim.version().major
     .. "."
     .. vim.version().minor
     .. "."
-    .. vim.version().patch
+    .. vim.version().patch .. ' kill me pls'
 end
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
@@ -90,7 +95,7 @@ require('nvim-gps').setup({
 		['python'] = true,
 		['rust'] = true,
 	},
-	separator = ' > ',
+	separator = ' >> ',
 })
 
 local gps = require('nvim-gps')
