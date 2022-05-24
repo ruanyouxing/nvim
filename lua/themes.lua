@@ -30,7 +30,8 @@ dashboard.section.buttons.val = {
 }
 
 local function footer()
-  require('plugin.packer_compiled')
+	package.path = vim.fn.stdpath('config')..'/plugin/?.lua;'..package.path
+	require('packer_compiled')
   local plugins = #vim.tbl_keys(packer_plugins)
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
   local version = vim.version()

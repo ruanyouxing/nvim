@@ -15,7 +15,7 @@ local plugins = {
 	 {"kyazdani42/nvim-tree.lua",
 	 	 requires = {"kyazdani42/nvim-web-devicons"}},
 	 {'edluffy/specs.nvim'},
-	 {"nvim-treesitter/nvim-treesitter",run = ':TSUpdateSync',
+	 {"nvim-treesitter/nvim-treesitter",run = ':TSUpdate',
 	 requires = {
 		 {"nvim-treesitter/nvim-treesitter-refactor",after = 'nvim-treesitter'},
 		 {'nvim-treesitter/nvim-treesitter-textobjects'},
