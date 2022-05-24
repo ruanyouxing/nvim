@@ -30,19 +30,21 @@ dashboard.section.buttons.val = {
 }
 
 local function footer()
- -- local plugins = #vim.tbl_keys(packer_plugins)
+  require('plugin.packer_compiled')
+  local plugins = #vim.tbl_keys(packer_plugins)
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
+  local version = vim.version()
     return '  '
-   -- ..plugins
-   -- ..' plugins '
+    .. plugins
+    ..' plugins  '
     ..datetime
     .. "   "
     .. "   v"
-    .. vim.version().major
+    .. version.major
     .. "."
-    .. vim.version().minor
+    .. version.minor
     .. "."
-    .. vim.version().patch .. ' kill me pls'
+    .. version.patch .. ' \n\t\t\t kill me pls'
 end
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
