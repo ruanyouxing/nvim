@@ -1,6 +1,5 @@
 local split = vim.split
 local fn = vim.fn
-local loop = vim.loop
 local glob = fn.glob
 local conf_dir = fn.stdpath('config')
 local homepath = os.getenv("HOME")

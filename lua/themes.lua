@@ -168,6 +168,25 @@ require('lualine').setup({
 	}
 })
 
+-- Default options
+require('nightfox').setup({
+ palettes = {
+    duskfox = {
+      bg1 = "#000000", -- Black background
+      bg0 = "#1d1d2b", -- Alt backgrounds (floats, statusline, ...)
+      bg3 = "#121820", -- 55% darkened from stock
+      sel0 = "#131b24", -- 55% darkened from stock
+    },
+  },
+  specs = {
+    all = {
+      inactive = "bg0", -- Default value for other styles
+    },
+    duskfox = {
+      inactive = "#090909", -- Slightly lighter then black background
+    },
+  },
+})
 
 g.nord_contrast = true
 g.nord_borders = true
@@ -176,7 +195,7 @@ g.nord_italic = true
 g.nord_cursorline_transparent = true
 
 
-g.tokyonight_style="night"
+g.tokyonight_style="storm"
 g.tokyonight_hide_inactive_statusline=1
 g.tokyonight_italic_funtions=1
 g.tokoynight_italic_variables=1

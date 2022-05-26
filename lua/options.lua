@@ -37,4 +37,5 @@ g.matchup_surround_enabled = 1
 g.smartindent=true
 g.syntax_on=true
 g.python_host_prog= '/usr/bin/python'
-vim.cmd('colorscheme nord')
+g.python3_host_prog = '/usr/bin/python3'
+vim.cmd('colorscheme tokyonight')

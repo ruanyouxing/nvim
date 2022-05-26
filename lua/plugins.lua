@@ -28,13 +28,11 @@ local plugins = {
 	 {'gelguy/wilder.nvim',
 		 requires = {'roxma/nvim-yarp',
 			 'roxma/vim-hug-neovim-rpc',
-			 'romgrk/fzy-lua-native'}},
-	 {'folke/zen-mode.nvim'},
-
+			 'romgrk/fzy-lua-native'}, run = 'pip install --user pyre2'},
 
 	 {"goolord/alpha-nvim"},
 	 {'lewis6991/impatient.nvim',
-	 	config = function() 
+	 	config = function()
 			require'impatient'.enable_profile()
 		end},
 	 {'iamcco/markdown-preview.nvim',run = 'cd app && yarn install'},
@@ -57,6 +55,7 @@ local plugins = {
 	{"nvim-lualine/lualine.nvim",
 	requires = {'arkav/lualine-lsp-progress',
 		   {'SmiteshP/nvim-gps'}}},
+	{"EdenEast/nightfox.nvim"},
 	{'shaunsingh/nord.nvim'},
 	{"folke/tokyonight.nvim"},
 
@@ -66,23 +65,20 @@ local plugins = {
 		{'zbirenbaum/copilot.lua',after = 'nvim-cmp',event = 'VimEnter'},
 		{'zbirenbaum/copilot-cmp',after = {'nvim-cmp','copilot.lua'}},
 		{'hrsh7th/cmp-buffer',after = 'nvim-cmp'},
-		{'octaltree/cmp-look',after = 'nvim-cmp'},
 		{'saadparwaiz1/cmp_luasnip',after = 'LuaSnip'},
 		{'hrsh7th/cmp-nvim-lsp',after = 'cmp_luasnip'},
 		{'hrsh7th/cmp-nvim-lua',after ='cmp-nvim-lsp'},
 		{'hrsh7th/cmp-path',after = 'nvim-cmp'},
 		{'f3fora/cmp-spell',after = 'nvim-cmp'},
-		{'lukas-reineke/cmp-under-comparator'},
 		{'rafamadriz/friendly-snippets',after = 'nvim-cmp'}}},
-		{'L3MON4D3/LuaSnip', requires = 
-		{'michaelb/sniprun',run = './install.sh'}},
+		{'L3MON4D3/LuaSnip'},
+	{'michaelb/sniprun',run = 'bash ./install.sh &'},
 	{'RishabhRD/nvim-lsputils', requires = 'RishabhRD/popfix'},
 	{'ray-x/lsp_signature.nvim'},
 	{'folke/trouble.nvim'},
 	 'rhysd/accelerated-jk',
 	  'github/copilot.vim',
 	 'onsails/lspkind-nvim',
-	 {'dstein64/nvim-scrollview',event = 'BufRead'},
 	 'mbbill/undotree',
 	 'itchyny/vim-cursorword',
 	 'dstein64/vim-startuptime',

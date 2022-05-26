@@ -163,7 +163,7 @@ require('bufferline').setup({
 			return "("..count..")"
 		end,
 		show_buffer_icons = true,
-		separator_style = "slant",
+		separator_style = "thin",
 		always_show_bufferline = true,
 		sort_by = "id",
 	groups = {
@@ -471,37 +471,50 @@ require('twilight').setup({
 	exclude = {},
 })
 
+local wilder = require('wilder')
+wilder.setup({modes ={':','/','?'}})
+wilder.set_option('pipeline', {
+  wilder.branch(
+    wilder.python_file_finder_pipeline({
+      file_command = {'fd', '.', '-tf'},
+      dir_command = {'find', '.', '-td'},
+      filters = {'fuzzy_filter', 'difflib_sorter'},
+    }),
+    wilder.cmdline_pipeline({ language = 'python',fuzzy = 1 }),
+    wilder.python_search_pipeline({
+	    pattern = wilder.python_fuzzy_pattern(),
+	    sorter = wilder.python_difflib_sorter(),
+	    engine = 're2'
+}))})
+  wilder.set_option('renderer', wilder.renderer_mux({
+  [':'] = wilder.popupmenu_renderer({
+    highlighter = wilder.basic_highlighter(),
+    separator = ' : ',
+    left ={' ', wilder.popupmenu_spinner(),' '},
+    right = {' ', wilder.popupmenu_devicons(),' '},
+  }),
+  ['/'] = wilder.wildmenu_renderer({
+    highlighter = wilder.basic_highlighter(),
+    separator = ' / ',
+    left = {' ', wilder.wildmenu_spinner(), ' '},
+    right = {' ', wilder.wildmenu_index(), ' '},
+  })}))
+-- vim.cmd[[
+-- 	call wilder#set_option('pipeline',[
+-- 		\ wilder#branch(wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1,
+-- 		\ 'fuzzy_filter':
+-- 			\ wilder#lua_fzy_filter()}),
+-- 		\ wilder#vim_search_pipeline(),
+-- 		\ [wilder#check({_, x -> empty(x)}),
+-- 		\ wilder#history(),
+-- 		\ wilder#result({'draw': [{_, x -> ' ' . x}]})])])
+-- 	call wilder#set_option('renderer',
+-- 		\ wilder#renderer_mux({':':
+-- 		\ wilder#popupmenu_renderer({'highlighter':
+-- 		\ wilder#lua_fzy_highlighter(),
+-- 		\ 'left': [wilder#popupmenu_devicons()],
+-- 		\ 'right': [' ', wilder#popupmenu_scrollbar()]}), '/':
+-- 		\ wilder#wildmenu_renderer({'highlighter':
+-- 		\ wilder#lua_fzy_highlighter()})}))
+-- ]]
 
-vim.cmd[[
-	call wilder#setup({'modes': [':', '/', '?']})
-	call wilder#set_option('use_python_remote_plugin', 0)
-	call wilder#set_option('pipeline', [wilder#branch(wilder#cmdline_pipeline({'use_python': 0,'fuzzy': 1, 'fuzzy_filter': wilder#lua_fzy_filter()}),wilder#vim_search_pipeline(), [wilder#check({_, x -> empty(x)}), wilder#history(), wilder#result({'draw': [{_, x -> ' ' . x}]})])])
-	call wilder#set_option('renderer', wilder#renderer_mux({':': wilder#popupmenu_renderer({'highlighter': wilder#lua_fzy_highlighter(), 'left': [wilder#popupmenu_devicons()], 'right': [' ', wilder#popupmenu_scrollbar()]}), '/': wilder#wildmenu_renderer({'highlighter': wilder#lua_fzy_highlighter()})}))
-]]
-
-
-require('zen-mode').setup({
-	window = {
-		backdrop = 0.8,
-		width = 120,
-		height = 1,
-		options = {},
-	},
-	plugins = {
-		options = {
-			enabled = true,
-			ruler = false, -- disables the ruler text in the cmd line area
-	showcmd = false, -- disables the command in the last line of the screen
-	},
-	twilight = { enabled = true }, -- enable to start Twilight when zen mode opens
-	gitsigns = { enabled = false},
-	tmux = { enabled = false }, -- disables the tmux statusline
-	kitty = {
-	enabled = false,
-	font = "+4", -- font size increment
-	}},
-	on_open = function(win)
-	end,
-	on_close = function()
-	end,
-})
