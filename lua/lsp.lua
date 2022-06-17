@@ -48,7 +48,7 @@ capabilities.textDocument.completion.completionItem.tagSupport = {
 capabilities.textDocument.completion.completionItem.resolveSupport = {
     properties = {"documentation", "detail", "additionalTextEdits"}
 }
-
+capabilities.offsetEncoding = { "utf-16" }
 
 lsp_installer.on_server_ready(function(server)
     local opts = {}
