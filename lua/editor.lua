@@ -1,3 +1,5 @@
+local config = {}
+function config.aerial()
 require("aerial").setup({
 	backends = { "treesitter", "lsp", "markdown" },
 	close_behavior = "auto",
@@ -55,7 +57,6 @@ require("aerial").setup({
 		return conf
 		end,
 	},
-
 	lsp = {
 		diagnostics_trigger_update = true,
 		update_when_errors = true,
@@ -64,9 +65,9 @@ require("aerial").setup({
 	treesitter = { update_delay = 200 },
 	markdown = { update_delay = 200 },
 })
+end
 
-
-
+function config.autopairs()
 require("nvim-autopairs").setup {
 	check_ts = true,
 }
@@ -75,10 +76,10 @@ local cmp = require("cmp")
 cmp.event:on("confirm_done",
 	 cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
 cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+end
 
-
+function config.autosave()
 local autosave = require("autosave")
-
 autosave.setup(
 {
 	enabled = true,
@@ -95,7 +96,9 @@ autosave.setup(
 	clean_command_line_interval = 0,
 	debounce_delay = 135
 })
+end
 
+function config.autosession()
 require('auto-session').setup({
 	log_level = 'info',
 	auto_session_enable_last_session = true,
@@ -104,9 +107,9 @@ require('auto-session').setup({
 	auto_save_enabled = true,
 	auto_restore_enable = true,
 	auto_session_suppress_dirs = nil
-})
+})end
 
-
+function config.blankline()
 vim.opt.termguicolors = true
 vim.opt.list = true
 require("indent_blankline").setup {
@@ -127,8 +130,9 @@ require("indent_blankline").setup {
 	    "import"
 	},
 	space_char_blankline = " "
-	}
-
+}
+end
+function config.better_escape()
 vim.cmd[[packadd better-escape.nvim]]
 require('better_escape').setup({
 	mapping = {'jk','jj'},
@@ -138,9 +142,9 @@ require('better_escape').setup({
 		return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>' or '<esc>'
 	end
 })
+end
 
-
-
+function config.bufferline()
 require('bufferline').setup({
 	options = {
 		numbers = "ordinal",
@@ -214,11 +218,14 @@ require('bufferline').setup({
 	  }
 	}
 })
+end
 
-
+function config.colorizer()
 vim.cmd[[packadd nvim-colorizer.lua]]
 require('colorizer').setup()
+end
 
+function config.diffview()
 local cb = require'diffview.config'.diffview_callback
 require'diffview'.setup {
   diff_binaries = false,    -- Show diffs for binaries
@@ -272,17 +279,19 @@ require'diffview'.setup {
     option_panel = {
       ["<tab>"] = cb("select"),
       ["q"]     = cb("close"),
-    },
-  },
-}
+}}}
+end
 
+function config.comment()
 require('nvim_comment').setup({
 	comment_empty = false,
 	create_mappings = true,
 	line_mapping = "gcc",
 	operator_mapping = "gc"
 })
+end
 
+function config.gitsigns()
 require("gitsigns").setup({
 	signs = {
 	  add = {text = "▌"},
@@ -301,10 +310,13 @@ require("gitsigns").setup({
 	},
 	current_line_blame_formatter = '<author>, <author_time:%Y:%m-%d>, <summary>',
 })
+end
 
+function config.nvim_tree()
 require('nvim-tree').setup()
+end
 
-
+function config.specs()
 require('specs').setup{
 	show_jumps  = true,
 	min_jump = 10,
@@ -320,6 +332,9 @@ require('specs').setup{
 	ignore_filetypes = {},
 	ignore_buftypes = { nofile = true },
 }
+end
+
+function config.treesitter()
 require("nvim-treesitter.configs").setup {
 	ensure_installed = {
 	   "bash",
@@ -410,10 +425,11 @@ require("nvim-treesitter.configs").setup {
 		      peek_definition_code = {
 			["<leader>df"] = "@function.outer",
 			["<leader>dF"] = "@class.outer",
-                },
-        },
-	},
-}
+}}}}
+end
+
+function config.ts_context()
+vim.cmd[[packadd nvim-treesitter-context]]
 require'treesitter-context'.setup{
 	enable = true,
 	throttle = true,
@@ -428,12 +444,12 @@ require'treesitter-context'.setup{
 		'if',
 		'switch',
 		'case',
-	},
-},
+	}},
 	exact_patterns = {}
 }
+end
 
-
+function config.tabout()
 require('tabout').setup({
 	tabkey = '<C-l>',
 	backwards_tabkey = '<C-h>',
@@ -451,9 +467,9 @@ require('tabout').setup({
 	},
 	exclude = {},
 })
+end
 
-
-
+function config.twilight()
 require('twilight').setup({
 	dimming = {
 	alpha = 0.25, -- amount of dimming
@@ -470,7 +486,9 @@ require('twilight').setup({
 	},
 	exclude = {},
 })
+end
 
+function config.wilder()
 local wilder = require('wilder')
 wilder.setup({modes ={':','/','?'}})
 wilder.set_option('pipeline', {
@@ -499,3 +517,5 @@ wilder.set_option('pipeline', {
     left = {' ', wilder.wildmenu_spinner(), ' '},
     right = {' ', wilder.wildmenu_index(), ' '},
   })}))
+end
+return config

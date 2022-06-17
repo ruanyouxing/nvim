@@ -1,5 +1,6 @@
+local config = {}
 
-
+function config.cmp()
 local function highlight(name,guifg,guibg)
 	return (name..' '..guifg..' '..guibg)
 end
@@ -117,7 +118,6 @@ end
 	    end
 	},
 	sorting = {},
-	-- You should specify your *installed* sources.
 	sources = cmp.config.sources({
 	    {name = "nvim_lsp"},
 	    {name = "nvim_lua"},
@@ -131,11 +131,8 @@ end
 		    option = {
 			convert_case = true,
 			loud = true
-		}
-	    },
-	}),
-    }
-
+}}})}
+end
 local locations = require('lsputil.locations')
 local symbols = require('lsputil.symbols')
 local codeAction = require('lsputil.codeAction')
@@ -326,3 +323,5 @@ require('trouble').setup({
     },
     use_diagnostic_signs = true
 })
+
+return config

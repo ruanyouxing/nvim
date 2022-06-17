@@ -1,5 +1,7 @@
  local g = vim.g
+local config = {}
 
+function config.alpha()
 local alpha = require("alpha")
 local dashboard = require("alpha.themes.dashboard")
 dashboard.section.header.val = {
@@ -50,8 +52,9 @@ end
 dashboard.section.footer.val = footer()
 dashboard.section.footer.opts.hl = "Constant"
 alpha.setup(dashboard.opts)
+end
 
-
+function config.catppuccin()
 local catppuccin=require('catppuccin')
  catppuccin.setup({
 	 term_colors=true,
@@ -72,8 +75,9 @@ local catppuccin=require('catppuccin')
 		 telescope=true,
 	 }
  })
+ end
 
-
+function config.circles()
 require("circles").setup({ icons = {
     empty = "",
     filled = "",
@@ -81,8 +85,9 @@ require("circles").setup({ icons = {
   },
   lsp = true
 })
+end
 
-
+function config.gps()
 require('nvim-gps').setup({
 	icons = {
 		['class-name'] = " ",
@@ -100,29 +105,30 @@ require('nvim-gps').setup({
 	},
 	separator = ' >> ',
 })
-
-local gps = require('nvim-gps')
-local function gps_content()
-if gps.is_available() then
-    return gps.get_location()
-else
-    return ""
 end
-end
+function config.lualine()
+	local gps = require('nvim-gps')
+	local function gps_content()
+	if gps.is_available() then
+	    return gps.get_location()
+	else
+	    return ""
+	end
+	end
 
-local mini_sections = {
-	lualine_a = {},
-	lualine_b = {},
-	lualine_c = {},
-	lualine_x = {},
-	lualine_y = {},
-	lualine_z = {'location'},
-}
+	local mini_sections = {
+		lualine_a = {},
+		lualine_b = {},
+		lualine_c = {},
+		lualine_x = {},
+		lualine_y = {},
+		lualine_z = {'location'},
+	}
 
-local aerial = {
-	sections = mini_sections,
-	filetypes = {'aerial'},
-}
+	local aerial = {
+		sections = mini_sections,
+		filetypes = {'aerial'},
+	}
 
 require('lualine').setup({
 	options = {
@@ -167,8 +173,9 @@ require('lualine').setup({
 	    aerial,
 	}
 })
+end
 
--- Default options
+function config.nightfox()
 require('nightfox').setup({
  palettes = {
     duskfox = {
@@ -184,24 +191,30 @@ require('nightfox').setup({
     },
     duskfox = {
       inactive = "#090909", -- Slightly lighter then black background
-    },
-  },
-})
+}}})
+end
 
+function config.nord()
 g.nord_contrast = true
 g.nord_borders = true
 g.nord_disable_background = false
 g.nord_italic = true
 g.nord_cursorline_transparent = true
+end
 
-
+function config.tokyonight()
 g.tokyonight_style="storm"
 g.tokyonight_hide_inactive_statusline=1
 g.tokyonight_italic_funtions=1
 g.tokoynight_italic_variables=1
 g.tokoynight_sidebars={"qf","vista_kind","terminal","packer"}
+end
 
+function config.transparent()
 require('transparent').setup({
 	enable = false,
 	extra_groups = 'all',
 })
+end
+
+return config

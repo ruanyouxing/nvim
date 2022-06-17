@@ -4,6 +4,8 @@ local glob = fn.glob
 local conf_dir = fn.stdpath('config')
 local homepath = os.getenv("HOME")
 
+vim.opt.termguicolors = true
+vim.opt.list = true
 require('pack')
 local luafiles = split(glob(conf_dir..'/lua/*.lua'),'\n')
 	for i in ipairs(luafiles) do
