@@ -1,6 +1,24 @@
-vim.cmd[[packadd aerial.nvim]]
-local lsp_installer = require("nvim-lsp-installer")
+local config = {}
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+local completionItem = capabilities.textDocument.completion.completionItem
+	completionItem.documentationFormat = {
+	    "markdown", "plaintext"
+	}
+	completionItem.snippetSupport = true
+	completionItem.preselectSupport = true
+	completionItem.insertReplaceSupport = true
+	completionItem.labelDetailsSupport = true
+	completionItem.deprecatedSupport = true
+	completionItem.commitCharactersSupport = true
+	completionItem.tagSupport = { valueSet = {1} }
+completionItem.resolveSupport = {
+    properties = {"documentation", "detail", "additionalTextEdits"}
+}
+capabilities.offsetEncoding = { "utf-16" }
+
+function config.lsp_installer()
+local lsp_installer = require("nvim-lsp-installer")
 lsp_installer.settings {
     ui = {
 	icons = {
@@ -30,26 +48,6 @@ for _, name in pairs(servers) do
   end
 end
 
-local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-capabilities.textDocument.completion.completionItem.documentationFormat = {
-    "markdown", "plaintext"
-}
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-capabilities.textDocument.completion.completionItem.deprecatedSupport = true
-capabilities.textDocument.completion.completionItem.commitCharactersSupport =
-    true
-capabilities.textDocument.completion.completionItem.tagSupport = {
-    valueSet = {1}
-}
-capabilities.textDocument.completion.completionItem.resolveSupport = {
-    properties = {"documentation", "detail", "additionalTextEdits"}
-}
-capabilities.offsetEncoding = { "utf-16" }
-
 lsp_installer.on_server_ready(function(server)
     local opts = {}
 
@@ -74,4 +72,5 @@ lsp_installer.on_server_ready(function(server)
 
     server:setup(opts)
 end)
-
+end
+return config

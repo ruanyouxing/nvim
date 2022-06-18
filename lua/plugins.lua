@@ -1,6 +1,8 @@
 local plugins = {}
 local editor = require('editor')
+local lsp = require('lsp')
 local themes = require('themes')
+local tools = require('tools')
 local completion = require('completion')
 plugins['stevearc/aerial.nvim'] = {
 	config = editor.aerial()
@@ -85,16 +87,25 @@ plugins['lewis6991/impatient.nvim'] = {
 			require'impatient'.enable_profile()
 		end}
 plugins['iamcco/markdown-preview.nvim'] = {run = 'cd app && yarn install'}
-plugins["rcarriga/nvim-notify"] = {opt = false }
+plugins["rcarriga/nvim-notify"] = {
+	opt = false,
+	config = tools.notify()}
 plugins["nvim-telescope/telescope.nvim"] = {
 	 requires = {{"sharkdp/fd"},
 		    {"BurntSushi/ripgrep"},
-	    	    {'jvgrootveld/telescope-zoxide'}}}
-plugins["akinsho/toggleterm.nvim"] = {opt = false }
+	    	    {'jvgrootveld/telescope-zoxide'}
+	    },
+	config = tools.telescope()}
+plugins["akinsho/toggleterm.nvim"] = {
+	opt = 'BufEnter',
+	config = tools.toggleterm()}
 
 
 plugins["neovim/nvim-lspconfig"] = {opt = false }
-plugins["williamboman/nvim-lsp-installer"] = {opt = false }
+plugins["williamboman/nvim-lsp-installer"] = {
+	opt = false,
+	config = lsp.lsp_installer()
+}
 
 
 
