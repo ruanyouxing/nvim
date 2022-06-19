@@ -133,19 +133,20 @@ end
 			loud = true
 }}})}
 end
-local locations = require('lsputil.locations')
-local symbols = require('lsputil.symbols')
-local codeAction = require('lsputil.codeAction')
-local typeDefinition = 'textDocument/typeDefinition'
-local codeaction = 'textDocument/codeActions'
-local definition = 'textDocument/definition'
-local declaration = 'textDocument/declaration'
-local documentSymbol = 'textDocument/documentSymbol'
-local implementation = 'textDocument/implementation'
-local references = 'textDocument/references'
-local symbol = 'textDocument/symbol'
-local handlers = vim.lsp.handlers
 
+function config.lsputil()
+	local locations = require('lsputil.locations')
+	local symbols = require('lsputil.symbols')
+	local codeAction = require('lsputil.codeAction')
+	local typeDefinition = 'textDocument/typeDefinition'
+	local codeaction = 'textDocument/codeActions'
+	local definition = 'textDocument/definition'
+	local declaration = 'textDocument/declaration'
+	local documentSymbol = 'textDocument/documentSymbol'
+	local implementation = 'textDocument/implementation'
+	local references = 'textDocument/references'
+	local symbol = 'textDocument/symbol'
+	local handlers = vim.lsp.handlers
 
 if vim.fn.has("nvim-0.5.1") == 1 then
 	handlers[codeaction] = codeAction.code_action_handler
@@ -205,123 +206,126 @@ else
 		symbols.workspace_handler(nil, result, { bufnr = bufn }, nil)
 	end
 end
+end
 
+function config.signature()
+	require('lsp_signature').setup({
+		bind = true,
+		debug = false,
+		log_path = vim.fn.stdpath('cache') .. "/lsp_signature.log",
+		verbose = false,
+		use_lspsaga = false,
+		floating_window = true,
+		floating_window_above_cur_line = true,
+		fix_pos = false,
+		hint_enable = true,
+		hing_prefix = '🐼',
+		hint_scheme = "String",
+		hi_parameter = "LspSignatureActiveParameter",
+		max_height = 12,
+		max_width = 120,
+		transparency = nil,
+		doc_lines = 10,
+		shadow_guibg = 'Black',
+		timer_interval = '200',
+		always_trigger = false,
+		auto_close_after = nil,
+		extra_trigger_chars = {},
+		zindex = 200,
+		padding = ' ',
+		shadow_blend = 36,
+		toggle_key = nil,
+		hander_opts  = {
+			border = "single",
+		},
 
+	})
+	require'lsp_signature'.on_attach({
+		bind = true,
+		debug = false,
+		log_path = vim.fn.stdpath('cache') .. "/lsp_signature.log",
+		verbose = false,
+		use_lspsaga = false,
+		floating_window = true,
+		floating_window_above_cur_line = true,
+		fix_pos = false,
+		hint_enable = true,
+		hing_prefix = '🐼',
+		hint_scheme = "String",
+		hi_parameter = "LspSignatureActiveParameter",
+		max_height = 12,
+		max_width = 120,
+		transparency = nil,
+		doc_lines = 10,
+		shadow_guibg = 'Black',
+		timer_interval = '200',
+		always_trigger = false,
+		auto_close_after = nil,
+		extra_trigger_chars = {},
+		zindex = 200,
+		padding = ' ',
+		shadow_blend = 36,
+		toggle_key = nil,
+		hander_opts  = {
+			border = "single",
+		},
+	},bufnr)
+end
 
-require('lsp_signature').setup({
-	bind = true,
-	debug = false,
-	log_path = vim.fn.stdpath('cache') .. "/lsp_signature.log",
-	verbose = false,
-	use_lspsaga = false,
-	floating_window = true,
-	floating_window_above_cur_line = true,
-	fix_pos = false,
-	hint_enable = true,
-	hing_prefix = '🐼',
-	hint_scheme = "String",
-	hi_parameter = "LspSignatureActiveParameter",
-	max_height = 12,
-	max_width = 120,
-	transparency = nil,
-	doc_lines = 10,
-	shadow_guibg = 'Black',
-	timer_interval = '200',
-	always_trigger = false,
-	auto_close_after = nil,
-	extra_trigger_chars = {},
-	zindex = 200,
-	padding = ' ',
-	shadow_blend = 36,
-	toggle_key = nil,
-	hander_opts  = {
-		border = "single",
-	},
+function config.snippets()
+	require("luasnip").config.set_config({
+		history = true,
+		update_events = "TextChanged,TextChangedI",
+		store_selection_keys = true,
+	})
+	require("luasnip/loaders/from_vscode").load()
+end
 
-})
-require'lsp_signature'.on_attach({
-	bind = true,
-	debug = false,
-	log_path = vim.fn.stdpath('cache') .. "/lsp_signature.log",
-	verbose = false,
-	use_lspsaga = false,
-	floating_window = true,
-	floating_window_above_cur_line = true,
-	fix_pos = false,
-	hint_enable = true,
-	hing_prefix = '🐼',
-	hint_scheme = "String",
-	hi_parameter = "LspSignatureActiveParameter",
-	max_height = 12,
-	max_width = 120,
-	transparency = nil,
-	doc_lines = 10,
-	shadow_guibg = 'Black',
-	timer_interval = '200',
-	always_trigger = false,
-	auto_close_after = nil,
-	extra_trigger_chars = {},
-	zindex = 200,
-	padding = ' ',
-	shadow_blend = 36,
-	toggle_key = nil,
-	hander_opts  = {
-		border = "single",
-	},
-},bufnr)
-
-
-require("luasnip").config.set_config({
-	history = true,
-	update_events = "TextChanged,TextChangedI",
-	store_selection_keys = true,
-})
-require("luasnip/loaders/from_vscode").load()
-
-
-require('trouble').setup({
-    position = "bottom",
-    height = 6,
-    width = 50,
-    icons = true,
-    mode = "workspace_diagnostics",
-    fold_open = "",
-    fold_closed = "",
-    group = true,
-    padding = true,
-    action_keys = {
-	close = "q",
-	cancel = "<esc>",
-	refresh = "r",
-	jump = {"<cr>", "<tab>"},
-	open_split = { "<c-x>" },
-	open_vsplit = { "<c-v>" },
-	open_tab = { "<c-t>" },
-	jump_close = {"o"},
-	toggle_mode = "m",
-	toggle_preview = "P",
-	hover = "K",
-	preview = "p",
-	close_folds = {"zM", "zm"},
-	open_folds = {"zR", "zr"},
-	toggle_fold = {"zA", "za"},
-	previous = "k",
-	next = "j"
-    },
-    indent_lines = true,
-    auto_open = false,
-    auto_close = false,
-    auto_preview = true,
-    auto_fold = false,
-    auto_jump = {"lsp_definitions"},
-    signs = {
-	error = "",
-	warning = "",
-	hint = "",
-	information = "",
-	other = "﫠"
-    },
-    use_diagnostic_signs = true
-})
+function config.trouble()
+	require('trouble').setup({
+	    position = "bottom",
+	    height = 6,
+	    width = 50,
+	    icons = true,
+	    mode = "workspace_diagnostics",
+	    fold_open = "",
+	    fold_closed = "",
+	    group = true,
+	    padding = true,
+	    action_keys = {
+		close = "q",
+		cancel = "<esc>",
+		refresh = "r",
+		jump = {"<cr>", "<tab>"},
+		open_split = { "<c-x>" },
+		open_vsplit = { "<c-v>" },
+		open_tab = { "<c-t>" },
+		jump_close = {"o"},
+		toggle_mode = "m",
+		toggle_preview = "P",
+		hover = "K",
+		preview = "p",
+		close_folds = {"zM", "zm"},
+		open_folds = {"zR", "zr"},
+		toggle_fold = {"zA", "za"},
+		previous = "k",
+		next = "j"
+	    },
+	    indent_lines = true,
+	    auto_open = false,
+	    auto_close = false,
+	    auto_preview = true,
+	    auto_fold = false,
+	    auto_jump = {"lsp_definitions"},
+	    signs = {
+		error = "",
+		warning = "",
+		hint = "",
+		information = "",
+		other = "﫠"
+	    },
+	    use_diagnostic_signs = true
+	})
+end
 
 return config

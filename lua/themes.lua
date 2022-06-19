@@ -1,4 +1,3 @@
- local g = vim.g
 local config = {}
 
 function config.alpha()
@@ -33,7 +32,6 @@ dashboard.section.buttons.val = {
 
 local function footer()
 	package.path = vim.fn.stdpath('config')..'/plugin/?.lua;'..package.path
-	require('packer_compiled')
   local plugins = #vim.tbl_keys(packer_plugins)
   local datetime = os.date(" %d-%m-%Y   %H:%M:%S")
   local version = vim.version()
@@ -50,31 +48,30 @@ local function footer()
     .. version.patch .. ' \n\t\t\t kill me pls'
 end
 dashboard.section.footer.val = footer()
-dashboard.section.footer.opts.hl = "Constant"
 alpha.setup(dashboard.opts)
 end
 
 function config.catppuccin()
-local catppuccin=require('catppuccin')
- catppuccin.setup({
-	 term_colors=true,
-	 transparent_background=false,
-	 styles={
-		 comments="italic",
-		 functions="italic",
-		 keywords="italic",
-		 string="bold",
-		 variables="italic",
-	 },
-	 integrations={
-		 nvimtree={
-			 enable=true,
-			 show_root=true,
+	local catppuccin=require('catppuccin')
+	 catppuccin.setup({
+		 term_colors=true,
+		 transparent_background=false,
+		 styles={
+			 comments="italic",
+			 functions="italic",
+			 keywords="italic",
+			 string="bold",
+			 variables="italic",
 		 },
-		 bufferline=true,
-		 telescope=true,
-	 }
- })
+		 integrations={
+			 nvimtree={
+				 enable=true,
+				 show_root=true,
+			 },
+			 bufferline=true,
+			 telescope=true,
+		 }
+	 })
  end
 
 function config.circles()
@@ -195,19 +192,19 @@ require('nightfox').setup({
 end
 
 function config.nord()
-g.nord_contrast = true
-g.nord_borders = true
-g.nord_disable_background = false
-g.nord_italic = true
-g.nord_cursorline_transparent = true
+	vim.g.nord_contrast = true
+	vim.g.nord_borders = true
+	vim.g.nord_disable_background = false
+	vim.g.nord_italic = true
+	vim.g.nord_cursorline_transparent = true
 end
 
 function config.tokyonight()
-g.tokyonight_style="storm"
-g.tokyonight_hide_inactive_statusline=1
-g.tokyonight_italic_funtions=1
-g.tokoynight_italic_variables=1
-g.tokoynight_sidebars={"qf","vista_kind","terminal","packer"}
+vim.g.tokyonight_style="storm"
+vim.g.tokyonight_hide_inactive_statusline=1
+vim.g.tokyonight_italic_funtions=1
+vim.g.tokyonight_italic_variables=1
+vim.g.tokyonight_sidebars={"qf","vista_kind","terminal","packer"}
 end
 
 function config.transparent()

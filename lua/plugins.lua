@@ -5,52 +5,54 @@ local themes = require('themes')
 local tools = require('tools')
 local completion = require('completion')
 plugins['stevearc/aerial.nvim'] = {
-	config = editor.aerial()
+	config = editor.aerial
 }
 plugins['windwp/nvim-autopairs'] = {
-	config = editor.autopairs()
+	config = editor.autopairs
 }
 plugins['Pocco81/AutoSave.nvim'] = {
-	config = editor.autosave()
+	config = editor.autosave
 }
 plugins['rmagatti/auto-session'] = {
-	config = editor.autosession()
+	config = editor.autosession
 }
 plugins['famiu/bufdelete.nvim'] = {opt = false }
 plugins['lukas-reineke/indent-blankline.nvim'] = {
-	config = editor.blankline()
+	config = editor.blankline
 }
 plugins['max397574/better-escape.nvim'] = {
 	event = 'InsertEnter',
-	config = editor.better_escape()
+	config = editor.better_escape
 }
 plugins['akinsho/bufferline.nvim'] = {
-	config = editor.bufferline()
+	config = editor.bufferline
 }
 plugins['norcalli/nvim-colorizer.lua']= {
 	opt = true,
-	config = editor.colorizer()
+	config = editor.colorizer
 }
 plugins['sindrets/diffview.nvim'] = {
-	config = editor.diffview()
+	config = editor.diffview
 }
 plugins['lewis6991/gitsigns.nvim'] = {
 	requires = 'nvim-lua/plenary.nvim',
-	config = editor.gitsigns()
+	config = editor.gitsigns
 }
 plugins['terrortylor/nvim-comment'] = {
-	config = editor.comment()
+	config = editor.comment
 }
 plugins["kyazdani42/nvim-tree.lua"] = {
 	requires = {"kyazdani42/nvim-web-devicons"},
-	config = editor.nvim_tree()
+	config = function()
+		require('nvim-tree').setup()
+	end
 }
 plugins['edluffy/specs.nvim'] = {
-	config = editor.specs()
+	config = editor.specs
 }
 plugins["nvim-treesitter/nvim-treesitter"] = {
 	run = ':TSUpdate',
-	config = editor.treesitter()
+	config = editor.treesitter
 }
 plugins["nvim-treesitter/nvim-treesitter-refactor"] = {
 	after = 'nvim-treesitter'
@@ -67,76 +69,79 @@ plugins['p00f/nvim-ts-rainbow'] = {
 plugins['andymass/vim-matchup'] = {after = 'nvim-treesitter'}
 plugins['romgrk/nvim-treesitter-context'] = {
 	after = 'nvim-treesitter',
-	config = editor.ts_context()
+	config = editor.ts_context
 }
 plugins['abecodes/tabout.nvim'] = {
-	config = editor.tabout()
+	config = editor.tabout
 }
 plugins['folke/twilight.nvim'] = {
-	config = editor.twilight()
+	config = editor.twilight
 }
 plugins['gelguy/wilder.nvim'] = {
 	 requires = {'roxma/nvim-yarp',
 		 'roxma/vim-hug-neovim-rpc',
 		 'romgrk/fzy-lua-native'},
-	 config = editor.wilder()
+	 config = editor.wilder
  }
 
 plugins['lewis6991/impatient.nvim'] = {
-	 	config = function()
-			require'impatient'.enable_profile()
-		end}
+	config = function()
+		require'impatient'.enable_profile()
+	end
+	}
 plugins['iamcco/markdown-preview.nvim'] = {run = 'cd app && yarn install'}
 plugins["rcarriga/nvim-notify"] = {
 	opt = false,
-	config = tools.notify()}
+	config = tools.notify
+}
 plugins["nvim-telescope/telescope.nvim"] = {
 	 requires = {{"sharkdp/fd"},
 		    {"BurntSushi/ripgrep"},
 	    	    {'jvgrootveld/telescope-zoxide'}
 	    },
-	config = tools.telescope()}
+	config = tools.telescope
+}
 plugins["akinsho/toggleterm.nvim"] = {
-	opt = 'BufEnter',
-	config = tools.toggleterm()}
+	config = tools.toggleterm
+}
 
 
 plugins["neovim/nvim-lspconfig"] = {opt = false }
 plugins["williamboman/nvim-lsp-installer"] = {
 	opt = false,
-	config = lsp.lsp_installer()
+	config = lsp.lsp_installer
 }
 
 
 
 plugins["goolord/alpha-nvim"] = {
-	config = themes.alpha()
+	config = themes.alpha
 }
 plugins["catppuccin/nvim"] = {
 	as = 'catppuccin',
-	config = themes.catppuccin()
+	config = themes.catppuccin
 }
 plugins["projekt0n/circles.nvim"] = {
-	config = themes.circles()
+	config = themes.circles
 }
 plugins['SmiteshP/nvim-gps'] = {
-	config = themes.gps()
+	config = themes.gps
 }
 plugins["nvim-lualine/lualine.nvim"] = {
 	requires = {'arkav/lualine-lsp-progress'},
-	config = themes.lualine()
+	config = themes.lualine
 }
 plugins['EdenEast/nightfox.nvim'] = {
-	config = themes.nightfox()
+	config = themes.nightfox
 }
 plugins['shaunsingh/nord.nvim'] = {
-	config = themes.nord()
+	config = themes.nord
 }
 plugins['folke/tokyonight.nvim'] = {
-	config = themes.tokyonight()
+	config = themes.tokyonight
 }
 plugins['xiyaowong/nvim-transparent'] = {
-	config = themes.transparent()
+	config = themes.transparent
 }
 plugins['hrsh7th/nvim-cmp'] = {
 	requires = {
@@ -149,7 +154,7 @@ plugins['hrsh7th/nvim-cmp'] = {
 		{'hrsh7th/cmp-path',after = 'nvim-cmp'},
 		{'f3fora/cmp-spell',after = 'nvim-cmp'},
 		{'rafamadriz/friendly-snippets',after = 'nvim-cmp'}},
-	config = completion.cmp()
+	config = completion.cmp
 }
 plugins['L3MON4D3/LuaSnip'] = {opt = false }
 plugins['michaelb/sniprun'] = {run = 'bash ./install.sh &'}

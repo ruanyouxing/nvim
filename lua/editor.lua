@@ -1,101 +1,100 @@
 local config = {}
 function config.aerial()
-require("aerial").setup({
-	backends = { "treesitter", "lsp", "markdown" },
-	close_behavior = "auto",
-	default_bindings = true,
-	default_direction = "prefer_right",
-	disable_max_lines = 10000,
-	disable_max_size = 10000000,
-	filter_kind = {
-		"Class",
-		"Constructor",
-		"Enum",
-		"Function",
-		"Interface",
-		"Module",
-		"Method",
-		"Struct",
-	},
-	highlight_mode = "split_width",
-	highlight_closest = true,
-	highlight_on_hover = false,
-	highlight_on_jump = 300,
-	ignore = {
-		unlisted_buffers = true,
-		filetypes = {},
-		buftypes = "special",
-		wintypes = "special",
-	},
-	link_folds_to_tree = false,
-	link_tree_to_folds = true,
-	manage_folds = false,
-	max_width = { 40, 0.2 },
-	width = nil,
-	min_width = 30,
-	nerd_font = "auto",
-	on_attach = nil,
-	open_automatic = false,
-	placement_editor_edge = false,
-	post_jump_cmd = "normal! zz",
-	close_on_select = false,
-	show_guides = false,
-	update_events = "TextChanged,InsertLeave",
-	guides = {
-		mid_item = "├─",
-		last_item = "└─",
-		nested_top = "│ ",
-		whitespace = "  ",
-	},
-	float = {
-		border = "rounded",
-		relative = "cursor",
-		max_height = 0.9,
-		height = nil,
-		min_height = { 8, 0.1 },
-		override = function(conf)
-		return conf
-		end,
-	},
-	lsp = {
-		diagnostics_trigger_update = true,
-		update_when_errors = true,
-		update_delay = 200,
-	},
-	treesitter = { update_delay = 200 },
-	markdown = { update_delay = 200 },
-})
+	require("aerial").setup({
+		backends = { "treesitter", "lsp", "markdown" },
+		close_behavior = "auto",
+		default_bindings = true,
+		default_direction = "prefer_right",
+		disable_max_lines = 10000,
+		disable_max_size = 10000000,
+		filter_kind = {
+			"Class",
+			"Constructor",
+			"Enum",
+			"Function",
+			"Interface",
+			"Module",
+			"Method",
+			"Struct",
+		},
+		highlight_mode = "split_width",
+		highlight_closest = true,
+		highlight_on_hover = false,
+		highlight_on_jump = 300,
+		ignore = {
+			unlisted_buffers = true,
+			filetypes = {},
+			buftypes = "special",
+			wintypes = "special",
+		},
+		link_folds_to_tree = false,
+		link_tree_to_folds = true,
+		manage_folds = false,
+		max_width = { 40, 0.2 },
+		width = nil,
+		min_width = 30,
+		nerd_font = "auto",
+		on_attach = nil,
+		open_automatic = false,
+		placement_editor_edge = false,
+		post_jump_cmd = "normal! zz",
+		close_on_select = false,
+		show_guides = false,
+		update_events = "TextChanged,InsertLeave",
+		guides = {
+			mid_item = "├─",
+			last_item = "└─",
+			nested_top = "│ ",
+			whitespace = "  ",
+		},
+		float = {
+			border = "rounded",
+			relative = "cursor",
+			max_height = 0.9,
+			height = nil,
+			min_height = { 8, 0.1 },
+			override = function(conf)
+			return conf
+			end,
+		},
+		lsp = {
+			diagnostics_trigger_update = true,
+			update_when_errors = true,
+			update_delay = 200,
+		},
+		treesitter = { update_delay = 200 },
+		markdown = { update_delay = 200 },
+	})
 end
 
 function config.autopairs()
-require("nvim-autopairs").setup {
-	check_ts = true,
-}
-local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-local cmp = require("cmp")
-cmp.event:on("confirm_done",
-	 cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
-cmp_autopairs.lisp[#cmp_autopairs.lisp + 1] = "racket"
+	require("nvim-autopairs").setup {
+		check_ts = true,
+	}
+	local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+	local cmp = require("cmp")
+	cmp.event:on("confirm_done",
+		 cmp_autopairs.on_confirm_done({map_char = {tex = ""}}))
 end
 
 function config.autosave()
-local autosave = require("autosave")
-autosave.setup(
-{
-	enabled = true,
-	execution_message = "Changes saved at " .. vim.fn.strftime("%H:%M:%S"),
-	events = {"InsertLeave", "TextChanged"},
-	conditions = {
-	    exists = true,
-	    filename_is_not = {},
-	    filetype_is_not = {},
-	    modifiable = true
-	},
-	write_all_buffers = false,
-	on_off_commands = true,
-	clean_command_line_interval = 0,
-	debounce_delay = 135
-})
+	local autosave = require("autosave")
+	autosave.setup(
+	{
+		enabled = true,
+		execution_message = "Changes saved at " .. vim.fn.strftime("%H:%M:%S"),
+		events = {"InsertLeave", "TextChanged"},
+		conditions = {
+		    exists = true,
+		    filename_is_not = {},
+		    filetype_is_not = {},
+		    modifiable = true
+		},
+		write_all_buffers = false,
+		on_off_commands = true,
+		clean_command_line_interval = 0,
+		debounce_delay = 135
+	})
 end
 
 function config.autosession()
@@ -310,10 +309,6 @@ require("gitsigns").setup({
 	},
 	current_line_blame_formatter = '<author>, <author_time:%Y:%m-%d>, <summary>',
 })
-end
-
-function config.nvim_tree()
-require('nvim-tree').setup()
 end
 
 function config.specs()
