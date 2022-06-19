@@ -219,10 +219,6 @@ require('bufferline').setup({
 })
 end
 
-function config.colorizer()
-vim.cmd[[packadd nvim-colorizer.lua]]
-require('colorizer').setup()
-end
 
 function config.diffview()
 local cb = require'diffview.config'.diffview_callback

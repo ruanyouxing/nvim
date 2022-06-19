@@ -28,8 +28,7 @@ plugins['akinsho/bufferline.nvim'] = {
 	config = editor.bufferline
 }
 plugins['norcalli/nvim-colorizer.lua']= {
-	opt = true,
-	config = editor.colorizer
+	config = function() require('colorizer').setup({}) end
 }
 plugins['sindrets/diffview.nvim'] = {
 	config = editor.diffview
