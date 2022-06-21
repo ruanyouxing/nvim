@@ -1,22 +1,9 @@
-local split = vim.split
-local fn = vim.fn
-local glob = fn.glob
-local conf_dir = fn.stdpath('config')
-local homepath = os.getenv("HOME")
-
-vim.opt.termguicolors = true
-vim.opt.list = true
+local mapping = require('mapping')
+require('options')
+mapping.shortcuts()
+mapping.commands()
+mapping.func()
 require('pack')
-local luafiles = split(glob(conf_dir..'/lua/*.lua'),'\n')
-	for i in ipairs(luafiles) do
-		local files = string.sub(luafiles[i],#homepath+19,-5)
-		if files == 'plugins' or files == 'pack' then
-			i = i + 1
-		end
-		require(files)
-		if files == 'mapping' then
-			require(files).shortcuts()
-			require(files).commands()
-			require(files).func()
-		end
-	end
+require('events')
+
+
