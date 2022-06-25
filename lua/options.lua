@@ -38,4 +38,3 @@ g.smartindent=true
 g.syntax_on=true
 g.python_host_prog= '/usr/bin/python'
 g.python3_host_prog = '/usr/bin/python3'
-vim.cmd('colorscheme tokyonight')

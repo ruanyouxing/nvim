@@ -493,7 +493,7 @@ wilder.set_option('pipeline', {
     wilder.python_search_pipeline({
 	    pattern = wilder.python_fuzzy_pattern(),
 	    sorter = wilder.python_difflib_sorter(),
-	    engine = 're2'
+--	    engine = 're2'
 }))})
   wilder.set_option('renderer', wilder.renderer_mux({
   [':'] = wilder.popupmenu_renderer({

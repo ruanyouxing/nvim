@@ -5,9 +5,11 @@ local themes = require('themes')
 local tools = require('tools')
 local completion = require('completion')
 plugins['stevearc/aerial.nvim'] = {
+	opt = true,
 	config = editor.aerial
 }
 plugins['windwp/nvim-autopairs'] = {
+	after = 'nvim-cmp',
 	config = editor.autopairs
 }
 plugins['Pocco81/AutoSave.nvim'] = {
@@ -18,6 +20,7 @@ plugins['rmagatti/auto-session'] = {
 }
 plugins['famiu/bufdelete.nvim'] = {opt = false }
 plugins['lukas-reineke/indent-blankline.nvim'] = {
+	opt =true,
 	config = editor.blankline
 }
 plugins['max397574/better-escape.nvim'] = {
@@ -31,25 +34,31 @@ plugins['norcalli/nvim-colorizer.lua']= {
 	config = function() require('colorizer').setup({}) end
 }
 plugins['sindrets/diffview.nvim'] = {
+	opt = true,
 	config = editor.diffview
 }
 plugins['lewis6991/gitsigns.nvim'] = {
-	requires = 'nvim-lua/plenary.nvim',
+	opt = true,
 	config = editor.gitsigns
 }
+plugins['nvim-lua/plenary.nvim'] = { opt = true }
 plugins['terrortylor/nvim-comment'] = {
 	config = editor.comment
 }
 plugins["kyazdani42/nvim-tree.lua"] = {
-	requires = {"kyazdani42/nvim-web-devicons"},
+	opt = true,
 	config = function()
 		require('nvim-tree').setup()
 	end
+}
+plugins['kyazdani42/nvim-web-devicons'] = {
+	opt = false
 }
 plugins['edluffy/specs.nvim'] = {
 	config = editor.specs
 }
 plugins["nvim-treesitter/nvim-treesitter"] = {
+	opt = true,
 	run = ':TSUpdate',
 	config = editor.treesitter
 }
@@ -71,6 +80,7 @@ plugins['romgrk/nvim-treesitter-context'] = {
 	config = editor.ts_context
 }
 plugins['abecodes/tabout.nvim'] = {
+	after = 'nvim-treesitter',
 	config = editor.tabout
 }
 plugins['folke/twilight.nvim'] = {
@@ -90,11 +100,12 @@ plugins['lewis6991/impatient.nvim'] = {
 	}
 plugins['iamcco/markdown-preview.nvim'] = {run = 'cd app && yarn install'}
 plugins["rcarriga/nvim-notify"] = {
-	opt = false,
 	config = tools.notify
 }
 plugins["nvim-telescope/telescope.nvim"] = {
-	 requires = {{"sharkdp/fd"},
+	opt = true,
+	 requires = {
+		    {"sharkdp/fd"},
 		    {"BurntSushi/ripgrep"},
 	    	    {'jvgrootveld/telescope-zoxide'}
 	    },
@@ -104,14 +115,11 @@ plugins["akinsho/toggleterm.nvim"] = {
 	config = tools.toggleterm
 }
 
-
-plugins["neovim/nvim-lspconfig"] = {opt = false }
+plugins["neovim/nvim-lspconfig"] = {opt = true }
+plugins['ray-x/lsp_signature.nvim'] = { opt = true }
 plugins["williamboman/nvim-lsp-installer"] = {
-	opt = false,
 	config = lsp.lsp_installer
 }
-
-
 
 plugins["goolord/alpha-nvim"] = {
 	config = themes.alpha
@@ -121,14 +129,19 @@ plugins["catppuccin/nvim"] = {
 	config = themes.catppuccin
 }
 plugins["projekt0n/circles.nvim"] = {
+	after = 'nvim-tree.lua',
 	config = themes.circles
 }
 plugins['SmiteshP/nvim-gps'] = {
+	after = 'lualine.nvim',
 	config = themes.gps
 }
 plugins["nvim-lualine/lualine.nvim"] = {
-	requires = {'arkav/lualine-lsp-progress'},
+	after = 'nvim-treesitter',
 	config = themes.lualine
+}
+plugins['arkav/lualine-lsp-progress'] = {
+	after = 'lualine.nvim'
 }
 plugins['EdenEast/nightfox.nvim'] = {
 	config = themes.nightfox
@@ -144,27 +157,33 @@ plugins['xiyaowong/nvim-transparent'] = {
 }
 plugins['hrsh7th/nvim-cmp'] = {
 	requires = {
-		{'zbirenbaum/copilot.lua',after = 'nvim-cmp',event = 'VimEnter'},
-		{'zbirenbaum/copilot-cmp',after = {'nvim-cmp','copilot.lua'}},
-		{'hrsh7th/cmp-buffer',after = 'nvim-cmp'},
-		{'saadparwaiz1/cmp_luasnip',after = 'LuaSnip'},
-		{'hrsh7th/cmp-nvim-lsp',after = 'cmp_luasnip'},
-		{'hrsh7th/cmp-nvim-lua',after ='cmp-nvim-lsp'},
-		{'hrsh7th/cmp-path',after = 'nvim-cmp'},
-		{'f3fora/cmp-spell',after = 'nvim-cmp'},
-		{'rafamadriz/friendly-snippets',after = 'nvim-cmp'}},
+		{'zbirenbaum/copilot.lua',after = 'nvim-cmp',event = 'VimEnter', opt = true},
+		{'zbirenbaum/copilot-cmp',after = {'nvim-cmp','copilot.lua'}, opt = true},
+		{'hrsh7th/cmp-buffer',after = 'nvim-cmp',opt = true},
+		{'saadparwaiz1/cmp_luasnip',after = {'LuaSnip','nvim-cmp'}, opt = true},
+		{'hrsh7th/cmp-nvim-lsp',after = 'nvim-cmp',opt  = true},
+		{'hrsh7th/cmp-nvim-lua',after ='nvim-cmp',opt = true},
+		{'hrsh7th/cmp-path',after = 'nvim-cmp',opt = true},
+		{'f3fora/cmp-spell',after = 'nvim-cmp',opt = true},
+		{'onsails/lspkind-nvim',after = 'nvim-cmp', opt = true}},
+	after = 'LuaSnip',
 	config = completion.cmp
 }
-plugins['L3MON4D3/LuaSnip'] = {opt = false }
+plugins['L3MON4D3/LuaSnip'] = {
+	event = 'InsertEnter',
+	config = completion.snippets,
+}
+plugins['rafamadriz/friendly-snippets'] = {
+	event = 'InsertEnter',
+	after = 'LuaSnip',
+}
 plugins['michaelb/sniprun'] = {run = 'bash ./install.sh &'}
-plugins['RishabhRD/nvim-lsputils'] =  {requires = 'RishabhRD/popfix'}
-plugins['ray-x/lsp_signature.nvim'] = {opt = false }
-plugins['folke/trouble.nvim'] = {opt = false }
+--plugins['RishabhRD/nvim-lsputils'] =  { requires = 'RishabhRD/popfix'}
+plugins['folke/trouble.nvim'] = { opt = true }
 plugins['rhysd/accelerated-jk'] = {opt = false }
 plugins['github/copilot.vim'] = {opt = false }
-plugins['onsails/lspkind-nvim'] = {opt = false }
-plugins['mbbill/undotree'] = {opt = false }
+plugins['mbbill/undotree'] = { event = 'TextChanged' }
 plugins['itchyny/vim-cursorword'] = {opt = false }
 plugins['dstein64/vim-startuptime'] = {opt = false }
-plugins['vimwiki/vimwiki'] = {opt = false }
+plugins['vimwiki/vimwiki'] = {opt = true }
 return plugins

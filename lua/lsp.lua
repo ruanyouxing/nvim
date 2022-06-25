@@ -1,5 +1,4 @@
 local config = {}
-
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 local completionItem = capabilities.textDocument.completion.completionItem
 	completionItem.documentationFormat = {
