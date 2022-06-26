@@ -1,4 +1,12 @@
-require('packer_compiled')
+local plugins = require('packer_compiled')
+if plugins == nil then
+	print('recompile')
+	require('packer').compile()
+	vim.defer_fn(function()
+		print('Packer recompiled, please run :PackerCompile and restart nvim')
+	end,400)
+	return
+end
 local load = require('packer').loader
 local fn = vim.fn
 local fsize = fn.getfsize(vim.fn.expand("%:p:f"))
@@ -19,12 +27,6 @@ if load_lsp then
 	load('aerial.nvim')
 end
 load('plenary.nvim')
-if packer_plugins['plenary.nvim'].loaded then
-	load('telescope.nvim')
-	load('fd')
-	load('ripgrep')
-	load('telescope-zoxide')
-end
 load('nvim-tree.lua')
 local function is_gitrepo()
 	local is_repo = fn.system('git rev-parse --is-inside-work-tree')
@@ -42,3 +44,5 @@ local filetype = vim.bo.filetype
 if filetype == 'markdown' then
 	load('vimwiki')
 end
+
+

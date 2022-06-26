@@ -104,6 +104,8 @@ plugins["rcarriga/nvim-notify"] = {
 }
 plugins["nvim-telescope/telescope.nvim"] = {
 	opt = true,
+	after = 'plenary.nvim',
+	cmd = 'Telescope',
 	 requires = {
 		    {"sharkdp/fd"},
 		    {"BurntSushi/ripgrep"},
