@@ -1,11 +1,10 @@
 package.path = vim.fn.stdpath('config')..'/plugin/?.lua;'..package.path
-local mapping = require('mapping')
-require('options')
+local mapping = require('config.mapping')
+require('config.options')
 mapping.shortcuts()
 mapping.commands()
 mapping.func()
-require('pack')
-require('lazy')
-require('events')
+require('config.pack')
+require('config.lazy')
+require('config.events')
 vim.cmd('colorscheme tokyonight')
-

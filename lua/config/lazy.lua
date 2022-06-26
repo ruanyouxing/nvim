@@ -44,5 +44,3 @@ local filetype = vim.bo.filetype
 if filetype == 'markdown' then
 	load('vimwiki')
 end
-
-

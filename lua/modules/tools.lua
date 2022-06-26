@@ -23,8 +23,8 @@ end
 function config.telescope()
 local actions = require('telescope.actions')
 require('telescope').load_extension('zoxide')
+require('telescope').load_extension('frecency')
 require('telescope').setup({
-	extensions = {},
 	  mappings = {
 		i = {
 			["<esc>"] = actions.close,

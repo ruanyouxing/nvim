@@ -1,9 +1,9 @@
 local plugins = {}
-local editor = require('editor')
-local lsp = require('lsp')
-local themes = require('themes')
-local tools = require('tools')
-local completion = require('completion')
+local editor = require('modules.editor')
+local lsp = require('modules.lsp')
+local themes = require('modules.themes')
+local tools = require('modules.tools')
+local completion = require('modules.completion')
 plugins['stevearc/aerial.nvim'] = {
 	opt = true,
 	config = editor.aerial
@@ -105,13 +105,15 @@ plugins["rcarriga/nvim-notify"] = {
 plugins["nvim-telescope/telescope.nvim"] = {
 	opt = true,
 	after = 'plenary.nvim',
-	cmd = 'Telescope',
 	 requires = {
 		    {"sharkdp/fd"},
 		    {"BurntSushi/ripgrep"},
-	    	    {'jvgrootveld/telescope-zoxide'}
+	    	    {'jvgrootveld/telescope-zoxide'},
 	    },
 	config = tools.telescope
+}
+plugins['nvim-telescope/telescope-frecency.nvim'] = {
+	requires = 'tami5/sqlite.lua'
 }
 plugins["akinsho/toggleterm.nvim"] = {
 	config = tools.toggleterm
@@ -159,10 +161,11 @@ plugins['xiyaowong/nvim-transparent'] = {
 }
 plugins['hrsh7th/nvim-cmp'] = {
 	requires = {
-		{'zbirenbaum/copilot.lua',after = 'nvim-cmp',event = 'VimEnter', opt = true},
+		{'zbirenbaum/copilot.lua',after = 'nvim-cmp', opt = true},
 		{'zbirenbaum/copilot-cmp',after = {'nvim-cmp','copilot.lua'}, opt = true},
 		{'hrsh7th/cmp-buffer',after = 'nvim-cmp',opt = true},
 		{'saadparwaiz1/cmp_luasnip',after = {'LuaSnip','nvim-cmp'}, opt = true},
+		{'hrsh7th/cmp-emoji',after = 'nvim-cmp', opt = true},
 		{'hrsh7th/cmp-nvim-lsp',after = 'nvim-cmp',opt  = true},
 		{'hrsh7th/cmp-nvim-lua',after ='nvim-cmp',opt = true},
 		{'hrsh7th/cmp-path',after = 'nvim-cmp',opt = true},
@@ -180,7 +183,6 @@ plugins['rafamadriz/friendly-snippets'] = {
 	after = 'LuaSnip',
 }
 plugins['michaelb/sniprun'] = {run = 'bash ./install.sh &'}
---plugins['RishabhRD/nvim-lsputils'] =  { requires = 'RishabhRD/popfix'}
 plugins['folke/trouble.nvim'] = { opt = true }
 plugins['rhysd/accelerated-jk'] = {opt = false }
 plugins['github/copilot.vim'] = {opt = false }

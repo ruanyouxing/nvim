@@ -1,8 +1,8 @@
 local g = vim.g
 local set = vim.opt
+
 set.linespace = 1
 set.showcmd = true
-
 set.termguicolors = true
 set.title = true
 set.foldmethod='manual'
@@ -29,7 +29,8 @@ set.pumheight=11
 set.encoding="utf-8"
 set.fileencoding="utf-8"
 set.fillchars.append='-'
-vim.o.termguicolors = true
+set.timeoutlen = 97
+set.termguicolors = true
 
 g.loaded_matchit = 1
 g.matchup_surround_enabled = 1

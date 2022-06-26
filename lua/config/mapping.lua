@@ -1,14 +1,26 @@
 local mapping = {}
 local map = vim.keymap.set
-local opts= {silent=true,noremap=true}
-local function ctrl(key) return string.format('<C-%s>',key) end
-local function alt(key) return string.format('<A-%s>',key) end
-local function leader(key) return string.format('<leader>%s',key) end
-vim.opt.timeoutlen = 97
+local opts= {
+	silent=true,
+	noremap=true
+}
+local function ctrl(key)
+	return string.format('<C-%s>',key)
+end
+local function alt(key)
+	return string.format('<A-%s>',key)
+end
+local function leader(key)
+	return string.format('<leader>%s',key)
+end
 
 function mapping.shortcuts()
-	local function plug(cmd) return string.format('<Plug>%s',cmd) end
-	local function nmap(key,cmd) return map('n',key,cmd,opts) end
+	local function plug(cmd)
+		return string.format('<Plug>%s',cmd)
+	end
+	local function nmap(key,cmd)
+		return map('n',key,cmd,opts)
+	end
 	nmap('j',plug('(accelerated_jk_j)'))
 	nmap('k',plug('(accelerated_jk_k)'))
 	nmap('<Space>','<NOP>')
@@ -19,7 +31,9 @@ function mapping.shortcuts()
 end
 
 function mapping.commands()
-	local function nmap(key,cmd) return map('n',key,string.format(':%s<CR>',cmd),opts) end
+	local function nmap(key,cmd)
+		return map('n',key,string.format(':%s<CR>',cmd),opts)
+	end
 	nmap('T','TroubleToggle')
 	nmap('U','UndotreeShow')
 
@@ -34,8 +48,8 @@ function mapping.commands()
 	nmap(ctrl('z'),"u")
 	nmap(ctrl('['),'BufferLineCyclePrev')
 	nmap(ctrl(']'),'BufferLineCycleNext')
-	
 	nmap(leader('t'),"ToggleTerm")
+	nmap(leader('<leader>'), 'Telescope frecency')
 	nmap(leader('z'),"Telescope zoxide list")
 end
 
@@ -50,11 +64,11 @@ function mapping.func()
 			cmd ="lazygit",
 			hidden=true,
 			direction="float",
-			float_opts={border="double",
+			float_opts={
+				border="double",
 			},
 		})
 			lazygit:toggle()
 	end)
-
-end 
+end
 return mapping
