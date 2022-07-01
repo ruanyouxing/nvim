@@ -18,7 +18,7 @@ plugins['Pocco81/AutoSave.nvim'] = {
 plugins['rmagatti/auto-session'] = {
 	config = editor.autosession
 }
-plugins['famiu/bufdelete.nvim'] = {opt = false }
+plugins['famiu/bufdelete.nvim'] = { }
 plugins['lukas-reineke/indent-blankline.nvim'] = {
 	opt =true,
 	config = editor.blankline
@@ -51,9 +51,7 @@ plugins["kyazdani42/nvim-tree.lua"] = {
 		require('nvim-tree').setup()
 	end
 }
-plugins['kyazdani42/nvim-web-devicons'] = {
-	opt = false
-}
+plugins['kyazdani42/nvim-web-devicons'] = {}
 plugins['edluffy/specs.nvim'] = {
 	config = editor.specs
 }
@@ -184,10 +182,13 @@ plugins['rafamadriz/friendly-snippets'] = {
 }
 plugins['michaelb/sniprun'] = {run = 'bash ./install.sh &'}
 plugins['folke/trouble.nvim'] = { opt = true }
-plugins['rhysd/accelerated-jk'] = {opt = false }
-plugins['github/copilot.vim'] = {opt = false }
+plugins['rhysd/accelerated-jk'] = {}
+plugins['github/copilot.vim'] = {}
 plugins['mbbill/undotree'] = { event = 'TextChanged' }
-plugins['itchyny/vim-cursorword'] = {opt = false }
-plugins['dstein64/vim-startuptime'] = {opt = false }
-plugins['vimwiki/vimwiki'] = {opt = true }
+plugins['itchyny/vim-cursorword'] = {}
+plugins['dstein64/vim-startuptime'] = {}
+plugins['vimwiki/vimwiki'] = {
+	opt = true,
+	ft = 'markdown'
+}
 return plugins

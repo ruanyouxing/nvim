@@ -1,7 +1,7 @@
 local fn = vim.fn
 local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
 if fn.empty(fn.glob(install_path)) > 0 then
-  packer_bootstrap = vim.cmd("!git clone https://github.com/wbthomason/packer.nvim ".. install_path)
+  Packer_bootstrap = vim.cmd("!git clone https://github.com/wbthomason/packer.nvim ".. install_path)
   vim.cmd('packadd packer.nvim')
 end
 local list = {}
@@ -14,7 +14,7 @@ return require('packer').startup({function(use)
   for _, repo in ipairs(list) do
 		use(repo)
 	end
-  if packer_bootstrap then
+  if Packer_bootstrap then
     require('packer').sync()
   end
 end,

@@ -1,14 +1,9 @@
 dap-buddy.nvim
-efmls-configs-nvim
 fzy-lua-native
 hop.nvim
 nvim-dap
 nvim-dap-ui
 split-term.vim
-telescope-frecency.nvim
 telescope-fzf-native.nvim
 vim-easy-align
-vim-eft
 vim-fugitive
-vim-illuminate
-which-key.nvim
