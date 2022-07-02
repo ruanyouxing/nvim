@@ -117,10 +117,19 @@ plugins["akinsho/toggleterm.nvim"] = {
 	config = tools.toggleterm
 }
 
-plugins["neovim/nvim-lspconfig"] = {opt = true }
-plugins['ray-x/lsp_signature.nvim'] = { opt = true }
+plugins["neovim/nvim-lspconfig"] = {
+	opt = true,
+}
+plugins['ray-x/lsp_signature.nvim'] = {
+	opt = true,
+}
 plugins["williamboman/nvim-lsp-installer"] = {
 	config = lsp.lsp_installer
+}
+plugins['RishabhRD/nvim-lsputils'] = {
+	opt = true,
+	requires = {'RishabhRD/popfix'},
+	config = lsp.lsputils,
 }
 
 plugins["goolord/alpha-nvim"] = {
@@ -181,7 +190,9 @@ plugins['rafamadriz/friendly-snippets'] = {
 	after = 'LuaSnip',
 }
 plugins['michaelb/sniprun'] = {run = 'bash ./install.sh &'}
-plugins['folke/trouble.nvim'] = { opt = true }
+plugins['folke/trouble.nvim'] = {
+	opt = true,
+}
 plugins['rhysd/accelerated-jk'] = {}
 plugins['github/copilot.vim'] = {}
 plugins['mbbill/undotree'] = { event = 'TextChanged' }

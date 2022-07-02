@@ -25,6 +25,9 @@ if load_lsp then
 	load('lsp_signature.nvim')
 	load('trouble.nvim')
 	load('aerial.nvim')
+	load('popfix')
+	load('nvim-lsputils')
+	require('config.lsp-mapping').mapping()
 end
 load('plenary.nvim')
 load('nvim-tree.lua')
