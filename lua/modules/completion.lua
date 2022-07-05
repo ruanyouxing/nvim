@@ -139,8 +139,8 @@ function completion.lsp_installer()
 	local capabilities = vim.lsp.protocol.make_client_capabilities()
 	local completionItem = capabilities.textDocument.completion.completionItem
 	capabilities.textDocument.foldingRange = {
-dynamicRegistration = false,
-lineFoldingOnly = true
+		dynamicRegistration = false,
+		lineFoldingOnly = true
 	}
 	completionItem.documentationFormat = {
 		"markdown", "plaintext"
@@ -262,6 +262,10 @@ function completion.lsputils()
 			symbols.workspace_handler(nil, result, { bufnr = bufn }, nil)
 		end
 	end
+end
+
+function completion.null_ls()
+
 end
 
 function completion.signature()

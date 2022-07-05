@@ -42,8 +42,8 @@ plugins['terrortylor/nvim-comment'] = {
 }
 plugins['kyazdani42/nvim-web-devicons'] = {}
 plugins['kevinhwang91/nvim-ufo'] = {
-	opt = true,
-	after = { 'nvim-treesitter', 'nvim-lspconfig' },
+	requires = 'kevinhwang91/promise-async',
+	after = { 'nvim-treesitter','nvim-lspconfig' },
 	config = editor.ufo,
 }
 plugins['edluffy/specs.nvim'] = {
@@ -200,6 +200,11 @@ plugins['github/copilot.vim'] = {
 plugins["neovim/nvim-lspconfig"] = {
 	opt = true,
 	after = 'nvim-lsp-installer',
+}
+plugins['jose-elias-alvarez/null-ls.nvim'] = {
+	opt = true,
+	after = 'nvim-lspconfig',
+	config = completion.null_ls
 }
 plugins['ray-x/lsp_signature.nvim'] = {
 	opt = true,

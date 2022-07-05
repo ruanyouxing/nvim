@@ -173,6 +173,7 @@ function ui.catppuccin()
 			telescope = true,
 		}
 	})
+	vim.g.catppuccin_flavour = 'mocha'
 end
 
 function ui.circles()
