@@ -1,13 +1,8 @@
 local plugins = {}
 local editor = require('modules.editor')
-local lsp = require('modules.lsp')
-local themes = require('modules.themes')
+local ui = require('modules.ui')
 local tools = require('modules.tools')
 local completion = require('modules.completion')
-plugins['stevearc/aerial.nvim'] = {
-	opt = true,
-	config = editor.aerial
-}
 plugins['windwp/nvim-autopairs'] = {
 	after = 'nvim-cmp',
 	config = editor.autopairs
@@ -15,22 +10,22 @@ plugins['windwp/nvim-autopairs'] = {
 plugins['Pocco81/AutoSave.nvim'] = {
 	config = editor.autosave
 }
+
 plugins['rmagatti/auto-session'] = {
 	config = editor.autosession
 }
-plugins['famiu/bufdelete.nvim'] = { }
-plugins['lukas-reineke/indent-blankline.nvim'] = {
-	opt =true,
-	config = editor.blankline
+plugins['famiu/bufdelete.nvim'] = {
+	opt = true,
+	event = 'BufDelete',
+	config = {
+		vim.keymap.set('n', '<C-w>', function() require 'bufdelete'.bufdelete(0, true) end)
+	}
 }
 plugins['max397574/better-escape.nvim'] = {
 	event = 'InsertEnter',
 	config = editor.better_escape
 }
-plugins['akinsho/bufferline.nvim'] = {
-	config = editor.bufferline
-}
-plugins['norcalli/nvim-colorizer.lua']= {
+plugins['norcalli/nvim-colorizer.lua'] = {
 	config = function() require('colorizer').setup({}) end
 }
 plugins['sindrets/diffview.nvim'] = {
@@ -45,18 +40,17 @@ plugins['nvim-lua/plenary.nvim'] = { opt = true }
 plugins['terrortylor/nvim-comment'] = {
 	config = editor.comment
 }
-plugins["kyazdani42/nvim-tree.lua"] = {
-	opt = true,
-	config = function()
-		require('nvim-tree').setup()
-	end
-}
 plugins['kyazdani42/nvim-web-devicons'] = {}
+plugins['kevinhwang91/nvim-ufo'] = {
+	opt = true,
+	after = { 'nvim-treesitter', 'nvim-lspconfig' },
+	config = editor.ufo,
+}
 plugins['edluffy/specs.nvim'] = {
 	config = editor.specs
 }
 plugins["nvim-treesitter/nvim-treesitter"] = {
-	opt = true,
+	event = 'BufRead',
 	run = ':TSUpdate',
 	config = editor.treesitter
 }
@@ -72,112 +66,122 @@ plugins['windwp/nvim-ts-autotag'] = {
 plugins['p00f/nvim-ts-rainbow'] = {
 	after = 'nvim-treesitter'
 }
-plugins['andymass/vim-matchup'] = {after = 'nvim-treesitter'}
+plugins['andymass/vim-matchup'] = { after = 'nvim-treesitter' }
 plugins['romgrk/nvim-treesitter-context'] = {
 	after = 'nvim-treesitter',
 	config = editor.ts_context
+}
+plugins['simrat39/symbols-outline.nvim'] = {
+	after = 'nvim-lspconfig',
+	config = editor.symbols_outline,
 }
 plugins['abecodes/tabout.nvim'] = {
 	after = 'nvim-treesitter',
 	config = editor.tabout
 }
-plugins['folke/twilight.nvim'] = {
-	config = editor.twilight
-}
-plugins['gelguy/wilder.nvim'] = {
-	 requires = {'roxma/nvim-yarp',
-		 'roxma/vim-hug-neovim-rpc',
-		 'romgrk/fzy-lua-native'},
-	 config = editor.wilder
- }
-
 plugins['lewis6991/impatient.nvim'] = {
 	config = function()
-		require'impatient'.enable_profile()
+		require 'impatient'.enable_profile()
 	end
-	}
-plugins['iamcco/markdown-preview.nvim'] = {run = 'cd app && yarn install'}
+}
+plugins['iamcco/markdown-preview.nvim'] = {
+	run = 'cd app && yarn install',
+	setup = function()
+		vim.g.mkdp_filetypes = { 'markdown' }
+	end,
+	ft = { 'markdown' },
+}
 plugins["rcarriga/nvim-notify"] = {
-	config = tools.notify
+	config = ui.notify
 }
 plugins["nvim-telescope/telescope.nvim"] = {
 	opt = true,
 	after = 'plenary.nvim',
-	 requires = {
-		    {"sharkdp/fd"},
-		    {"BurntSushi/ripgrep"},
-	    	    {'jvgrootveld/telescope-zoxide'},
-	    },
+	requires = {
+		{ "sharkdp/fd" },
+		{ "BurntSushi/ripgrep" },
+		{ 'jvgrootveld/telescope-zoxide' },
+	},
 	config = tools.telescope
-}
-plugins['nvim-telescope/telescope-frecency.nvim'] = {
-	requires = 'tami5/sqlite.lua'
 }
 plugins["akinsho/toggleterm.nvim"] = {
 	config = tools.toggleterm
 }
 
-plugins["neovim/nvim-lspconfig"] = {
-	opt = true,
-}
-plugins['ray-x/lsp_signature.nvim'] = {
-	opt = true,
-}
-plugins["williamboman/nvim-lsp-installer"] = {
-	config = lsp.lsp_installer
-}
-plugins['RishabhRD/nvim-lsputils'] = {
-	opt = true,
-	requires = {'RishabhRD/popfix'},
-	config = lsp.lsputils,
-}
 
 plugins["goolord/alpha-nvim"] = {
-	config = themes.alpha
+	config = ui.alpha
+}
+plugins['lukas-reineke/indent-blankline.nvim'] = {
+	after = 'nvim-treesitter',
+	config = ui.blankline
+}
+plugins['akinsho/bufferline.nvim'] = {
+	opt = true,
+	event = 'UIEnter',
+	config = ui.bufferline
 }
 plugins["catppuccin/nvim"] = {
 	as = 'catppuccin',
-	config = themes.catppuccin
+	config = ui.catppuccin
 }
 plugins["projekt0n/circles.nvim"] = {
 	after = 'nvim-tree.lua',
-	config = themes.circles
+	config = ui.circles
 }
 plugins['SmiteshP/nvim-gps'] = {
 	after = 'lualine.nvim',
-	config = themes.gps
+	config = ui.gps
 }
 plugins["nvim-lualine/lualine.nvim"] = {
 	after = 'nvim-treesitter',
-	config = themes.lualine
+	config = ui.lualine
 }
 plugins['arkav/lualine-lsp-progress'] = {
 	after = 'lualine.nvim'
 }
 plugins['EdenEast/nightfox.nvim'] = {
-	config = themes.nightfox
+	config = ui.nightfox
 }
 plugins['shaunsingh/nord.nvim'] = {
-	config = themes.nord
+	config = ui.nord
+}
+plugins["kyazdani42/nvim-tree.lua"] = {
+	opt = true,
+	config = function()
+		require('nvim-tree').setup()
+	end
 }
 plugins['folke/tokyonight.nvim'] = {
-	config = themes.tokyonight
+	config = ui.tokyonight
 }
 plugins['xiyaowong/nvim-transparent'] = {
-	config = themes.transparent
+	config = ui.transparent
+}
+plugins['folke/twilight.nvim'] = {
+	event = 'CursorMoved',
+	config = ui.twilight
+}
+plugins['gelguy/wilder.nvim'] = {
+	opt = true,
+	event = { 'CmdwinEnter', 'CmdlineEnter' },
+	requires = { { 'roxma/nvim-yarp', run = ':UpdateRemotePlugins' },
+		'roxma/vim-hug-neovim-rpc',
+		'romgrk/fzy-lua-native' },
+	config = ui.wilder
 }
 plugins['hrsh7th/nvim-cmp'] = {
 	requires = {
-		{'zbirenbaum/copilot.lua',after = 'nvim-cmp', opt = true},
-		{'zbirenbaum/copilot-cmp',after = {'nvim-cmp','copilot.lua'}, opt = true},
-		{'hrsh7th/cmp-buffer',after = 'nvim-cmp',opt = true},
-		{'saadparwaiz1/cmp_luasnip',after = {'LuaSnip','nvim-cmp'}, opt = true},
-		{'hrsh7th/cmp-emoji',after = 'nvim-cmp', opt = true},
-		{'hrsh7th/cmp-nvim-lsp',after = 'nvim-cmp',opt  = true},
-		{'hrsh7th/cmp-nvim-lua',after ='nvim-cmp',opt = true},
-		{'hrsh7th/cmp-path',after = 'nvim-cmp',opt = true},
-		{'f3fora/cmp-spell',after = 'nvim-cmp',opt = true},
-		{'onsails/lspkind-nvim',after = 'nvim-cmp', opt = true}},
+		{ 'zbirenbaum/copilot.lua', after = { 'nvim-cmp', 'copilot.vim' }, opt = true },
+		{ 'zbirenbaum/copilot-cmp', after = { 'nvim-cmp', 'copilot.lua' }, opt = true },
+		{ 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
+		{ 'saadparwaiz1/cmp_luasnip', after = { 'LuaSnip', 'nvim-cmp' }, opt = true },
+		{ 'hrsh7th/cmp-emoji', after = 'nvim-cmp', opt = true },
+		{ 'hrsh7th/cmp-nvim-lsp', event = 'BufRead', opt = true },
+		{ 'hrsh7th/cmp-nvim-lua', after = 'nvim-cmp', opt = true },
+		{ 'hrsh7th/cmp-path', after = 'nvim-cmp', opt = true },
+		{ 'f3fora/cmp-spell', after = 'nvim-cmp', opt = true },
+		{ 'onsails/lspkind-nvim', after = 'nvim-cmp', opt = true } },
 	after = 'LuaSnip',
 	config = completion.cmp
 }
@@ -186,20 +190,47 @@ plugins['L3MON4D3/LuaSnip'] = {
 	config = completion.snippets,
 }
 plugins['rafamadriz/friendly-snippets'] = {
-	event = 'InsertEnter',
+	opt = true,
 	after = 'LuaSnip',
+	event = 'InsertEnter',
 }
-plugins['michaelb/sniprun'] = {run = 'bash ./install.sh &'}
+plugins['github/copilot.vim'] = {
+	event = 'InsertEnter'
+}
+plugins["neovim/nvim-lspconfig"] = {
+	opt = true,
+	after = 'nvim-lsp-installer',
+}
+plugins['ray-x/lsp_signature.nvim'] = {
+	opt = true,
+	after = 'nvim-lspconfig',
+	config = completion.signature,
+}
+plugins["williamboman/nvim-lsp-installer"] = {
+	after = 'cmp-nvim-lsp',
+	config = completion.lsp_installer
+}
+plugins['RishabhRD/nvim-lsputils'] = {
+	opt = true,
+	requires = { 'RishabhRD/popfix' },
+	config = completion.lsputils,
+}
+plugins['michaelb/sniprun'] = {
+	run = 'bash ./install.sh &'
+}
 plugins['folke/trouble.nvim'] = {
 	opt = true,
+	after = 'nvim-lspconfig'
 }
-plugins['rhysd/accelerated-jk'] = {}
-plugins['github/copilot.vim'] = {}
-plugins['mbbill/undotree'] = { event = 'TextChanged' }
-plugins['itchyny/vim-cursorword'] = {}
-plugins['dstein64/vim-startuptime'] = {}
+
+plugins['mbbill/undotree'] = {
+	event = 'TextChanged'
+}
 plugins['vimwiki/vimwiki'] = {
 	opt = true,
 	ft = 'markdown'
 }
+plugins['rhysd/accelerated-jk'] = {}
+plugins['itchyny/vim-cursorword'] = {}
+plugins['dstein64/vim-startuptime'] = {}
 return plugins
