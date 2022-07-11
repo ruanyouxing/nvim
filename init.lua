@@ -1,4 +1,4 @@
-package.path = vim.fn.stdpath('config')..'/plugin/?.lua;'..package.path
+package.path = vim.fn.stdpath('config') .. '/plugin/?.lua;' .. package.path
 local mapping = require('config.mapping')
 require('config.options')
 mapping.shortcuts()
