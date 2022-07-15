@@ -245,7 +245,6 @@ function completion.lsp_installer()
     'bashls',
     'clangd',
     'cssls',
-    'efm',
     'html',
     'pyright',
     'jdtls',
@@ -283,7 +282,9 @@ function completion.lsp_installer()
     end
     opts.capabilities = capabilities
     opts.flags = { debounce_text_changes = 500 }
-
+    opts.on_attach = function(client, bufnr)
+      require('nvim-navic').attach(client, bufnr)
+    end
     server:setup(opts)
   end)
 end

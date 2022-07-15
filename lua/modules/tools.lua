@@ -7,11 +7,11 @@ function tools.hydra()
   end
 
   local hint = [[
-                 _m_: Marks       _C_: Colorschemes
+                 _m_: Marks            _C_: Colorschemes
 
-		 _/_: Search in file
+		 _/_: Search in files  
 
-		 _r_: Run code
+		 _r_: Run code         
 
 		 _?_: Search history
 

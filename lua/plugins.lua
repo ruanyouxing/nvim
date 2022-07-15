@@ -3,6 +3,7 @@ local editor = require('modules.editor')
 local ui = require('modules.ui')
 local tools = require('modules.tools')
 local completion = require('modules.completion')
+local mapping = require('modules.mapping')
 --  _____    _ _ _
 -- | ____|__| (_) |_ ___  _ __
 -- |  _| / _` | | __/ _ \| '__|  Editor
@@ -88,6 +89,23 @@ plugins['nvim-telescope/telescope.nvim'] = {
   },
   config = tools.telescope,
 }
+plugins['ziontee113/icon-picker.nvim'] = {
+  opt = true,
+  event = 'InsertEnter',
+  setup = mapping.icon_picker(),
+  requires = 'stevearc/dressing.nvim',
+  config = function()
+    require('icon-picker')
+  end,
+}
+plugins['ziontee113/color-picker.nvim'] = {
+  opt = true,
+  event = 'InsertEnter',
+  setup = mapping.color_picker(),
+  config = function()
+    require('color-picker')
+  end,
+}
 plugins['akinsho/toggleterm.nvim'] = { config = tools.toggleterm }
 
 -- _   _ ___
@@ -108,22 +126,23 @@ plugins['lukas-reineke/indent-blankline.nvim'] = {
   after = 'nvim-treesitter',
   config = ui.blankline,
 }
-plugins['akinsho/bufferline.nvim'] = {
+plugins['noib3/nvim-cokeline'] = {
   opt = true,
   event = 'UIEnter',
-  config = ui.bufferline,
+  setup = mapping.cokeline(),
+  config = ui.cokeline,
 }
 plugins['catppuccin/nvim'] = { as = 'catppuccin', config = ui.catppuccin }
-plugins['projekt0n/circles.nvim'] = {
-  after = 'nvim-tree.lua',
-  config = ui.circles,
-}
 plugins['kevinhwang91/nvim-ufo'] = {
   requires = 'kevinhwang91/promise-async',
   after = { 'nvim-treesitter', 'nvim-lspconfig' },
   config = ui.fold,
 }
-plugins['SmiteshP/nvim-gps'] = { after = 'lualine.nvim', config = ui.gps }
+plugins['SmiteshP/nvim-navic'] = {
+  opt = true,
+  event = 'BufReadPre',
+  config = ui.navic,
+}
 plugins['anuvyklack/hydra.nvim'] = {
   opt = true,
   event = 'BufRead',
@@ -136,11 +155,10 @@ plugins['kosayoda/nvim-lightbulb'] = {
   after = 'nvim-lspconfig',
   config = ui.lightbulb,
 }
-plugins['nvim-lualine/lualine.nvim'] = {
-  after = 'nvim-treesitter',
-  config = ui.lualine,
+plugins['glepnir/galaxyline.nvim'] = {
+  event = 'BufWinEnter',
+  config = ui.statusline,
 }
-plugins['arkav/lualine-lsp-progress'] = { after = 'lualine.nvim' }
 plugins['EdenEast/nightfox.nvim'] = { config = ui.nightfox }
 plugins['shaunsingh/nord.nvim'] = { config = ui.nord }
 plugins['kyazdani42/nvim-tree.lua'] = {
@@ -206,11 +224,6 @@ plugins['rafamadriz/friendly-snippets'] = {
 }
 plugins['github/copilot.vim'] = { event = 'InsertEnter' }
 plugins['neovim/nvim-lspconfig'] = { opt = true, after = 'nvim-lsp-installer' }
--- plugins['lukas-reineke/lsp-format.nvim'] = {
--- 	opt = true,
--- 	after = 'nvim-lspconfig',
--- 	config = completion.formatting,
--- }
 plugins['mhartington/formatter.nvim'] = {
   opt = true,
   after = 'nvim-lspconfig',

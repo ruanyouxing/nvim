@@ -1,5 +1,4 @@
 local ui = {}
-
 function ui.alpha()
   local alpha = require('alpha')
   local dashboard = require('alpha.themes.dashboard')
@@ -62,7 +61,6 @@ function ui.blankline()
     filetype_exclude = {
       'startify',
       'alpha',
-      'dotooagenda',
       'log',
       'fugitive',
       'gitcommit',
@@ -105,83 +103,6 @@ function ui.blankline()
   })
 end
 
-function ui.bufferline()
-  require('bufferline').setup({
-    options = {
-      numbers = 'ordinal',
-      close_command = 'bd! %d',
-      right_mouse_command = 'bd! %d',
-      middle_mouse_command = nil,
-      name_formatter = function(buf)
-        if buf.name:match('%.md') then
-          return vim.fn.fnamemodify(buf.name, ':t:r')
-        end
-      end,
-      nax_name_length = 20,
-      max_prefix_length = 20,
-      tab_size = 20,
-      buffer_close_icon = '柳',
-      modified_icon = '',
-      diagnostics = 'nvim-lsp',
-      diagnostics_update_in_insert = true,
-      diagnostics_indicator = function(count, level, diagnostics_dict, context)
-        return '(' .. count .. ')'
-      end,
-      show_buffer_icons = true,
-      separator_style = 'thin',
-      always_show_bufferline = true,
-      sort_by = 'id',
-      groups = {
-        options = {
-          toggle_hidden_on_enter = true,
-        },
-        items = {
-          {
-            name = 'Tests',
-            highlight = { gui = 'underline', guisp = 'blue' }, -- Optional
-            priority = 2,
-            icon = '', -- Optional
-            matcher = function(buf) -- Mandatory
-              return buf.filename:match('%_test') or buf.filename:match('%_spec')
-            end,
-          },
-          {
-            name = 'Docs',
-            highlight = { gui = 'undercurl', guisp = 'green' },
-            auto_close = false,
-            matcher = function(buf)
-              return buf.filename:match('%.md') or buf.filename:match('%.txt')
-            end,
-            separator = { -- Optional
-              style = require('bufferline.groups').separator.tab,
-            },
-          },
-        },
-      },
-      offsets = {
-        {
-          filetype = 'Outline',
-          text = 'Outline',
-          highlight = 'Directory',
-          text_align = 'left',
-        },
-        {
-          filetype = 'NvimTree',
-          text = 'Explorer',
-          highlight = 'Directory',
-          text_align = 'left',
-        },
-        {
-          filetype = 'minimap',
-          text = 'Minimap',
-          highlight = 'Directory',
-          text_align = 'left',
-        },
-      },
-    },
-  })
-end
-
 function ui.catppuccin()
   local catppuccin = require('catppuccin')
   catppuccin.setup({
@@ -206,31 +127,150 @@ function ui.catppuccin()
   vim.g.catppuccin_flavour = 'mocha'
 end
 
-function ui.circles()
-  require('circles').setup({ icons = {
-    empty = '',
-    filled = '',
-    lsp_prefix = '',
-  }, lsp = true })
+function ui.cokeline()
+  local get_hex = require('cokeline.utils').get_hex
+  local mappings = require('cokeline.mappings')
+  local errors_fg = get_hex('DiagnosticError', 'fg')
+  local warnings_fg = get_hex('DiagnosticWarn', 'fg')
+  local hints_fg = get_hex('Diagnostichint', 'fg')
+  local red = vim.g.terminal_color_1
+  local green = vim.g.terminal_color_2
+  local yellow = vim.g.terminal_color_3
+  require('cokeline').setup({
+    default_hl = {
+      fg = function(buffer)
+        return buffer.is_focused and get_hex('Normal', 'fg') or get_hex('Comment', 'fg')
+      end,
+      bg = get_hex('ColorColumn', 'bg'),
+    },
+    components = {
+      {
+        text = '',
+        bg = get_hex('Normal', 'bg'),
+        fg = get_hex('ColorColumn', 'bg'),
+      },
+      {
+        text = ' ',
+      },
+      {
+        text = function(buffer)
+          return (mappings.is_picking_focus() or mappings.is_picking_close()) and buffer.pick_letter .. '  '
+            or buffer.devicon.icon
+        end,
+        fg = function(buffer)
+          return (mappings.is_picking_focus() and yellow)
+            or (mappings.is_picking_close() and red)
+            or buffer.devicon.color
+        end,
+        style = function(_)
+          return (mappings.is_picking_focus() or mappings.is_picking_close()) and 'italic,bold' or nil
+        end,
+        truncation = { priority = 1 },
+      },
+      {
+        text = function(buffer)
+          return buffer.index .. '. '
+        end,
+      },
+      {
+        text = function(buffer)
+          return buffer.unique_prefix
+        end,
+        fg = get_hex('Comment', 'fg'),
+        style = 'italic',
+        truncation = {
+          priority = 3,
+          direction = 'left',
+        },
+      },
+      {
+        text = function(buffer)
+          return buffer.filename .. ' '
+        end,
+        fg = function(buffer)
+          if buffer.is_modified then
+            return yellow
+          end
+          if buffer.diagnostics.errors ~= 0 then
+            return red
+          end
+        end,
+        style = function(buffer)
+          return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
+            or buffer.is_modified and 'italic,bold'
+            or (buffer.is_focused and 'bold')
+            or (buffer.diagnostics.errors ~= 0 and 'underline')
+            or nil
+        end,
+      },
+      {
+        text = function(buffer)
+          return (buffer.diagnostics.errors ~= 0 and '  ' .. buffer.diagnostics.errors)
+            or (buffer.diagnostics.warnings ~= 0 and '  ' .. buffer.diagnostics.warnings)
+            or ''
+        end,
+        fg = function(buffer)
+          return (buffer.diagnostics.errors ~= 0 and errors_fg)
+            or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+            or nil
+        end,
+        truncation = { priority = 1 },
+      },
+      {
+        text = function(buffer)
+          return (buffer.diagnostics.hints ~= 0 and '  ' .. buffer.diagnostics.hints .. ' ') or ''
+        end,
+        fg = function(buffer)
+          return (buffer.diagnostics.hints ~= 0 and hints_fg) or nil
+        end,
+      },
+      {
+        text = function(buffer)
+          return buffer.is_modified and '● ' or ' '
+        end,
+        fg = function(buffer)
+          return buffer.is_modified and green or nil
+        end,
+        delete_buffer_on_left_click = true,
+        truncation = { priority = 1 },
+      },
+      {
+        text = '|',
+        fg = function(buffer)
+          return buffer.is_focused and green or nil
+        end,
+      },
+      {
+        text = '',
+        fg = get_hex('ColorColumn', 'bg'),
+        bg = get_hex('Normal', 'bg'),
+      },
+    },
+    sidebar = {
+      filetype = 'NvimTree',
+      components = {
+        {
+          text = '  Explorer',
+          fg = yellow,
+          bg = get_hex('NvimTreeNormal', 'bg'),
+          style = 'bold',
+        },
+      },
+    },
+  })
 end
 
 function ui.fold()
-  vim.wo.foldlevel = 0
+  vim.wo.foldlevel = 99
   vim.wo.foldenable = true
   vim.o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
   vim.o.foldcolumn = '1'
+  vim.o.foldlevelstart = -1
+
   require('ufo').setup({
-    open_fold_hl_timeout = 200,
-    provider_selector = function(bufnr, filetype)
+    provider_selector = function()
       return { 'treesitter' }
     end,
-    preview = {
-      win_config = {
-        border = { '', '─', '', '', '', '─', '', '' },
-        winhighlight = 'Normal:Folded',
-        winblend = 0,
-      },
-    },
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
       local suffix = ('  %d '):format(endLnum - lnum)
@@ -247,6 +287,7 @@ function ui.fold()
           local hlGroup = chunk[2]
           table.insert(newVirtText, { chunkText, hlGroup })
           chunkWidth = vim.fn.strdisplaywidth(chunkText)
+          -- str width returned from truncate() may less than 2nd argument, need padding
           if curWidth + chunkWidth < targetWidth then
             suffix = suffix .. (' '):rep(targetWidth - curWidth - chunkWidth)
           end
@@ -257,27 +298,7 @@ function ui.fold()
       table.insert(newVirtText, { suffix, 'MoreMsg' })
       return newVirtText
     end,
-  })
-  require('modules.mapping').ufo()
-end
-
-function ui.gps()
-  require('nvim-gps').setup({
-    icons = {
-      ['class-name'] = ' ',
-      ['function-name'] = ' ',
-      ['method-name'] = ' ',
-    },
-    languages = {
-      ['c'] = true,
-      ['cpp'] = true,
-      ['java'] = true,
-      ['javascript'] = true,
-      ['lua'] = true,
-      ['python'] = true,
-      ['rust'] = true,
-    },
-    separator = ' >> ',
+    require('modules.mapping').ufo(),
   })
 end
 
@@ -292,7 +313,7 @@ function ui.lightbulb()
     },
     float = {
       enabled = false,
-      text = '💡',
+      text = '',
       win_opts = {},
     },
     virtual_text = {
@@ -304,74 +325,6 @@ function ui.lightbulb()
       enabled = false,
       text = '💡',
       text_unavailable = '',
-    },
-  })
-end
-
-function ui.lualine()
-  local gps = require('nvim-gps')
-  local function gps_content()
-    if gps.is_available() then
-      return gps.get_location()
-    else
-      return ''
-    end
-  end
-
-  local mini_sections = {
-    lualine_a = {},
-    lualine_b = {},
-    lualine_c = {},
-    lualine_x = {},
-    lualine_y = {},
-    lualine_z = { 'location' },
-  }
-
-  local aerial = {
-    sections = mini_sections,
-    filetypes = { 'aerial' },
-  }
-
-  require('lualine').setup({
-    options = {
-      icons_enabled = true,
-      theme = 'auto',
-      disabled_filetypes = {},
-      component_separators = '|',
-    },
-    sections = {
-      lualine_a = { 'mode' },
-      lualine_b = { { 'branch' }, { 'diff' } },
-      lualine_c = {
-        { 'lsp_progress' },
-        { gps_content, cond = gps.is_available },
-        { require('auto-session-library').current_session_name },
-      },
-      lualine_x = {
-        {
-          'diagnostics',
-          sources = { 'nvim_diagnostic' },
-          symbols = { error = ' ', warn = ' ', info = ' ' },
-        },
-      },
-      lualine_y = { 'filetype', 'encoding', 'fileformat' },
-      lualine_z = { 'progress', 'location' },
-    },
-    inactive_sections = {
-      lualine_a = {},
-      lualine_b = {},
-      lualine_c = { 'filename' },
-      lualine_x = { 'location' },
-      lualine_y = {},
-      lualine_z = {},
-    },
-    tabline = {},
-    extensions = {
-      'quickfix',
-      'nvim-tree',
-      'toggleterm',
-      'fugitive',
-      aerial,
     },
   })
 end
@@ -395,6 +348,174 @@ function ui.nightfox()
       },
     },
   })
+end
+
+function ui.navic()
+  require('nvim-navic').setup({
+    icons = {
+      File = ' ',
+      Module = ' ',
+      Namespace = ' ',
+      Package = ' ',
+      Class = ' ',
+      Method = ' ',
+      Property = ' ',
+      Field = ' ',
+      Constructor = ' ',
+      Enum = '練',
+      Interface = '練',
+      Function = ' ',
+      Variable = ' ',
+      Constant = ' ',
+      String = ' ',
+      Number = ' ',
+      Boolean = '◩ ',
+      Array = ' ',
+      Object = ' ',
+      Key = ' ',
+      Null = 'ﳠ ',
+      EnumMember = ' ',
+      Struct = ' ',
+      Event = ' ',
+      Operator = ' ',
+      TypeParameter = ' ',
+    },
+    highlight = false,
+    separator = ' >> ',
+    depth_limit = 0,
+    depth_limit_indicator = '..',
+  })
+end
+
+function ui.statusline()
+  vim.opt.laststatus = 3
+  local navic = require('nvim-navic')
+  local gl = require('galaxyline')
+  local colors = require('galaxyline.theme').default
+  local gls = gl.section
+  local function is_git_repo()
+    local is_repo = vim.fn.system('git rev-parse --is-inside-work-tree')
+    if vim.v.shell_error == 0 then
+      return true
+    end
+    return false
+  end
+  gls.left[1] = {
+    ViMode = {
+      provider = function()
+        local mode_color = {
+          n = colors.magenta,
+          i = colors.green,
+          v = colors.cyan,
+          V = colors.cyan,
+          [''] = colors.cyan,
+          c = colors.red,
+          R = colors.red,
+          Rv = colors.red,
+          t = colors.blue,
+          ['!'] = colors.blue,
+        }
+        local alias = {
+          n = 'NORMAL',
+          i = 'INSERT',
+          v = 'VISUAL',
+          V = 'V-LINE',
+          [''] = 'V-BLOCK',
+          c = 'COMMAND',
+          R = 'REPLACE',
+          Rv = 'V-REPLACE',
+          t = 'TERM',
+          ['!'] = 'SHELL',
+        }
+        vim.cmd('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
+        return alias[vim.fn.mode()]
+      end,
+      highlight = { colors.fg, colors.bg, 'bold' },
+    },
+  }
+  gls.left[2] = {
+    GitBranch = {
+      provider = 'GitBranch',
+      condition = is_git_repo,
+      icon = '   ',
+      highlight = { colors.orange, colors.bg },
+    },
+  }
+  gls.left[3] = {
+    Whitespace = {
+      provider = function()
+        return ' '
+      end,
+      highlight = { 'NONE', colors.bg },
+    },
+  }
+  gls.left[4] = {
+    nvimNavic = {
+      provider = function()
+        return navic.get_location()
+      end,
+      condition = function()
+        return navic.is_available()
+      end,
+    },
+  }
+  gls.mid[1] = {
+    FileName = {
+      provider = 'FileName',
+      highlight = { colors.green, colors.bg, 'bold' },
+    },
+  }
+  gls.mid[2] = {
+    FileSize = {
+      provider = 'FileSize',
+      condition = function()
+        if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+          return true
+        end
+        return false
+      end,
+      highlight = { colors.green, colors.bg, 'bold' },
+    },
+  }
+  gls.right[1] = {
+    Added = {
+      provider = 'DiffAdd',
+      highlight = { colors.green, colors.bg },
+      condition = is_git_repo,
+      icon = '  ',
+    },
+  }
+  gls.right[2] = {
+    Modified = {
+      provider = 'DiffModified',
+      highlight = { '#a020f0', colors.bg },
+      condition = is_git_repo,
+      icon = ' 柳',
+    },
+  }
+  gls.right[3] = {
+    Removed = {
+      provider = 'DiffRemove',
+      highlight = { colors.red, colors.bg },
+      condition = is_git_repo,
+      icon = '  ',
+    },
+  }
+  gls.right[4] = {
+    FileFormat = {
+      icon = '  ',
+      provider = 'FileFormat',
+      highlight = { colors.orange, colors.bg },
+    },
+  }
+  gls.right[5] = {
+    Bigwhitespace = {
+      provider = function()
+        return '  '
+      end,
+      highlight = { 'NONE', colors.bg },
+    },
+  }
 end
 
 function ui.nord()
@@ -427,7 +548,7 @@ function ui.notify()
 end
 
 function ui.tokyonight()
-  vim.g.tokyonight_style = 'storm'
+  vim.g.tokyonight_style = 'night'
   vim.g.tokyonight_hide_inactive_statusline = 1
   vim.g.tokyonight_italic_funtions = 1
   vim.g.tokyonight_italic_variables = 1
@@ -485,7 +606,6 @@ function ui.wilder()
     '#b6e84e',
     '#aff05b',
   }
-
   for i, fg in ipairs(gradient) do
     gradient[i] = wilder.make_hl('WilderGradient' .. i, 'Pmenu', { { a = 1 }, { a = 1 }, { foreground = fg } })
   end
@@ -495,22 +615,12 @@ function ui.wilder()
         fuzzy = 1,
       }),
       wilder.python_file_finder_pipeline({
-        -- to use ripgrep : {'rg', '--files'}
-        -- to use fd      : {'fd', '-tf'}
-        file_command = { 'rg', '--files' }, --  { "find", ".", "-type", "f", "-printf", "%P\n" },
-        -- to use fd      : {'fd', '-td'}
-        dir_command = { 'fd', '-tf' }, -- { "find", ".", "-type", "d", "-printf", "%P\n" },
-        -- use {'cpsm_filter'} for performance, requires cpsm vim plugin
-        -- found at https://github.com/nixprime/cpsm
+        file_command = { 'fd', '-tf' },
+        dir_command = { 'fd', '-tf' },
         filters = { 'fuzzy_filter', 'difflib_sorter' },
       }),
 
       wilder.python_search_pipeline()
-      -- wilder.python_search_pipeline({
-      --   pattern = wilder.python_fuzzy_pattern(), --python_fuzzy_delimiter_pattern()
-      --   sorter = wilder.python_difflib_sorter(),
-      --   engine = "re",
-      -- })
     ),
   })
   local highlighters = {
