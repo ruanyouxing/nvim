@@ -1,6 +1,7 @@
 local plugins = {}
 local editor = require('modules.editor')
 local ui = require('modules.ui')
+local galaxyline = require('modules.galaxyline')
 local tools = require('modules.tools')
 local completion = require('modules.completion')
 local mapping = require('modules.mapping')
@@ -15,7 +16,6 @@ plugins['windwp/nvim-autopairs'] = {
   config = completion.autopairs,
 }
 plugins['Pocco81/AutoSave.nvim'] = { config = editor.autosave }
-
 plugins['rmagatti/auto-session'] = { config = editor.autosession }
 plugins['famiu/bufdelete.nvim'] = {
   opt = true,
@@ -157,7 +157,7 @@ plugins['kosayoda/nvim-lightbulb'] = {
 }
 plugins['glepnir/galaxyline.nvim'] = {
   event = 'BufWinEnter',
-  config = ui.statusline,
+  config = galaxyline.statusline,
 }
 plugins['EdenEast/nightfox.nvim'] = { config = ui.nightfox }
 plugins['shaunsingh/nord.nvim'] = { config = ui.nord }

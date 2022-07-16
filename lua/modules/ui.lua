@@ -381,141 +381,38 @@ function ui.navic()
       TypeParameter = ' ',
     },
     highlight = false,
-    separator = ' >> ',
-    depth_limit = 0,
+    separator = ' > ',
+    depth_limit = 2,
     depth_limit_indicator = '..',
   })
-end
-
-function ui.statusline()
-  vim.opt.laststatus = 3
-  local navic = require('nvim-navic')
-  local gl = require('galaxyline')
-  local colors = require('galaxyline.theme').default
-  local gls = gl.section
-  local function is_git_repo()
-    local is_repo = vim.fn.system('git rev-parse --is-inside-work-tree')
-    if vim.v.shell_error == 0 then
-      return true
-    end
-    return false
-  end
-  gls.left[1] = {
-    ViMode = {
-      provider = function()
-        local mode_color = {
-          n = colors.magenta,
-          i = colors.green,
-          v = colors.cyan,
-          V = colors.cyan,
-          [''] = colors.cyan,
-          c = colors.red,
-          R = colors.red,
-          Rv = colors.red,
-          t = colors.blue,
-          ['!'] = colors.blue,
-        }
-        local alias = {
-          n = 'NORMAL',
-          i = 'INSERT',
-          v = 'VISUAL',
-          V = 'V-LINE',
-          [''] = 'V-BLOCK',
-          c = 'COMMAND',
-          R = 'REPLACE',
-          Rv = 'V-REPLACE',
-          t = 'TERM',
-          ['!'] = 'SHELL',
-        }
-        vim.cmd('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
-        return alias[vim.fn.mode()]
-      end,
-      highlight = { colors.fg, colors.bg, 'bold' },
-    },
-  }
-  gls.left[2] = {
-    GitBranch = {
-      provider = 'GitBranch',
-      condition = is_git_repo,
-      icon = '   ',
-      highlight = { colors.orange, colors.bg },
-    },
-  }
-  gls.left[3] = {
-    Whitespace = {
-      provider = function()
-        return ' '
-      end,
-      highlight = { 'NONE', colors.bg },
-    },
-  }
-  gls.left[4] = {
-    nvimNavic = {
-      provider = function()
-        return navic.get_location()
-      end,
-      condition = function()
-        return navic.is_available()
-      end,
-    },
-  }
-  gls.mid[1] = {
-    FileName = {
-      provider = 'FileName',
-      highlight = { colors.green, colors.bg, 'bold' },
-    },
-  }
-  gls.mid[2] = {
-    FileSize = {
-      provider = 'FileSize',
-      condition = function()
-        if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
-          return true
-        end
-        return false
-      end,
-      highlight = { colors.green, colors.bg, 'bold' },
-    },
-  }
-  gls.right[1] = {
-    Added = {
-      provider = 'DiffAdd',
-      highlight = { colors.green, colors.bg },
-      condition = is_git_repo,
-      icon = '  ',
-    },
-  }
-  gls.right[2] = {
-    Modified = {
-      provider = 'DiffModified',
-      highlight = { '#a020f0', colors.bg },
-      condition = is_git_repo,
-      icon = ' 柳',
-    },
-  }
-  gls.right[3] = {
-    Removed = {
-      provider = 'DiffRemove',
-      highlight = { colors.red, colors.bg },
-      condition = is_git_repo,
-      icon = '  ',
-    },
-  }
-  gls.right[4] = {
-    FileFormat = {
-      icon = '  ',
-      provider = 'FileFormat',
-      highlight = { colors.orange, colors.bg },
-    },
-  }
-  gls.right[5] = {
-    Bigwhitespace = {
-      provider = function()
-        return '  '
-      end,
-      highlight = { 'NONE', colors.bg },
-    },
-  }
+  vim.api.nvim_set_hl(0, 'NavicIconsFile', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsModule', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsNamespace', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsPackage', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsClass', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsMethod', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsProperty', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsField', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsConstructor', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsEnum', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsInterface', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsFunction', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsVariable', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsConstant', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsString', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsNumber', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsBoolean', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsArray', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsObject', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsKey', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsNull', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsEnumMember', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsStruct', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsEvent', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsOperator', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicIconsTypeParameter', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicText', { default = true, bg = '#000000', fg = '#ffffff' })
+  vim.api.nvim_set_hl(0, 'NavicSeparator', { default = true, bg = '#000000', fg = '#ffffff' })
 end
 
 function ui.nord()
@@ -644,5 +541,4 @@ function ui.wilder()
     })
   )
 end
-
 return ui
