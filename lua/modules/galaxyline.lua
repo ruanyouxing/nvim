@@ -6,16 +6,27 @@ function galaxyline.statusline()
   local colors = require('galaxyline.theme').default
   local gls = gl.section
   local condition = require('galaxyline.condition')
-  gl.short_line_list = { 'NvimTree', 'packer' }
+  colors.bg = string.sub(vim.api.nvim_command_output('hi StatusLine'), 59)
+  gl.short_line_list = { 'NvimTree', 'packer', 'TelescopePrompt', 'help' }
   gls.short_line_left[1] = {
     BufferType = {
       provider = 'FileTypeName',
       separator = ' ',
       separator_highlight = { 'NONE', colors.bg },
+
       highlight = { colors.blue, colors.bg, 'bold' },
     },
   }
   gls.left[1] = {
+    HalfLeftCircle = {
+      provider = function()
+        return ''
+      end,
+
+      highlight = { colors.bg, 'NONE' },
+    },
+  }
+  gls.left[2] = {
     ViMode = {
       provider = function()
         local mode_color = {
@@ -31,16 +42,16 @@ function galaxyline.statusline()
           ['!'] = colors.blue,
         }
         local alias = {
-          n = '▊ Norm',
-          i = '▊ Ins',
-          v = '▊ Visl',
-          V = '▊ VLine',
-          [''] = '▊ VBlck',
-          c = '▊ Cmd',
-          R = '▊ Rplc',
-          Rv = '▊ Rplv',
-          t = '▊ Term',
-          ['!'] = '▊ Shell',
+          n = 'Norm',
+          i = 'Ins',
+          v = 'Visl',
+          V = 'VLine',
+          [''] = 'VBlck',
+          c = 'Cmd',
+          R = 'Rplc',
+          Rv = 'Rplv',
+          t = ' Term',
+          ['!'] = ' Shell',
         }
         vim.cmd('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
         return alias[vim.fn.mode()]
@@ -50,7 +61,7 @@ function galaxyline.statusline()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-  gls.left[2] = {
+  gls.left[3] = {
     GitBranch = {
       provider = 'GitBranch',
       condition = condition.check_git_workspace,
@@ -60,12 +71,12 @@ function galaxyline.statusline()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-  gls.left[3] = {
+  gls.left[4] = {
     Lsp = {
       provider = 'GetLspClient',
       icon = ' ',
       condition = function()
-        local tbl = { ['alpha'] = true, [''] = true, ['NvimTree'] = true }
+        local tbl = { ['alpha'] = true, ['toggleterm'] = true, ['NvimTree'] = true, [''] = true }
         if tbl[vim.bo.filetype] then
           return false
         end
@@ -76,7 +87,7 @@ function galaxyline.statusline()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-  gls.left[4] = {
+  gls.left[5] = {
     nvimNavic = {
       provider = function()
         return navic.get_location()
@@ -107,12 +118,6 @@ function galaxyline.statusline()
     },
   }
   gls.right[1] = {
-    FileIcon = {
-      provider = function()
-        return ' '
-      end,
-      highlight = { 'NONE', colors.bg },
-    },
     FileSize = {
       provider = 'FileSize',
       condition = function()
@@ -121,6 +126,7 @@ function galaxyline.statusline()
         end
         return false
       end,
+      icon = '   ',
       highlight = { colors.blue, colors.bg, 'bold' },
     },
   }
@@ -137,7 +143,7 @@ function galaxyline.statusline()
       provider = 'DiffModified',
       highlight = { '#a020f0', colors.bg },
       condition = condition.check_git_workspace,
-      icon = ' 柳',
+      icon = ' 柳 ',
     },
   }
   gls.right[4] = {
@@ -155,11 +161,11 @@ function galaxyline.statusline()
     },
   }
   gls.right[6] = {
-    Whitespace = {
+    HalfRightCircle = {
       provider = function()
-        return ' '
+        return ''
       end,
-      highlight = { 'NONE', colors.bg },
+      highlight = { colors.bg, 'NONE' },
     },
   }
 end

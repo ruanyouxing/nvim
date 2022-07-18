@@ -103,30 +103,6 @@ function ui.blankline()
   })
 end
 
-function ui.catppuccin()
-  local catppuccin = require('catppuccin')
-  catppuccin.setup({
-    term_colors = true,
-    transparent_background = false,
-    styles = {
-      comments = 'italic',
-      functions = 'italic',
-      keywords = 'italic',
-      string = 'bold',
-      variables = 'italic',
-    },
-    integrations = {
-      nvimtree = {
-        enable = true,
-        show_root = true,
-      },
-      bufferline = true,
-      telescope = true,
-    },
-  })
-  vim.g.catppuccin_flavour = 'mocha'
-end
-
 function ui.cokeline()
   local get_hex = require('cokeline.utils').get_hex
   local mappings = require('cokeline.mappings')
@@ -136,6 +112,8 @@ function ui.cokeline()
   local red = vim.g.terminal_color_1
   local green = vim.g.terminal_color_2
   local yellow = vim.g.terminal_color_3
+  local is_picking_focus = mappings.is_picking_focus
+  local is_picking_close = mappings.is_picking_close
   require('cokeline').setup({
     default_hl = {
       fg = function(buffer)
@@ -154,18 +132,14 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return (mappings.is_picking_focus() or mappings.is_picking_close()) and buffer.pick_letter .. '  '
-            or buffer.devicon.icon
+          return (is_picking_focus() or is_picking_close()) and buffer.pick_letter .. ' ' or buffer.devicon.icon
         end,
         fg = function(buffer)
-          return (mappings.is_picking_focus() and yellow)
-            or (mappings.is_picking_close() and red)
-            or buffer.devicon.color
+          return (is_picking_focus() and yellow) or (is_picking_close() and red) or buffer.devicon.color
         end,
         style = function(_)
-          return (mappings.is_picking_focus() or mappings.is_picking_close()) and 'italic,bold' or nil
+          return (is_picking_focus() or is_picking_close()) and 'italic,bold' or nil
         end,
-        truncation = { priority = 1 },
       },
       {
         text = function(buffer)
@@ -198,8 +172,8 @@ function ui.cokeline()
         style = function(buffer)
           return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
             or buffer.is_modified and 'italic,bold'
-            or (buffer.is_focused and 'bold')
-            or (buffer.diagnostics.errors ~= 0 and 'underline')
+            or buffer.is_focused and 'bold'
+            or buffer.diagnostics.errors ~= 0 and 'underline'
             or nil
         end,
       },

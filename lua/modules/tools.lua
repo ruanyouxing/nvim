@@ -9,9 +9,9 @@ function tools.hydra()
   local hint = [[
                  _m_: Marks            _C_: Colorschemes
 
-		 _/_: Search in files  
+		 _/_: Search in files  _p_: Pick buffer
 
-		 _r_: Run code         
+		 _r_: Run code         _c_: Close buffer
 
 		 _?_: Search history
 
@@ -35,6 +35,8 @@ function tools.hydra()
     body = '<Leader>h',
     heads = {
       { 'r', cmd('SnipRun') },
+      { 'p', "'<Plug>(cokeline-pick-select)'", { expr = true } },
+      {'c',"'<Plug>(cokeline-pick-close)'",{expr = true}},
       { 'C', cmd('Telescope colorscheme') },
       { 'm', cmd('MarksListBuf'), { desc = 'Marks' } },
       { '/', cmd('Telescope current_buffer_fuzzy_find'), { desc = 'Search in file' } },

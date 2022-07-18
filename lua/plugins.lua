@@ -5,6 +5,7 @@ local galaxyline = require('modules.galaxyline')
 local tools = require('modules.tools')
 local completion = require('modules.completion')
 local mapping = require('modules.mapping')
+local format = require('modules.formatting')
 --  _____    _ _ _
 -- | ____|__| (_) |_ ___  _ __
 -- |  _| / _` | | __/ _ \| '__|  Editor
@@ -132,7 +133,6 @@ plugins['noib3/nvim-cokeline'] = {
   setup = mapping.cokeline(),
   config = ui.cokeline,
 }
-plugins['catppuccin/nvim'] = { as = 'catppuccin', config = ui.catppuccin }
 plugins['kevinhwang91/nvim-ufo'] = {
   requires = 'kevinhwang91/promise-async',
   after = { 'nvim-treesitter', 'nvim-lspconfig' },
@@ -224,10 +224,10 @@ plugins['rafamadriz/friendly-snippets'] = {
 }
 plugins['github/copilot.vim'] = { event = 'InsertEnter' }
 plugins['neovim/nvim-lspconfig'] = { opt = true, after = 'nvim-lsp-installer' }
-plugins['mhartington/formatter.nvim'] = {
+plugins['jose-elias-alvarez/null-ls.nvim'] = {
   opt = true,
   after = 'nvim-lspconfig',
-  config = completion.formatting,
+  config = format.null_ls,
 }
 plugins['ray-x/lsp_signature.nvim'] = {
   opt = true,

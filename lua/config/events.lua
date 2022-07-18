@@ -21,9 +21,10 @@ autocmd({ 'BufEnter' }, {
   command = silent('imap <silent><expr><script> <Tab> copilot#Accept()'),
 })
 
-autocmd({ 'BufWritePost' }, {
-  pattern = all,
-  command = silent('FormatWrite'),
+autocmd({ 'BufWritePre', 'BufWritePost' }, {
+  pattern = '*',
+  callback = function()
+    vim.lsp.buf.formatting_sync()
+  end,
 })
-
 return events

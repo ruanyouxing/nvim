@@ -150,64 +150,36 @@ function completion.cmp()
   })
 end
 
-function completion.formatting()
-  local util = require('formatter.util')
-  local prettier = {
-    exe = 'prettier',
-    args = {
-      '--stdin-filepath ',
-      util.escape_path(util.get_current_buffer_file_path()),
-      '--single-quote ',
-    },
-  }
-  require('formatter').setup({
-    logging = true,
-    log_level = vim.log.levels.WARN,
-    filetype = {
-      lua = {
-        require('formatter.filetypes.lua').stylua,
-        function()
-          return {
-            exe = 'stylua',
-            args = {
-              '--search-parent-directories',
-              '--stdin-filepath',
-              util.escape_path(util.get_current_buffer_file_path()),
-              '--',
-              '-',
-            },
-            stdin = true,
-          }
-        end,
-      },
-      cpp = {
-        require('formatter.filetypes.cpp').clangformat,
-        function()
-          return {
-            exe = 'clang-format',
-            args = {
-              '-style=file',
-              '-assume-filename',
-              util.escape_path(util.get_current_buffer_file_path()),
-            },
-          }
-        end,
-      },
-      javascript = {
-        require('formatter.filetypes.javascript').prettier,
-        function()
-          return prettier
-        end,
-      },
-      typscript = {
-        require('formatter.filetypes.typescript').prettier,
-        function()
-          return prettier
-        end,
-      },
-    },
-  })
-end
+local signature_config = {
+  bind = true,
+  debug = false,
+  log_path = vim.fn.stdpath('cache') .. '/lsp_signature.log',
+  verbose = false,
+  use_lspsaga = false,
+  floating_window = true,
+  floating_window_above_cur_line = true,
+  fix_pos = false,
+  hint_enable = true,
+  hing_prefix = '🐼',
+  hint_scheme = 'String',
+  hi_parameter = 'LspSignatureActiveParameter',
+  max_height = 12,
+  max_width = 120,
+  transparency = nil,
+  doc_lines = 10,
+  shadow_guibg = 'Black',
+  timer_interval = '200',
+  always_trigger = false,
+  auto_close_after = nil,
+  extra_trigger_chars = {},
+  zindex = 200,
+  padding = ' ',
+  shadow_blend = 36,
+  toggle_key = nil,
+  hander_opts = {
+    border = 'rounded',
+  },
+}
 function completion.lsp_installer()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local completionItem = capabilities.textDocument.completion.completionItem
@@ -284,6 +256,8 @@ function completion.lsp_installer()
     opts.flags = { debounce_text_changes = 500 }
     opts.on_attach = function(client, bufnr)
       require('nvim-navic').attach(client, bufnr)
+      client.resolved_capabilities.document_formatting = false
+      require('lsp_signature').on_attach(signature_config, bufnr)
     end
     server:setup(opts)
   end)
@@ -338,69 +312,6 @@ function completion.lsputils()
       symbols.workspace_handler(nil, result, { bufnr = bufn }, nil)
     end
   end
-end
-
-function completion.signature()
-  require('lsp_signature').setup({
-    bind = true,
-    debug = false,
-    log_path = vim.fn.stdpath('cache') .. '/lsp_signature.log',
-    verbose = false,
-    use_lspsaga = false,
-    floating_window = true,
-    floating_window_above_cur_line = true,
-    fix_pos = false,
-    hint_enable = true,
-    hing_prefix = '🐼',
-    hint_scheme = 'String',
-    hi_parameter = 'LspSignatureActiveParameter',
-    max_height = 12,
-    max_width = 120,
-    transparency = nil,
-    doc_lines = 10,
-    shadow_guibg = 'Black',
-    timer_interval = '200',
-    always_trigger = false,
-    auto_close_after = nil,
-    extra_trigger_chars = {},
-    zindex = 200,
-    padding = ' ',
-    shadow_blend = 36,
-    toggle_key = nil,
-    hander_opts = {
-      border = 'single',
-    },
-  })
-  require('lsp_signature').on_attach({
-    bind = true,
-    debug = false,
-    log_path = vim.fn.stdpath('cache') .. '/lsp_signature.log',
-    verbose = false,
-    use_lspsaga = false,
-    floating_window = true,
-    floating_window_above_cur_line = true,
-    fix_pos = false,
-    hint_enable = true,
-    hing_prefix = '🐼',
-    hint_scheme = 'String',
-    hi_parameter = 'LspSignatureActiveParameter',
-    max_height = 12,
-    max_width = 120,
-    transparency = nil,
-    doc_lines = 10,
-    shadow_guibg = 'Black',
-    timer_interval = '200',
-    always_trigger = false,
-    auto_close_after = nil,
-    extra_trigger_chars = {},
-    zindex = 200,
-    padding = ' ',
-    shadow_blend = 36,
-    toggle_key = nil,
-    hander_opts = {
-      border = 'single',
-    },
-  }, bufnr)
 end
 
 function completion.snippets()
