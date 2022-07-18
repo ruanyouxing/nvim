@@ -105,7 +105,7 @@ end
 
 function ui.cokeline()
   local get_hex = require('cokeline.utils').get_hex
-  local mappings = require('cokeline.mappings')
+  local mappings = require('cokeline/mappings')
   local errors_fg = get_hex('DiagnosticError', 'fg')
   local warnings_fg = get_hex('DiagnosticWarn', 'fg')
   local hints_fg = get_hex('Diagnostichint', 'fg')
@@ -179,8 +179,8 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return (buffer.diagnostics.errors ~= 0 and '  ' .. buffer.diagnostics.errors)
-            or (buffer.diagnostics.warnings ~= 0 and '  ' .. buffer.diagnostics.warnings)
+          return (buffer.diagnostics.errors ~= 0 and ' ' .. buffer.diagnostics.errors..' ')
+            or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings..' ')
             or ''
         end,
         fg = function(buffer)
@@ -188,11 +188,10 @@ function ui.cokeline()
             or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
             or nil
         end,
-        truncation = { priority = 1 },
       },
       {
         text = function(buffer)
-          return (buffer.diagnostics.hints ~= 0 and '  ' .. buffer.diagnostics.hints .. ' ') or ''
+          return (buffer.diagnostics.hints ~= 0 and ' ' .. buffer.diagnostics.hints .. ' ') or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.hints ~= 0 and hints_fg) or nil
@@ -206,7 +205,6 @@ function ui.cokeline()
           return buffer.is_modified and green or nil
         end,
         delete_buffer_on_left_click = true,
-        truncation = { priority = 1 },
       },
       {
         text = '|',

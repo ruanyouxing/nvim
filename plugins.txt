@@ -1,9 +1,7 @@
 dap-buddy.nvim
-fzy-lua-native
 hop.nvim
 nvim-dap
 nvim-dap-ui
 split-term.vim
 telescope-fzf-native.nvim
-vim-easy-align
 vim-fugitive

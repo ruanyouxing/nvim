@@ -232,7 +232,6 @@ plugins['jose-elias-alvarez/null-ls.nvim'] = {
 plugins['ray-x/lsp_signature.nvim'] = {
   opt = true,
   after = 'nvim-lspconfig',
-  config = completion.signature,
 }
 plugins['williamboman/nvim-lsp-installer'] = {
   after = 'cmp-nvim-lsp',

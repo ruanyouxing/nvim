@@ -2,12 +2,13 @@ local galaxyline = {}
 function galaxyline.statusline()
   vim.opt.laststatus = 3
   local navic = require('nvim-navic')
+  local hydra = require('hydra.statusline')
   local gl = require('galaxyline')
   local colors = require('galaxyline.theme').default
   local gls = gl.section
   local condition = require('galaxyline.condition')
   colors.bg = string.sub(vim.api.nvim_command_output('hi StatusLine'), 59)
-  gl.short_line_list = { 'NvimTree', 'packer', 'TelescopePrompt', 'help' }
+  gl.short_line_list = { 'NvimTree', 'Trouble', 'packer', 'TelescopePrompt', 'help' }
   gls.short_line_left[1] = {
     BufferType = {
       provider = 'FileTypeName',
@@ -100,8 +101,18 @@ function galaxyline.statusline()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-
   gls.mid[1] = {
+    Hydra = {
+      provider = function()
+        return hydra.get_name()
+      end,
+      condition = function()
+        return hydra.is_active()
+      end,
+      highlight = { colors.pink, colors.bg },
+    },
+  }
+  gls.mid[2] = {
     BufferIcon = {
       provider = 'FileIcon',
       highlight = { colors.green, colors.bg },
@@ -110,7 +121,7 @@ function galaxyline.statusline()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-  gls.mid[2] = {
+  gls.mid[3] = {
     FileName = {
       provider = 'FileName',
       highlight = { colors.green, colors.bg, 'bold' },

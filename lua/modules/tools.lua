@@ -7,21 +7,21 @@ function tools.hydra()
   end
 
   local hint = [[
-                 _m_: Marks            _C_: Colorschemes
+  _C_: Colorschemes
 
-		 _/_: Search in files  _p_: Pick buffer
+  _/_: Search in files  _p_: Pick buffer
 
-		 _r_: Run code         _c_: Close buffer
+  _r_: Run code         _c_: Close buffer
 
-		 _?_: Search history
+  _?_: Search history
 
-                 _t_: Terminal
+  _t_: Terminal
 
-                 _<Enter>_: Telescope           _<Esc>_ 
-]]
+  _<Enter>_: Telescope           _<Esc>_
+  ]]
 
   Hydra({
-    name = 'Telescope',
+    name = 'Buffers',
     hint = hint,
     config = {
       color = 'teal',
@@ -31,14 +31,13 @@ function tools.hydra()
         border = 'rounded',
       },
     },
-    mode = { 'n', 'v', 'x' },
+    mode = { 'n', 'v', 'x', 'o' },
     body = '<Leader>h',
     heads = {
       { 'r', cmd('SnipRun') },
-      { 'p', "'<Plug>(cokeline-pick-select)'", { expr = true } },
-      {'c',"'<Plug>(cokeline-pick-close)'",{expr = true}},
+      { 'p', '<Plug>(cokeline-pick-focus)' },
+      { 'c', '<Plug>(cokeline-pick-close)' },
       { 'C', cmd('Telescope colorscheme') },
-      { 'm', cmd('MarksListBuf'), { desc = 'Marks' } },
       { '/', cmd('Telescope current_buffer_fuzzy_find'), { desc = 'Search in file' } },
       { '?', cmd('Telescope search_history'), { desc = 'Search history' } },
       { 't', cmd('ToggleTerm directon=float') },
