@@ -143,6 +143,16 @@ plugins['SmiteshP/nvim-navic'] = {
   event = 'BufReadPre',
   config = ui.navic,
 }
+plugins['phaazon/hop.nvim'] = {
+  opt = true,
+  branch = 'v2',
+  event = 'BufEnter',
+  config = function()
+    require('hop').setup({
+      keys = 'thequickbrownfoxjumpsoverthelazydogTHEQUICKBROWNFOXJUMPSOVERTHELAZYDOG',
+    })
+  end,
+}
 plugins['anuvyklack/hydra.nvim'] = {
   opt = true,
   event = 'BufRead',

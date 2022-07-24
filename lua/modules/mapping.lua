@@ -20,7 +20,7 @@ end
 function mapping.ufo()
   local ufo = require('ufo')
   nmap('K', function()
-    local winid = ufo.peekFoldedLineUnderCursor()
+    local winid = ufo.peekFoldedLinesUnderCursor()
     if not winid then
       vim.lsp.buf.hover()
     end

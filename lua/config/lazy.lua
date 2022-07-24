@@ -3,7 +3,7 @@ if not plugins then
   print('recompile')
   require('packer').compile()
   vim.defer_fn(function()
-    print('Packer recompiled, please run :PackerCompile and restart nvim')
+    print('Packer recompiled, please run :PackerCompile and restart neovim')
   end, 400)
   return
 end

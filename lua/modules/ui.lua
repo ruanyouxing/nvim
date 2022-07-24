@@ -114,21 +114,30 @@ function ui.cokeline()
   local yellow = vim.g.terminal_color_3
   local is_picking_focus = mappings.is_picking_focus
   local is_picking_close = mappings.is_picking_close
+  local normal_fg = get_hex('Normal', 'fg')
+  local normal_bg = get_hex('Normal', 'bg')
+  local comment_fg = get_hex('Comment', 'fg')
+  local column_bg = get_hex('ColorColumn', 'bg')
   require('cokeline').setup({
     default_hl = {
       fg = function(buffer)
-        return buffer.is_focused and get_hex('Normal', 'fg') or get_hex('Comment', 'fg')
+        return buffer.is_focused and normal_fg or comment_fg
       end,
-      bg = get_hex('ColorColumn', 'bg'),
+      bg = column_bg,
     },
     components = {
       {
         text = '',
-        bg = get_hex('Normal', 'bg'),
-        fg = get_hex('ColorColumn', 'bg'),
+        bg = normal_bg,
+        fg = column_bg,
       },
       {
         text = ' ',
+      },
+      {
+        text = function(buffer)
+          return buffer.index .. '. '
+        end,
       },
       {
         text = function(buffer)
@@ -143,14 +152,9 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return buffer.index .. '. '
-        end,
-      },
-      {
-        text = function(buffer)
           return buffer.unique_prefix
         end,
-        fg = get_hex('Comment', 'fg'),
+        fg = comment_fg,
         style = 'italic',
         truncation = {
           priority = 3,
@@ -179,8 +183,8 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return (buffer.diagnostics.errors ~= 0 and ' ' .. buffer.diagnostics.errors..' ')
-            or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings..' ')
+          return (buffer.diagnostics.errors ~= 0 and ' ' .. buffer.diagnostics.errors .. ' ')
+            or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings .. ' ')
             or ''
         end,
         fg = function(buffer)
@@ -214,8 +218,8 @@ function ui.cokeline()
       },
       {
         text = '',
-        fg = get_hex('ColorColumn', 'bg'),
-        bg = get_hex('Normal', 'bg'),
+        fg = column_bg,
+        bg = normal_bg,
       },
     },
     sidebar = {
