@@ -31,7 +31,7 @@ set.fileencoding = 'utf-8'
 set.fillchars.append = '-'
 set.timeoutlen = 97
 set.termguicolors = true
-
+set.signcolumn = 'yes'
 g.loaded_matchit = 1
 g.matchup_surround_enabled = 1
 
