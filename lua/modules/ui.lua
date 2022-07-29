@@ -305,6 +305,12 @@ function ui.lightbulb()
   })
 end
 
+function ui.lsp_lines()
+  require('lsp_lines').setup()
+  vim.diagnostic.config({
+    virtual_text = false,
+  })
+end
 function ui.nightfox()
   require('nightfox').setup({
     palettes = {

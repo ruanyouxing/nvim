@@ -165,6 +165,11 @@ plugins['kosayoda/nvim-lightbulb'] = {
   after = 'nvim-lspconfig',
   config = ui.lightbulb,
 }
+plugins['Maan2003/lsp_lines.nvim'] = {
+  opt = true,
+  after = 'nvim-lspconfig',
+  config = ui.lsp_lines,
+}
 plugins['glepnir/galaxyline.nvim'] = {
   event = 'BufWinEnter',
   config = galaxyline.statusline,
@@ -260,4 +265,5 @@ plugins['vimwiki/vimwiki'] = { opt = true, ft = 'markdown' }
 plugins['rhysd/accelerated-jk'] = {}
 plugins['itchyny/vim-cursorword'] = {}
 plugins['dstein64/vim-startuptime'] = {}
+
 return plugins

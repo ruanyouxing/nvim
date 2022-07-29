@@ -13,9 +13,9 @@ function tools.hydra()
 
   _r_: Run code         _c_: Close buffer
 
-  _?_: Search history
+  _?_: Search history   _d_: Open diffs
 
-  _t_: Terminal
+  _t_: Terminal         _s_: Stage buffer
 
   _<Enter>_: Telescope           _<Esc>_
   ]]
@@ -35,6 +35,8 @@ function tools.hydra()
     body = '<Leader>h',
     heads = {
       { 'r', cmd('SnipRun') },
+      { 'd', cmd('DiffviewOpen') },
+      { 's', cmd('Gitsigns stage_buffer') },
       { 'p', '<Plug>(cokeline-pick-focus)' },
       { 'c', '<Plug>(cokeline-pick-close)' },
       { 'C', cmd('Telescope colorscheme') },
