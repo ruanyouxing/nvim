@@ -100,7 +100,6 @@ function completion.cmp()
           path = '[Path]',
           luasnip = '[Snip]',
           spell = '[Spell]',
-          copilot = '[GC]',
         })[entry.source.name]
 
         return vim_item
