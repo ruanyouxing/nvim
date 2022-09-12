@@ -74,19 +74,4 @@ plugin {
 plugin { 'mbbill/undotree', event = 'TextChanged' }
 plugin { 'dstein64/vim-startuptime' }
 plugin { 'Pocco81/HighStr.nvim', setup = mapping.doc_highlight(), ft = { 'markdown', 'neorg' } }
-plugin {
-  'lewis6991/impatient.nvim',
-  config = function()
-    require('impatient').enable_profile()
-  end,
-}
-plugin { 'edluffy/hologram.nvim' }
-plugin {
-  'iamcco/markdown-preview.nvim',
-  run = 'cd app && yarn install',
-  setup = function()
-    vim.g.mkdp_filetypes = { 'markdown' }
-  end,
-  ft = { 'markdown' },
-}
 plugin { 'michaelb/sniprun', run = 'bash ./install.sh &' }
