@@ -1,17 +1,17 @@
 local completion = {}
 
 function completion.autopairs()
-  require('nvim-autopairs').setup({
+  require('nvim-autopairs').setup {
     check_ts = true,
-  })
-  local cmp_autopairs = require('nvim-autopairs.completion.cmp')
-  local cmp = require('cmp')
-  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done({ map_char = { tex = '' } }))
+  }
+  local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
+  local cmp = require 'cmp'
+  cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
 end
 
 function completion.cmp()
-  local cmp = require('cmp')
-  local luasnip = require('luasnip')
+  local cmp = require 'cmp'
+  local luasnip = require 'luasnip'
   local mapping = cmp.mapping
   local function highlight(name, guifg, guibg)
     return (name .. ' ' .. guifg .. ' ' .. guibg)
@@ -35,7 +35,7 @@ function completion.cmp()
 
   local has_words_before = function()
     local line, col = unpack(vim.api.nvim_win_get_cursor(0))
-    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match('%s') == nil
+    return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
   end
 
   local sources = {
@@ -45,7 +45,7 @@ function completion.cmp()
     { name = 'luasnip' },
     { name = 'path' },
     { name = 'buffer' },
-    { name = 'emoji'},
+    { name = 'emoji' },
     {
       keyword_length = 2,
       option = {
@@ -61,7 +61,7 @@ function completion.cmp()
   if vim.o.ft == 'lua' then
     table.insert(sources, { name = 'nvim_lua' })
   end
-  cmp.setup({
+  cmp.setup {
     formatting = {
       format = function(entry, vim_item)
         local icons = {
@@ -107,7 +107,7 @@ function completion.cmp()
     },
     -- You can set mappings if you want
     mapping = {
-      ['<CR>'] = mapping.confirm({ select = true }),
+      ['<CR>'] = mapping.confirm { select = true },
       ['<C-p>'] = mapping.select_prev_item(),
       ['<C-n>'] = mapping.select_next_item(),
       ['<S-Space>'] = mapping(function(fallback)
@@ -123,7 +123,7 @@ function completion.cmp()
         if cmp.visible() then
           cmp.select_prev_item()
         elseif luasnip.jumpable(-1) then
-          vim.fn.feedkeys(t('<Plug>luasnip-jump-prev'), '')
+          vim.fn.feedkeys(t '<Plug>luasnip-jump-prev', '')
         else
           fallback()
         end
@@ -136,13 +136,13 @@ function completion.cmp()
     },
     sorting = {},
     sources = sources,
-  })
+  }
 end
 
 local signature_config = {
   bind = true,
   debug = false,
-  log_path = vim.fn.stdpath('cache') .. '/lsp_signature.log',
+  log_path = vim.fn.stdpath 'cache' .. '/lsp_signature.log',
   verbose = false,
   use_lspsaga = false,
   floating_window = true,
@@ -192,8 +192,8 @@ function completion.lsp_installer()
   }
   capabilities.offsetEncoding = 'utf-8'
   capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-  local lsp_installer = require('nvim-lsp-installer')
-  lsp_installer.settings({
+  local lsp_installer = require 'nvim-lsp-installer'
+  lsp_installer.settings {
     ui = {
       icons = {
         server_installed = '✓',
@@ -201,7 +201,7 @@ function completion.lsp_installer()
         server_uninstalled = '✗',
       },
     },
-  })
+  }
   local servers = {
     'bashls',
     'clangd',
@@ -231,8 +231,8 @@ function completion.lsp_installer()
           diagnostics = { globals = { 'vim', 'packer_plugins' } },
           workspace = {
             library = {
-              [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-              [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
+              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+              [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
             },
             maxPreload = 100000,
             preloadFileSize = 10000,
@@ -254,10 +254,10 @@ end
 
 function completion.lsputils()
   local handlers = vim.lsp.handlers
-  local symbols = require('lsputil.symbols')
-  local locations = require('lsputil.locations')
-  local code_action = require('lsputil.codeAction')
-  if vim.fn.has('nvim-0.5.1') == 1 then
+  local symbols = require 'lsputil.symbols'
+  local locations = require 'lsputil.locations'
+  local code_action = require 'lsputil.codeAction'
+  if vim.fn.has 'nvim-0.5.1' == 1 then
     handlers['textDocument/codeAction'] = code_action.code_action_handler
     handlers['textDocument/references'] = locations.references_handler
     handlers['textDocument/definition'] = locations.definition_handler
@@ -304,16 +304,16 @@ function completion.lsputils()
 end
 
 function completion.snippets()
-  require('luasnip').config.set_config({
+  require('luasnip').config.set_config {
     history = true,
     update_events = 'TextChanged,TextChangedI',
     store_selection_keys = true,
-  })
+  }
   require('luasnip/loaders/from_vscode').load()
 end
 
 function completion.trouble()
-  require('trouble').setup({
+  require('trouble').setup {
     position = 'bottom',
     height = 6,
     width = 50,
@@ -356,7 +356,7 @@ function completion.trouble()
       other = '﫠',
     },
     use_diagnostic_signs = true,
-  })
+  }
 end
 
 return completion

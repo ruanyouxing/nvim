@@ -1,7 +1,7 @@
 -- author: glepnr https://github.com/glepnir
 -- date: 2022-07-02
 -- License: MIT
-local cache_dir = os.getenv('HOME') .. '/.cache/nvim/'
+local cache_dir = os.getenv 'HOME' .. '/.cache/nvim/'
 
 vim.opt.termguicolors = true
 vim.opt.mouse = 'nv'

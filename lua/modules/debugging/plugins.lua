@@ -1,8 +1,9 @@
 local plugin = require('core.pack').register_plugin
-local conf = require('modules.debugging.config')
-local ui = require('modules.ui.config')
+local conf = require 'modules.debugging.config'
+local ui = require 'modules.ui.config'
 
-plugin ({'mfussenegger/nvim-dap',
+plugin {
+  'mfussenegger/nvim-dap',
   opt = true,
   event = 'BufRead',
   config = conf.dap,
@@ -11,4 +12,4 @@ plugin ({'mfussenegger/nvim-dap',
     after = 'nvim-dap',
     config = ui.dap,
   },
-})
+}

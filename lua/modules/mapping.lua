@@ -10,17 +10,17 @@ local plug = function(cmd)
   return string.format('<Plug>%s', cmd)
 end
 function mapping.cokeline()
-  nmap('<C-]>', plug('(cokeline-focus-next)'))
-  nmap('<C-[>', plug('(cokeline-focus-prev)'))
-  nmap('<Tab>', plug('(cokeline-switch-next)'))
-  nmap('<S-Tab>', plug('(cokeline-switch-prev)'))
+  nmap('<C-]>', plug '(cokeline-focus-next)')
+  nmap('<C-[>', plug '(cokeline-focus-prev)')
+  nmap('<Tab>', plug '(cokeline-switch-next)')
+  nmap('<S-Tab>', plug '(cokeline-switch-prev)')
   for i = 1, 9 do
     nmap(('<F%s>'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i))
     nmap(('<Leader>%s'):format(i), ('<Plug>(cokeline-switch-%s)'):format(i))
   end
 end
 function mapping.ufo()
-  local ufo = require('ufo')
+  local ufo = require 'ufo'
   nmap('K', function()
     local winid = ufo.peekFoldedLinesUnderCursor()
     if not winid then
@@ -42,7 +42,7 @@ function mapping.icon_picker()
   local function imap(key, command, opt)
     return map('i', key, command, opt)
   end
-  imap('<C-i>', cmd('IconPickerInsert alt_font symbols nerd_font emoji'), { noremap = true, silent = true })
+  imap('<C-i>', cmd 'IconPickerInsert alt_font symbols nerd_font emoji', { noremap = true, silent = true })
 end
 
 function mapping.color_picker()
@@ -52,7 +52,7 @@ function mapping.color_picker()
   local function imap(key, command, opt)
     return map('i', key, command, opt)
   end
-  imap('<C-c>', cmd('PickColorInsert'), { silent = true, noremap = true })
+  imap('<C-c>', cmd 'PickColorInsert', { silent = true, noremap = true })
 end
 
 _G.OnFocus = 0
@@ -93,11 +93,11 @@ function mapping.zenmode()
     if OnFocus == 0 then
       OnFocus = 1
       -- vim.cmd([[autocmd! galaxyline]])
-      vim.api.nvim_del_augroup_by_name('galaxyline')
+      vim.api.nvim_del_augroup_by_name 'galaxyline'
       vim.o.statusline = 0
-      vim.cmd([[TZAtaraxis]])
+      vim.cmd [[TZAtaraxis]]
     else
-      vim.cmd([[TZAtaraxis]])
+      vim.cmd [[TZAtaraxis]]
       require('galaxyline').load_galaxyline()
       load_autocmds()
       OnFocus = 0

@@ -10,7 +10,7 @@ function tools.accelerated_jk()
   vim.keymap.set('v', 'k', '<Plug>(faster_vmove_k)', opts)
 end
 function tools.fm()
-  require('fm-nvim').setup({
+  require('fm-nvim').setup {
     -- (Vim) Command used to open files
     edit_cmd = 'edit',
 
@@ -46,14 +46,14 @@ function tools.fm()
       ESC = '<ESC>',
     },
 
-    broot_conf = vim.fn.stdpath('data') .. '/site/pack/packer/start/fm-nvim/assets/broot_conf.hjson',
-  })
+    broot_conf = vim.fn.stdpath 'data' .. '/site/pack/packer/start/fm-nvim/assets/broot_conf.hjson',
+  }
 end
 function tools.fold_preview()
-  require('fold-preview').setup({
+  require('fold-preview').setup {
     border = 'rounded',
     default_keybindings = false,
-  })
+  }
   vim.api.nvim_create_autocmd('CursorHold', {
     pattern = '*',
     callback = function()
@@ -62,9 +62,9 @@ function tools.fold_preview()
   })
 end
 function tools.highlight()
-  local high_str = require('high-str')
+  local high_str = require 'high-str'
 
-  high_str.setup({
+  high_str.setup {
     verbosity = 0,
     saving_path = '/tmp/highstr/',
     highlight_colors = {
@@ -80,10 +80,10 @@ function tools.highlight()
       color_8 = { '#FFF9E3', 'smart' }, -- Cosmic latte
       color_9 = { '#7d5c34', 'smart' }, -- Fallow brown
     },
-  })
+  }
 end
 function tools.mason()
-  require('mason').setup({
+  require('mason').setup {
     ui = {
       border = 'none',
       icons = {
@@ -92,11 +92,11 @@ function tools.mason()
         package_uninstalled = '✗',
       },
     },
-  })
+  }
 end
 
 function tools.mason_tools()
-  require('mason-tool-installer').setup({
+  require('mason-tool-installer').setup {
     ensure_installed = {
       'prettier',
       'clang-format',
@@ -109,17 +109,17 @@ function tools.mason_tools()
     auto_update = true,
     run_on_start = true,
     start_delay = 3000, -- 3 second delay
-  })
+  }
 end
 function tools.headlines()
-  require('headlines').setup({})
+  require('headlines').setup {}
 end
 
 function tools.keystack()
   _G.DAPStopped = true
-  local keystack = require('keystack')
+  local keystack = require 'keystack'
 
-  keystack.config({
+  keystack.config {
     default_opts = { silent = true, noremap = true },
     default_exit_key = { 'q', '<ESC>' },
     default_mode = 'n',
@@ -176,25 +176,25 @@ function tools.keystack()
           ['<C-S-d>'] = function()
             if DAPStopped then
               require('dap').continue()
-              print('Starting DAP...')
+              print 'Starting DAP...'
               DAPStopped = false
             else
               require('dap').close()
-              print('DAP Stopped.')
+              print 'DAP Stopped.'
               DAPStopped = true
             end
           end,
         },
       },
     },
-  })
+  }
 end
 
 function tools.hydra()
-  local Hydra = require('hydra')
+  local Hydra = require 'hydra'
 
   local function cmd(command)
-    return table.concat({ '<Cmd>', command, '<CR>' })
+    return table.concat { '<Cmd>', command, '<CR>' }
   end
 
   local hint = [[
@@ -211,7 +211,7 @@ function tools.hydra()
   _<Enter>_: Telescope           _<Esc>_
   ]]
 
-  Hydra({
+  Hydra {
     name = 'Buffers',
     hint = hint,
     config = {
@@ -225,24 +225,24 @@ function tools.hydra()
     mode = { 'n', 'v', 'x', 'o' },
     body = '<Leader>h',
     heads = {
-      { 'r', cmd('SnipRun') },
-      { 'g', cmd('DiffviewOpen') },
-      { 'd', cmd('lua require("keystack").push("debugging")') },
-      { 's', cmd('Gitsigns stage_buffer') },
+      { 'r', cmd 'SnipRun' },
+      { 'g', cmd 'DiffviewOpen' },
+      { 'd', cmd 'lua require("keystack").push("debugging")' },
+      { 's', cmd 'Gitsigns stage_buffer' },
       { 'p', '<Plug>(cokeline-pick-focus)' },
       { 'c', '<Plug>(cokeline-pick-close)' },
-      { 'C', cmd('Telescope colorscheme') },
-      { '/', cmd('Telescope current_buffer_fuzzy_find'), { desc = 'Search in file' } },
-      { '?', cmd('Telescope search_history'), { desc = 'Search history' } },
-      { 't', cmd('ToggleTerm directon=float') },
-      { '<Enter>', cmd('Telescope'), { exit = true, desc = 'List all pickers' } },
+      { 'C', cmd 'Telescope colorscheme' },
+      { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'Search in file' } },
+      { '?', cmd 'Telescope search_history', { desc = 'Search history' } },
+      { 't', cmd 'ToggleTerm directon=float' },
+      { '<Enter>', cmd 'Telescope', { exit = true, desc = 'List all pickers' } },
       { '<Esc>', nil, { exit = true, nowait = true } },
     },
-  })
+  }
 end
 
 function tools.sniprun()
-  require('sniprun').setup({
+  require('sniprun').setup {
     selected_interpreters = {},
     repl_enable = {},
     repl_disable = {},
@@ -287,21 +287,21 @@ function tools.sniprun()
 
     borders = 'single', --# display borders around floating windows
     live_mode_toggle = 'off', --# live mode toggle, see Usage - Running for more info
-  })
+  }
 end
 
 function tools.stay_in_place()
-  require('stay-in-place').setup({
+  require('stay-in-place').setup {
     set_keymaps = true,
     preserve_visual_selection = true,
-  })
+  }
 end
 
 function tools.telescope()
-  local actions = require('telescope.actions')
-  require('telescope').load_extension('zoxide')
-  require('telescope').load_extension('notify')
-  require('telescope').setup({
+  local actions = require 'telescope.actions'
+  require('telescope').load_extension 'zoxide'
+  require('telescope').load_extension 'notify'
+  require('telescope').setup {
     mappings = {
       i = {
         ['<esc>'] = actions.close,
@@ -310,12 +310,12 @@ function tools.telescope()
         ['q'] = actions.close,
       },
     },
-  })
+  }
 end
 
 function tools.toggleterm()
-  vim.cmd([[packadd toggleterm.nvim]])
-  require('toggleterm').setup({
+  vim.cmd [[packadd toggleterm.nvim]]
+  require('toggleterm').setup {
     size = 7,
     border = 'curved',
     hide_numbers = true,
@@ -327,11 +327,11 @@ function tools.toggleterm()
     persist_size = true,
     shell = 'zsh',
     close_on_exit = true,
-  })
+  }
 end
 
 function tools.zenmode()
-  require('true-zen').setup({
+  require('true-zen').setup {
     modes = { -- configurations per mode
       ataraxis = {
         shade = 'dark',
@@ -383,7 +383,7 @@ function tools.zenmode()
       tmux = false, -- hide tmux status bar in (minimalist, ataraxis)
       twilight = true,
     },
-  })
+  }
 end
 
 return tools

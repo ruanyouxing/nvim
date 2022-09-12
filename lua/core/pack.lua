@@ -3,8 +3,8 @@
 -- License: MIT
 
 local fn, uv, api = vim.fn, vim.loop, vim.api
-local vim_path = vim.fn.stdpath('config')
-local data_dir = string.format('%s/site/', vim.fn.stdpath('data'))
+local vim_path = vim.fn.stdpath 'config'
+local data_dir = string.format('%s/site/', vim.fn.stdpath 'data')
 local modules_dir = vim_path .. '/lua/modules'
 local packer_compiled = data_dir .. 'lua/packer_compiled.lua'
 local packer = nil
@@ -32,10 +32,10 @@ end
 
 function Packer:load_packer()
   if not packer then
-    api.nvim_command('packadd packer.nvim')
-    packer = require('packer')
+    api.nvim_command 'packadd packer.nvim'
+    packer = require 'packer'
   end
-  packer.init({
+  packer.init {
     compile_path = packer_compiled,
     git = { clone_timeout = 120 },
     disable_commands = true,
@@ -47,11 +47,11 @@ function Packer:load_packer()
       removed_sym = '',
       moved_sym = 'ﰳ',
     },
-  })
+  }
   packer.reset()
   local use = packer.use
   self:load_plugins()
-  use({ 'wbthomason/packer.nvim', opt = true })
+  use { 'wbthomason/packer.nvim', opt = true }
   for _, repo in ipairs(self.repos) do
     use(repo)
   end
@@ -64,7 +64,7 @@ function Packer:init_ensure_plugins()
     local cmd = '!git clone https://github.com/wbthomason/packer.nvim ' .. packer_dir
     api.nvim_command(cmd)
     uv.fs_mkdir(data_dir .. 'lua', 511, function()
-      assert('make compile path dir faield')
+      assert 'make compile path dir faield'
     end)
     self:load_packer()
     packer.sync()
@@ -94,21 +94,21 @@ end
 -- end
 
 function plugins.auto_compile()
-  local file = vim.fn.expand('%:p')
+  local file = vim.fn.expand '%:p'
   if not file:match(vim_path) then
     return
   end
 
-  if file:match('plugins.lua') then
+  if file:match 'plugins.lua' then
     plugins.clean()
   end
   plugins.compile()
-  require('packer_compiled')
+  require 'packer_compiled'
 end
 
 function plugins.load_compile()
   if vim.fn.filereadable(packer_compiled) == 1 then
-    require('packer_compiled')
+    require 'packer_compiled'
   else
     vim.notify('Run PackerSync or PackerCompile', 'info', { title = 'Packer' })
   end

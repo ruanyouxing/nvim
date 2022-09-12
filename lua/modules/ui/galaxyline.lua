@@ -2,12 +2,12 @@ local config = {}
 
 function config.setup()
   vim.opt.laststatus = 3
-  local navic = require('nvim-navic')
-  local hydra = require('hydra.statusline')
-  local gl = require('galaxyline')
+  local navic = require 'nvim-navic'
+  local hydra = require 'hydra.statusline'
+  local gl = require 'galaxyline'
   local colors = require('galaxyline.theme').default
   local gls = gl.section
-  local cond = require('galaxyline.condition')
+  local cond = require 'galaxyline.condition'
   local function get_color(group, attr)
     return vim.fn.synIDattr(vim.fn.synIDtrans(vim.fn.hlID(group)), attr)
   end
@@ -144,7 +144,7 @@ function config.setup()
     FileSize = {
       provider = 'FileSize',
       condition = function()
-        if vim.fn.empty(vim.fn.expand('%:t')) ~= 1 then
+        if vim.fn.empty(vim.fn.expand '%:t') ~= 1 then
           return true
         end
         return false

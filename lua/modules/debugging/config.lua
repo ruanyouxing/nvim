@@ -1,7 +1,7 @@
 local debugging = {}
 
 function debugging.dap()
-  local dap = require('dap')
+  local dap = require 'dap'
 
   vim.fn.sign_define('DapBreakpoint', { text = '🟥', texthl = '', linehl = '', numhl = '' })
   vim.fn.sign_define('DapStopped', { text = '🔴', texthl = '', linehl = '', numhl = '' })

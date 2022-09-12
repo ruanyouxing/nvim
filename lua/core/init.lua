@@ -3,7 +3,7 @@
 -- License: MIT
 
 local vim = vim
-local home = os.getenv('HOME')
+local home = os.getenv 'HOME'
 -- remove check is windows because I only use mac or linux
 local cache_dir = home .. '/.cache/nvim/'
 
@@ -50,9 +50,9 @@ vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
 
-local pack = require('core.pack')
+local pack = require 'core.pack'
 
 pack.ensure_plugins()
-require('core.options')
+require 'core.options'
 pack.load_compile()
-require('keymap')
+require 'keymap'

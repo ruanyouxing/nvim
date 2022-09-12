@@ -1,7 +1,7 @@
 local ui = {}
 function ui.alpha()
-  local alpha = require('alpha')
-  local dashboard = require('alpha.themes.dashboard')
+  local alpha = require 'alpha'
+  local dashboard = require 'alpha.themes.dashboard'
   dashboard.section.header.val = {
     [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀]],
     [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠟⠉⠉⠉⠉⠉⠉⠉⠙⠻⢶⣄⠀⠀⠀⠀⠀]],
@@ -30,9 +30,9 @@ function ui.alpha()
   }
 
   local function footer()
-    package.path = vim.fn.stdpath('config') .. '/plugin/?.lua;' .. package.path
+    package.path = vim.fn.stdpath 'config' .. '/plugin/?.lua;' .. package.path
     local plugins = #vim.tbl_keys(packer_plugins)
-    local datetime = os.date(' %d-%m-%Y   %H:%M:%S')
+    local datetime = os.date ' %d-%m-%Y   %H:%M:%S'
     local version = vim.version()
     return '  '
       .. plugins
@@ -55,7 +55,7 @@ end
 function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
-  require('indent_blankline').setup({
+  require('indent_blankline').setup {
     char = '│',
     show_first_indent_level = true,
     filetype_exclude = {
@@ -100,13 +100,13 @@ function ui.blankline()
       'import',
     },
     space_char_blankline = ' ',
-  })
+  }
   vim.api.nvim_create_autocmd({ 'CursorMoved' }, { pattern = '*', command = 'IndentBlanklineRefresh' })
 end
 
 function ui.cokeline()
   local get_hex = require('cokeline.utils').get_hex
-  local mappings = require('cokeline/mappings')
+  local mappings = require 'cokeline/mappings'
   local errors_fg = get_hex('DiagnosticError', 'fg')
   local warnings_fg = get_hex('DiagnosticWarn', 'fg')
   local hints_fg = get_hex('Diagnostichint', 'fg')
@@ -119,7 +119,7 @@ function ui.cokeline()
   local normal_bg = get_hex('Normal', 'bg')
   local comment_fg = get_hex('Comment', 'fg')
   local column_bg = get_hex('ColorColumn', 'bg')
-  require('cokeline').setup({
+  require('cokeline').setup {
     default_hl = {
       fg = function(buffer)
         return buffer.is_focused and normal_fg or comment_fg
@@ -234,14 +234,14 @@ function ui.cokeline()
         },
       },
     },
-  })
+  }
 end
 
 function ui.cursorline()
-  require('nvim-cursorline').setup({
+  require('nvim-cursorline').setup {
     curosrline = { enable = true, timeout = 100, number = false },
     cursorword = { enable = true, min_length = 3, hl = { underline = true } },
-  })
+  }
 end
 function ui.dap()
   require('dapui').setup()
@@ -257,7 +257,7 @@ function ui.fold()
   vim.o.foldcolumn = '1'
   vim.o.foldlevelstart = -1
 
-  require('ufo').setup({
+  require('ufo').setup {
     provider_selector = function()
       return { 'treesitter' }
     end,
@@ -289,11 +289,11 @@ function ui.fold()
       return newVirtText
     end,
     require('modules.mapping').ufo(),
-  })
+  }
 end
 
 function ui.lightbulb()
-  require('nvim-lightbulb').setup({
+  require('nvim-lightbulb').setup {
     autocmd = {
       enabled = true,
     },
@@ -316,11 +316,11 @@ function ui.lightbulb()
       text = '💡',
       text_unavailable = '',
     },
-  })
+  }
 end
 
 function ui.navic()
-  require('nvim-navic').setup({
+  require('nvim-navic').setup {
     icons = {
       File = ' ',
       Module = ' ',
@@ -353,7 +353,7 @@ function ui.navic()
     separator = ' > ',
     depth_limit = 2,
     depth_limit_indicator = '..',
-  })
+  }
   vim.api.nvim_set_hl(0, 'NavicIconsFile', { default = true, bg = '#000000', fg = '#ffffff' })
   vim.api.nvim_set_hl(0, 'NavicIconsModule', { default = true, bg = '#000000', fg = '#ffffff' })
   vim.api.nvim_set_hl(0, 'NavicIconsNamespace', { default = true, bg = '#000000', fg = '#ffffff' })
@@ -384,10 +384,9 @@ function ui.navic()
   vim.api.nvim_set_hl(0, 'NavicSeparator', { default = true, bg = '#000000', fg = '#ffffff' })
 end
 
-
 function ui.notify()
-  vim.notify = require('notify')
-  require('notify').setup({
+  vim.notify = require 'notify'
+  require('notify').setup {
     stages = 'slide',
     on_open = nil,
     on_close = nil,
@@ -402,8 +401,8 @@ function ui.notify()
       DEBUG = '',
       TRACE = '✎',
     },
-  })
-  require('notify')('Welcome!')
+  }
+  require 'notify' 'Welcome!'
 end
 
 function ui.rose_pine() end
@@ -417,14 +416,14 @@ function ui.tokyonight()
 end
 
 function ui.transparent()
-  require('transparent').setup({
+  require('transparent').setup {
     enable = false,
     extra_groups = 'all',
-  })
+  }
 end
 
 function ui.twilight()
-  require('twilight').setup({
+  require('twilight').setup {
     dimming = {
       alpha = 0.25, -- amount of dimming
       color = { 'Normal', '#ffffff' },
@@ -439,13 +438,13 @@ function ui.twilight()
       'if_statement',
     },
     exclude = {},
-  })
-  vim.cmd([[TwilightEnable]])
+  }
+  vim.cmd [[TwilightEnable]]
 end
 
 function ui.wilder()
-  local wilder = require('wilder')
-  wilder.setup({ modes = { ':', '/', '?' } })
+  local wilder = require 'wilder'
+  wilder.setup { modes = { ':', '/', '?' } }
   local gradient = {
     '#f4468f',
     '#fd4a85',
@@ -472,37 +471,37 @@ function ui.wilder()
   end
   wilder.set_option('pipeline', {
     wilder.branch(
-      wilder.cmdline_pipeline({
+      wilder.cmdline_pipeline {
         fuzzy = 1,
-      }),
-      wilder.python_file_finder_pipeline({
+      },
+      wilder.python_file_finder_pipeline {
         file_command = { 'fd', '-tf' },
         dir_command = { 'fd', '-tf' },
         filters = { 'fuzzy_filter', 'difflib_sorter' },
-      }),
+      },
 
       wilder.python_search_pipeline()
     ),
   })
   local highlighters = {
-    wilder.highlighter_with_gradient({
+    wilder.highlighter_with_gradient {
       wilder.basic_highlighter(), -- or wilder.lua_fzy_highlighter(),
-    }),
+    },
     wilder.basic_highlighter(),
   }
   wilder.set_option(
     'renderer',
-    wilder.renderer_mux({
-      [':'] = wilder.popupmenu_renderer({
+    wilder.renderer_mux {
+      [':'] = wilder.popupmenu_renderer {
         highlights = { gradient = gradient },
         min_height = '5%',
         max_height = '35%',
         highlighter = highlighters,
-      }),
-      ['/'] = wilder.wildmenu_renderer({
+      },
+      ['/'] = wilder.wildmenu_renderer {
         highlighter = highlighters,
-      }),
-    })
+      },
+    }
   )
 end
 return ui

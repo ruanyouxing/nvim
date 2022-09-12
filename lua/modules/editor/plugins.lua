@@ -1,15 +1,16 @@
 local plugin = require('core.pack').register_plugin
-local conf = require('modules.editor.config')
+local conf = require 'modules.editor.config'
 local function is_gitrepo()
-  local is_repo = vim.fn.system('git rev-parse --is-inside-work-tree')
+  local is_repo = vim.fn.system 'git rev-parse --is-inside-work-tree'
   if vim.v.shell_error == 0 then
     return true
   end
   return false
 end
-plugin ({'Pocco81/AutoSave.nvim', config = conf.autosave })
-plugin ({'rmagatti/auto-session', config = conf.autosession })
-plugin ({'famiu/bufdelete.nvim',
+plugin { 'Pocco81/AutoSave.nvim', config = conf.autosave }
+plugin { 'rmagatti/auto-session', config = conf.autosession }
+plugin {
+  'famiu/bufdelete.nvim',
   opt = true,
   event = 'BufDelete',
   config = {
@@ -17,58 +18,38 @@ plugin ({'famiu/bufdelete.nvim',
       require('bufdelete').bufdelete(0, true)
     end),
   },
-})
-plugin ({'max397574/better-escape.nvim',
-  event = 'InsertEnter',
-  config = conf.better_escape,
-})
-plugin ({'norcalli/nvim-colorizer.lua',
+}
+plugin { 'max397574/better-escape.nvim', event = 'InsertEnter', config = conf.better_escape }
+plugin {
+  'norcalli/nvim-colorizer.lua',
   config = function()
-    require('colorizer').setup({})
+    require('colorizer').setup {}
   end,
-})
-plugin ({'sindrets/diffview.nvim', opt = true, config = conf.diffview, cond = is_gitrepo })
-plugin ({'lewis6991/gitsigns.nvim', opt = true, config = conf.gitsigns, cond = is_gitrepo })
-plugin ({'phaazon/hop.nvim',
+}
+plugin { 'sindrets/diffview.nvim', opt = true, config = conf.diffview, cond = is_gitrepo }
+plugin { 'lewis6991/gitsigns.nvim', opt = true, config = conf.gitsigns, cond = is_gitrepo }
+plugin {
+  'phaazon/hop.nvim',
   opt = true,
   branch = 'v2',
   event = 'BufEnter',
   config = function()
-    require('hop').setup({
+    require('hop').setup {
       keys = 'thequickbrownfoxjumpsoverthelazydog',
-    })
+    }
   end,
-})
-plugin ({'nvim-lua/plenary.nvim'})
-plugin ({'terrortylor/nvim-comment', config = conf.comment })
-plugin ({'kyazdani42/nvim-web-devicons'})
-plugin ({'edluffy/specs.nvim', config = conf.specs })
-plugin ({'nvim-treesitter/nvim-treesitter',
-  event = 'BufRead',
-  run = ':TSUpdate',
-  config = conf.treesitter,
-})
-plugin ({'nvim-treesitter/nvim-treesitter-refactor',
-  after = 'nvim-treesitter',
-})
-plugin ({'JoosepAlviste/nvim-ts-context-commentstring',
-  after = 'nvim-treesitter',
-})
-plugin ({'nvim-treesitter/nvim-treesitter-textobjects',
-  after = 'nvim-treesitter',
-})
-plugin ({'windwp/nvim-ts-autotag', after = 'nvim-treesitter' })
-plugin ({'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' })
-plugin ({'andymass/vim-matchup', after = 'nvim-treesitter' })
-plugin ({'romgrk/nvim-treesitter-context',
-  after = 'nvim-treesitter',
-  config = conf.ts_context,
-})
-plugin ({'simrat39/symbols-outline.nvim',
-  after = 'nvim-lspconfig',
-  config = conf.symbols_outline,
-})
-plugin ({'abecodes/tabout.nvim',
-  after = 'nvim-cmp',
-  config = conf.tabout,
-})
+}
+plugin { 'nvim-lua/plenary.nvim' }
+plugin { 'terrortylor/nvim-comment', config = conf.comment }
+plugin { 'kyazdani42/nvim-web-devicons' }
+plugin { 'edluffy/specs.nvim', config = conf.specs }
+plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', run = ':TSUpdate', config = conf.treesitter }
+plugin { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' }
+plugin { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
+plugin { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
+plugin { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' }
+plugin { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
+plugin { 'andymass/vim-matchup', after = 'nvim-treesitter' }
+plugin { 'romgrk/nvim-treesitter-context', after = 'nvim-treesitter', config = conf.ts_context }
+plugin { 'simrat39/symbols-outline.nvim', after = 'nvim-lspconfig', config = conf.symbols_outline }
+plugin { 'abecodes/tabout.nvim', after = 'nvim-cmp', config = conf.tabout }
