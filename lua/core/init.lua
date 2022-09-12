@@ -1,13 +1,5 @@
--- author: glepnr https://github.com/glepnir
--- date: 2022-07-02
--- License: MIT
-
-local vim = vim
 local home = os.getenv 'HOME'
--- remove check is windows because I only use mac or linux
 local cache_dir = home .. '/.cache/nvim/'
-
--- Create cache dir and subs dir
 local createdir = function()
   local data_dir = {
     cache_dir .. 'backup',
@@ -29,8 +21,6 @@ local createdir = function()
 end
 
 createdir()
-
---disable_distribution_plugins
 vim.g.loaded_gzip = 1
 vim.g.loaded_tar = 1
 vim.g.loaded_tarPlugin = 1
@@ -49,9 +39,7 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
-
 local pack = require 'core.pack'
-
 pack.ensure_plugins()
 require 'core.options'
 pack.load_compile()

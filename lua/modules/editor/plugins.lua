@@ -11,13 +11,7 @@ plugin { 'Pocco81/AutoSave.nvim', config = conf.autosave }
 plugin { 'rmagatti/auto-session', config = conf.autosession }
 plugin {
   'famiu/bufdelete.nvim',
-  opt = true,
   event = 'BufDelete',
-  config = {
-    vim.keymap.set('n', '<C-w>', function()
-      require('bufdelete').bufdelete(0, true)
-    end),
-  },
 }
 plugin { 'max397574/better-escape.nvim', event = 'InsertEnter', config = conf.better_escape }
 plugin {
@@ -26,11 +20,10 @@ plugin {
     require('colorizer').setup {}
   end,
 }
-plugin { 'sindrets/diffview.nvim', opt = true, config = conf.diffview, cond = is_gitrepo }
-plugin { 'lewis6991/gitsigns.nvim', opt = true, config = conf.gitsigns, cond = is_gitrepo }
+plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo }
+plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo }
 plugin {
   'phaazon/hop.nvim',
-  opt = true,
   branch = 'v2',
   event = 'BufEnter',
   config = function()

@@ -5,7 +5,14 @@ function config.setup()
   local navic = require 'nvim-navic'
   local hydra = require 'hydra.statusline'
   local gl = require 'galaxyline'
-  local colors = require('galaxyline.theme').default
+  local colors = {
+  fg = '#bbc2cf',
+  red = '#ec5767',
+  yellow = '#ecbe7b',
+  blue = '#51afef',
+  orange = '#ff8800',
+  green = '#98be65'
+  }
   local gls = gl.section
   local cond = require 'galaxyline.condition'
   local function get_color(group, attr)
@@ -114,7 +121,7 @@ function config.setup()
       condition = function()
         return hydra.is_active()
       end,
-      highlight = { colors.pink, colors.bg },
+      highlight = { colors.green, colors.bg },
     },
   }
   gls.mid[2] = {

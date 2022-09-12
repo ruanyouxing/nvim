@@ -21,10 +21,10 @@ plugin {
   config = conf.cmp,
 }
 plugin { 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.snippets }
-plugin { 'rafamadriz/friendly-snippets', opt = true, after = 'nvim-cmp' }
-plugin { 'neovim/nvim-lspconfig', opt = true, after = 'nvim-lsp-installer' }
-plugin { 'jose-elias-alvarez/null-ls.nvim', opt = true, after = 'nvim-lspconfig', config = null_ls.setup }
-plugin { 'ray-x/lsp_signature.nvim', opt = true, after = 'nvim-lspconfig' }
+plugin { 'rafamadriz/friendly-snippets', after = 'nvim-cmp' }
+plugin { 'neovim/nvim-lspconfig', after = 'nvim-lsp-installer' }
+plugin { 'jose-elias-alvarez/null-ls.nvim', after = 'nvim-lspconfig', config = null_ls.setup }
+plugin { 'ray-x/lsp_signature.nvim', after = 'nvim-lspconfig' }
 plugin { 'williamboman/nvim-lsp-installer', after = 'cmp-nvim-lsp', config = conf.lsp_installer }
-plugin { 'RishabhRD/nvim-lsputils', opt = true, requires = { 'RishabhRD/popfix' }, config = conf.lsputils }
-plugin { 'folke/trouble.nvim', opt = true, after = 'nvim-lspconfig' }
+plugin { 'RishabhRD/nvim-lsputils', after = 'nvim-lspconfig', requires = { 'RishabhRD/popfix' }, config = conf.lsputils }
+plugin { 'folke/trouble.nvim', after = 'nvim-lspconfig' }

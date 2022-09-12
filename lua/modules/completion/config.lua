@@ -245,7 +245,8 @@ function completion.lsp_installer()
     opts.flags = { debounce_text_changes = 500 }
     opts.on_attach = function(client, bufnr)
       require('nvim-navic').attach(client, bufnr)
-      client.resolved_capabilities.document_formatting = false
+      client.server_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
       require('lsp_signature').on_attach(signature_config, bufnr)
     end
     server:setup(opts)

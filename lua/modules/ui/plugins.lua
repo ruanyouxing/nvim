@@ -1,14 +1,11 @@
 local plugin = require('core.pack').register_plugin
 local conf = require 'modules.ui.config'
-local mapping = require 'modules.mapping'
 local statusline = require 'modules.ui.galaxyline'
 plugin { 'goolord/alpha-nvim', config = conf.alpha }
 plugin { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = conf.blankline }
 plugin {
   'noib3/nvim-cokeline',
-  opt = true,
   event = 'UIEnter',
-  setup = mapping.cokeline(),
   config = conf.cokeline,
 }
 plugin { 'yamatsum/nvim-cursorline', config = conf.cursorline }
@@ -19,7 +16,7 @@ plugin {
   config = conf.fold,
 }
 plugin { 'j-hui/fidget.nvim', after = 'nvim-lsp-installer', config = conf.fidget }
-plugin { 'SmiteshP/nvim-navic', opt = true, event = 'BufReadPre', config = conf.navic }
+plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin {
   'kosayoda/nvim-lightbulb',
@@ -48,7 +45,6 @@ plugin {
 }
 plugin {
   'gelguy/wilder.nvim',
-  opt = true,
   event = { 'CmdwinEnter', 'CmdlineEnter' },
   requires = {
     { 'roxma/nvim-yarp', run = ':UpdateRemotePlugins' },

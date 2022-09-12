@@ -1,6 +1,5 @@
 local plugin = require('core.pack').register_plugin
 local conf = require 'modules.tools.config'
-local mapping = require 'modules.mapping'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter', config = conf.accelerated_jk }
 plugin {
   'lewis6991/impatient.nvim',
@@ -45,7 +44,6 @@ plugin { 'edluffy/hologram.nvim' }
 plugin {
   'ziontee113/icon-picker.nvim',
   event = 'InsertEnter',
-  setup = mapping.icon_picker(),
   requires = 'stevearc/dressing.nvim',
   config = function()
     require 'icon-picker'
@@ -55,13 +53,12 @@ plugin {
   'ziontee113/color-picker.nvim',
   opt = true,
   event = 'InsertEnter',
-  setup = mapping.color_picker(),
   config = function()
     require 'color-picker'
   end,
 }
 plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm }
-plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', setup = mapping.zenmode(), config = conf.zenmode }
+plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode }
 
 plugin {
   'iamcco/markdown-preview.nvim',
@@ -73,5 +70,5 @@ plugin {
 }
 plugin { 'mbbill/undotree', event = 'TextChanged' }
 plugin { 'dstein64/vim-startuptime' }
-plugin { 'Pocco81/HighStr.nvim', setup = mapping.doc_highlight(), ft = { 'markdown', 'neorg' } }
+plugin { 'Pocco81/HighStr.nvim', ft = { 'markdown', 'neorg' } }
 plugin { 'michaelb/sniprun', run = 'bash ./install.sh &' }
