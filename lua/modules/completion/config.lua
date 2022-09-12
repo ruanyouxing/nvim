@@ -172,6 +172,16 @@ local signature_config = {
 function completion.lsp_installer()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local completionItem = capabilities.textDocument.completion.completionItem
+  local lsp_formatting = function(bufnr)
+    vim.lsp.buf.format {
+      filter = function(client)
+        -- apply whatever logic you want (in this example, we'll only use null-ls)
+        return client.name == 'null-ls'
+      end,
+      bufnr = bufnr,
+    }
+  end
+  local augroup = vim.api.nvim_create_augroup('LspFormatting', {})
   capabilities.textDocument.foldingRange = {
     dynamicRegistration = false,
     lineFoldingOnly = true,
@@ -245,9 +255,17 @@ function completion.lsp_installer()
     opts.flags = { debounce_text_changes = 500 }
     opts.on_attach = function(client, bufnr)
       require('nvim-navic').attach(client, bufnr)
-      client.server_capabilities.document_formatting = false
-        client.server_capabilities.documentFormattingProvider = false
       require('lsp_signature').on_attach(signature_config, bufnr)
+      if client.supports_method 'textDocument/formatting' then
+        vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+        vim.api.nvim_create_autocmd('BufWritePre', {
+          group = augroup,
+          buffer = bufnr,
+          callback = function()
+            lsp_formatting(bufnr)
+          end,
+        })
+      end
     end
     server:setup(opts)
   end)

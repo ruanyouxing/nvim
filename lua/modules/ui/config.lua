@@ -30,7 +30,6 @@ function ui.alpha()
   }
 
   local function footer()
-    package.path = vim.fn.stdpath 'config' .. '/plugin/?.lua;' .. package.path
     local plugins = #vim.tbl_keys(packer_plugins)
     local datetime = os.date ' %d-%m-%Y   %H:%M:%S'
     local version = vim.version()
@@ -288,7 +287,6 @@ function ui.fold()
       table.insert(newVirtText, { suffix, 'MoreMsg' })
       return newVirtText
     end,
-    require('modules.mapping').ufo(),
   }
 end
 
@@ -413,6 +411,7 @@ function ui.tokyonight()
   vim.g.tokyonight_italic_funtions = 1
   vim.g.tokyonight_italic_variables = 1
   vim.g.tokyonight_sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' }
+  vim.cmd 'colorscheme tokyonight'
 end
 
 function ui.transparent()

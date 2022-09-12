@@ -6,12 +6,12 @@ function config.setup()
   local hydra = require 'hydra.statusline'
   local gl = require 'galaxyline'
   local colors = {
-  fg = '#bbc2cf',
-  red = '#ec5767',
-  yellow = '#ecbe7b',
-  blue = '#51afef',
-  orange = '#ff8800',
-  green = '#98be65'
+    fg = '#bbc2cf',
+    red = '#ec5767',
+    yellow = '#ecbe7b',
+    blue = '#51afef',
+    orange = '#ff8800',
+    green = '#98be65',
   }
   local gls = gl.section
   local cond = require 'galaxyline.condition'

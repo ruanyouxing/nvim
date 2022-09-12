@@ -37,10 +37,9 @@ plugin { 'folke/tokyonight.nvim', config = conf.tokyonight }
 plugin { 'xiyaowong/nvim-transparent', config = conf.transparent }
 plugin { 'folke/twilight.nvim', event = 'CursorMoved', config = conf.twilight }
 plugin {
-  'xiyaowong/virtcolumn.nvim',
+  'lukas-reineke/virt-column.nvim',
   config = function()
-    vim.g.virtcolumn_char = '▕' -- char to display the line
-    vim.g.virtcolumn_priority = 10 -- priority of extmark
+    require('virt-column').setup()
   end,
 }
 plugin {

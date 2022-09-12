@@ -1,8 +1,9 @@
 local keymap = require 'core.keymap'
-local nmap, imap, cmap, xmap, vmap = keymap.nmap, keymap.imap, keymap.cmap, keymap.xmap, keymap.vmap
+local nmap, imap, xmap, vmap = keymap.nmap, keymap.imap, keymap.xmap, keymap.vmap
 local silent, noremap = keymap.silent, keymap.noremap
 local opts = keymap.new_opts
 local cmd = keymap.cmd
+local plug = keymap.plug
 local buf = vim.lsp.buf
 vim.g.mapleader = ' '
 local defaults = opts(noremap, silent)
@@ -69,6 +70,7 @@ nmap {
       require('ufo').closeAllFolds()
     end,
   },
+  { '<C-a>', 'ggVG', defaults },
   { '<C-h>', '<C-w>h', defaults },
   { '<C-l>', '<C-w>l', defaults },
   { '<C-j>', '<C-w>j', defaults },
@@ -79,8 +81,8 @@ nmap {
   { '<C-s>', cmd 'SymbolsOutline', defaults },
   { '<leader>p', cmd 'PackerSync', defaults },
   { '<C-q>', cmd 'q!', defaults },
-  { '<S-p>', 'Telescope', defaults },
-  { '<C-t>', 'Telescope find_files', defaults },
+  { '<C-S-p>', cmd 'Telescope', defaults },
+  { '<C-t>', cmd 'Telescope find_files', defaults },
   {
     '<C-w>',
     function()
@@ -88,10 +90,10 @@ nmap {
     end,
     defaults,
   },
-  { '<C-y>', 'redo', defaults },
-  { '<C-z>', 'u', defaults },
-  { '<leader>t', 'ToggleTerm', defaults },
-  { '<leader>z', 'Telescope zoxide list', defaults },
+  { '<C-y>', cmd 'redo', defaults },
+  { '<C-z>', cmd 'u', defaults },
+  { '<leader>t', cmd 'ToggleTerm', defaults },
+  { '<leader>z', cmd 'Telescope zoxide list', defaults },
   {
     'lg',
     function()
@@ -168,15 +170,15 @@ nmap {
     end,
     defaults,
   },
-  { '<C-]>', '<Plug>(cokeline-focus-next)', defaults },
-  { '<C-[>', '<Plug>(cokeline-focus-prev)', defaults },
-  { '<Tab>', '<Plug>(cokeline-switch-next)', defaults },
-  { '<S-Tab>', '<Plug>(cokeline-switch-prev)', defaults },
+  { '<C-]>', plug 'cokeline-focus-next', defaults },
+  { '<C-[>', plug 'cokeline-focus-prev', defaults },
+  { '<Tab>', plug 'cokeline-switch-next', defaults },
+  { '<S-Tab>', plug 'cokeline-switch-prev', defaults },
 }
 for i = 1, 9 do
   nmap {
-    { ('<F%s>'):format(i), ('<Plug>(cokeline-focus-%s)'):format(i), defaults },
-    { ('<Leader>%s'):format(i), ('<Plug>(cokeline-switch-%s)'):format(i), defaults },
+    { ('<F%s>'):format(i), (plug 'cokeline-focus-%s)'):format(i), defaults },
+    { ('<Leader>%s'):format(i), (plug 'cokeline-switch-%s)'):format(i), defaults },
   }
 end
 
@@ -189,4 +191,3 @@ for i = 1, 9 do
   vmap { ('<F%s>'):format(i), ('<C-u>' .. cmd 'HSHighlight %s<CR>'):format(i), defaults }
 end
 vmap { 'dh', 'HSRmHighlight', defaults }
-cmap { '<C-b>', '<Left>', defaults }

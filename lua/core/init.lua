@@ -42,5 +42,6 @@ vim.g.loaded_netrwFileHandlers = 1
 local pack = require 'core.pack'
 pack.ensure_plugins()
 require 'core.options'
+require 'core.events'
 pack.load_compile()
 require 'keymap'

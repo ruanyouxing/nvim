@@ -68,6 +68,9 @@ function keymap.cmd(str)
   return '<cmd>' .. str .. '<CR>'
 end
 
+function keymap.plug(str)
+  return str:format('<Plug>(%s)',str)
+end
 -- visual
 function keymap.cu(str)
   return '<C-u><cmd>' .. str .. '<CR>'
