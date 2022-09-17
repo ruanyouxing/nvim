@@ -25,6 +25,7 @@ plugin {
   config = conf.lightbulb,
 }
 
+plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = statusline.setup }
 plugin {
   'kyazdani42/nvim-tree.lua',
@@ -32,12 +33,11 @@ plugin {
     require('nvim-tree').setup()
   end,
 }
-plugin { 'rose-pine/neovim', as = 'rose-pine', config = conf.rose_pine }
 plugin { 'folke/tokyonight.nvim', config = conf.tokyonight }
-plugin { 'xiyaowong/nvim-transparent', config = conf.transparent }
 plugin { 'folke/twilight.nvim', event = 'CursorMoved', config = conf.twilight }
 plugin {
   'lukas-reineke/virt-column.nvim',
+  event = 'UIEnter',
   config = function()
     require('virt-column').setup()
   end,

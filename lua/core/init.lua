@@ -45,3 +45,4 @@ require 'core.options'
 require 'core.events'
 pack.load_compile()
 require 'keymap'
+vim.cmd 'colorscheme tokyonight'

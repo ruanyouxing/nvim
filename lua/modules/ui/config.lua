@@ -44,7 +44,6 @@ function ui.alpha()
       .. version.minor
       .. '.'
       .. version.patch
-      .. ' \n\t\t\t kill me pls'
   end
 
   dashboard.section.footer.val = footer()
@@ -117,19 +116,18 @@ function ui.cokeline()
   local normal_fg = get_hex('Normal', 'fg')
   local normal_bg = get_hex('Normal', 'bg')
   local comment_fg = get_hex('Comment', 'fg')
-  local column_bg = get_hex('ColorColumn', 'bg')
   require('cokeline').setup {
     default_hl = {
       fg = function(buffer)
         return buffer.is_focused and normal_fg or comment_fg
       end,
-      bg = column_bg,
+      bg = get_hex('ColorColumn', 'bg'),
     },
     components = {
       {
         text = '',
-        bg = normal_bg,
-        fg = column_bg,
+        fg = get_hex('ColorColumn', 'bg'),
+        bg = get_hex('Normal', 'bg'),
       },
       {
         text = ' ',
@@ -218,8 +216,8 @@ function ui.cokeline()
       },
       {
         text = '',
-        fg = column_bg,
-        bg = normal_bg,
+        fg = get_hex('ColorColumn', 'bg'),
+        bg = get_hex('Normal', 'bg'),
       },
     },
     sidebar = {
@@ -403,15 +401,12 @@ function ui.notify()
   require 'notify' 'Welcome!'
 end
 
-function ui.rose_pine() end
-
 function ui.tokyonight()
   vim.g.tokyonight_style = 'night'
   vim.g.tokyonight_hide_inactive_statusline = 1
   vim.g.tokyonight_italic_funtions = 1
   vim.g.tokyonight_italic_variables = 1
   vim.g.tokyonight_sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' }
-  vim.cmd 'colorscheme tokyonight'
 end
 
 function ui.transparent()
@@ -502,5 +497,28 @@ function ui.wilder()
       },
     }
   )
+end
+function ui.specs()
+  require('specs').setup {
+    show_jumps = true,
+    min_jump = 10,
+    popup = {
+      delay_ms = 0,
+      inc_ms = 10,
+      blend = 10,
+      width = 10,
+      winhl = 'PMenu',
+      fader = require('specs').pulse_fader,
+      resizer = require('specs').slide_resizer,
+    },
+    ignore_filetypes = {},
+    ignore_buftypes = { nofile = true },
+  }
+  vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+    pattern = '*',
+    callback = function()
+      require('specs').show_specs()
+    end,
+  })
 end
 return ui

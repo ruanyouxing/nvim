@@ -69,7 +69,7 @@ function keymap.cmd(str)
 end
 
 function keymap.plug(str)
-  return str:format('<Plug>(%s)',str)
+  return string.format('<Plug>(%s)', str)
 end
 -- visual
 function keymap.cu(str)

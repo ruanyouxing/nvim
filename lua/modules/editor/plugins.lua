@@ -32,10 +32,8 @@ plugin {
     }
   end,
 }
-plugin { 'nvim-lua/plenary.nvim' }
 plugin { 'terrortylor/nvim-comment', config = conf.comment }
 plugin { 'kyazdani42/nvim-web-devicons' }
-plugin { 'edluffy/specs.nvim', config = conf.specs }
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', run = ':TSUpdate', config = conf.treesitter }
 plugin { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }

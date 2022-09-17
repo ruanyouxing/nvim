@@ -36,7 +36,9 @@ plugin {
   requires = {
     { 'sharkdp/fd' },
     { 'BurntSushi/ripgrep' },
-    { 'jvgrootveld/telescope-zoxide' },
+    { 'jvgrootveld/telescope-zoxide', opt = true },
+    { 'nvim-lua/popup.nvim', opt = true },
+    { 'nvim-lua/plenary.nvim', opt = true },
   },
   config = conf.telescope,
 }
@@ -71,4 +73,3 @@ plugin {
 plugin { 'mbbill/undotree', event = 'TextChanged' }
 plugin { 'dstein64/vim-startuptime' }
 plugin { 'Pocco81/HighStr.nvim', ft = { 'markdown', 'neorg' } }
-plugin { 'michaelb/sniprun', run = 'bash ./install.sh &' }

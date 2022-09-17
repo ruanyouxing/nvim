@@ -225,7 +225,6 @@ function tools.hydra()
     mode = { 'n', 'v', 'x', 'o' },
     body = '<Leader>h',
     heads = {
-      { 'r', cmd 'SnipRun' },
       { 'g', cmd 'DiffviewOpen' },
       { 'd', cmd 'lua require("keystack").push("debugging")' },
       { 's', cmd 'Gitsigns stage_buffer' },
@@ -298,6 +297,11 @@ function tools.stay_in_place()
 end
 
 function tools.telescope()
+  if not packer_plugins['plenary.nvim'].loaded then
+    vim.cmd [[packadd plenary.nvim]]
+    vim.cmd [[packadd popup.nvim]]
+    vim.cmd [[packadd telescope-zoxide]]
+  end
   local actions = require 'telescope.actions'
   require('telescope').load_extension 'zoxide'
   require('telescope').load_extension 'notify'
