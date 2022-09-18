@@ -1,14 +1,5 @@
 local tools = {}
 
-function tools.accelerated_jk()
-  local opts = { noremap = false, silent = true }
-  vim.keymap.set('n', 'j', '<Plug>(faster_move_j)', opts)
-  vim.keymap.set('n', 'k', '<Plug>(faster_move_k)', opts)
-  vim.keymap.set('n', 'j', '<Plug>(faster_move_gj)', opts)
-  vim.keymap.set('n', 'k', '<Plug>(faster_move_gk)', opts)
-  vim.keymap.set('v', 'j', '<Plug>(faster_vmove_j)', opts)
-  vim.keymap.set('v', 'k', '<Plug>(faster_vmove_k)', opts)
-end
 function tools.fm()
   require('fm-nvim').setup {
     -- (Vim) Command used to open files
@@ -81,6 +72,9 @@ function tools.highlight()
       color_9 = { '#7d5c34', 'smart' }, -- Fallow brown
     },
   }
+end
+function tools.hologram()
+  require('hologram').setup { auto_display = true }
 end
 function tools.mason()
   require('mason').setup {

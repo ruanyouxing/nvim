@@ -2,74 +2,15 @@ local keymap = require 'core.keymap'
 local nmap, imap, xmap, vmap = keymap.nmap, keymap.imap, keymap.xmap, keymap.vmap
 local silent, noremap = keymap.silent, keymap.noremap
 local opts = keymap.new_opts
-local cmd = keymap.cmd
+local cmd, cu = keymap.cmd, keymap.cu
 local plug = keymap.plug
-local buf = vim.lsp.buf
 vim.g.mapleader = ' '
 local defaults = opts(noremap, silent)
 
-_G.OnFocus = 0
-local function load_autocmds()
-  local autocmd = vim.api.nvim_create_autocmd
-  vim.api.nvim_create_augroup('galaxyline', { clear = true })
-  local options = {
-    pattern = '*',
-    group = 'galaxyline',
-    callback = function()
-      require('galaxyline').load_galaxyline()
-    end,
-  }
-  local events = {
-    'BufEnter',
-    'BufReadPost',
-    'BufWinEnter',
-    'BufWritePost',
-    'ColorScheme',
-    'FileChangedShellPost',
-    'FileType',
-    'TermOpen',
-    'VimResized',
-    'WinEnter',
-  }
-  autocmd(events, options)
-  autocmd({ 'WinLeave' }, {
-    pattern = '*',
-    group = 'galaxyline',
-    callback = function()
-      require('galaxyline').inactive_galaxyline()
-    end,
-  })
-end
-
--- leaderkey
 nmap { ' ', '', defaults }
 xmap { ' ', '', defaults }
-
 nmap {
   { 'Y', 'y$', defaults },
-  {
-    'K',
-    function()
-      local winid = require('ufo').peekFoldedLinesUnderCursor()
-      if not winid then
-        vim.lsp.buf.hover()
-      end
-    end,
-    defaults,
-  },
-  {
-    'zR',
-    function()
-      require('ufo').openAllFolds()
-    end,
-    defaults,
-  },
-  {
-    'zM',
-    function()
-      require('ufo').closeAllFolds()
-    end,
-  },
   { '<C-a>', 'ggVG', defaults },
   { '<C-h>', '<C-w>h', defaults },
   { '<C-l>', '<C-w>l', defaults },
@@ -132,62 +73,20 @@ nmap {
     end,
     defaults,
   },
-  {
-    '<F11>',
-    function()
-      if OnFocus == 0 then
-        OnFocus = 1
-        vim.api.nvim_del_augroup_by_name 'galaxyline'
-        vim.o.statusline = 0
-        vim.cmd [[TZAtaraxis]]
-      else
-        vim.cmd [[TZAtaraxis]]
-        require('galaxyline').load_galaxyline()
-        load_autocmds()
-        OnFocus = 0
-      end
-    end,
-    defaults,
-  },
-  {
-    '<leader>ca',
-    function()
-      buf.code_action()
-    end,
-    defaults,
-  },
-  {
-    '<C-i>',
-    function()
-      buf.references()
-    end,
-    defaults,
-  },
-  {
-    'R',
-    function()
-      buf.rename()
-    end,
-    defaults,
-  },
-  { '<C-]>', plug 'cokeline-focus-next', defaults },
-  { '<C-[>', plug 'cokeline-focus-prev', defaults },
-  { '<Tab>', plug 'cokeline-switch-next', defaults },
-  { '<S-Tab>', plug 'cokeline-switch-prev', defaults },
 }
-for i = 1, 9 do
-  nmap {
-    { ('<F%s>'):format(i), (plug 'cokeline-focus-%s)'):format(i), defaults },
-    { ('<Leader>%s'):format(i), (plug 'cokeline-switch-%s)'):format(i), defaults },
-  }
-end
-
+nmap {
+  { 'j', plug 'faster_move_j', opts(silent) },
+  { 'k', plug 'faster_move_k', opts(silent) },
+  { 'j', plug 'faster_move_gj', opts(silent) },
+  { 'k', plug 'faster_move_gk', opts(silent) },
+}
+vmap { { 'j', plug 'faster_vmove_j', defaults }, { 'k', plug 'faster_vmove_k', defaults } }
 imap {
   { '<C-c>', cmd 'PickColorInsert', defaults },
   { '<C-i>', cmd 'IconPickerInsert alt_font symbols nerd_font emoji', defaults },
 }
 
 for i = 1, 9 do
-  vmap { ('<F%s>'):format(i), ('<C-u>' .. cmd 'HSHighlight %s<CR>'):format(i), defaults }
+  vmap { ('<F%s>'):format(i), (cu(cmd 'HSHighlight %s<CR>'):format(i)), defaults }
 end
 vmap { 'dh', 'HSRmHighlight', defaults }

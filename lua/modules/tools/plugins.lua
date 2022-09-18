@@ -1,15 +1,15 @@
 local plugin = require('core.pack').register_plugin
 local conf = require 'modules.tools.config'
-plugin { 'PHSix/faster.nvim', event = 'VimEnter', config = conf.accelerated_jk }
+plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
 plugin {
   'lewis6991/impatient.nvim',
   config = function()
     require('impatient').enable_profile()
   end,
 }
-plugin { 'is0n/fm-nvim', config = conf.fm }
 plugin { 'anuvyklack/fold-preview.nvim', after = 'nvim-ufo', config = conf.fold_preview }
 plugin { 'lukas-reineke/headlines.nvim', ft = { 'markdown', 'org', 'norg' }, config = conf.headlines }
+plugin { 'is0n/fm-nvim', config = conf.fm }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
 plugin {
   'anuvyklack/hydra.nvim',
@@ -42,7 +42,7 @@ plugin {
   },
   config = conf.telescope,
 }
-plugin { 'edluffy/hologram.nvim' }
+plugin { 'edluffy/hologram.nvim', config = conf.hologram, ft = 'markdown' }
 plugin {
   'ziontee113/icon-picker.nvim',
   event = 'InsertEnter',

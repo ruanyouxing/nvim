@@ -44,5 +44,9 @@ pack.ensure_plugins()
 require 'core.options'
 require 'core.events'
 pack.load_compile()
-require 'keymap'
+local config_path = vim.fn.stdpath 'config'
+local tmp = vim.split(vim.fn.globpath(config_path, 'lua/keymap/*.lua'), '\n')
+for _, f in ipairs(tmp) do
+  require(f:sub(#config_path + 6, -5))
+end
 vim.cmd 'colorscheme tokyonight'
