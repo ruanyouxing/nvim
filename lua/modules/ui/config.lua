@@ -114,7 +114,6 @@ function ui.cokeline()
   local is_picking_focus = mappings.is_picking_focus
   local is_picking_close = mappings.is_picking_close
   local normal_fg = get_hex('Normal', 'fg')
-  local normal_bg = get_hex('Normal', 'bg')
   local comment_fg = get_hex('Comment', 'fg')
   require('cokeline').setup {
     default_hl = {

@@ -1,6 +1,5 @@
 local plugin = require('core.pack').register_plugin
 local conf = require 'modules.ui.config'
-local statusline = require 'modules.ui.galaxyline'
 plugin { 'goolord/alpha-nvim', config = conf.alpha }
 plugin { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = conf.blankline }
 plugin {
@@ -26,7 +25,7 @@ plugin {
 }
 
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
-plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = statusline.setup }
+plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
 plugin {
   'kyazdani42/nvim-tree.lua',
   config = function()

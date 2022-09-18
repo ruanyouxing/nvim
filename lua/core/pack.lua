@@ -15,18 +15,9 @@ Packer.__index = Packer
 function Packer:load_plugins()
   self.repos = {}
 
-  local get_plugins_list = function()
-    local list = {}
-    local tmp = vim.split(fn.globpath(modules_dir, '*/plugins.lua'), '\n')
-    for _, f in ipairs(tmp) do
-      list[#list + 1] = string.match(f, 'lua/(.+).lua$')
-    end
-    return list
-  end
-
-  local plugins_file = get_plugins_list()
-  for _, m in ipairs(plugins_file) do
-    require(m)
+  local tmp = vim.split(fn.globpath(modules_dir, '*/plugins.lua'), '\n')
+  for _, f in ipairs(tmp) do
+    require(string.match(f, 'lua/(.+).lua$'))
   end
 end
 
