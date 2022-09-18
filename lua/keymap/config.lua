@@ -6,7 +6,6 @@ local cmd, cu = keymap.cmd, keymap.cu
 local plug = keymap.plug
 vim.g.mapleader = ' '
 local defaults = opts(noremap, silent)
-
 nmap { ' ', '', defaults }
 xmap { ' ', '', defaults }
 nmap {
