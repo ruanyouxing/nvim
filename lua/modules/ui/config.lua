@@ -123,11 +123,11 @@ function ui.cokeline()
       bg = get_hex('ColorColumn', 'bg'),
     },
     components = {
-      {
-        text = '',
-        fg = get_hex('ColorColumn', 'bg'),
-        bg = get_hex('Normal', 'bg'),
-      },
+      -- {
+      --   text = '',
+      --   fg = get_hex('ColorColumn', 'bg'),
+      --   bg = get_hex('Normal', 'bg'),
+      -- },
       {
         text = ' ',
       },
@@ -213,11 +213,11 @@ function ui.cokeline()
           return buffer.is_focused and green or nil
         end,
       },
-      {
-        text = '',
-        fg = get_hex('ColorColumn', 'bg'),
-        bg = get_hex('Normal', 'bg'),
-      },
+      -- {
+      --   text = '',
+      --   fg = get_hex('ColorColumn', 'bg'),
+      --   bg = get_hex('Normal', 'bg'),
+      -- },
     },
     sidebar = {
       filetype = 'NvimTree',
@@ -520,4 +520,5 @@ function ui.specs()
     end,
   })
 end
+
 return ui

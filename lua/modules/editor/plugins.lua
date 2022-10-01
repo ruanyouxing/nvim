@@ -44,3 +44,4 @@ plugin { 'andymass/vim-matchup', after = 'nvim-treesitter' }
 plugin { 'romgrk/nvim-treesitter-context', after = 'nvim-treesitter', config = conf.ts_context }
 plugin { 'simrat39/symbols-outline.nvim', after = 'nvim-lspconfig', config = conf.symbols_outline }
 plugin { 'abecodes/tabout.nvim', after = 'nvim-cmp', config = conf.tabout }
+plugin { 'elkowar/yuck.vim', ft = 'yuck' }

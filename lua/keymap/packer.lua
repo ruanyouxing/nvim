@@ -6,7 +6,14 @@ local cmd = key.cmd
 local defaults = opts(noremap, silent)
 nmap {
   { '<Leader>pu', cmd 'PackerUpdate', defaults },
-  { '<Leader>ps', cmd 'PackerSync', defaults },
+  {
+    '<Leader>ps',
+    function()
+      vim.cmd 'PackerSync'
+      vim.cmd 'UpdateRemotePlugins'
+    end,
+    defaults,
+  },
   { '<Leader>pi', cmd 'PackerInstall', defaults },
   { '<Leader>pc', cmd 'PackerCompile', defaults },
 }

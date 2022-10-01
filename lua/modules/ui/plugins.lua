@@ -23,7 +23,6 @@ plugin {
   after = 'nvim-lspconfig',
   config = conf.lightbulb,
 }
-
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
 plugin {
