@@ -14,7 +14,7 @@ plugin {
   after = 'nvim-treesitter',
   config = conf.fold,
 }
-plugin { 'j-hui/fidget.nvim', after = 'nvim-lsp-installer', config = conf.fidget }
+plugin { 'j-hui/fidget.nvim', after = 'lazy-lsp.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin {
@@ -25,6 +25,7 @@ plugin {
 }
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
+plugin {'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes}
 plugin {
   'kyazdani42/nvim-tree.lua',
   config = function()

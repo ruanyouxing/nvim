@@ -497,6 +497,21 @@ function ui.wilder()
     }
   )
 end
+function ui.modes()
+  require('modes').setup({
+	colors = {
+		copy = "#f5c359",
+		delete = "#c75c6a",
+		insert = "#78ccc5",
+		visual = "#9745be",
+	},
+	line_opacity = 0.15,
+	set_cursor = true,
+	set_cursorline = true,
+	set_number = true,
+	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
+})
+end
 function ui.specs()
   require('specs').setup {
     show_jumps = true,
