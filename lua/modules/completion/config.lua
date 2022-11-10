@@ -201,17 +201,9 @@ function completion.lsp_installer()
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities.offsetEncoding = 'utf-8'
-  capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
-  local lsp_installer = require 'nvim-lsp-installer'
-  lsp_installer.settings {
-    ui = {
-      icons = {
-        server_installed = '✓',
-        server_pending = '➜',
-        server_uninstalled = '✗',
-      },
-    },
-  }
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  require('mason').setup()
+  local lsp_installer = require 'mason-lspconfig'
   local servers = {
     'bashls',
     'clangd',
@@ -223,20 +215,18 @@ function completion.lsp_installer()
     'sumneko_lua',
     'tsserver',
   }
+lsp_installer.setup(
+{
+  ensure_isntalled = servers,
+  automatic_installation = true,
+}
+)
 
-  for _, name in pairs(servers) do
-    local server_is_found, server = lsp_installer.get_server(name)
-    if server_is_found and not server:is_installed() then
-      print('Installing ' .. name)
-      server:install()
-    end
-  end
+for _,name in ipairs(servers) do
 
-  lsp_installer.on_server_ready(function(server)
-    local opts = {}
-
-    if server.name == 'sumneko_lua' then
-      opts.settings = {
+    if name == 'sumneko_lua' then
+      require'lspconfig'[name].setup({
+      settings = {
         Lua = {
           diagnostics = { globals = { 'vim', 'packer_plugins' } },
           workspace = {
@@ -249,11 +239,12 @@ function completion.lsp_installer()
           },
           telemetry = { enable = false },
         },
-      }
+      }})
     end
-    opts.capabilities = capabilities
-    opts.flags = { debounce_text_changes = 500 }
-    opts.on_attach = function(client, bufnr)
+    require'lspconfig'[name].setup({
+    capabilities = capabilities,
+    flags = { debounce_text_changes = 500 },
+    on_attach = function(client, bufnr)
       require('nvim-navic').attach(client, bufnr)
       require('lsp_signature').on_attach(signature_config, bufnr)
       if client.supports_method 'textDocument/formatting' then
@@ -267,8 +258,8 @@ function completion.lsp_installer()
         })
       end
     end
-    server:setup(opts)
-  end)
+  })
+end 
 end
 
 function completion.lsputils()

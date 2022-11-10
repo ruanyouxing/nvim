@@ -14,7 +14,7 @@ plugin {
   after = 'nvim-treesitter',
   config = conf.fold,
 }
-plugin { 'j-hui/fidget.nvim', after = 'nvim-lsp-installer', config = conf.fidget }
+plugin { 'j-hui/fidget.nvim', after = 'mason-lspconfig.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin {
