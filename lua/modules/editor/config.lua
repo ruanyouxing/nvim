@@ -326,5 +326,4 @@ function editor.tabout()
     exclude = {},
   }
 end
-
 return editor

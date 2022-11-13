@@ -9,6 +9,7 @@ plugin {
     { 'kdheepak/cmp-latex-symbols', after = 'nvim-cmp', opt = true },
     { 'ray-x/cmp-treesitter', after = 'nvim-cmp', opt = true },
     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
+    {'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true},
     { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp', opt = true },
     { 'hrsh7th/cmp-emoji', after = 'nvim-cmp', opt = true },
     { 'hrsh7th/cmp-nvim-lsp', event = 'BufRead', opt = true },

@@ -42,7 +42,6 @@ plugin {
   },
   config = conf.telescope,
 }
-plugin { 'edluffy/hologram.nvim', config = conf.hologram, ft = 'markdown' }
 plugin {
   'ziontee113/icon-picker.nvim',
   event = 'InsertEnter',

@@ -34,12 +34,13 @@ function completion.cmp()
   end
 
   local has_words_before = function()
-    local line, col = unpack(vim.api.nvim_win_get_cursor(0))
+    local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
     return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
   end
 
   local sources = {
     { name = 'nvim_lsp' },
+    { name = 'calc'},
     { name = 'latex_symbols' },
     { name = 'treesitter' },
     { name = 'luasnip' },
@@ -212,54 +213,50 @@ function completion.lsp_installer()
     'pyright',
     'jdtls',
     'jsonls',
-    'sumneko_lua',
     'tsserver',
   }
-lsp_installer.setup(
-{
-  ensure_isntalled = servers,
-  automatic_installation = true,
-}
-)
 
-for _,name in ipairs(servers) do
+  lsp_installer.setup {
+    ensure_isntalled = { servers, 'sumneko_lua' },
+    automatic_installation = true,
+  }
 
-    if name == 'sumneko_lua' then
-      require'lspconfig'[name].setup({
-      settings = {
-        Lua = {
-          diagnostics = { globals = { 'vim', 'packer_plugins' } },
-          workspace = {
-            library = {
-              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-              [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-            },
-            maxPreload = 100000,
-            preloadFileSize = 10000,
+  require('lspconfig').sumneko_lua.setup {
+    settings = {
+      Lua = {
+        diagnostics = { globals = { 'vim', 'packer_plugins' } },
+        workspace = {
+          library = {
+            [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+            [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
           },
-          telemetry = { enable = false },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
         },
-      }})
-    end
-    require'lspconfig'[name].setup({
-    capabilities = capabilities,
-    flags = { debounce_text_changes = 500 },
-    on_attach = function(client, bufnr)
-      require('nvim-navic').attach(client, bufnr)
-      require('lsp_signature').on_attach(signature_config, bufnr)
-      if client.supports_method 'textDocument/formatting' then
-        vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-        vim.api.nvim_create_autocmd('BufWritePre', {
-          group = augroup,
-          buffer = bufnr,
-          callback = function()
-            lsp_formatting(bufnr)
-          end,
-        })
-      end
-    end
-  })
-end 
+        telemetry = { enable = false },
+      },
+    },
+  }
+  for _, name in ipairs(servers) do
+    require('lspconfig')[name].setup {
+      capabilities = capabilities,
+      flags = { debounce_text_changes = 500 },
+      on_attach = function(client, bufnr)
+        require('nvim-navic').attach(client, bufnr)
+        require('lsp_signature').on_attach(signature_config, bufnr)
+        if client.supports_method 'textDocument/formatting' then
+          vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+          vim.api.nvim_create_autocmd('BufWritePre', {
+            group = augroup,
+            buffer = bufnr,
+            callback = function()
+              lsp_formatting(bufnr)
+            end,
+          })
+        end
+      end,
+    }
+  end
 end
 
 function completion.lsputils()

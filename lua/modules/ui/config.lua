@@ -314,6 +314,12 @@ function ui.lightbulb()
   }
 end
 
+function ui.minimap()
+  require('codewindow').setup{
+    auto_enable = true,
+    exclude_filetypes = {'NvimTree', 'UndoTree','alpha'}
+  }
+end
 function ui.navic()
   require('nvim-navic').setup {
     icons = {

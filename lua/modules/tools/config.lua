@@ -73,21 +73,6 @@ function tools.highlight()
     },
   }
 end
-function tools.hologram()
-  require('hologram').setup { auto_display = true }
-end
-function tools.mason()
-  require('mason').setup {
-    ui = {
-      border = 'none',
-      icons = {
-        package_installed = '✓',
-        package_pending = '➜',
-        package_uninstalled = '✗',
-      },
-    },
-  }
-end
 
 function tools.mason_tools()
   require('mason-tool-installer').setup {
@@ -196,7 +181,7 @@ function tools.hydra()
 
   _/_: Search in files  _p_: Pick buffer
 
-  _r_: Run code         _c_: Close buffer
+  _c_: Close buffer
 
   _g_: Open diffs       _d_: Debugging mode
 

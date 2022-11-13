@@ -1,6 +1,7 @@
 local plugin = require('core.pack').register_plugin
 local conf = require 'modules.ui.config'
 plugin { 'goolord/alpha-nvim', config = conf.alpha }
+plugin {'gorbit99/codewindow.nvim',config = conf.minimap, event = 'BufRead'}
 plugin { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = conf.blankline }
 plugin {
   'noib3/nvim-cokeline',
@@ -23,6 +24,9 @@ plugin {
   after = 'nvim-lspconfig',
   config = conf.lightbulb,
 }
+plugin {'folke/noice.nvim', requires = {"MunifTanjim/nui.nvim", module = 'nui'}, config = function ()
+  require('noice').setup({cmdline = {view = 'cmdline'}})
+end}
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
 plugin {'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes}
