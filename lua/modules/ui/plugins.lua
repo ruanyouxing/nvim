@@ -25,7 +25,10 @@ plugin {
   config = conf.lightbulb,
 }
 plugin {'folke/noice.nvim', requires = {"MunifTanjim/nui.nvim", module = 'nui'}, config = function ()
-  require('noice').setup({cmdline = {view = 'cmdline'}})
+  require('noice').setup({
+    cmdline = {view = 'cmdline'},
+    lsp = { signature = {enabled = false}}
+  })
 end}
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
