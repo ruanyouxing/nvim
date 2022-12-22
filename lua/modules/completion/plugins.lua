@@ -9,7 +9,7 @@ plugin {
     { 'kdheepak/cmp-latex-symbols', after = 'nvim-cmp', opt = true },
     { 'ray-x/cmp-treesitter', after = 'nvim-cmp', opt = true },
     { 'hrsh7th/cmp-buffer', after = 'nvim-cmp', opt = true },
-    {'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true},
+    { 'hrsh7th/cmp-calc', after = 'nvim-cmp', opt = true },
     { 'saadparwaiz1/cmp_luasnip', after = 'nvim-cmp', opt = true },
     { 'hrsh7th/cmp-emoji', after = 'nvim-cmp', opt = true },
     { 'hrsh7th/cmp-nvim-lsp', event = 'BufRead', opt = true },
@@ -24,6 +24,7 @@ plugin {
 plugin { 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.snippets }
 plugin { 'rafamadriz/friendly-snippets', after = 'nvim-cmp' }
 plugin { 'neovim/nvim-lspconfig', after = 'cmp-nvim-lsp' }
+plugin { 'p00f/clangd_extensions.nvim', after = 'nvim-lspconfig' }
 plugin { 'jose-elias-alvarez/null-ls.nvim', after = 'nvim-lspconfig', config = null_ls.setup }
 plugin { 'ray-x/lsp_signature.nvim', after = 'nvim-lspconfig' }
 plugin { 'williamboman/mason-lspconfig.nvim', after = 'nvim-lspconfig', config = conf.lsp_installer }

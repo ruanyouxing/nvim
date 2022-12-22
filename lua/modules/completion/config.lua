@@ -40,7 +40,8 @@ function completion.cmp()
 
   local sources = {
     { name = 'nvim_lsp' },
-    { name = 'calc'},
+
+    { name = 'calc' },
     { name = 'latex_symbols' },
     { name = 'treesitter' },
     { name = 'luasnip' },
@@ -106,7 +107,6 @@ function completion.cmp()
         return vim_item
       end,
     },
-    -- You can set mappings if you want
     mapping = {
       ['<CR>'] = mapping.confirm { select = true },
       ['<C-p>'] = mapping.select_prev_item(),
@@ -201,13 +201,11 @@ function completion.lsp_installer()
   completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
-  capabilities.offsetEncoding = 'utf-8'
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   require('mason').setup()
   local lsp_installer = require 'mason-lspconfig'
   local servers = {
     'bashls',
-    'clangd',
     'cssls',
     'html',
     'pyright',
@@ -217,10 +215,91 @@ function completion.lsp_installer()
   }
 
   lsp_installer.setup {
-    ensure_isntalled = { servers, 'sumneko_lua' },
+    ensure_isntalled = { servers, 'sumneko_lua', 'clangd' },
     automatic_installation = true,
   }
+  local on_attach = function(client, bufnr)
+    require('nvim-navic').attach(client, bufnr)
+    require('lsp_signature').on_attach(signature_config, bufnr)
+    if client.supports_method 'textDocument/formatting' then
+      vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
+      vim.api.nvim_create_autocmd('BufWritePre', {
+        group = augroup,
+        buffer = bufnr,
+        callback = function()
+          lsp_formatting(bufnr)
+        end,
+      })
+    end
+  end
+  local clangd_defaults = require 'lspconfig.server_configurations.clangd'
+  local clangd_configs = vim.tbl_deep_extend('force', clangd_defaults['default_config'], {
+    -- on_attach = on_attach_16,
+    -- on_attach = on_attach,
+    cmd = {
+      'clangd',
+      '--offset-encoding=utf-16',
+      '-j=4',
+      '--background-index',
+      '--clang-tidy',
+      '--fallback-style=llvm',
+      '--all-scopes-completion',
+      '--completion-style=detailed',
+      '--header-insertion=iwyu',
+      '--header-insertion-decorators',
+      '--pch-storage=memory',
+    },
+  })
 
+  local clangd = require 'clangd_extensions'
+  clangd.setup {
+    server = clangd_configs,
+    extensions = {
+      autoSetHints = true,
+      hover_with_actions = true,
+      inlay_hints = {
+        only_current_line = false,
+        only_current_line_autocmd = 'CursorHold',
+        show_parameter_hints = true,
+        parameter_hints_prefix = '<- ',
+        other_hints_prefix = '=> ',
+        max_len_align = false,
+        max_len_align_padding = 1,
+        right_align = false,
+        right_align_padding = 7,
+        highlight = 'Comment',
+        priority = 100,
+      },
+      ast = {
+        role_icons = {
+          type = '',
+          declaration = '',
+          expression = '',
+          specifier = '',
+          statement = '',
+          ['template argument'] = '',
+        },
+        {
+          Compound = '',
+          Recovery = '',
+          TranslationUnit = '',
+          PackExpansion = '',
+          TemplateTypeParm = '',
+          TemplateTemplateParm = '',
+          TemplateParamObject = '',
+        },
+        highlights = {
+          detail = 'Comment',
+        },
+        memory_usage = {
+          border = 'rounded',
+        },
+        symbol_info = {
+          border = 'rounded',
+        },
+      },
+    },
+  }
   require('lspconfig').sumneko_lua.setup {
     settings = {
       Lua = {
@@ -240,21 +319,8 @@ function completion.lsp_installer()
   for _, name in ipairs(servers) do
     require('lspconfig')[name].setup {
       capabilities = capabilities,
+      on_attach = on_attach,
       flags = { debounce_text_changes = 500 },
-      on_attach = function(client, bufnr)
-        require('nvim-navic').attach(client, bufnr)
-        require('lsp_signature').on_attach(signature_config, bufnr)
-        if client.supports_method 'textDocument/formatting' then
-          vim.api.nvim_clear_autocmds { group = augroup, buffer = bufnr }
-          vim.api.nvim_create_autocmd('BufWritePre', {
-            group = augroup,
-            buffer = bufnr,
-            callback = function()
-              lsp_formatting(bufnr)
-            end,
-          })
-        end
-      end,
     }
   end
 end

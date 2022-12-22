@@ -21,10 +21,15 @@ function format.setup()
     },
   }
   null_ls.setup {
-    on_init = function(new_client, _)
-      new_client.offset_encoding = 'utf-8'
-    end,
     sources = sources,
+    on_attach = function(client, bufnr)
+      vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+        buffer = bufnr,
+        callback = function()
+          vim.lsp.buf.format()
+        end,
+      })
+    end,
   }
 end
 
