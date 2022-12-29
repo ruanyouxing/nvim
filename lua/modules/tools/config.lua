@@ -40,6 +40,7 @@ function tools.fm()
     broot_conf = vim.fn.stdpath 'data' .. '/site/pack/packer/start/fm-nvim/assets/broot_conf.hjson',
   }
 end
+
 function tools.fold_preview()
   require('fold-preview').setup {
     border = 'rounded',
@@ -52,6 +53,7 @@ function tools.fold_preview()
     end,
   })
 end
+
 function tools.highlight()
   local high_str = require 'high-str'
 
@@ -89,9 +91,6 @@ function tools.mason_tools()
     run_on_start = true,
     start_delay = 3000, -- 3 second delay
   }
-end
-function tools.headlines()
-  require('headlines').setup {}
 end
 
 function tools.keystack()

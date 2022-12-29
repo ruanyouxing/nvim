@@ -8,7 +8,6 @@ plugin {
   end,
 }
 plugin { 'anuvyklack/fold-preview.nvim', after = 'nvim-ufo', config = conf.fold_preview }
-plugin { 'lukas-reineke/headlines.nvim', ft = { 'markdown', 'org', 'norg' }, config = conf.headlines }
 plugin { 'is0n/fm-nvim', config = conf.fm }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
 plugin {
@@ -61,14 +60,5 @@ plugin {
 plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm }
 plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode }
 
-plugin {
-  'iamcco/markdown-preview.nvim',
-  run = 'cd app && yarn install',
-  setup = function()
-    vim.g.mkdp_filetypes = { 'markdown' }
-  end,
-  ft = { 'markdown' },
-}
 plugin { 'mbbill/undotree', event = 'TextChanged' }
 plugin { 'dstein64/vim-startuptime' }
-plugin { 'Pocco81/HighStr.nvim', ft = { 'markdown', 'neorg' } }

@@ -102,6 +102,10 @@ function ui.blankline()
   vim.api.nvim_create_autocmd({ 'CursorMoved' }, { pattern = '*', command = 'IndentBlanklineRefresh' })
 end
 
+function ui.catppuccin()
+  vim.cmd 'colorscheme catppuccin'
+end
+
 function ui.cokeline()
   local get_hex = require('cokeline.utils').get_hex
   local mappings = require 'cokeline/mappings'
@@ -239,9 +243,11 @@ function ui.cursorline()
     cursorword = { enable = true, min_length = 3, hl = { underline = true } },
   }
 end
+
 function ui.dap()
   require('dapui').setup()
 end
+
 function ui.fidget()
   require('fidget').setup()
 end
@@ -315,11 +321,12 @@ function ui.lightbulb()
 end
 
 function ui.minimap()
-  require('codewindow').setup{
+  require('codewindow').setup {
     auto_enable = true,
-    exclude_filetypes = {'NvimTree', 'UndoTree','alpha'}
+    exclude_filetypes = { 'NvimTree', 'UndoTree', 'alpha' },
   }
 end
+
 function ui.navic()
   require('nvim-navic').setup {
     icons = {
@@ -503,21 +510,23 @@ function ui.wilder()
     }
   )
 end
+
 function ui.modes()
-  require('modes').setup({
-	colors = {
-		copy = "#f5c359",
-		delete = "#c75c6a",
-		insert = "#78ccc5",
-		visual = "#9745be",
-	},
-	line_opacity = 0.15,
-	set_cursor = true,
-	set_cursorline = true,
-	set_number = true,
-	ignore_filetypes = { 'NvimTree', 'TelescopePrompt' }
-})
+  require('modes').setup {
+    colors = {
+      copy = '#f5c359',
+      delete = '#c75c6a',
+      insert = '#78ccc5',
+      visual = '#9745be',
+    },
+    line_opacity = 0.15,
+    set_cursor = true,
+    set_cursorline = true,
+    set_number = true,
+    ignore_filetypes = { 'NvimTree', 'TelescopePrompt' },
+  }
 end
+
 function ui.specs()
   require('specs').setup {
     show_jumps = true,
