@@ -43,5 +43,5 @@ plugin { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' }
 plugin { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
 plugin { 'andymass/vim-matchup', after = 'nvim-treesitter' }
 plugin { 'romgrk/nvim-treesitter-context', after = 'nvim-treesitter', config = conf.ts_context }
-plugin { 'simrat39/symbols-outline.nvim', after = 'nvim-lspconfig', config = conf.symbols_outline }
+-- plugin { 'Jxstxs/conceal.nvim', after = 'nvim-treesitter', config = conf.conceal }
 plugin { 'abecodes/tabout.nvim', after = 'nvim-cmp', config = conf.tabout }

@@ -1,6 +1,11 @@
 local plugin = require('core.pack').register_plugin
 local conf = require 'modules.ui.config'
-plugin { 'goolord/alpha-nvim', config = conf.alpha }
+plugin {
+  'glepnir/dashboard-nvim',
+  config = function()
+    require 'modules.ui.dashboard'
+  end,
+}
 plugin { 'catppuccin/nvim', as = 'catppuccin', config = conf.catppuccin }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
 plugin { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = conf.blankline }

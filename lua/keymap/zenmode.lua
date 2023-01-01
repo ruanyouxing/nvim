@@ -41,6 +41,7 @@ vim.keymap.set('n', '<F11>', function()
     vim.cmd [[TZAtaraxis]]
     require('galaxyline').load_galaxyline()
     load_autocmds()
+    require('codewindow').open_minimap()
     OnFocus = 0
   end
 end, { noremap = true, silent = true })

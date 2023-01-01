@@ -1,54 +1,5 @@
 local ui = {}
-function ui.alpha()
-  local alpha = require 'alpha'
-  local dashboard = require 'alpha.themes.dashboard'
-  dashboard.section.header.val = {
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣤⣤⣤⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⠟⠉⠉⠉⠉⠉⠉⠉⠙⠻⢶⣄⠀⠀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣾⡏⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠙⣷⡀⠀⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣸⡟⠀⣠⣶⠛⠛⠛⠛⠛⠛⠳⣦⡀⠀⠘⣿⡄⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⢠⣿⠁⠀⢹⣿⣦⣀⣀⣀⣀⣀⣠⣼⡇⠀⠀⠸⣷⠀⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⠀⠀⣼⡏⠀⠀⠀⠉⠛⠿⠿⠿⠿⠛⠋⠁⠀⠀⠀⠀⣿⡄ ]],
-    [[⠀⠀      ⢠⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢻⡇⠀]],
-    [[      ⠀⠀⣸⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢸⡇⠀]],
-    [[⠀⠀⠀⠀⠀⠀⠀⣿⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⣿⠀]],
-    [[⠀⠀⠀⠀⠀⠀⢰⣿⠀⠀⠀⠀⣠⡶⠶⠿⠿⠿⠿⢷⣦⠀⠀⠀⠀⠀⠀⠀⣿⠀]],
-    [[⠀    ⠀⣸⡇⠀⠀⠀⠀⣿⡀⠀⠀⠀⠀⠀⠀⣿⡇⠀⠀⠀⠀⠀⠀⣿⠀]],
-    [[⣠⡿⠛⠛⠛⠛⠻⠀⠀⠀⠀⠀⢸⣇⠀⠀⠀⠀⠀⠀⣿⠇⠀⠀⠀⠀⠀⠀⣿⠀]],
-    [[ ⣇⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⣼⡟⠀⠀⢀⣤⣤⣴⣿⠀⠀⠀⠀⠀⠀⠀⣿⠀]],
-    [[  ⢷⣶⣦⣤⣤⣤⣴⣶⣾⠿⠛⠁⢀⣶⡟⠉⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡟⠀]],
-    [[          ⠀⠀⠀⠀⠈⣿⣆⡀⠀⠀⠀⠀⠀⠀⢀⣠⣴⡾⠃⠀]],
-    [[          ⠀⠀⠀⠀⠀⠈⠛⠻⢿⣿⣾⣿⡿⠿⠟⠋⠁⠀⠀⠀]],
-    [[                              ]],
-  }
-
-  dashboard.section.buttons.val = {
-    dashboard.button('t', ' > Terminal', ':ToggleTerm<CR>'),
-    dashboard.button('f', '  > Find file', ':Telescope find_files<CR>'),
-    dashboard.button('r', '  > Recent', ':Telescope oldfiles<CR>'),
-    dashboard.button('q', '  > Quit', ':qa<CR>'),
-  }
-
-  local function footer()
-    local plugins = #vim.tbl_keys(packer_plugins)
-    local datetime = os.date ' %d-%m-%Y   %H:%M:%S'
-    local version = vim.version()
-    return '  '
-      .. plugins
-      .. ' plugins  '
-      .. datetime
-      .. '   '
-      .. '   v'
-      .. version.major
-      .. '.'
-      .. version.minor
-      .. '.'
-      .. version.patch
-  end
-
-  dashboard.section.footer.val = footer()
-  alpha.setup(dashboard.opts)
-end
+function ui.dashboard() end
 
 function ui.blankline()
   vim.opt.termguicolors = true
@@ -58,7 +9,6 @@ function ui.blankline()
     show_first_indent_level = true,
     filetype_exclude = {
       'startify',
-      'alpha',
       'log',
       'fugitive',
       'gitcommit',
@@ -323,7 +273,7 @@ end
 function ui.minimap()
   require('codewindow').setup {
     auto_enable = true,
-    exclude_filetypes = { 'NvimTree', 'UndoTree', 'alpha' },
+    exclude_filetypes = { 'NvimTree', 'UndoTree' },
   }
 end
 
@@ -523,7 +473,7 @@ function ui.modes()
     set_cursor = true,
     set_cursorline = true,
     set_number = true,
-    ignore_filetypes = { 'NvimTree', 'TelescopePrompt' },
+    ignore_filetypes = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
   }
 end
 
