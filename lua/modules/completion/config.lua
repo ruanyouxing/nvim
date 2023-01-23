@@ -1,5 +1,4 @@
 local completion = {}
-
 function completion.autopairs()
   require('nvim-autopairs').setup {
     check_ts = true,
@@ -139,37 +138,6 @@ function completion.cmp()
     sources = sources,
   }
 end
-
-local signature_config = {
-  bind = true,
-  debug = false,
-  log_path = vim.fn.stdpath 'cache' .. '/lsp_signature.log',
-  verbose = false,
-  use_lspsaga = false,
-  floating_window = true,
-  floating_window_above_cur_line = true,
-  fix_pos = false,
-  hint_enable = true,
-  hing_prefix = '🐼',
-  hint_scheme = 'String',
-  hi_parameter = 'LspSignatureActiveParameter',
-  max_height = 12,
-  max_width = 120,
-  transparency = nil,
-  doc_lines = 10,
-  shadow_guibg = 'Black',
-  timer_interval = '200',
-  always_trigger = false,
-  auto_close_after = nil,
-  extra_trigger_chars = {},
-  zindex = 200,
-  padding = ' ',
-  shadow_blend = 36,
-  toggle_key = nil,
-  hander_opts = {
-    border = 'rounded',
-  },
-}
 function completion.lsp_installer()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local completionItem = capabilities.textDocument.completion.completionItem
@@ -206,7 +174,6 @@ function completion.lsp_installer()
   }
   local on_attach = function(client, bufnr)
     require('nvim-navic').attach(client, bufnr)
-    require('lsp_signature').on_attach(signature_config, bufnr)
   end
   local clangd_defaults = require 'lspconfig.server_configurations.clangd'
   local clangd_configs = vim.tbl_deep_extend('force', clangd_defaults['default_config'], {

@@ -7,7 +7,7 @@ plugin {
     require('impatient').enable_profile()
   end,
 }
-plugin { 'anuvyklack/fold-preview.nvim', lazy = true, config = conf.fold_preview }
+plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
 plugin { 'is0n/fm-nvim', config = conf.fm }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
 plugin {

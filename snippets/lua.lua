@@ -1,5 +1,4 @@
 return {
-  -- e.g. local bar = require("foo.bar")
   s(
     'require',
     fmt([[local {} = require("{}")]], {

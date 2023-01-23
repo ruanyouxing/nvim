@@ -37,12 +37,12 @@ plugin {
 plugin { 'terrortylor/nvim-comment', config = conf.comment }
 plugin { 'kyazdani42/nvim-web-devicons' }
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
-plugin { 'nvim-treesitter/nvim-treesitter-refactor', lazy = true }
-plugin { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true }
-plugin { 'nvim-treesitter/nvim-treesitter-textobjects', lazy = true }
-plugin { 'windwp/nvim-ts-autotag', lazy = true }
-plugin { 'p00f/nvim-ts-rainbow', lazy = true }
-plugin { 'andymass/vim-matchup', lazy = true }
-plugin { 'romgrk/nvim-treesitter-context', lazy = true, config = conf.ts_context }
+plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
+plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
+plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
+plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
+plugin { 'p00f/nvim-ts-rainbow', event = 'BufRead' }
+plugin { 'andymass/vim-matchup', event = 'BufRead' }
+plugin { 'romgrk/nvim-treesitter-context', event = 'BufRead', config = conf.ts_context }
 -- plugin { 'Jxstxs/conceal.nvim',lazy = true, config = conf.conceal }
 plugin { 'abecodes/tabout.nvim', event = 'InsertEnter', config = conf.tabout }

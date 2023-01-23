@@ -20,6 +20,7 @@ plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
   config = conf.fold,
+  event = 'UIEnter'
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }
