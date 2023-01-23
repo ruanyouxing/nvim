@@ -22,15 +22,18 @@ function format.setup()
   }
   null_ls.setup {
     sources = sources,
-    on_attach = function(client, bufnr)
-      vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-        buffer = bufnr,
-        callback = function()
-          vim.lsp.buf.format()
-        end,
-      })
-    end,
+    --     on_attach = function(_, bufnr)
+    --       vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
+    --         buffer = bufnr,
+    --         callback = function()
+    --           vim.lsp.buf.format()
+    --         end,
+    --       })
+    --     end,
   }
+  vim.api.nvim_create_user_command('Format', function()
+    vim.lsp.buf.format()
+  end, {})
 end
 
 return format

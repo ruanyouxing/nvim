@@ -32,6 +32,12 @@ nmap {
   },
   { '<C-y>', cmd 'redo', defaults },
   { '<C-z>', cmd 'u', defaults },
+  {
+    '<leader>f',
+    function()
+      vim.lsp.buf.format()
+    end,
+  },
   { '<leader>t', cmd 'ToggleTerm', defaults },
   { '<leader>z', cmd 'Telescope zoxide list', defaults },
   {
