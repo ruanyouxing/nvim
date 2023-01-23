@@ -1,4 +1,5 @@
-local plugin = require('core.pack').register_plugin
+---@diagnostic disable: unused-local
+local plugin = require('core.pack').package
 local conf = require 'modules.editor.config'
 local function is_gitrepo()
   local is_repo = vim.fn.system 'git rev-parse --is-inside-work-tree'
@@ -35,13 +36,13 @@ plugin {
 }
 plugin { 'terrortylor/nvim-comment', config = conf.comment }
 plugin { 'kyazdani42/nvim-web-devicons' }
-plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', run = ':TSUpdate', config = conf.treesitter }
-plugin { 'nvim-treesitter/nvim-treesitter-refactor', after = 'nvim-treesitter' }
-plugin { 'JoosepAlviste/nvim-ts-context-commentstring', after = 'nvim-treesitter' }
-plugin { 'nvim-treesitter/nvim-treesitter-textobjects', after = 'nvim-treesitter' }
-plugin { 'windwp/nvim-ts-autotag', after = 'nvim-treesitter' }
-plugin { 'p00f/nvim-ts-rainbow', after = 'nvim-treesitter' }
-plugin { 'andymass/vim-matchup', after = 'nvim-treesitter' }
-plugin { 'romgrk/nvim-treesitter-context', after = 'nvim-treesitter', config = conf.ts_context }
--- plugin { 'Jxstxs/conceal.nvim', after = 'nvim-treesitter', config = conf.conceal }
-plugin { 'abecodes/tabout.nvim', after = 'nvim-cmp', config = conf.tabout }
+plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
+plugin { 'nvim-treesitter/nvim-treesitter-refactor', lazy = true }
+plugin { 'JoosepAlviste/nvim-ts-context-commentstring', lazy = true }
+plugin { 'nvim-treesitter/nvim-treesitter-textobjects', lazy = true }
+plugin { 'windwp/nvim-ts-autotag', lazy = true }
+plugin { 'p00f/nvim-ts-rainbow', lazy = true }
+plugin { 'andymass/vim-matchup', lazy = true }
+plugin { 'romgrk/nvim-treesitter-context', lazy = true, config = conf.ts_context }
+-- plugin { 'Jxstxs/conceal.nvim',lazy = true, config = conf.conceal }
+plugin { 'abecodes/tabout.nvim', event = 'InsertEnter', config = conf.tabout }

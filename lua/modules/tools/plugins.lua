@@ -1,4 +1,4 @@
-local plugin = require('core.pack').register_plugin
+local plugin = require('core.pack').package
 local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
 plugin {
@@ -7,23 +7,22 @@ plugin {
     require('impatient').enable_profile()
   end,
 }
-plugin { 'anuvyklack/fold-preview.nvim', after = 'nvim-ufo', config = conf.fold_preview }
+plugin { 'anuvyklack/fold-preview.nvim', lazy = true, config = conf.fold_preview }
 plugin { 'is0n/fm-nvim', config = conf.fm }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
 plugin {
   'anuvyklack/hydra.nvim',
-  opt = true,
+  lazy = true,
   event = 'BufRead',
-  requires = 'anuvyklack/keymap-layer.nvim',
+  dependencies = 'anuvyklack/keymap-layer.nvim',
   config = conf.hydra,
 }
 plugin {
   'williamboman/mason.nvim',
-  requires = {
+  dependencies = {
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
       config = conf.mason_tools,
-      after = 'mason.nvim',
     },
   },
   event = 'BufRead',
@@ -32,26 +31,26 @@ plugin {
 plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
 plugin {
   'nvim-telescope/telescope.nvim',
-  requires = {
-    { 'sharkdp/fd' },
-    { 'BurntSushi/ripgrep' },
-    { 'jvgrootveld/telescope-zoxide', opt = true },
-    { 'nvim-lua/popup.nvim', opt = true },
-    { 'nvim-lua/plenary.nvim', opt = true },
+  dependencies = {
+    { 'sharkdp/fd', lazy = true },
+    { 'BurntSushi/ripgrep',lazy = true },
+    { 'jvgrootveld/telescope-zoxide', lazy = true },
+    { 'nvim-lua/popup.nvim', lazy = true },
+    { 'nvim-lua/plenary.nvim', lazy = true },
   },
   config = conf.telescope,
 }
 plugin {
   'ziontee113/icon-picker.nvim',
   event = 'InsertEnter',
-  requires = 'stevearc/dressing.nvim',
+  dependencies = 'stevearc/dressing.nvim',
   config = function()
     require 'icon-picker'
   end,
 }
 plugin {
   'ziontee113/color-picker.nvim',
-  opt = true,
+  lazy = true,
   event = 'InsertEnter',
   config = function()
     require 'color-picker'

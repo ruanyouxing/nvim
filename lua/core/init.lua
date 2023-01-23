@@ -8,8 +8,6 @@ local createdir = function()
     cache_dir .. 'tags',
     cache_dir .. 'undo',
   }
-  -- There only check once that If cache_dir exists
-  -- Then I don't want to check subs dir exists
   if vim.fn.isdirectory(cache_dir) == 0 then
     os.execute('mkdir -p ' .. cache_dir)
     for _, v in pairs(data_dir) do
@@ -39,11 +37,9 @@ vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
 vim.g.loaded_netrwSettings = 1
 vim.g.loaded_netrwFileHandlers = 1
-local pack = require 'core.pack'
-pack.ensure_plugins()
 require 'core.options'
 require 'core.events'
-pack.load_compile()
+require('core.pack'):boot_strap()
 local config_path = vim.fn.stdpath 'config'
 local tmp = vim.split(vim.fn.globpath(config_path, 'lua/keymap/*.lua'), '\n')
 for _, f in ipairs(tmp) do

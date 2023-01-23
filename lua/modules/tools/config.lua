@@ -275,11 +275,6 @@ function tools.stay_in_place()
 end
 
 function tools.telescope()
-  if not packer_plugins['plenary.nvim'].loaded then
-    vim.cmd [[packadd plenary.nvim]]
-    vim.cmd [[packadd popup.nvim]]
-    vim.cmd [[packadd telescope-zoxide]]
-  end
   local actions = require 'telescope.actions'
   require('telescope').load_extension 'zoxide'
   require('telescope').load_extension 'notify'
@@ -296,7 +291,6 @@ function tools.telescope()
 end
 
 function tools.toggleterm()
-  vim.cmd [[packadd toggleterm.nvim]]
   require('toggleterm').setup {
     size = 7,
     border = 'curved',

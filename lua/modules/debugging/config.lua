@@ -1,5 +1,4 @@
 local debugging = {}
-
 function debugging.dap()
   local dap = require 'dap'
 

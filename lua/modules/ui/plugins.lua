@@ -1,4 +1,5 @@
-local plugin = require('core.pack').register_plugin
+---@diagnostic disable: different-requires
+local plugin = require('core.pack').package
 local conf = require 'modules.ui.config'
 plugin {
   'glepnir/dashboard-nvim',
@@ -6,9 +7,9 @@ plugin {
     require 'modules.ui.dashboard'
   end,
 }
-plugin { 'catppuccin/nvim', as = 'catppuccin', config = conf.catppuccin }
+plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin, lazy = true }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
-plugin { 'lukas-reineke/indent-blankline.nvim', after = 'nvim-treesitter', config = conf.blankline }
+plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline,event = 'UIEnter' }
 plugin {
   'noib3/nvim-cokeline',
   event = 'UIEnter',
@@ -17,22 +18,20 @@ plugin {
 plugin { 'yamatsum/nvim-cursorline', config = conf.cursorline }
 plugin {
   'kevinhwang91/nvim-ufo',
-  requires = 'kevinhwang91/promise-async',
-  after = 'nvim-treesitter',
+  dependencies = 'kevinhwang91/promise-async',
   config = conf.fold,
 }
-plugin { 'j-hui/fidget.nvim', after = 'mason-lspconfig.nvim', config = conf.fidget }
+plugin { 'j-hui/fidget.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin {
   'kosayoda/nvim-lightbulb',
-  requires = 'antoinemadec/FixCursorHold.nvim',
-  after = 'nvim-lspconfig',
+  dependencies = 'antoinemadec/FixCursorHold.nvim',
   config = conf.lightbulb,
 }
 plugin {
   'folke/noice.nvim',
-  requires = { 'MunifTanjim/nui.nvim', module = 'nui' },
+  dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
   config = function()
     require('noice').setup {
       cmdline = { view = 'cmdline' },
@@ -61,8 +60,8 @@ plugin {
 plugin {
   'gelguy/wilder.nvim',
   event = { 'CmdwinEnter', 'CmdlineEnter' },
-  requires = {
-    { 'roxma/nvim-yarp', run = ':UpdateRemotePlugins' },
+  dependencies = {
+    { 'roxma/nvim-yarp', build = ':UpdateRemotePlugins' },
     'roxma/vim-hug-neovim-rpc',
     'romgrk/fzy-lua-native',
   },

@@ -1,11 +1,11 @@
-local plugin = require('core.pack').register_plugin
+local plugin = require('core.pack').package
 local conf = require 'modules.lang.config'
 plugin { 'LnL7/vim-nix', ft = 'nix' }
 plugin { 'lukas-reineke/headlines.nvim', ft = { 'markdown', 'org', 'norg' }, config = conf.headlines }
 plugin {
   'iamcco/markdown-preview.nvim',
-  run = 'cd app && yarn install',
-  setup = function()
+  build = 'cd app && yarn install',
+  init = function()
     vim.g.mkdp_filetypes = { 'markdown' }
   end,
   ft = { 'markdown' },

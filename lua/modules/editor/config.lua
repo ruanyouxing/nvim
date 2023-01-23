@@ -28,7 +28,6 @@ function editor.autosession()
 end
 
 function editor.better_escape()
-  vim.cmd [[packadd better-escape.nvim]]
   require('better_escape').setup {
     mapping = { 'jk', 'jj' },
     timeout = 100,
@@ -230,7 +229,6 @@ function editor.treesitter()
 end
 
 function editor.ts_context()
-  vim.cmd [[packadd nvim-treesitter-context]]
   require('treesitter-context').setup {
     enable = true,
     throttle = true,
