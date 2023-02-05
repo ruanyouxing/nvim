@@ -1,4 +1,4 @@
-local dashboard = require 'dashboard'
+local db = require 'dashboard'
 --Read lines from json file
 local lockfile = table.concat({ vim.fn.stdpath 'data', 'lazy-lock.json' }, '/')
 local function file_exists(file)
@@ -25,7 +25,7 @@ for _ in pairs(lines_from(lockfile)) do
   lines = lines + 1
 end
 local version = vim.version()
-dashboard.custom_header = {
+db.custom_header = {
   '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
@@ -43,7 +43,21 @@ dashboard.custom_header = {
   '⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⠗⠂⠄⠀⣴⡟⠀⠀⡃⠀⠉⠉⠟⡿⣿⣿⣿⣿',
   '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠾⠛⠂⢹⠀⠀⠀⢡⠀⠀⠀⠀⠀⠙⠛⠿⢿',
 }
-dashboard.custom_footer = {
+ db.custom_center = {
+      {icon = '  ',
+      desc = 'Recently latest session                  ',
+      shortcut = 'SPC s l',
+      action ='SessionLoad'},
+      {icon = '  ',
+      desc = 'Find  File                              ',
+      action = 'Telescope find_files find_command=rg,--hidden,--files',
+      shortcut = 'SPC f f'},
+      {icon = '  ',
+      desc = 'Find  word                              ',
+      action = 'Telescope live_grep',
+      shortcut = 'SPC f w'},
+    }
+db.custom_footer = {
   'Today is' .. os.date ' %d-%m-%Y 📆',
   tostring(lines - 2) .. ' plugins installed',
   'Version: ' .. version.major .. '.' .. version.minor .. '.' .. version.patch,

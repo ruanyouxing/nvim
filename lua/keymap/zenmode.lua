@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 _G.OnFocus = 0
 local function load_autocmds()
   local autocmd = vim.api.nvim_create_autocmd

@@ -287,6 +287,11 @@ function tools.telescope()
         ['q'] = actions.close,
       },
     },
+    pickers = {
+      find_files = {
+        hidden = true
+      }
+    }
   }
 end
 

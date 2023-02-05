@@ -2,6 +2,15 @@
 local plugin = require('core.pack').package
 local conf = require 'modules.ui.config'
 plugin {
+  'Shatur/neovim-ayu',
+  config = function()
+    require('ayu').setup {
+      mirage = true,
+    }
+    vim.cmd('colorscheme ayu-mirage')
+  end,
+}
+plugin {
   'glepnir/dashboard-nvim',
   config = function()
     require 'modules.ui.dashboard'
@@ -9,7 +18,7 @@ plugin {
 }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin, lazy = true }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
-plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline,event = 'UIEnter' }
+plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline, event = 'UIEnter' }
 plugin {
   'noib3/nvim-cokeline',
   event = 'UIEnter',
@@ -20,7 +29,7 @@ plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
   config = conf.fold,
-  event = 'UIEnter'
+  event = 'UIEnter',
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }

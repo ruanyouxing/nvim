@@ -45,4 +45,3 @@ local tmp = vim.split(vim.fn.globpath(config_path, 'lua/keymap/*.lua'), '\n')
 for _, f in ipairs(tmp) do
   require(f:sub(#config_path + 6, -5))
 end
-vim.cmd 'colorscheme tokyonight'

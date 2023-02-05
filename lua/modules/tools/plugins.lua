@@ -1,12 +1,6 @@
 local plugin = require('core.pack').package
 local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
-plugin {
-  'lewis6991/impatient.nvim',
-  config = function()
-    require('impatient').enable_profile()
-  end,
-}
 plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
 plugin { 'is0n/fm-nvim', config = conf.fm }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }

@@ -1,3 +1,4 @@
+---@diagnostic disable: different-requires
 local ui = {}
 function ui.dashboard() end
 
@@ -8,20 +9,16 @@ function ui.blankline()
     char = '│',
     show_first_indent_level = true,
     filetype_exclude = {
-      'startify',
       'log',
       'fugitive',
       'gitcommit',
-      'packer',
       'vimwiki',
       'markdown',
-      'json',
       'txt',
       'vista',
       'help',
       'todoist',
       'NvimTree',
-      'peekaboo',
       'git',
       'TelescopePrompt',
       'undotree',
@@ -126,22 +123,22 @@ function ui.cokeline()
         end,
         style = function(buffer)
           return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
-            or buffer.is_modified and 'italic,bold'
-            or buffer.is_focused and 'bold'
-            or buffer.diagnostics.errors ~= 0 and 'underline'
-            or nil
+              or buffer.is_modified and 'italic,bold'
+              or buffer.is_focused and 'bold'
+              or buffer.diagnostics.errors ~= 0 and 'underline'
+              or nil
         end,
       },
       {
         text = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and ' ' .. buffer.diagnostics.errors .. ' ')
-            or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings .. ' ')
-            or ''
+              or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings .. ' ')
+              or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and errors_fg)
-            or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-            or nil
+              or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+              or nil
         end,
       },
       {
@@ -272,7 +269,11 @@ end
 function ui.minimap()
   require('codewindow').setup {
     auto_enable = true,
-    exclude_filetypes = { 'NvimTree', 'UndoTree' },
+    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard' },
+    use_lsp = true,
+    use_treesitter = true,
+    use_git = true,
+    show_cursor = true,
   }
 end
 
@@ -394,7 +395,6 @@ function ui.twilight()
     },
     exclude = {},
   }
-  vim.cmd [[TwilightEnable]]
 end
 
 function ui.wilder()
