@@ -163,7 +163,6 @@ function completion.lsp_installer()
     'cssls',
     'html',
     'pyright',
-    'jdtls',
     'jsonls',
     'tsserver',
   }
