@@ -12,5 +12,5 @@ plugin {
 }
 plugin { 'Pocco81/HighStr.nvim', ft = { 'markdown', 'neorg' } }
 plugin { 'elkowar/yuck.vim', ft = 'yuck' }
-plugin { 'nathom/filetype.nvim', config = conf.filetypes }
+plugin { 'nathom/filetype.nvim', config = conf.filetypes, event = {'BufRead','BufNewFile'} }
 return plugin
