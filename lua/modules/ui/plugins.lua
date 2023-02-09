@@ -10,6 +10,7 @@ plugin {
     vim.cmd('colorscheme ayu-mirage')
   end,
 }
+plugin {'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'SmiteshP/nvim-navic'}
 plugin {
   'glepnir/dashboard-nvim',
   config = function()
@@ -76,4 +77,9 @@ plugin {
     'romgrk/fzy-lua-native',
   },
   config = conf.wilder,
+}
+plugin {
+  'fgheng/winbar.nvim',
+  config = conf.winbar,
+  event = 'UIEnter'
 }

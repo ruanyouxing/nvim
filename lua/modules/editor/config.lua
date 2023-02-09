@@ -149,7 +149,6 @@ function editor.treesitter()
       'css',
     },
     sync_install = true,
-
     highlight = {
       enable = true,
     },

@@ -39,7 +39,14 @@ nmap {
     end,
   },
   { '<leader>t', cmd 'ToggleTerm', defaults },
-  { '<leader>z', cmd 'Telescope zoxide list', defaults },
+  {
+    '<leader>z',
+    function()
+      vim.cmd 'Telescope zoxide list'
+      vim.cmd 'NvimTreeRefresh'
+    end,
+    defaults,
+  },
   {
     'lg',
     function()

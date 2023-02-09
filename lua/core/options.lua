@@ -68,19 +68,3 @@ vim.g.syntax_on = true
 vim.g.smartindent = true
 vim.g.loaded_matchit = 1
 vim.g.matchup_surround_enabled = 1
-if vim.loop.os_uname().sysname == 'Darwin' then
-  vim.g.clipboard = {
-    name = 'macOS-clipboard',
-    copy = {
-      ['+'] = 'pbcopy',
-      ['*'] = 'pbcopy',
-    },
-    paste = {
-      ['+'] = 'pbpaste',
-      ['*'] = 'pbpaste',
-    },
-    cache_enabled = 0,
-  }
-  vim.g.python_host_prog = '/usr/bin/python'
-  vim.g.python3_host_prog = '/usr/local/bin/python3'
-end
