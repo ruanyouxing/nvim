@@ -5,10 +5,10 @@ function opts:new(instance)
   instance = instance
     or {
       options = {
-        silent = false,
+        silent = true,
         nowait = false,
         expr = false,
-        noremap = false,
+        noremap = true,
       },
     }
   setmetatable(instance, self)

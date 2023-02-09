@@ -1,6 +1,5 @@
 local keymap = require 'core.keymap'
 local nmap = keymap.nmap
-local defaults = keymap.new_opts(keymap.noremap, keymap.silent)
 nmap {
   {
     'K',
@@ -10,14 +9,12 @@ nmap {
         vim.lsp.buf.hover()
       end
     end,
-    defaults,
   },
   {
     'zR',
     function()
       require('ufo').openAllFolds()
     end,
-    defaults,
   },
   {
     'zM',
