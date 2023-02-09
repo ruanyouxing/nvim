@@ -500,5 +500,11 @@ function ui.specs()
   })
 end
 
+function ui.winbar()
+  require('barbecue').setup {
+    create_autocmd = true,
+    show_modified = true
+  }
+end
 
 return ui

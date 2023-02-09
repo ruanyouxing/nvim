@@ -33,7 +33,7 @@ plugin {
   event = 'UIEnter',
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget }
-plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic }
+plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin {
   'kosayoda/nvim-lightbulb',

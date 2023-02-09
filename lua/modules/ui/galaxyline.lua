@@ -2,7 +2,6 @@ local config = {}
 
 function config.setup()
   vim.opt.laststatus = 3
-  local navic = require 'nvim-navic'
   local hydra = require 'hydra.statusline'
   local gl = require 'galaxyline'
   local colors = {
@@ -96,19 +95,6 @@ function config.setup()
       end,
       icon = ' ',
       highlight = { colors.red, colors.bg, 'bold' },
-      separator = ' ',
-      separator_highlight = { 'NONE', colors.bg },
-    },
-  }
-  gls.left[5] = {
-    nvimNavic = {
-      provider = function()
-        return navic.get_location()
-      end,
-      condition = function()
-        return navic.is_available()
-      end,
-      highlight = { colors.blue, colors.bg, 'italic' },
       separator = ' ',
       separator_highlight = { 'NONE', colors.bg },
     },
