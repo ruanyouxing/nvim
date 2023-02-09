@@ -24,14 +24,4 @@ plugin {
 
 plugin { 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.snippets }
 plugin { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
-plugin { 'neovim/nvim-lspconfig'}
-plugin { 'p00f/clangd_extensions.nvim', lazy = true }
 plugin { 'jose-elias-alvarez/null-ls.nvim', config = null_ls.setup }
-plugin { 'williamboman/mason-lspconfig.nvim',event = 'BufRead', config = conf.lsp_installer }
-plugin {
-  'RishabhRD/nvim-lsputils',
-  dependencies = { 'RishabhRD/popfix', lazy = true },
-  config = conf.lsputils,
-  event = 'BufRead'
-}
-plugin { 'folke/trouble.nvim', lazy = true }
