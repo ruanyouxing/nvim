@@ -5,6 +5,12 @@ function ui.dashboard() end
 function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
+  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { fg = '#E06C75', nocombine = true })
+  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent2', { fg = '#E5C07B', nocombine = true })
+  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent3', { fg = '#98C379', nocombine = true })
+  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent4', { fg = '#56B6C2', nocombine = true })
+  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent5', { fg = '#61AFEF', nocombine = true })
+  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent6', { fg = '#C678DD', nocombine = true })
   require('indent_blankline').setup {
     char = '│',
     show_first_indent_level = true,
@@ -45,6 +51,15 @@ function ui.blankline()
       'import',
     },
     space_char_blankline = ' ',
+    char_highlight_list = {
+      'IndentBlanklineIndent1',
+      'IndentBlanklineIndent2',
+      'IndentBlanklineIndent3',
+      'IndentBlanklineIndent4',
+      'IndentBlanklineIndent5',
+      'IndentBlanklineIndent6',
+    },
+    show_current_context_start = true,
   }
   vim.api.nvim_create_autocmd({ 'CursorMoved' }, { pattern = '*', command = 'IndentBlanklineRefresh' })
 end
@@ -501,9 +516,28 @@ function ui.specs()
 end
 
 function ui.winbar()
+  vim.opt.updatetime = 200
+
   require('barbecue').setup {
-    create_autocmd = true,
-    show_modified = true
+    create_autocmd = false, -- prevent barbecue from updating itself automatically
+  }
+
+  vim.api.nvim_create_autocmd({
+    'BufWinEnter',
+    'CursorHold',
+    'InsertLeave',
+    'BufWritePost',
+    'TextChanged',
+    'TextChangedI',
+  }, {
+    group = vim.api.nvim_create_augroup('barbecue.updater', {}),
+    callback = function()
+      require('barbecue.ui').update()
+    end,
+  })
+  require('barbecue').setup {
+    show_modified = true,
+    create_autocmd = false,
   }
 end
 
