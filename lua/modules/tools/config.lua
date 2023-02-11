@@ -145,9 +145,6 @@ function tools.keystack()
           ['D'] = function()
             require('dap').clear_breakpoints()
           end,
-          ['<Del>'] = function()
-            require('dap').clear_breakpoints()
-          end,
           ['e'] = function()
             require('dapui').eval()
           end,
