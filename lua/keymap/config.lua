@@ -20,8 +20,18 @@ nmap {
   { '<C-s>', cmd 'SymbolsOutline' },
   { '<leader>p', cmd 'Lazy sync' },
   { '<C-q>', cmd 'q!' },
-  { '<C-S-p>', cmd 'Telescope' },
-  { '<C-t>', cmd 'Telescope find_files' },
+  {
+    '<C-S-p>',
+    function()
+      require('telescope.command').load_command()
+    end,
+  },
+  {
+    '<C-t>',
+    function()
+      require('telescope.builtin').find_files()
+    end,
+  },
   {
     '<C-w>',
     function()
@@ -40,7 +50,7 @@ nmap {
   {
     '<leader>z',
     function()
-      vim.cmd 'Telescope zoxide list'
+      require('telescope').extensions.zoxide.list {}
       vim.cmd 'NvimTreeRefresh'
     end,
   },
@@ -60,7 +70,7 @@ nmap {
     end,
   },
   {
-    '<F9>',
+    '<leader><leader>',
     function()
       if vim.o.conceallevel > 0 then
         vim.o.conceallevel = 0

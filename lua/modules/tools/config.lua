@@ -286,9 +286,9 @@ function tools.telescope()
     },
     pickers = {
       find_files = {
-        hidden = true
-      }
-    }
+        hidden = true,
+      },
+    },
   }
 end
 

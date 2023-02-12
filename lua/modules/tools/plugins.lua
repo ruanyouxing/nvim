@@ -2,7 +2,7 @@ local plugin = require('core.pack').package
 local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
 plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
-plugin { 'is0n/fm-nvim', config = conf.fm }
+plugin { 'is0n/fm-nvim', config = conf.fm, lazy = true }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
 plugin {
   'anuvyklack/hydra.nvim',
@@ -27,12 +27,13 @@ plugin {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'sharkdp/fd', lazy = true },
-    { 'BurntSushi/ripgrep',lazy = true },
+    { 'BurntSushi/ripgrep', lazy = true },
     { 'jvgrootveld/telescope-zoxide', lazy = true },
     { 'nvim-lua/popup.nvim', lazy = true },
     { 'nvim-lua/plenary.nvim', lazy = true },
   },
   config = conf.telescope,
+  lazy = true,
 }
 plugin {
   'ziontee113/icon-picker.nvim',
@@ -54,4 +55,5 @@ plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm }
 plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode }
 
 plugin { 'mbbill/undotree', event = 'TextChanged' }
+
 plugin { 'dstein64/vim-startuptime' }
