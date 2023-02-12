@@ -1,7 +1,7 @@
 ---@diagnostic disable: unused-local
 local plugin = require('core.pack').package
 local conf = require 'modules.editor.config'
-local function is_gitrepo()
+local is_gitrepo = function()
   local is_repo = vim.fn.system 'git rev-parse --is-inside-work-tree'
   if vim.v.shell_error == 0 then
     return true
@@ -22,8 +22,8 @@ plugin {
     require('colorizer').setup {}
   end,
 }
-plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo }
-plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo }
+plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, event = 'BufRead' }
+plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }
 plugin {
   'phaazon/hop.nvim',
   branch = 'v2',
@@ -44,5 +44,4 @@ plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
 plugin { 'p00f/nvim-ts-rainbow', event = 'BufRead' }
 plugin { 'andymass/vim-matchup', event = 'BufRead' }
 plugin { 'romgrk/nvim-treesitter-context', event = 'BufRead', config = conf.ts_context }
--- plugin { 'Jxstxs/conceal.nvim',lazy = true, config = conf.conceal }
 plugin { 'abecodes/tabout.nvim', event = 'InsertEnter', config = conf.tabout }

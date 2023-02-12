@@ -4,7 +4,7 @@ local ui = require 'modules.ui.config'
 
 plugin {
   'mfussenegger/nvim-dap',
-  event = 'BufRead',
+  lazy = true,
   config = conf.dap,
   dependencies = {
     'rcarriga/nvim-dap-ui',

@@ -70,7 +70,7 @@ plugin {
 }
 plugin {
   'gelguy/wilder.nvim',
-  event = { 'CmdwinEnter', 'CmdlineEnter' },
+  event = { 'CmdlineEnter' },
   dependencies = {
     { 'roxma/nvim-yarp', build = ':UpdateRemotePlugins' },
     'roxma/vim-hug-neovim-rpc',
