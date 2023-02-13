@@ -54,7 +54,6 @@ function lsp.lsp_installer()
       '--pch-storage=memory',
     },
   })
-
   local clangd = require 'clangd_extensions'
   clangd.setup {
     server = clangd_configs,
