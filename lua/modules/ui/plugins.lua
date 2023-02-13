@@ -30,7 +30,7 @@ plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
   config = conf.fold,
-  event = 'UIEnter',
+  lazy = true
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
@@ -58,6 +58,7 @@ plugin {
   config = function()
     require('nvim-tree').setup()
   end,
+  cmd = 'NvimTreeToggle'
 }
 plugin { 'folke/tokyonight.nvim', config = conf.tokyonight }
 plugin { 'folke/twilight.nvim', event = 'CursorMoved', config = conf.twilight }

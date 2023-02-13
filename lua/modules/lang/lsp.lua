@@ -30,7 +30,7 @@ function lsp.lsp_installer()
   }
 
   lsp_installer.setup {
-    ensure_isntalled = { servers, 'sumneko_lua', 'clangd' },
+    ensure_isntalled = { servers, 'lua_ls', 'clangd' },
     automatic_installation = true,
   }
   local on_attach = function(client, bufnr)
@@ -104,7 +104,7 @@ function lsp.lsp_installer()
       },
     },
   }
-  require('lspconfig').sumneko_lua.setup {
+  require('lspconfig').lua_ls.setup {
     settings = {
       Lua = {
         diagnostics = { globals = { 'vim', 'packer_plugins' } },

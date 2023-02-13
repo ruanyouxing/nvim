@@ -22,7 +22,7 @@ plugin {
     require('colorizer').setup {}
   end,
 }
-plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, event = 'BufRead' }
+plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, cmd = 'DiffviewOpen' }
 plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }
 plugin {
   'phaazon/hop.nvim',

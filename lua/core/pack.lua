@@ -41,6 +41,18 @@ function pack:boot_strap()
   local lazy = require 'lazy'
   local opts = {
     lockfile = self.helper.path_join(self.data_path, 'lazy-lock.json'),
+    version = '*',
+    ui = {
+      border = 'rounded',
+    },
+    checker = {
+      enabled = true
+    },
+    performance = {
+      cache = {
+        disable_events = {}
+      }
+    }
   }
   self:load_modules_packages()
   lazy.setup(self.repos, opts)

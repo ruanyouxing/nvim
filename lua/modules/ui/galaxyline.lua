@@ -77,11 +77,11 @@ function config.setup()
       provider = 'GetLspClient',
       condition = function()
         local tbl = {
-          ['alpha'] = true,
+          ['dashboard'] = true,
           ['help'] = true,
           ['NvimTree'] = true,
           ['Outline'] = true,
-          ['packer'] = true,
+          ['lazy'] = true,
           ['TelescopePrompt'] = true,
           ['Trouble'] = true,
           ['undotree'] = true,
@@ -95,9 +95,16 @@ function config.setup()
       end,
       icon = ' ',
       highlight = { colors.red, colors.bg, 'bold' },
-      separator = ' ',
+      separator = '  ',
       separator_highlight = { 'NONE', colors.bg },
     },
+  }
+  gls.left[5] = {
+    LazyUpdates = {
+      provider = require('lazy.status').updates,
+      condition = require('lazy.status').has_updates,
+      highlight = {"#ff9e64",colors.bg}
+    }
   }
   gls.mid[1] = {
     Hydra = {

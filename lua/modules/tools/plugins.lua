@@ -2,7 +2,7 @@ local plugin = require('core.pack').package
 local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
 plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
-plugin { 'is0n/fm-nvim', config = conf.fm, lazy = true }
+plugin { 'is0n/fm-nvim', config = conf.fm, cmd = 'Ranger' }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
 plugin {
   'anuvyklack/hydra.nvim',
@@ -16,6 +16,7 @@ plugin {
   dependencies = {
     {
       'WhoIsSethDaniel/mason-tool-installer.nvim',
+      cmd = 'Mason',
       config = conf.mason_tools,
     },
   },
@@ -42,6 +43,7 @@ plugin {
   config = function()
     require 'icon-picker'
   end,
+  cmd = 'IconPickerInsert'
 }
 plugin {
   'ziontee113/color-picker.nvim',
@@ -50,9 +52,10 @@ plugin {
   config = function()
     require 'color-picker'
   end,
+  cmd = 'PickColorInsert'
 }
-plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm }
-plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode }
+plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm, cmd = 'ToggleTerm' }
+plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode, cmd = 'TZAtaraxis' }
 
 plugin { 'mbbill/undotree', event = 'TextChanged' }
 
