@@ -8,18 +8,23 @@ vim.g.mapleader = ' '
 nmap { ' ', '' }
 xmap { ' ', '' }
 nmap {
-  { 'Y', 'y$' },
+  { 'Y',     'y$' },
   { '<C-a>', 'ggVG' },
   { '<C-h>', '<C-w>h' },
   { '<C-l>', '<C-w>l' },
   { '<C-j>', '<C-w>j' },
   { '<C-k>', '<C-w>k' },
-  { 'T', cmd 'TroubleToggle' },
-  { 'U', cmd 'UndotreeShow' },
-  { '<C-n>', cmd 'NvimTreeToggle' },
-  { '<C-s>', cmd 'SymbolsOutline' },
+  {
+    'T',
+    function()
+      require('trouble').toggle()
+    end,
+  },
+  { 'U',         cmd 'UndotreeShow' },
+  { '<C-n>',     cmd 'NvimTreeToggle' },
+  { '<C-s>',     cmd 'SymbolsOutline' },
   { '<leader>p', cmd 'Lazy sync' },
-  { '<C-q>', cmd 'q!' },
+  { '<C-q>',     cmd 'q!' },
   {
     '<C-S-p>',
     function()
@@ -51,7 +56,38 @@ nmap {
     '<leader>z',
     function()
       require('telescope').extensions.zoxide.list {}
-      vim.cmd 'NvimTreeRefresh'
+    end,
+  },
+  {
+    '<leader>cp',
+    function()
+      local Terminal = require('toggleterm.terminal').Terminal
+      local terminalOpts = {
+        cmd = nil,
+        close_on_exit = false,
+        dir = vim.fn.getcwd(),
+        hidden = true,
+        direction = 'float',
+      }
+      if vim.bo.filetype == 'cpp' then
+        local outputFileName = nil
+        vim.ui.input({ prompt = 'File name: ' }, function(input)
+          outputFileName = input
+        end)
+        terminalOpts['cmd'] = 'g++ '
+            .. vim.fn.expand '%:p'
+            .. ' -o '
+            .. outputFileName
+            .. ' && '
+            .. './'
+            .. outputFileName
+        local compile = Terminal:new(terminalOpts)
+        compile:toggle()
+      elseif vim.bo.filetype == 'python' then
+        terminalOpts['cmd'] = 'python ' .. vim.fn.expand '%:p'
+        local compile = Terminal:new(terminalOpts)
+        compile:toggle()
+      end
     end,
   },
   {
@@ -91,8 +127,8 @@ nmap {
   },
 }
 nmap {
-  { 'j', plug 'faster_move_j', opts(silent) },
-  { 'k', plug 'faster_move_k', opts(silent) },
+  { 'j', plug 'faster_move_j',  opts(silent) },
+  { 'k', plug 'faster_move_k',  opts(silent) },
   { 'j', plug 'faster_move_gj', opts(silent) },
   { 'k', plug 'faster_move_gk', opts(silent) },
 }

@@ -27,42 +27,42 @@ function config.setup()
       highlight = { colors.bg, 'NONE' },
     },
   }
+  -- gls.left[2] = {
+  --   ViMode = {
+  --     provider = function()
+  --       local mode_color = {
+  --         n = colors.green,
+  --         i = colors.yellow,
+  --         v = '#a020f0',
+  --         V = '#a020f0',
+  --         [''] = '#a020f0',
+  --         c = colors.red,
+  --         R = colors.red,
+  --         Rv = colors.red,
+  --         t = colors.blue,
+  --         ['!'] = colors.blue,
+  --       }
+  --       local alias = {
+  --         n = 'Norm',
+  --         i = 'Ins',
+  --         v = 'Visl',
+  --         V = 'VLine',
+  --         [''] = 'VBlck',
+  --         c = 'Cmd',
+  --         R = 'Rplc',
+  --         Rv = 'Rplv',
+  --         t = ' Term',
+  --         ['!'] = ' Shell',
+  --       }
+  --       vim.cmd('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
+  --       return alias[vim.fn.mode()]
+  --     end,
+  --     highlight = { colors.fg, colors.bg, 'bold' },
+  --     separator = ' ',
+  --     separator_highlight = { 'NONE', colors.bg },
+  --   },
+  -- }
   gls.left[2] = {
-    ViMode = {
-      provider = function()
-        local mode_color = {
-          n = colors.green,
-          i = colors.yellow,
-          v = '#a020f0',
-          V = '#a020f0',
-          [''] = '#a020f0',
-          c = colors.red,
-          R = colors.red,
-          Rv = colors.red,
-          t = colors.blue,
-          ['!'] = colors.blue,
-        }
-        local alias = {
-          n = 'Norm',
-          i = 'Ins',
-          v = 'Visl',
-          V = 'VLine',
-          [''] = 'VBlck',
-          c = 'Cmd',
-          R = 'Rplc',
-          Rv = 'Rplv',
-          t = ' Term',
-          ['!'] = ' Shell',
-        }
-        vim.cmd('hi GalaxyViMode guifg=' .. mode_color[vim.fn.mode()])
-        return alias[vim.fn.mode()]
-      end,
-      highlight = { colors.fg, colors.bg, 'bold' },
-      separator = ' ',
-      separator_highlight = { 'NONE', colors.bg },
-    },
-  }
-  gls.left[3] = {
     GitBranch = {
       provider = 'GitBranch',
       condition = cond.check_git_workspace,
@@ -72,7 +72,7 @@ function config.setup()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-  gls.left[4] = {
+  gls.left[3] = {
     Lsp = {
       provider = 'GetLspClient',
       condition = function()
@@ -99,7 +99,7 @@ function config.setup()
       separator_highlight = { 'NONE', colors.bg },
     },
   }
-  gls.left[5] = {
+  gls.left[4] = {
     LazyUpdates = {
       provider = require('lazy.status').updates,
       condition = require('lazy.status').has_updates,

@@ -39,7 +39,6 @@ function completion.cmp()
 
   local sources = {
     { name = 'nvim_lsp' },
-
     { name = 'calc' },
     { name = 'latex_symbols' },
     { name = 'treesitter' },
@@ -95,24 +94,24 @@ function completion.cmp()
         vim_item.kind = string.format('%s %s', icons[vim_item.kind], vim_item.kind)
 
         vim_item.menu = ({
-          buffer = '[Buf]',
-          nvim_lsp = '[LSP]',
-          nvim_lua = '[Lua]',
-          path = '[Path]',
-          luasnip = '[Snip]',
-          spell = '[Spell]',
-        })[entry.source.name]
+              buffer = '[Buf]',
+              nvim_lsp = '[LSP]',
+              nvim_lua = '[Lua]',
+              path = '[Path]',
+              luasnip = '[Snip]',
+              spell = '[Spell]',
+            })[entry.source.name]
 
         return vim_item
       end,
     },
     mapping = {
       ['<CR>'] = mapping.confirm { select = true },
-      ['<C-p>'] = mapping.select_prev_item(),
-      ['<C-n>'] = mapping.select_next_item(),
       ['<S-Space>'] = mapping(function(fallback)
         if cmp.visible() then
           cmp.select_next_item()
+        elseif luasnip.expand_or_jumpable() then
+          luasnip.expand_or_jump()
         elseif has_words_before() then
           cmp.complete()
         else
@@ -122,7 +121,7 @@ function completion.cmp()
       ['<S-Tab>'] = mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif luasnip.jumpable(-1) then
+        elseif luasnip.jumpable( -1) then
           vim.fn.feedkeys(t '<Plug>luasnip-jump-prev', '')
         else
           fallback()
@@ -139,16 +138,16 @@ function completion.cmp()
   }
 end
 
-
-
 function completion.snippets()
-  require('luasnip').config.set_config {
+  local ls = require 'luasnip'
+  ls.config.set_config {
     history = true,
+    enable_autosnippets = true,
     update_events = 'TextChanged,TextChangedI',
     store_selection_keys = true,
   }
   require('luasnip/loaders/from_vscode').load()
+  require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
 end
-
 
 return completion

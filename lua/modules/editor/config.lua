@@ -132,6 +132,22 @@ end
 
 function editor.treesitter()
   require('nvim-treesitter.configs').setup {
+    ensure_installed = {
+      'bash',
+      'c',
+      'cpp',
+      'fish',
+      'lua',
+      'json',
+      'yaml',
+      'make',
+      'python',
+      'rust',
+      'html',
+      'javascript',
+      'typescript',
+      'css',
+    },
     sync_install = false,
     highlight = {
       enable = true,
