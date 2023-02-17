@@ -91,17 +91,18 @@ function completion.cmp()
           Operator = '',
           TypeParameter = '',
         }
-        vim_item.kind = string.format('%s %s', icons[vim_item.kind], vim_item.kind)
+        vim_item.kind = string.format('%s %s',vim_item.kind, icons[vim_item.kind])
 
         vim_item.menu = ({
-              buffer = '[Buf]',
-              nvim_lsp = '[LSP]',
-              nvim_lua = '[Lua]',
-              path = '[Path]',
-              luasnip = '[Snip]',
-              spell = '[Spell]',
+              buffer = '﬘',
+              nvim_lsp = '',
+              nvim_lua = '',
+              path = '',
+              luasnip = '✂',
+              spell = '暈',
+              treesitter = '',
             })[entry.source.name]
-
+        vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
         return vim_item
       end,
     },
@@ -136,6 +137,14 @@ function completion.cmp()
     sorting = {},
     sources = sources,
   }
+  cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
+    sources = cmp.config.sources({
+      { name = 'nvim_lsp_document_symbol' },
+    }, {
+      { name = 'buffer' },
+    }),
+  })
 end
 
 function completion.snippets()
@@ -149,5 +158,4 @@ function completion.snippets()
   require('luasnip/loaders/from_vscode').load()
   require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
 end
-
 return completion
