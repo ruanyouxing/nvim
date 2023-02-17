@@ -40,8 +40,4 @@ vim.g.loaded_netrwFileHandlers = 1
 require 'core.options'
 require 'core.events'
 require('core.pack'):boot_strap()
-local config_path = vim.fn.stdpath 'config'
-local tmp = vim.split(vim.fn.globpath(config_path, 'lua/keymap/*.lua'), '\n')
-for _, f in ipairs(tmp) do
-  require(f:sub(#config_path + 6, -5))
-end
+require('keymap.config')
