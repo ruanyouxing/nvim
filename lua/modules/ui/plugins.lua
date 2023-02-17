@@ -7,16 +7,26 @@ plugin {
     require('ayu').setup {
       mirage = true,
     }
-    vim.cmd('colorscheme ayu-mirage')
+    vim.cmd 'colorscheme ayu-mirage'
   end,
 }
-plugin {'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'SmiteshP/nvim-navic'}
+plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead' }
+plugin {
+  'jcdickinson/wpm.nvim',
+  config = function()
+    require('wpm').setup { sample_interval = 1000 }
+  end,
+  event = 'BufEnter',
+}
+
+plugin { 'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'SmiteshP/nvim-navic' }
 plugin {
   'glepnir/dashboard-nvim',
   config = function()
     require 'modules.ui.dashboard'
   end,
 }
+plugin { 'stevearc/dressing.nvim', config = conf.dressing, module = true, event = 'BufWritePre' }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin, lazy = true }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
 plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline, event = 'UIEnter' }
@@ -30,7 +40,7 @@ plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
   config = conf.fold,
-  lazy = true
+  lazy = true,
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
@@ -43,12 +53,7 @@ plugin {
 plugin {
   'folke/noice.nvim',
   dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
-  config = function()
-    require('noice').setup {
-      cmdline = { view = 'cmdline' },
-      lsp = { signature = { enabled = false } },
-    }
-  end,
+  config = conf.noice,
 }
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
@@ -58,7 +63,7 @@ plugin {
   config = function()
     require('nvim-tree').setup()
   end,
-  cmd = 'NvimTreeToggle'
+  cmd = 'NvimTreeToggle',
 }
 plugin { 'folke/tokyonight.nvim', config = conf.tokyonight }
 plugin { 'folke/twilight.nvim', event = 'CursorMoved', config = conf.twilight }
@@ -82,5 +87,5 @@ plugin {
 plugin {
   'fgheng/winbar.nvim',
   config = conf.winbar,
-  event = 'UIEnter'
+  event = 'UIEnter',
 }

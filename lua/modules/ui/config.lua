@@ -1,6 +1,5 @@
 ---@diagnostic disable: different-requires
 local ui = {}
-function ui.dashboard() end
 
 function ui.blankline()
   vim.opt.termguicolors = true
@@ -210,6 +209,15 @@ function ui.dap()
   require('dapui').setup()
 end
 
+function ui.dressing()
+  require('dressing').setup {
+    input = { relative = 'editor' },
+    select = {
+      backend = { 'telescope', 'fzf', 'builtin' },
+    },
+  }
+end
+
 function ui.fidget()
   require('fidget').setup()
 end
@@ -254,6 +262,12 @@ function ui.fold()
   }
 end
 
+function ui.highlight()
+  require('local-highlight').setup {
+    hlGroup = 'TSDefinitionUsage',
+  }
+end
+
 function ui.lightbulb()
   require('nvim-lightbulb').setup {
     autocmd = {
@@ -284,7 +298,7 @@ end
 function ui.minimap()
   require('codewindow').setup {
     auto_enable = true,
-    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard' },
+    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground' },
     use_lsp = true,
     use_treesitter = true,
     use_git = true,
@@ -473,6 +487,13 @@ function ui.wilder()
       },
     }
   )
+end
+
+function ui.noice()
+  require('noice').setup {
+    cmdline = { view = 'cmdline' },
+    lsp = { signature = { enabled = false } },
+  }
 end
 
 function ui.modes()

@@ -6,6 +6,7 @@ function config.setup()
   local gl = require 'galaxyline'
   local colors = {
     fg = '#bbc2cf',
+    teal = '#008080',
     red = '#ec5767',
     yellow = '#ecbe7b',
     blue = '#51afef',
@@ -103,8 +104,8 @@ function config.setup()
     LazyUpdates = {
       provider = require('lazy.status').updates,
       condition = require('lazy.status').has_updates,
-      highlight = {"#ff9e64",colors.bg}
-    }
+      highlight = { '#ff9e64', colors.bg },
+    },
   }
   gls.mid[1] = {
     Hydra = {
@@ -154,14 +155,26 @@ function config.setup()
     },
   }
   gls.right[2] = {
+    Wpm = {
+      provider = require('wpm').wpm,
+      highlight = { colors.teal, colors.bg, 'bold' },
+    },
+  }
+  gls.right[3] = {
+    WpmGraph = {
+      provider = require('wpm').historic_graph,
+      icon = ' ',
+    },
+  }
+  gls.right[4] = {
     Added = {
       provider = 'DiffAdd',
       highlight = { colors.green, colors.bg },
       condition = cond.check_git_workspace,
-      icon = '  ',
+      icon = '   ',
     },
   }
-  gls.right[3] = {
+  gls.right[5] = {
     Modified = {
       provider = 'DiffModified',
       highlight = { '#a020f0', colors.bg },
@@ -169,7 +182,7 @@ function config.setup()
       icon = ' 柳 ',
     },
   }
-  gls.right[4] = {
+  gls.right[6] = {
     Removed = {
       provider = 'DiffRemove',
       highlight = { colors.red, colors.bg },
@@ -177,13 +190,13 @@ function config.setup()
       icon = '  ',
     },
   }
-  gls.right[5] = {
+  gls.right[7] = {
     LineInfo = {
       provider = 'LineColumn',
       highlight = { colors.orange, colors.bg },
     },
   }
-  gls.right[6] = {
+  gls.right[8] = {
     HalfRightCircle = {
       provider = function()
         return ''
