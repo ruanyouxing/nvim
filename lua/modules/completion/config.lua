@@ -12,22 +12,38 @@ function completion.cmp()
   local cmp = require 'cmp'
   local luasnip = require 'luasnip'
   local mapping = cmp.mapping
-  local function highlight(name, guifg, guibg)
-    return (name .. ' ' .. guifg .. ' ' .. guibg)
-  end
 
-  highlight('CmpItemKindSnippet', 'guifg=#BF616A', 'guibg=NONE')
-  highlight('CmpItemKindUnit', 'guifg=#D08770', 'guibg=NONE')
-  highlight('CmpItemKindProperty', 'guifg=#A3BE8C', 'guibg=NONE')
-  highlight('CmpItemKindKeyword', 'guifg=#EBCB8B', 'guibg=NONE')
-  highlight('CmpItemAbbrMatch', 'guifg=#5E81AC', 'guibg=NONE')
-  highlight('CmpItemAbbrMatchFuzzy', 'guifg=#5E81AC', 'guibg=NONE')
-  highlight('CmpItemKindVariable', 'guifg=#8FBCBB', 'guibg=NONE')
-  highlight('CmpItemKindInterface', 'guifg=#88C0D0', 'guibg=NONE')
-  highlight('CmpItemKindText', 'guifg=#81A1C1', 'guibg=NONE')
-  highlight('CmpItemKindFunction', 'guifg=#B48EAD', 'guibg=NONE')
-  highlight('CmpItemKindMethod', 'guifg=#B48EAD', 'guibg=NONE')
-
+  vim.api.nvim_set_hl(0, 'PmenuSel', { bg = '#282C34', fg = 'NONE' })
+  vim.api.nvim_set_hl(0, 'Pmenu', { fg = '#C5CDD9', bg = '#22252A' })
+  vim.api.nvim_set_hl(0, 'CmpItemAbbrDeprecated', { fg = '#7E8294', bg = 'NONE', strikethrough = true })
+  vim.api.nvim_set_hl(0, 'CmpItemAbbrMatch', { fg = '#82AAFF', bg = 'NONE', bold = true })
+  vim.api.nvim_set_hl(0, 'CmpItemAbbrMatchFuzzy', { fg = '#82AAFF', bg = 'NONE', bold = true })
+  vim.api.nvim_set_hl(0, 'CmpItemMenu', { fg = '#C792EA', bg = 'NONE', italic = true })
+  vim.api.nvim_set_hl(0, 'CmpItemKindField', { fg = '#EED8DA', bg = '#B5585F' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindProperty', { fg = '#EED8DA', bg = '#B5585F' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindEvent', { fg = '#EED8DA', bg = '#B5585F' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindText', { fg = '#C3E88D', bg = '#9FBD73' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindEnum', { fg = '#C3E88D', bg = '#9FBD73' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindKeyword', { fg = '#C3E88D', bg = '#9FBD73' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindConstant', { fg = '#FFE082', bg = '#D4BB6C' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindConstructor', { fg = '#FFE082', bg = '#D4BB6C' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindReference', { fg = '#FFE082', bg = '#D4BB6C' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindFunction', { fg = '#EADFF0', bg = '#A377BF' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindStruct', { fg = '#EADFF0', bg = '#A377BF' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindClass', { fg = '#EADFF0', bg = '#A377BF' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindModule', { fg = '#EADFF0', bg = '#A377BF' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindOperator', { fg = '#EADFF0', bg = '#A377BF' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindVariable', { fg = '#C5CDD9', bg = '#7E8294' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindFile', { fg = '#C5CDD9', bg = '#7E8294' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindUnit', { fg = '#F5EBD9', bg = '#D4A959' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindSnippet', { fg = '#F5EBD9', bg = '#D4A959' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindFolder', { fg = '#F5EBD9', bg = '#D4A959' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindMethod', { fg = '#DDE5F5', bg = '#6C8ED4' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindValue', { fg = '#DDE5F5', bg = '#6C8ED4' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindEnumMember', { fg = '#DDE5F5', bg = '#6C8ED4' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindInterface', { fg = '#D8EEEB', bg = '#58B5A8' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindColor', { fg = '#D8EEEB', bg = '#58B5A8' })
+  vim.api.nvim_set_hl(0, 'CmpItemKindTypeParameter', { fg = '#D8EEEB', bg = '#58B5A8' })
   local t = function(str)
     return vim.api.nvim_replace_termcodes(str, true, true, true)
   end
@@ -61,49 +77,27 @@ function completion.cmp()
   if vim.o.ft == 'lua' then
     table.insert(sources, { name = 'nvim_lua' })
   end
+  local lspkind = require 'lspkind'
   cmp.setup {
+    view = {
+      entries = { name = 'custom', selection_order = 'near_cursor' },
+    },
+    window = {
+      completion = {
+        winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
+        col_offset = -3,
+        side_padding = 0,
+      },
+    },
     formatting = {
+      fields = { 'kind', 'abbr', 'menu' },
       format = function(entry, vim_item)
-        local icons = {
-          Text = '',
-          Method = '',
-          Function = '',
-          Constructor = '',
-          Field = '',
-          Variable = '',
-          Class = 'ﴯ',
-          Interface = '',
-          Module = '',
-          Property = 'ﰠ',
-          Unit = '',
-          Value = '',
-          Enum = '',
-          Keyword = '',
-          Snippet = '',
-          Color = '',
-          File = '',
-          Reference = '',
-          Folder = '',
-          EnumMember = '',
-          Constant = '',
-          Struct = '',
-          Event = '',
-          Operator = '',
-          TypeParameter = '',
-        }
-        vim_item.kind = string.format('%s %s',vim_item.kind, icons[vim_item.kind])
+        local kind = lspkind.cmp_format { mode = 'symbol_text', maxwidth = 50 } (entry, vim_item)
+        local strings = vim.split(kind.kind, '%s', { trimempty = true })
+        kind.kind = ' ' .. (strings[1] or '') .. ' '
+        kind.menu = '    [' .. (strings[2] or '') .. ']'
 
-        vim_item.menu = ({
-              buffer = '﬘',
-              nvim_lsp = '',
-              nvim_lua = '',
-              path = '',
-              luasnip = '✂',
-              spell = '暈',
-              treesitter = '',
-            })[entry.source.name]
-        vim_item.abbr = string.sub(vim_item.abbr, 1, 20)
-        return vim_item
+        return kind
       end,
     },
     mapping = {
@@ -158,4 +152,5 @@ function completion.snippets()
   require('luasnip/loaders/from_vscode').load()
   require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
 end
+
 return completion

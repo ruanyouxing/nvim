@@ -50,13 +50,15 @@ plugin {
   dependencies = 'antoinemadec/FixCursorHold.nvim',
   config = conf.lightbulb,
 }
+plugin { 'onsails/lspkind.nvim', lazy = true }
 plugin {
   'folke/noice.nvim',
   dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
   config = conf.noice,
 }
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
-plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
+-- plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
+plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
 plugin {
   'kyazdani42/nvim-tree.lua',
