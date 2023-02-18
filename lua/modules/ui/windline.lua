@@ -1,9 +1,62 @@
 local config = {}
 ---@diagnostic disable: undefined-field
+---@diagnostic disable: unused-local
 
+local create_cava_colors = function(colors)
+  local HSL = require 'wlanimation.utils'
+  local d_colors = {
+    'green_light',
+    'blue',
+    'yellow_light',
+    'magenta_light',
+    'red',
+  }
+  local cava_colors = HSL.rgb_to_hsl(colors[d_colors[math.random(#d_colors)]]):shades(10, 8)
+  for i = 1, 8, 1 do
+    colors['cava' .. i] = cava_colors[i]:to_rgb()
+  end
+  return colors
+end
 function config.setup()
-  vim.opt.laststatus = 3
   local windline = require 'windline'
+  local cava_text = 'OK'
+
+  local bars = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+
+  local uv = vim.loop
+
+  if _G._cava_stop then
+    _G._cava_stop()
+  end
+  local cava_path = vim.fn.expand '$HOME/.config/nvim/.cava.sh'
+
+  local stdin = uv.new_pipe(false)
+  local stdout = uv.new_pipe(false)
+  local stderr = uv.new_pipe(false)
+  local handle = uv.spawn(cava_path, { stdio = { stdin, stdout, stderr } }, function()
+    _G._cava_stop()
+  end)
+
+  uv.read_start(
+    stdout,
+    vim.schedule_wrap(function(err, data)
+      if data then
+        cava_text = data
+      end
+    end)
+  )
+  _G._cava_stop = function()
+    stdin:read_stop()
+    stdin:close()
+    stdout:read_stop()
+    stdout:close()
+    stderr:read_stop()
+    stderr:close()
+
+    handle:close()
+    _G._cava_stop = nil
+  end
+  vim.opt.laststatus = 3
   local state = _G.WindLine.state
   local git_comps = require 'windline.components.git'
   local lsp_comps = require 'windline.components.lsp'
@@ -149,19 +202,47 @@ function config.setup()
     },
     text = function()
       return {
-        { '  ',                        'FSizeHl' },
+        { '   ',                       'FSizeHl' },
         { b_components.cache_file_size(), 'FSizeHl' },
-        { '  ' },
+        { ' ' },
       }
+    end,
+  }
+  addComponent {
+    name = 'cava',
+    hl_colors = {
+      cava1 = { 'cava1', 'NormalBg' },
+      cava2 = { 'cava2', 'NormalBg' },
+      cava3 = { 'cava3', 'NormalBg' },
+      cava4 = { 'cava4', 'NormalBg' },
+      cava5 = { 'cava5', 'NormalBg' },
+      cava6 = { 'cava6', 'NormalBg' },
+      cava7 = { 'cava7', 'NormalBg' },
+      cava8 = { 'cava8', 'NormalBg' },
+    },
+    text = function()
+      local result = {}
+      for i = 1, 40, 2 do
+        local c = tonumber(cava_text:sub(i, i))
+        if c then
+          c = c + 1
+          result[#result + 1] = { bars[c], 'cava' .. c }
+        end
+      end
+      return result
+    end,
+    click = function()
+      windline.change_colors(create_cava_colors(windline.get_colors()))
     end,
   }
   addComponent {
     name = 'Wpm',
     hl_colors = {
-      WpmHl = { 'teal', 'bg' },
+      WpmHl = { 'teal', 'bg', 'bold' },
     },
     text = function()
       return {
+        { ' ' },
         { require('wpm').wpm, 'WpmHl' },
         { ' | ',              'WpmHl' },
         {
@@ -213,7 +294,7 @@ function config.setup()
   local default = {
     filetypes = { 'default' },
     active = StatuslineComps,
-    inactive = {}
+    inactive = {},
   }
   windline.setup {
     colors_name = function(colors)
@@ -229,6 +310,7 @@ function config.setup()
       colors.green = '#98be65'
       colors.purple = '#a020f0'
       colors.nocolor = 'NONE'
+      create_cava_colors(colors)
       return colors
     end,
     statuslines = { default },
