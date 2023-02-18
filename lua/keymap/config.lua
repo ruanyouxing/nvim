@@ -96,6 +96,18 @@ nmap {
     end,
   },
   {
+    '<leader>mm',
+    function()
+      require('codewindow').toggle_minimap()
+    end,
+  },
+  {
+    '<leader>mf',
+    function()
+      require('codewindow').toggle_focus()
+    end,
+  },
+  {
     'lg',
     function()
       local Terminal = require('toggleterm.terminal').Terminal
@@ -130,6 +142,10 @@ nmap {
       end
     end,
   },
+}
+
+-- Folds
+nmap {
   {
     'K',
     function()
@@ -139,10 +155,6 @@ nmap {
       end
     end,
   },
-}
-
--- Folds
-nmap {
   {
     'zR',
     function()
