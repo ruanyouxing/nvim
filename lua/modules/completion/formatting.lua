@@ -14,6 +14,7 @@ function format.setup()
     formatting.clang_format,
     hover.dictionary,
     formatting.nixpkgs_fmt,
+    formatting.shfmt,
     diagnostics.eslint.with {
       extra_args = { '--config', vim.fn.expand(config_dir .. '/.eslintrc.json') },
     },
