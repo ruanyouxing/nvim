@@ -187,7 +187,7 @@ function tools.hydra()
   ]]
 
   Hydra {
-    name = 'Buffers',
+    name = 'Hydra opitions',
     hint = hint,
     config = {
       color = 'teal',
