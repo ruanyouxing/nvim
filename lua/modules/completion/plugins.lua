@@ -1,7 +1,6 @@
 local plugin = require('core.pack').package
 local conf = require 'modules.completion.config'
 local null_ls = require 'modules.completion.formatting'
-
 plugin { 'windwp/nvim-autopairs', config = conf.autopairs, event = 'InsertEnter' }
 plugin {
   'hrsh7th/nvim-cmp',
