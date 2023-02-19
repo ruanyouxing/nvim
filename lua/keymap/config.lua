@@ -22,12 +22,15 @@ nmap {
       require('trouble').toggle()
     end,
   },
-  { 'U',         cmd 'UndotreeShow' },
-  { '<C-n>',     cmd 'NvimTreeToggle' },
-  {'<C-s>', function ()
-    require('codewindow').close_minimap()
-    require('symbols-outline').toggle_outline()
-  end},
+  { 'U',     cmd 'UndotreeShow' },
+  { '<C-n>', cmd 'NvimTreeToggle' },
+  {
+    '<C-s>',
+    function()
+      require('codewindow').close_minimap()
+      require('symbols-outline').toggle_outline()
+    end,
+  },
   { '<leader>p', cmd 'Lazy sync' },
   { '<C-q>',     cmd 'q!' },
   {
@@ -57,9 +60,12 @@ nmap {
     end,
   },
   { '<leader>t', cmd 'ToggleTerm' },
-  {'<leader>s', function ()
-    require('spectre').open()
-  end},
+  {
+    '<leader>s',
+    function()
+      require('spectre').open()
+    end,
+  },
   {
     '<leader>z',
     function()
@@ -201,7 +207,10 @@ nmap {
   { 'j', plug 'faster_move_gj', opts(silent) },
   { 'k', plug 'faster_move_gk', opts(silent) },
 }
-vmap { { 'j', plug 'faster_vmove_j' }, { 'k', plug 'faster_vmove_k' } }
+vmap {
+  { 'j', plug 'faster_vmove_j' },
+  { 'k', plug 'faster_vmove_k' },
+}
 imap {
   { '<C-c>', cmd 'PickColorInsert' },
   { '<C-i>', cmd 'IconPickerInsert alt_font symbols nerd_font emoji' },
@@ -229,47 +238,14 @@ vim.keymap.set('n', '<CR>', function()
 end, { silent = true, nowait = true })
 
 -- Zen mode
-local function load_autocmds()
-  local autocmd = vim.api.nvim_create_autocmd
-  vim.api.nvim_create_augroup('galaxyline', { clear = true })
-  local options = {
-    pattern = '*',
-    group = 'galaxyline',
-    callback = function()
-      require('galaxyline').load_galaxyline()
-    end,
-  }
-  local events = {
-    'BufEnter',
-    'BufReadPost',
-    'BufWinEnter',
-    'BufWritePost',
-    'ColorScheme',
-    'FileChangedShellPost',
-    'FileType',
-    'TermOpen',
-    'VimResized',
-    'WinEnter',
-  }
-  autocmd(events, options)
-  autocmd({ 'WinLeave' }, {
-    pattern = '*',
-    group = 'galaxyline',
-    callback = function()
-      require('galaxyline').inactive_galaxyline()
-    end,
-  })
-end
 vim.keymap.set('n', '<F11>', function()
   if OnFocus == 0 then
     OnFocus = 1
-    vim.api.nvim_del_augroup_by_name 'galaxyline'
-    vim.o.statusline = 0
     vim.cmd [[TZAtaraxis]]
+    vim.o.statusline = 0
   else
     vim.cmd [[TZAtaraxis]]
-    require('galaxyline').load_galaxyline()
-    load_autocmds()
+    vim.opt.statusline = '%!v:lua.WindLine.show()'
     require('codewindow').open_minimap()
     OnFocus = 0
   end

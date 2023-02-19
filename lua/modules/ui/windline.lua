@@ -327,6 +327,7 @@ function config.setup()
     end,
     statuslines = { default },
   }
+  windline.add_status(require('spectre.state_utils').status_line())
 end
 
 return config
