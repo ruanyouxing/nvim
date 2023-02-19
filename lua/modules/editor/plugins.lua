@@ -19,8 +19,9 @@ plugin { 'max397574/better-escape.nvim', event = 'InsertEnter', config = conf.be
 plugin {
   'norcalli/nvim-colorizer.lua',
   config = function()
-    require('colorizer').setup {}
+    require('colorizer').setup {'*'}
   end,
+  cmd = 'ColorizerToggle'
 }
 plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, cmd = 'DiffviewOpen' }
 plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }
@@ -34,8 +35,8 @@ plugin {
     }
   end,
 }
-plugin { 'terrortylor/nvim-comment', config = conf.comment }
-plugin { 'kyazdani42/nvim-web-devicons' }
+plugin { 'terrortylor/nvim-comment', config = conf.comment, event = 'ModeChanged' }
+plugin { 'kyazdani42/nvim-web-devicons', lazy = true }
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
 plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }

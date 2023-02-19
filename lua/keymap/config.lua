@@ -1,6 +1,6 @@
 local keymap = require 'core.keymap'
 local buf = vim.lsp.buf
-local nmap, imap, xmap, vmap, xnmap = keymap.nmap, keymap.imap, keymap.xmap, keymap.vmap, keymap.xnmap
+local nmap, imap, xmap, vmap = keymap.nmap, keymap.imap, keymap.xmap, keymap.vmap
 local silent = keymap.silent
 local opts = keymap.new_opts
 local cmd, cu = keymap.cmd, keymap.cu
@@ -24,7 +24,10 @@ nmap {
   },
   { 'U',         cmd 'UndotreeShow' },
   { '<C-n>',     cmd 'NvimTreeToggle' },
-  { '<C-s>',     cmd 'SymbolsOutline' },
+  {'<C-s>', function ()
+    require('codewindow').close_minimap()
+    require('symbols-outline').toggle_outline()
+  end},
   { '<leader>p', cmd 'Lazy sync' },
   { '<C-q>',     cmd 'q!' },
   {
@@ -254,19 +257,6 @@ local function load_autocmds()
     end,
   })
 end
-xnmap {
-  { 'p',  plug 'YankyPutAfter' },
-  { 'P',  plug 'YankyPutBefore' },
-  { 'gp', plug 'YankyGPutAfter' },
-  { 'gP', plug 'YankyGPutBefore' },
-  { 'y',  plug 'YankyYank' },
-  {
-    '<C-S-y>',
-    function()
-      require('telescope').extensions.yank_history.yank_history()
-    end,
-  },
-}
 vim.keymap.set('n', '<F11>', function()
   if OnFocus == 0 then
     OnFocus = 1

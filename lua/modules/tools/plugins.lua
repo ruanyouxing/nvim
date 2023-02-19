@@ -1,9 +1,10 @@
 local plugin = require('core.pack').package
+local plug = require('core.keymap').plug
 local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
 plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
 plugin { 'is0n/fm-nvim', config = conf.fm, cmd = 'Ranger' }
-plugin { 'Jxstxs/keystack.nvim', config = conf.keystack }
+plugin { 'Jxstxs/keystack.nvim', config = conf.keystack, lazy = true }
 plugin {
   'anuvyklack/hydra.nvim',
   lazy = true,
@@ -61,5 +62,21 @@ plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode, cmd 
 plugin { 'mbbill/undotree', event = 'TextChanged' }
 plugin { 'nvim-treesitter/playground', dependencies = 'nvim-treesitter', cmd = 'TSPlaygroundToggle' }
 plugin { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
-plugin { 'gbprod/yanky.nvim', config = conf.yank }
+plugin {
+  'gbprod/yanky.nvim',
+  config = conf.yank,
+  keys = {
+    { 'p',  plug 'YankyPutAfter',   mode = { 'n', 'x' } },
+    { 'P',  plug 'YankyPutBefore',  mode = { 'n', 'x' } },
+    { 'gp', plug 'YankyGPutAfter',  mode = { 'n', 'x' } },
+    { 'gP', plug 'YankyGPutBefore', mode = { 'n', 'x' } },
+    { 'y',  plug 'YankyYank',       mode = { 'n', 'x' } },
+    {
+      '<C-S-y>',
+      function()
+        require('telescope').extensions.yank_history.yank_history()
+      end,
+    },
+  },
+}
 plugin { 'nyngwang/NeoZoom.lua', cmd = 'NeoZoomToggle', config = conf.zoom }

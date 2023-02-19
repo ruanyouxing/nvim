@@ -298,7 +298,7 @@ end
 function ui.minimap()
   require('codewindow').setup {
     auto_enable = true,
-    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground' },
+    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline' },
     use_lsp = true,
     use_treesitter = true,
     use_git = true,
@@ -369,6 +369,14 @@ function ui.navic()
   vim.api.nvim_set_hl(0, 'NavicIconsTypeParameter', { default = true, bg = '#000000', fg = '#ffffff' })
   vim.api.nvim_set_hl(0, 'NavicText', { default = true, bg = '#000000', fg = '#ffffff' })
   vim.api.nvim_set_hl(0, 'NavicSeparator', { default = true, bg = '#000000', fg = '#ffffff' })
+end
+
+function ui.outline()
+  require('symbols-outline').setup {
+    position = 'left',
+    auto_close = true,
+    show_relative_numbers = true,
+  }
 end
 
 function ui.notify()

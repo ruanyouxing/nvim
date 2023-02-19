@@ -18,8 +18,8 @@ plugin {
   end,
   event = 'BufEnter',
 }
-
-plugin { 'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'SmiteshP/nvim-navic' }
+plugin { 'SmiteshP/nvim-navic', lazy = true }
+plugin { 'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'nvim-navic', event = 'BufRead' }
 plugin {
   'glepnir/dashboard-nvim',
   config = function()
@@ -42,13 +42,15 @@ plugin {
   config = conf.fold,
   lazy = true,
 }
-plugin { 'j-hui/fidget.nvim', config = conf.fidget }
+plugin { 'j-hui/fidget.nvim', config = conf.fidget, lazy = true }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
+plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
 plugin {
   'kosayoda/nvim-lightbulb',
-  dependencies = 'antoinemadec/FixCursorHold.nvim',
+  dependencies = 'mason-lspconfig.nvim',
   config = conf.lightbulb,
+  event = 'BufEnter',
 }
 plugin { 'onsails/lspkind.nvim', lazy = true }
 plugin {
@@ -56,8 +58,8 @@ plugin {
   dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
   config = conf.noice,
 }
+plugin({'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline'})
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
--- plugin { 'glepnir/galaxyline.nvim', event = 'BufWinEnter', config = require('modules.ui.galaxyline').setup }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
 plugin {
