@@ -1,5 +1,6 @@
 local snippets = {}
 local ls = require 'luasnip'
+
 local s = ls.s
 local t = ls.t
 local i = ls.i
@@ -11,9 +12,11 @@ local sn = ls.snippet_node
 
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
-
-local firstSnippet = s('FirstSnippet', { t 'This is my first Snippet!', i(1, 'placeholertext') })
-local secondSnippet = s(
+local function addSnippets(snippet)
+  table.insert(snippets,snippet)
+end
+addSnippets(s('FirstSnippet', { t 'This is my first Snippet!', i(1, 'placeholertext') }))
+addSnippets(s(
   'secondSnippet',
   fmt(
     [[
@@ -27,8 +30,6 @@ local secondSnippet = s(
       i(3, 'body'),
     }
   )
-)
+))
 
-table.insert(snippets, firstSnippet)
-table.insert(snippets, secondSnippet)
 return snippets
