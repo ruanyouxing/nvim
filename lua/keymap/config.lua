@@ -57,6 +57,9 @@ nmap {
     end,
   },
   { '<leader>t', cmd 'ToggleTerm' },
+  {'<leader>s', function ()
+    require('spectre').open()
+  end},
   {
     '<leader>z',
     function()

@@ -56,6 +56,7 @@ plugin {
   end,
   cmd = 'PickColorInsert',
 }
+plugin { 'nvim-pack/nvim-spectre', config = conf.spectre, lazy = true }
 plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm, cmd = 'ToggleTerm' }
 plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode, cmd = 'TZAtaraxis' }
 
