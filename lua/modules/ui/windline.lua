@@ -163,6 +163,18 @@ function config.setup()
       end
     end,
   }
+  addComponent {
+    name = 'OSName',
+    hl_colors = {
+      osname = { 'blue', 'bg' },
+    },
+    text = function()
+      local system_name = vim.loop.os_uname().sysname
+      if system_name == 'Linux' then
+        return { { '   Linux x64', 'osname' } }
+      end
+    end,
+  }
   divideComps() -- End left side components
   addComponent {
     name = 'Hydra',
