@@ -26,4 +26,3 @@ while read -r cmd; do
     echo "$cmd"
 done < $pipe
 pkill -9 cava
-1

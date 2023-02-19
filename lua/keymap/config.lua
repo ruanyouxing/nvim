@@ -126,7 +126,7 @@ nmap {
     end,
   },
   {
-    '<leader><leader>',
+    '<leader>c',
     function()
       if vim.o.conceallevel > 0 then
         vim.o.conceallevel = 0

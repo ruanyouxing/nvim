@@ -1,6 +1,5 @@
 ---@diagnostic disable: different-requires
 local ui = {}
-
 function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
@@ -376,6 +375,7 @@ function ui.outline()
     position = 'left',
     auto_close = true,
     show_relative_numbers = true,
+    symbols = { Function = { icon = '', hl = '@function' } },
   }
 end
 
