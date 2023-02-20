@@ -7,8 +7,10 @@ plugin {
     require('ayu').setup {
       mirage = true,
     }
-    vim.cmd 'colorscheme ayu-mirage'
+    vim.cmd[[colorscheme ayu-mirage]]
   end,
+  lazy = false,
+  priority = 10000,
 }
 plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead' }
 plugin {
@@ -27,7 +29,7 @@ plugin {
   end,
 }
 plugin { 'stevearc/dressing.nvim', config = conf.dressing, module = true, event = 'BufWritePre' }
-plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin, lazy = true }
+plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
 plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline, event = 'UIEnter' }
 plugin {
@@ -58,7 +60,16 @@ plugin {
   dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
   config = conf.noice,
 }
-plugin({'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline'})
+plugin {
+  'rose-pine/neovim',
+  name = 'rose-pine',
+  config = function()
+    require('rose-pine').setup {
+      dark_variant = 'moon',
+    }
+  end,
+}
+plugin { 'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline' }
 plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }

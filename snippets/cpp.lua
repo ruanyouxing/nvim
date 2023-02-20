@@ -1,13 +1,14 @@
+local snippets = {}
 local ls = require 'luasnip'
 local s = ls.s
 local t = ls.t
 local i = ls.i
 local fmt = require('luasnip.extras.fmt').fmt
-local addSnippets =function (snippet)
-  ls.add_snippets('cpp',snippet)
+local addSnippets = function(snippet)
+  table.insert(snippets, snippet)
 end
-addSnippets( s(
-'main',
+addSnippets(s(
+  'main',
   fmt(
     [[
   int main(int argc, char **argv)
@@ -20,10 +21,11 @@ addSnippets( s(
   )
 ))
 
-addSnippets( s(
-  'Class',
-  fmt(
-    [[
+addSnippets(
+  s(
+    'Class',
+    fmt(
+      [[
   class {className} {classInheritence} {{
     private:
       {privateVars}
@@ -37,7 +39,17 @@ addSnippets( s(
     }}
   }};
 ]],
-    { className = i(1), classInheritence = i(2), privateVars = i(3), publicVars = i(4), constructorFunc = i(5), destructionFunc =i(6) },
-    { repeat_duplicates = true }
+      {
+        className = i(1),
+        classInheritence = i(2),
+        privateVars = i(3),
+        publicVars = i(4),
+        constructorFunc = i(5),
+        destructionFunc = i(6),
+      },
+      { repeat_duplicates = true }
+    )
   )
-))
+)
+
+return snippets

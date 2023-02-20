@@ -40,4 +40,4 @@ vim.g.loaded_netrwFileHandlers = 1
 require 'core.options'
 require 'core.events'
 require('core.pack'):boot_strap()
-require('keymap.config')
+require('keymap.config').set_keymaps()

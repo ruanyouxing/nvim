@@ -63,7 +63,9 @@ function ui.blankline()
 end
 
 function ui.catppuccin()
-  vim.cmd 'colorscheme catppuccin'
+  require('catppuccin').setup {
+    flavour = 'mocha',
+  }
 end
 
 function ui.cokeline()
@@ -297,7 +299,7 @@ end
 function ui.minimap()
   require('codewindow').setup {
     auto_enable = true,
-    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline' , 'spectre_panel'},
+    exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
     use_lsp = true,
     use_treesitter = true,
     use_git = true,
@@ -375,7 +377,7 @@ function ui.outline()
     position = 'left',
     auto_close = true,
     show_relative_numbers = true,
-    symbols = { Function = { icon = '', hl = '@function' }, Variable = {icon = '', hl = '@constant'} },
+    symbols = { Function = { icon = '', hl = '@function' }, Variable = { icon = '', hl = '@constant' } },
   }
 end
 

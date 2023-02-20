@@ -25,16 +25,6 @@ plugin {
 }
 plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, cmd = 'DiffviewOpen' }
 plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }
-plugin {
-  'phaazon/hop.nvim',
-  branch = 'v2',
-  event = 'BufEnter',
-  config = function()
-    require('hop').setup {
-      keys = 'thequickbrownfoxjumpsoverthelazydog',
-    }
-  end,
-}
 plugin { 'terrortylor/nvim-comment', config = conf.comment, event = 'ModeChanged' }
 plugin { 'kyazdani42/nvim-web-devicons', lazy = true }
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }

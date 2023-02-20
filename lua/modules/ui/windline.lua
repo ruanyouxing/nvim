@@ -116,7 +116,7 @@ function config.setup()
     },
     text = function()
       return {
-        { '',                'Border' },
+        { '', 'Border' },
         { state.mode[1] .. ' ', state.mode[1] },
       }
     end,
@@ -143,7 +143,7 @@ function config.setup()
     text = function(bufnr)
       if lsp_comps.check_lsp(bufnr) then
         return {
-          { ' ',                                  'Blank' },
+          { ' ', 'Blank' },
           { lsp_comps.lsp_name { icon = ' ' }, 'LspHl' },
         }
       end
@@ -180,6 +180,7 @@ function config.setup()
     name = 'Hydra',
     hl_colors = {
       HydraHl = { 'blue', 'bg', 'bold' },
+      FileNameHL = { 'green', 'bg', 'bold' },
     },
     text = function()
       local hydrStatusline = require 'hydra.statusline'
@@ -190,20 +191,13 @@ function config.setup()
             'HydraHl',
           },
         }
+      else
+        return {
+          { b_components.cache_file_icon { default = '' }, 'FileNameHL' },
+          { ' ' },
+          { b_components.cache_file_name('[No Name]', 'unique'), 'FileNameHL' },
+        }
       end
-    end,
-  }
-  addComponent {
-    name = 'FileName',
-    hl_colors = {
-      FileNameHL = { 'green', 'bg', 'bold' },
-    },
-    text = function()
-      return {
-        { b_components.cache_file_icon { default = '' },    'FileNameHL' },
-        { ' ' },
-        { b_components.cache_file_name('[No Name]', 'unique'), 'FileNameHL' },
-      }
     end,
   }
   divideComps() -- End center components
@@ -214,7 +208,7 @@ function config.setup()
     },
     text = function()
       return {
-        { '   ',                       'FSizeHl' },
+        { '   ', 'FSizeHl' },
         { b_components.cache_file_size(), 'FSizeHl' },
         { ' ' },
       }
@@ -223,14 +217,14 @@ function config.setup()
   addComponent {
     name = 'cava',
     hl_colors = {
-      cava1 = { 'cava1', 'NormalBg' },
-      cava2 = { 'cava2', 'NormalBg' },
-      cava3 = { 'cava3', 'NormalBg' },
-      cava4 = { 'cava4', 'NormalBg' },
-      cava5 = { 'cava5', 'NormalBg' },
-      cava6 = { 'cava6', 'NormalBg' },
-      cava7 = { 'cava7', 'NormalBg' },
-      cava8 = { 'cava8', 'NormalBg' },
+      cava1 = { 'cava1', 'bg' },
+      cava2 = { 'cava2', 'bg' },
+      cava3 = { 'cava3', 'bg' },
+      cava4 = { 'cava4', 'bg' },
+      cava5 = { 'cava5', 'bg' },
+      cava6 = { 'cava6', 'bg' },
+      cava7 = { 'cava7', 'bg' },
+      cava8 = { 'cava8', 'bg' },
     },
     text = function()
       local result = {}
@@ -256,7 +250,7 @@ function config.setup()
       return {
         { ' ' },
         { require('wpm').wpm, 'WpmHl' },
-        { ' | ',              'WpmHl' },
+        { ' | ', 'WpmHl' },
         {
           require('wpm').historic_graph(),
           'WpmHl',
@@ -275,8 +269,8 @@ function config.setup()
       if git_comps.is_git(bufnr) then
         return {
           { ' ' },
-          { git_comps.diff_added { format = '  %s ' },   'DiffAdd' },
-          { git_comps.diff_changed { format = ' 柳%s ' },  'DiffMod' },
+          { git_comps.diff_added { format = '  %s ' }, 'DiffAdd' },
+          { git_comps.diff_changed { format = ' 柳%s ' }, 'DiffMod' },
           { git_comps.diff_removed { format = '  %s ' }, 'DiffRemove' },
         }
       end
