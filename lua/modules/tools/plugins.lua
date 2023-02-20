@@ -4,6 +4,16 @@ local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
 plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
 plugin { 'is0n/fm-nvim', config = conf.fm, cmd = 'Ranger' }
+plugin {
+  'phaazon/hop.nvim',
+  branch = 'v2',
+  event = 'BufEnter',
+  config = function()
+    require('hop').setup {
+      keys = 'thequickbrownfoxjumpsoverthelazydog',
+    }
+  end,
+}
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack, lazy = true }
 plugin {
   'anuvyklack/hydra.nvim',
@@ -24,6 +34,7 @@ plugin {
   event = 'BufRead',
   config = conf.mason,
 }
+plugin { 'stevearc/overseer.nvim', config = conf.overseer, cmd = 'OverseerRun' }
 plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
 plugin {
   'nvim-telescope/telescope.nvim',
@@ -37,6 +48,7 @@ plugin {
   },
   config = conf.telescope,
   lazy = true,
+  cmd = 'Telescope',
 }
 plugin {
   'ziontee113/icon-picker.nvim',

@@ -172,17 +172,16 @@ function tools.hydra()
   end
 
   local hint = [[
-  _C_: Colorschemes
 
-  _/_: Search in files  _p_: Pick buffer
+   _C_: Colorschemes      _/_: Search in files        _<Enter>_: Telescope        _Y_: Yank history   
 
-  _c_: Close buffer
+   _p_: Pick buffer       _w_: Close buffer           _h_: Hop motions            _c_: Compile code   
 
-  _g_: Open diffs       _d_: Debugging mode
+   _g_: Open diffs        _s_: Stage buffer           _S_: Spectre
 
-  _t_: Terminal         _s_: Stage buffer
+   _d_: Debugging mode    _t_: Float terminal
 
-  _<Enter>_: Telescope           _<Esc>_
+   _q_: Quit              _<Esc>_
   ]]
 
   Hydra {
@@ -192,7 +191,7 @@ function tools.hydra()
       color = 'teal',
       invoke_on_body = true,
       hint = {
-        position = 'middle-right',
+        position = 'middle',
         border = 'rounded',
       },
     },
@@ -200,66 +199,52 @@ function tools.hydra()
     body = '<Leader>h',
     heads = {
       { 'g', cmd 'DiffviewOpen' },
-      { 'd', cmd 'lua require("keystack").push("debugging")' },
+      { 'h', cmd 'HopWord' },
+      {
+        'd',
+        function()
+          require('keystack').push 'debugging'
+        end,
+      },
       { 's', cmd 'Gitsigns stage_buffer' },
+      {
+        'S',
+        function()
+          require('spectre').open_visual { select_word = true }
+        end,
+      },
+      { 'q', nil,                          { exit = true, nowait = true } },
       { 'p', '<Plug>(cokeline-pick-focus)' },
-      { 'c', '<Plug>(cokeline-pick-close)' },
+      { 'w', '<Plug>(cokeline-pick-close)' },
+      {
+        'c',
+        function()
+          require('keymap.config').compile_func()
+        end,
+      },
       { 'C', cmd 'Telescope colorscheme' },
       { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'Search in file' } },
-      { '?', cmd 'Telescope search_history', { desc = 'Search history' } },
+      { '?', cmd 'Telescope search_history',            { desc = 'Search history' } },
       { 't', cmd 'ToggleTerm directon=float' },
-      { '<Enter>', cmd 'Telescope', { exit = true, desc = 'List all pickers' } },
+      {
+        'Y',
+        function()
+          require('telescope').extensions.yank_history.yank_history()
+        end,
+      },
+      {
+        '<Enter>',
+        cmd 'Telescope',
+        { exit = true, desc = 'List all pickers' },
+      },
       { '<Esc>', nil, { exit = true, nowait = true } },
     },
   }
 end
 
-function tools.sniprun()
-  require('sniprun').setup {
-    selected_interpreters = {},
-    repl_enable = {},
-    repl_disable = {},
-
-    interpreter_options = {
-      GFM_original = {
-        use_on_filetypes = { 'markdown.pandoc' },
-      },
-      Python3_original = {
-        error_truncate = 'auto',
-      },
-    },
-
-    display = {
-      'Classic',
-      'VirtualTextOk',
-      'VirtualTextErr', --# display error results as virtual text
-      'TempFloatingWindow', --# display results in a floating window
-      'LongTempFloatingWindow', --# same as above, but only long results. To use with VirtualText__
-      'Terminal', --# display results in a vertical split
-      'TerminalWithCode', --# display results and code history in a vertical split
-      'NvimNotify', --# display with the nvim-notify plugin
-      'Api', --# return output to a programming interface
-    },
-    display_options = {
-      terminal_width = 45, --# change the terminal display option width
-      notification_timeout = 5, --# timeout for nvim_notify output
-    },
-    show_no_output = {
-      'Classic',
-      'TempFloatingWindow',
-    },
-
-    snipruncolors = {
-      SniprunVirtualTextOk = { bg = '#66eeff', fg = '#000000', ctermbg = 'Cyan', cterfg = 'Black' },
-      SniprunFloatingWinOk = { fg = '#66eeff', ctermfg = 'Cyan' },
-      SniprunVirtualTextErr = { bg = '#881515', fg = '#000000', ctermbg = 'DarkRed', cterfg = 'Black' },
-      SniprunFloatingWinErr = { fg = '#881515', ctermfg = 'DarkRed' },
-    },
-
-    inline_messages = 0, --# inline_message (0/1) is a one-line way to display messages
-
-    borders = 'single', --# display borders around floating windows
-    live_mode_toggle = 'off', --# live mode toggle, see Usage - Running for more info
+function tools.overseer()
+  require('overseer').setup {
+    templates = {'builtin', 'user.cpp_build'}
   }
 end
 
@@ -304,6 +289,12 @@ function tools.toggleterm()
   require('toggleterm').setup {
     size = 7,
     border = 'curved',
+    winbar = {
+      enabled = true,
+      name_formatter = function(term)
+        return term.name
+      end,
+    },
     hide_numbers = true,
     shade_filetypes = { 'none', 'fzf' },
     shade_terminals = true,
