@@ -18,12 +18,12 @@ M.compile_func = function()
     end
     local outputFileName = vim.fn.input { prompt = 'File name: ', cancelreturn = vim.fn.expand '%:r' .. '.o' }
     termOpts['cmd'] = compiler_name
-      .. vim.fn.expand '%:p'
-      .. ' -o '
-      .. outputFileName
-      .. ' && '
-      .. './'
-      .. outputFileName
+        .. vim.fn.expand '%:p'
+        .. ' -o '
+        .. outputFileName
+        .. ' && '
+        .. './'
+        .. outputFileName
     local compile = Terminal:new(termOpts)
     compile:toggle()
   elseif vim.bo.filetype == 'python' then
@@ -45,20 +45,40 @@ function M.set_keymaps()
   nmap { ' ', '' }
   xmap { ' ', '' }
   nmap {
-    { 'Y', 'y$' },
+    { 'Y',     'y$' },
     { '<C-a>', 'ggVG' },
     { '<C-h>', '<C-w>h' },
     { '<C-l>', '<C-w>l' },
     { '<C-j>', '<C-w>j' },
     { '<C-k>', '<C-w>k' },
     {
+      'zM',
+      function()
+        require('ufo').closeAllFolds()
+      end,
+    },
+    {
+      'K',
+      function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end,
+    },
+    {
+      'zR',
+      function()
+        require('ufo').openAllFolds()
+      end,
+    },
+    {
       'T',
       function()
         require('trouble').toggle()
       end,
     },
-    { 'U', cmd 'UndotreeShow' },
-    { '<C-n>', cmd 'NvimTreeToggle' },
+    { '<C-n>',     cmd 'NvimTreeToggle' },
     {
       '<C-s>',
       function()
@@ -67,11 +87,11 @@ function M.set_keymaps()
       end,
     },
     { '<leader>p', cmd 'Lazy sync' },
-    { '<C-q>', cmd 'q!' },
+    { '<C-q>',     cmd 'q!' },
     {
       '<C-S-p>',
       function()
-        require('telescope.command').load_command()
+        require('core.menu').trigger_menu()
       end,
     },
     {
@@ -91,7 +111,7 @@ function M.set_keymaps()
     {
       '<leader>f',
       function()
-        vim.lsp.buf.format()
+        buf.format()
       end,
     },
     { '<leader>t', cmd 'ToggleTerm' },
@@ -108,9 +128,10 @@ function M.set_keymaps()
       end,
     },
     {
-      '<leader>cp', function ()
+      '<leader>cp',
+      function()
         require('keymap.config').compile_func()
-      end
+      end,
     },
     {
       '<leader>mm',
@@ -150,65 +171,13 @@ function M.set_keymaps()
       end,
     },
     {
-      '<F10>',
-      function()
-        if vim.o.concealcursor == 'n' then
-          vim.o.concealcursor = ''
-        else
-          vim.o.concealcursor = 'n'
-        end
-      end,
-    },
-  }
-
-  -- Folds
-  nmap {
-    {
-      'K',
-      function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
-        if not winid then
-          vim.lsp.buf.hover()
-        end
-      end,
-    },
-    {
-      'zR',
-      function()
-        require('ufo').openAllFolds()
-      end,
-    },
-    {
-      'zM',
-      function()
-        require('ufo').closeAllFolds()
-      end,
-    },
-  }
-  -- LSP
-  nmap {
-    {
-      '<leader>ca',
-      function()
-        buf.code_action()
-      end,
-    },
-    {
-      '<leader>r',
-      function()
-        buf.references()
-      end,
-    },
-    {
       'R',
-      function()
-        buf.rename()
-      end,
+      buf.rename,
     },
   }
   nmap {
-    { 'j', plug 'faster_move_j', opts(silent) },
-    { 'k', plug 'faster_move_k', opts(silent) },
+    { 'j', plug 'faster_move_j',  opts(silent) },
+    { 'k', plug 'faster_move_k',  opts(silent) },
     { 'j', plug 'faster_move_gj', opts(silent) },
     { 'k', plug 'faster_move_gk', opts(silent) },
   }
@@ -223,14 +192,14 @@ function M.set_keymaps()
 
   -- Cokeline
   nmap {
-    { '<C-]>', plug 'cokeline-focus-next' },
-    { '<C-[>', plug 'cokeline-focus-prev' },
-    { '<Tab>', plug 'cokeline-switch-next' },
+    { '<C-]>',   plug 'cokeline-focus-next' },
+    { '<C-[>',   plug 'cokeline-focus-prev' },
+    { '<Tab>',   plug 'cokeline-switch-next' },
     { '<S-Tab>', plug 'cokeline-switch-prev' },
   }
   for i = 1, 9 do
     nmap {
-      { ('<F%s>'):format(i), (plug 'cokeline-focus-%s)'):format(i) },
+      { ('<F%s>'):format(i),      (plug 'cokeline-focus-%s)'):format(i) },
       { ('<Leader>%s'):format(i), (plug 'cokeline-switch-%s)'):format(i) },
     }
   end
@@ -241,20 +210,6 @@ function M.set_keymaps()
   vim.keymap.set('n', '<CR>', function()
     vim.cmd 'NeoZoomToggle'
   end, { silent = true, nowait = true })
-
-  -- Zen mode
-  vim.keymap.set('n', '<F11>', function()
-    if OnFocus == 0 then
-      OnFocus = 1
-      vim.cmd [[TZAtaraxis]]
-      vim.o.statusline = 0
-    else
-      vim.cmd [[TZAtaraxis]]
-      vim.opt.statusline = '%!v:lua.WindLine.show()'
-      require('codewindow').open_minimap()
-      OnFocus = 0
-    end
-  end, { noremap = true, silent = true })
 end
 
 return M

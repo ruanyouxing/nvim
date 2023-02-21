@@ -17,10 +17,9 @@ plugin {
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack, lazy = true }
 plugin {
   'anuvyklack/hydra.nvim',
-  lazy = true,
-  event = 'BufRead',
   dependencies = 'anuvyklack/keymap-layer.nvim',
   config = conf.hydra,
+  keys = {'<leader>h', '<leader>l'}
 }
 plugin {
   'williamboman/mason.nvim',

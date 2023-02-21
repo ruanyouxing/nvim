@@ -171,15 +171,91 @@ function tools.hydra()
     return table.concat { '<Cmd>', command, '<CR>' }
   end
 
+  local hint_config = {
+    position = 'middle',
+    border = 'rounded',
+  }
+  local lsp_hints = [[
+
+  LSP:
+
+     _ca_: Code actions      _K_: Hover               _r_: References          _f_: Format           ^
+
+     _R_: Rename             _d_: Go to definition    _s_: Document symbols
+
+  ]]
+  Hydra {
+    name = 'LSP actions',
+    hint = lsp_hints,
+    config = {
+      color = 'blue',
+      invoke_on_body = true,
+      hint = hint_config,
+    },
+    mode = { 'n', 'x', 'v', 'o' },
+    body = '<Leader>l',
+    heads = {
+      {
+        's',
+        function()
+          vim.lsp.buf.document_symbol()
+        end,
+      },
+      {
+        'd',
+        function()
+          vim.lsp.buf.definition { reuse_win = true }
+        end,
+        { exit = true },
+      },
+      {
+        'R',
+        function()
+          vim.lsp.buf.rename()
+        end,
+      },
+      {
+        'ca',
+        function()
+          vim.lsp.buf.code_action()
+        end,
+      },
+      {
+        'K',
+        function()
+          vim.lsp.buf.hover()
+        end,
+      },
+      {
+        'r',
+        function()
+          vim.lsp.buf.references()
+        end,
+      },
+      {
+        'f',
+        function()
+          vim.lsp.buf.format()
+        end,
+      },
+    },
+  }
+
   local hint = [[
 
-   _C_: Colorschemes      _/_: Search in files        _<Enter>_: Telescope        _Y_: Yank history   
+   _C_: Colorschemes      _/_: Search in files        _<Enter>_: Telescope        _Y_: Yank history     ^
 
-   _p_: Pick buffer       _w_: Close buffer           _h_: Hop motions            _c_: Compile code   
+   _p_: Pick buffer       _w_: Close buffer           _h_: Hop motions            _c_: Compile code     ^
 
-   _g_: Open diffs        _s_: Stage buffer           _S_: Spectre
+   _S_: Spectre
 
-   _d_: Debugging mode    _t_: Float terminal
+   Toggle:
+
+       _tc_: Toggle conceal       _z_: Toggle zen-mode        _d_: Debugging mode
+
+   Git utils:
+
+        _g_: Open diffs           _s_: Stage buffer
 
    _q_: Quit              _<Esc>_
   ]]
@@ -188,12 +264,10 @@ function tools.hydra()
     name = 'Hydra opitions',
     hint = hint,
     config = {
+      timeout = 200,
       color = 'teal',
       invoke_on_body = true,
-      hint = {
-        position = 'middle',
-        border = 'rounded',
-      },
+      hint = hint_config,
     },
     mode = { 'n', 'v', 'x', 'o' },
     body = '<Leader>h',
@@ -206,14 +280,14 @@ function tools.hydra()
           require('keystack').push 'debugging'
         end,
       },
-      { 's', cmd 'Gitsigns stage_buffer' },
+      { 's', require('gitsigns').stage_buffer },
       {
         'S',
         function()
           require('spectre').open_visual { select_word = true }
         end,
       },
-      { 'q', nil,                          { exit = true, nowait = true } },
+      { 'q', nil, { exit = true, nowait = true } },
       { 'p', '<Plug>(cokeline-pick-focus)' },
       { 'w', '<Plug>(cokeline-pick-close)' },
       {
@@ -224,8 +298,7 @@ function tools.hydra()
       },
       { 'C', cmd 'Telescope colorscheme' },
       { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'Search in file' } },
-      { '?', cmd 'Telescope search_history',            { desc = 'Search history' } },
-      { 't', cmd 'ToggleTerm directon=float' },
+      { '?', cmd 'Telescope search_history', { desc = 'Search history' } },
       {
         'Y',
         function()
@@ -233,9 +306,35 @@ function tools.hydra()
         end,
       },
       {
+        'tc',
+        function()
+          if vim.o.conceallevel > 0 then
+            vim.o.conceallevel = 0
+          else
+            vim.o.conceallevel = 2
+          end
+        end,
+      },
+      {
+        'z',
+        function()
+          if OnFocus == 0 then
+            OnFocus = 1
+            vim.cmd [[TZAtaraxis]]
+            vim.o.statusline = 0
+          else
+            vim.cmd [[TZAtaraxis]]
+            vim.opt.statusline = '%!v:lua.WindLine.show()'
+            require('codewindow').open_minimap()
+            OnFocus = 0
+          end
+        end,
+        { exit = true },
+      },
+      {
         '<Enter>',
         cmd 'Telescope',
-        { exit = true, desc = 'List all pickers' },
+        { exit = true, desc = 'List all Telescope options' },
       },
       { '<Esc>', nil, { exit = true, nowait = true } },
     },
@@ -244,7 +343,7 @@ end
 
 function tools.overseer()
   require('overseer').setup {
-    templates = {'builtin', 'user.cpp_build'}
+    templates = { 'builtin', 'cpp_build' },
   }
 end
 
