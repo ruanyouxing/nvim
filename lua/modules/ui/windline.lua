@@ -116,7 +116,7 @@ function config.setup()
     },
     text = function()
       return {
-        { '', 'Border' },
+        { '',                'Border' },
         { state.mode[1] .. ' ', state.mode[1] },
       }
     end,
@@ -143,7 +143,7 @@ function config.setup()
     text = function(bufnr)
       if lsp_comps.check_lsp(bufnr) then
         return {
-          { ' ', 'Blank' },
+          { ' ',                                  'Blank' },
           { lsp_comps.lsp_name { icon = ' ' }, 'LspHl' },
         }
       end
@@ -193,7 +193,7 @@ function config.setup()
         }
       else
         return {
-          { b_components.cache_file_icon { default = '' }, 'FileNameHL' },
+          { b_components.cache_file_icon { default = '' },    'FileNameHL' },
           { ' ' },
           { b_components.cache_file_name('[No Name]', 'unique'), 'FileNameHL' },
         }
@@ -208,7 +208,7 @@ function config.setup()
     },
     text = function()
       return {
-        { '   ', 'FSizeHl' },
+        { '   ',                       'FSizeHl' },
         { b_components.cache_file_size(), 'FSizeHl' },
         { ' ' },
       }
@@ -250,7 +250,7 @@ function config.setup()
       return {
         { ' ' },
         { require('wpm').wpm, 'WpmHl' },
-        { ' | ', 'WpmHl' },
+        { ' | ',              'WpmHl' },
         {
           require('wpm').historic_graph(),
           'WpmHl',
@@ -269,8 +269,8 @@ function config.setup()
       if git_comps.is_git(bufnr) then
         return {
           { ' ' },
-          { git_comps.diff_added { format = '  %s ' }, 'DiffAdd' },
-          { git_comps.diff_changed { format = ' 柳%s ' }, 'DiffMod' },
+          { git_comps.diff_added { format = '  %s ' },   'DiffAdd' },
+          { git_comps.diff_changed { format = ' 柳%s ' },  'DiffMod' },
           { git_comps.diff_removed { format = '  %s ' }, 'DiffRemove' },
         }
       end

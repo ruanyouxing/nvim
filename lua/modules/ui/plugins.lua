@@ -28,7 +28,7 @@ plugin {
     require 'modules.ui.dashboard'
   end,
 }
-plugin { 'stevearc/dressing.nvim', config = conf.dressing, module = true, event = 'BufWritePre' }
+plugin { 'stevearc/dressing.nvim', config = conf.dressing }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
 plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline, event = 'UIEnter' }
