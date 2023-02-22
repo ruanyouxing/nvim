@@ -78,7 +78,7 @@ function M.set_keymaps()
         require('trouble').toggle()
       end,
     },
-    { '<C-n>',     cmd 'NvimTreeToggle' },
+    { '<C-n>', cmd 'NvimTreeToggle' },
     {
       '<C-s>',
       function()
@@ -86,8 +86,13 @@ function M.set_keymaps()
         require('symbols-outline').toggle_outline()
       end,
     },
-    { '<leader>p', cmd 'Lazy sync' },
-    { '<C-q>',     cmd 'q!' },
+    {
+      '<leader>p',
+      function()
+        require('lazy').update()
+      end,
+    },
+    { '<C-q>', cmd 'q!' },
     {
       '<C-S-p>',
       function()
@@ -210,6 +215,23 @@ function M.set_keymaps()
   vim.keymap.set('n', '<CR>', function()
     vim.cmd 'NeoZoomToggle'
   end, { silent = true, nowait = true })
+
+  vmap {
+    { 'jk', '<ESC>' },
+    { 'q',  '<ESC>' },
+    {
+      '<S-Space>',
+      function()
+        require('hop').hint_lines_skip_whitespaces()
+      end,
+    },
+    {
+      'W',
+      function()
+        require('hop').hint_words()
+      end,
+    },
+  }
 end
 
 return M
