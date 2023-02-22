@@ -8,11 +8,7 @@ plugin {
   'phaazon/hop.nvim',
   branch = 'v2',
   event = 'BufEnter',
-  config = function()
-    require('hop').setup {
-      keys = 'etovxqpdygfblzhckisuran',
-    }
-  end,
+  config = conf.hop,
 }
 plugin { 'Jxstxs/keystack.nvim', config = conf.keystack, lazy = true }
 plugin {

@@ -54,6 +54,12 @@ function tools.fold_preview()
   })
 end
 
+function tools.hop()
+  require('hop').setup {
+    keys = 'etovxqpdygfblzhckisuran',
+  }
+end
+
 function tools.highlight()
   local high_str = require 'high-str'
   high_str.setup {
@@ -103,7 +109,6 @@ function tools.keystack()
     mappings = {
       exit_key = { 'q', '<ESC>' },
       ['debugging'] = {
-        opts = { silent = true, noremap = true },
         maps = {
           ['c'] = function()
             require('dap').run_to_cursor()
@@ -181,7 +186,7 @@ function tools.hydra()
 
      _ca_: Code actions      _K_: Hover               _r_: References          _f_: Format           ^
 
-     _R_: Rename             _d_: Go to definition    _s_: Document symbols
+     _R_: Rename             _d_: Go to definition    _s_: Document symbols    _i_: Implementations  ^
 
   ]]
   Hydra {
@@ -195,6 +200,12 @@ function tools.hydra()
     mode = { 'n', 'x', 'v', 'o' },
     body = '<Leader>l',
     heads = {
+      {
+        'i',
+        function()
+          vim.lsp.buf.implementation()
+        end,
+      },
       {
         's',
         function()
@@ -243,19 +254,17 @@ function tools.hydra()
 
   local hint = [[
 
-   _C_: Colorschemes      _/_: Search in files        _<Enter>_: Telescope        _Y_: Yank history     ^
+   _/_: Search in files        _<Enter>_: Telescope
 
-   _p_: Pick buffer       _w_: Close buffer           _h_: Hop motions            _c_: Compile code     ^
+   _p_: Pick buffer            _w_: Close buffer
+
+   _h_: Hop motions            _c_: Compile code     ^
 
    _S_: Spectre
 
-   Toggle:
-
-       _tc_: Toggle conceal       _z_: Toggle zen-mode        _d_: Debugging mode
-
    Git utils:
 
-        _g_: Open diffs           _s_: Stage buffer
+        _g_: Open diffs
 
    _q_: Quit              _<Esc>_
   ]]
@@ -275,19 +284,12 @@ function tools.hydra()
       { 'g', cmd 'DiffviewOpen' },
       { 'h', cmd 'HopWord' },
       {
-        'd',
-        function()
-          require('keystack').push 'debugging'
-        end,
-      },
-      { 's', require('gitsigns').stage_buffer },
-      {
         'S',
         function()
           require('spectre').open_visual { select_word = true }
         end,
       },
-      { 'q', nil, { exit = true, nowait = true } },
+      { 'q', nil,                          { exit = true, nowait = true } },
       { 'p', '<Plug>(cokeline-pick-focus)' },
       { 'w', '<Plug>(cokeline-pick-close)' },
       {
@@ -298,39 +300,7 @@ function tools.hydra()
       },
       { 'C', cmd 'Telescope colorscheme' },
       { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'Search in file' } },
-      { '?', cmd 'Telescope search_history', { desc = 'Search history' } },
-      {
-        'Y',
-        function()
-          require('telescope').extensions.yank_history.yank_history()
-        end,
-      },
-      {
-        'tc',
-        function()
-          if vim.o.conceallevel > 0 then
-            vim.o.conceallevel = 0
-          else
-            vim.o.conceallevel = 2
-          end
-        end,
-      },
-      {
-        'z',
-        function()
-          if OnFocus == 0 then
-            OnFocus = 1
-            vim.cmd [[TZAtaraxis]]
-            vim.o.statusline = 0
-          else
-            vim.cmd [[TZAtaraxis]]
-            vim.opt.statusline = '%!v:lua.WindLine.show()'
-            require('codewindow').open_minimap()
-            OnFocus = 0
-          end
-        end,
-        { exit = true },
-      },
+      { '?', cmd 'Telescope search_history',            { desc = 'Search history' } },
       {
         '<Enter>',
         cmd 'Telescope',
