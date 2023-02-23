@@ -222,7 +222,7 @@ function M.set_keymaps()
     {
       '<S-Space>',
       function()
-        require('hop').hint_lines_skip_whitespaces()
+        require('hop').hint_lines_skip_whitespace()
       end,
     },
     {
