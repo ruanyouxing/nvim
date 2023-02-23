@@ -172,10 +172,6 @@ end
 function tools.hydra()
   local Hydra = require 'hydra'
 
-  local function cmd(command)
-    return table.concat { '<Cmd>', command, '<CR>' }
-  end
-
   local hint_config = {
     position = 'middle',
     border = 'rounded',
@@ -184,9 +180,9 @@ function tools.hydra()
 
   LSP:
 
-     _ca_: Code actions      _K_: Hover               _r_: References          _f_: Format           ^
+     _ca_: Code actions      _K_: Hover               _r_: References          _f_: Format                ^
 
-     _R_: Rename             _d_: Go to definition    _s_: Document symbols    _i_: Implementations  ^
+     _R_: Rename             _d_: Go to definition    _s_: Document symbols    _i_: Implementations       ^
 
   ]]
   Hydra {
@@ -249,64 +245,6 @@ function tools.hydra()
           vim.lsp.buf.format()
         end,
       },
-    },
-  }
-
-  local hint = [[
-
-   _/_: Search in files        _<Enter>_: Telescope
-
-   _p_: Pick buffer            _w_: Close buffer
-
-   _h_: Hop motions            _c_: Compile code     ^
-
-   _S_: Spectre
-
-   Git utils:
-
-        _g_: Open diffs
-
-   _q_: Quit              _<Esc>_
-  ]]
-
-  Hydra {
-    name = 'Hydra opitions',
-    hint = hint,
-    config = {
-      timeout = 200,
-      color = 'teal',
-      invoke_on_body = true,
-      hint = hint_config,
-    },
-    mode = { 'n', 'v', 'x', 'o' },
-    body = '<Leader>h',
-    heads = {
-      { 'g', cmd 'DiffviewOpen' },
-      { 'h', cmd 'HopWord' },
-      {
-        'S',
-        function()
-          require('spectre').open_visual { select_word = true }
-        end,
-      },
-      { 'q', nil,                          { exit = true, nowait = true } },
-      { 'p', '<Plug>(cokeline-pick-focus)' },
-      { 'w', '<Plug>(cokeline-pick-close)' },
-      {
-        'c',
-        function()
-          require('keymap.config').compile_func()
-        end,
-      },
-      { 'C', cmd 'Telescope colorscheme' },
-      { '/', cmd 'Telescope current_buffer_fuzzy_find', { desc = 'Search in file' } },
-      { '?', cmd 'Telescope search_history',            { desc = 'Search history' } },
-      {
-        '<Enter>',
-        cmd 'Telescope',
-        { exit = true, desc = 'List all Telescope options' },
-      },
-      { '<Esc>', nil, { exit = true, nowait = true } },
     },
   }
 end

@@ -15,7 +15,7 @@ plugin {
   'anuvyklack/hydra.nvim',
   dependencies = 'anuvyklack/keymap-layer.nvim',
   config = conf.hydra,
-  keys = {'<leader>h', '<leader>l'}
+  keys = '<leader>l',
 }
 plugin {
   'williamboman/mason.nvim',
