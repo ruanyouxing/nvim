@@ -91,10 +91,11 @@ plugin {
 }
 plugin {
   'gelguy/wilder.nvim',
-  event = { 'CmdlineEnter' },
+  event =  'CmdlineEnter',
+  lazy = true,
   dependencies = {
-    { 'roxma/nvim-yarp', build = ':UpdateRemotePlugins' },
-    'roxma/vim-hug-neovim-rpc',
+    -- { 'roxma/nvim-yarp', build = ':UpdateRemotePlugins' },
+    -- 'roxma/vim-hug-neovim-rpc',
     'romgrk/fzy-lua-native',
   },
   config = conf.wilder,

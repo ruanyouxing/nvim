@@ -138,22 +138,22 @@ function ui.cokeline()
         end,
         style = function(buffer)
           return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
-              or buffer.is_modified and 'italic,bold'
-              or buffer.is_focused and 'bold'
-              or buffer.diagnostics.errors ~= 0 and 'underline'
-              or nil
+            or buffer.is_modified and 'italic,bold'
+            or buffer.is_focused and 'bold'
+            or buffer.diagnostics.errors ~= 0 and 'underline'
+            or nil
         end,
       },
       {
         text = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and ' ' .. buffer.diagnostics.errors .. ' ')
-              or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings .. ' ')
-              or ''
+            or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings .. ' ')
+            or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and errors_fg)
-              or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-              or nil
+            or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+            or nil
         end,
       },
       {
@@ -399,7 +399,6 @@ function ui.notify()
       TRACE = '✎',
     },
   }
-  require 'notify' 'Welcome!'
 end
 
 function ui.tokyonight()
@@ -438,6 +437,7 @@ end
 
 function ui.wilder()
   local wilder = require 'wilder'
+  wilder.set_option('use_python_remote_plugin', 0)
   wilder.setup { modes = { ':', '/', '?' } }
   local gradient = {
     '#f4468f',
@@ -467,14 +467,25 @@ function ui.wilder()
     wilder.branch(
       wilder.cmdline_pipeline {
         fuzzy = 1,
+        use_python = 0,
+        fuzzy_filter = wilder.lua_fzy_filter(),
       },
-      wilder.python_file_finder_pipeline {
-        file_command = { 'fd', '-tf' },
-        dir_command = { 'fd', '-tf' },
-        filters = { 'fuzzy_filter', 'difflib_sorter' },
-      },
-
-      wilder.python_search_pipeline()
+      wilder.vim_search_pipeline(),
+      {
+      {
+        wilder.check(function(_, x)
+          return x == ''
+        end),
+        wilder.history(),
+        wilder.result {
+          draw = {
+            function(_, x)
+              return ' '.. ' ' .. x
+            end,
+          },
+        },
+      }
+      }
     ),
   })
   local highlighters = {
