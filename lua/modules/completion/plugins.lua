@@ -25,3 +25,4 @@ plugin {
 plugin { 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.snippets }
 plugin { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
 plugin { 'jose-elias-alvarez/null-ls.nvim', config = null_ls.setup }
+
