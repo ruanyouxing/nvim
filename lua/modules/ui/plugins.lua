@@ -27,6 +27,7 @@ plugin {
   config = function()
     require 'modules.ui.dashboard'
   end,
+  lazy = true,
 }
 plugin { 'stevearc/dressing.nvim', config = conf.dressing }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin }

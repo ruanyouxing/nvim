@@ -140,7 +140,6 @@ function completion.cmp()
     }),
   })
 end
-
 function completion.snippets()
   local ls = require 'luasnip'
   ls.config.set_config {
