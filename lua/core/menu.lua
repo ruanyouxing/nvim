@@ -205,11 +205,14 @@ add_section {
   end,
 }
 add_section {
-  'Split buffers ',
+  'Split buffers vertically',
   function()
     vim.cmd [[vsplit]]
   end,
 }
+add_section{'Split buffers horizontally', function ()
+  vim.cmd[[sp]]
+end}
 add_section {
   'Close splits',
   function()
