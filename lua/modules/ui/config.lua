@@ -199,6 +199,17 @@ function ui.cokeline()
   }
 end
 
+function ui.github_theme()
+  require('github-theme').setup {
+    theme_style = 'dimmed',
+    function_style = 'italic',
+    dev = true,
+    overrides = function(c)
+      return { StatusLine = { bg = c.bg, fg = c.fg } }
+    end,
+  }
+end
+
 function ui.cursorline()
   require('nvim-cursorline').setup {
     curosrline = { enable = true, timeout = 100, number = false },
@@ -375,7 +386,7 @@ end
 function ui.outline()
   require('symbols-outline').setup {
     position = 'left',
-    auto_close = true,
+    show_numbers = true,
     show_relative_numbers = true,
     symbols = { Function = { icon = '', hl = '@function' }, Variable = { icon = '', hl = '@constant' } },
   }
@@ -468,23 +479,22 @@ function ui.wilder()
       wilder.cmdline_pipeline {
         fuzzy = 1,
         use_python = 0,
-        fuzzy_filter = wilder.lua_fzy_filter(),
       },
       wilder.vim_search_pipeline(),
       {
-      {
-        wilder.check(function(_, x)
-          return x == ''
-        end),
-        wilder.history(),
-        wilder.result {
-          draw = {
-            function(_, x)
-              return ' '.. ' ' .. x
-            end,
+        {
+          wilder.check(function(_, x)
+            return x == ''
+          end),
+          wilder.history(),
+          wilder.result {
+            draw = {
+              function(_, x)
+                return ' ' .. ' ' .. x
+              end,
+            },
           },
         },
-      }
       }
     ),
   })

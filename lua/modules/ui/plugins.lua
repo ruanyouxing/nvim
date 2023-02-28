@@ -7,7 +7,7 @@ plugin {
     require('ayu').setup {
       mirage = true,
     }
-    vim.cmd[[colorscheme ayu-mirage]]
+    vim.cmd [[colorscheme ayu-mirage]]
   end,
   lazy = false,
   priority = 10000,
@@ -28,6 +28,9 @@ plugin {
     require 'modules.ui.dashboard'
   end,
 }
+plugin {
+  'typicode/bg.nvim',
+}
 plugin { 'stevearc/dressing.nvim', config = conf.dressing }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin }
 plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
@@ -45,6 +48,7 @@ plugin {
   lazy = true,
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget, lazy = true }
+plugin { 'projekt0n/github-nvim-theme', lazy = false, priority = 10000, config = conf.github_theme }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
@@ -91,7 +95,7 @@ plugin {
 }
 plugin {
   'gelguy/wilder.nvim',
-  event =  'CmdlineEnter',
+  event = 'CmdlineEnter',
   lazy = true,
   dependencies = {
     -- { 'roxma/nvim-yarp', build = ':UpdateRemotePlugins' },
