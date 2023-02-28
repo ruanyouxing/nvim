@@ -45,16 +45,16 @@ function M.set_keymaps()
   nmap { ' ', '' }
   xmap { ' ', '' }
   nmap {
-    { 'Y',     'y$' },
-    { '<C-a>', 'ggVG' },
+    { 'Y',       'y$' },
+    { '<C-a>',   'ggVG' },
     { '<C-S-h>', '<C-w>h' },
     { '<C-S-l>', '<C-w>l' },
     { '<C-S-j>', '<C-w>j' },
     { '<C-S-k>', '<C-w>k' },
-    {'<C-h>', '1<C-w><'},
-    {'<C-l>', '1<C-w>>'},
-    {'<C-k>', '1<C-w>-'},
-    {'<C-j>' , '1<C-w>+'},
+    { '<C-h>',   '1<C-w><' },
+    { '<C-l>',   '1<C-w>>' },
+    { '<C-k>',   '1<C-w>-' },
+    { '<C-j>',   '1<C-w>+' },
     {
       'zM',
       function()
@@ -189,6 +189,24 @@ function M.set_keymaps()
     { 'k', plug 'faster_move_k',  opts(silent) },
     { 'j', plug 'faster_move_gj', opts(silent) },
     { 'k', plug 'faster_move_gk', opts(silent) },
+    {
+      'H',
+      function()
+        require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true }
+      end,
+    },
+    {
+      'L',
+      function()
+        require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true }
+      end,
+    },
+    {
+      '<S-Space>',
+      function()
+        require('hop').hint_lines_skip_whitespace()
+      end,
+    },
   }
   vmap {
     { 'j', plug 'faster_vmove_j' },
@@ -230,9 +248,27 @@ function M.set_keymaps()
       end,
     },
     {
+      'w',
+      function()
+        require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR }
+      end,
+    },
+    {
       'W',
       function()
-        require('hop').hint_words()
+        require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR }
+      end,
+    },
+    {
+      'H',
+      function()
+        require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true }
+      end,
+    },
+    {
+      'L',
+      function()
+        require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true }
       end,
     },
   }
