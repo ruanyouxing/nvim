@@ -79,6 +79,13 @@ function completion.cmp()
   end
   local lspkind = require 'lspkind'
   cmp.setup {
+    enabled = function()
+      local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
+      if buftype == 'prompt' then
+        return false
+      end
+      return true
+    end,
     view = {
       entries = { name = 'custom', selection_order = 'near_cursor' },
     },
@@ -92,7 +99,7 @@ function completion.cmp()
     formatting = {
       fields = { 'kind', 'abbr', 'menu' },
       format = function(entry, vim_item)
-        local kind = lspkind.cmp_format { mode = 'symbol_text', maxwidth = 50 } (entry, vim_item)
+        local kind = lspkind.cmp_format { mode = 'symbol_text', maxwidth = 50 }(entry, vim_item)
         local strings = vim.split(kind.kind, '%s', { trimempty = true })
         kind.kind = ' ' .. (strings[1] or '') .. ' '
         kind.menu = '    [' .. (strings[2] or '') .. ']'
@@ -116,7 +123,7 @@ function completion.cmp()
       ['<S-Tab>'] = mapping(function(fallback)
         if cmp.visible() then
           cmp.select_prev_item()
-        elseif luasnip.jumpable( -1) then
+        elseif luasnip.jumpable(-1) then
           vim.fn.feedkeys(t '<Plug>luasnip-jump-prev', '')
         else
           fallback()

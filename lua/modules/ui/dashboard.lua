@@ -98,13 +98,6 @@ db.setup {
         key = 'T',
       },
       {
-        desc = ' Jump to folder',
-        desc_hl = '@variable',
-        group = 'Label',
-        action = 'Telescope zoxide list',
-        key = '<leader>z',
-      },
-      {
         desc = ' List available sessions',
         desc_hl = '@variable',
         group = 'Label',
