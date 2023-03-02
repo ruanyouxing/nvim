@@ -31,6 +31,7 @@ plugin {
 }
 plugin { 'stevearc/overseer.nvim', config = conf.overseer, cmd = 'OverseerRun' }
 plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
+
 plugin {
   'nvim-telescope/telescope.nvim',
   dependencies = {

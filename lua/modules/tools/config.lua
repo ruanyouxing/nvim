@@ -275,6 +275,7 @@ function tools.telescope()
   require('telescope').load_extension 'zoxide'
   require('telescope').load_extension 'media_files'
   require('telescope').load_extension 'notify'
+  require('telescope').load_extension('persisted')
   require('telescope').setup {
     mappings = {
       i = {

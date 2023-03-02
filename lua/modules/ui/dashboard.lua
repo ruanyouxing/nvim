@@ -1,4 +1,5 @@
 local db = require 'dashboard'
+local version = vim.version()
 local lockfile = table.concat({ vim.fn.stdpath 'data', 'lazy-lock.json' }, '/')
 local function file_exists(file)
   local f = io.open(file, 'rb')
@@ -23,8 +24,10 @@ local lines = 0
 for _ in pairs(lines_from(lockfile)) do
   lines = lines + 1
 end
-local version = vim.version()
 local header = {
+  desc = '',
+  '',
+  '',
   '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
@@ -41,27 +44,8 @@ local header = {
   '⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⠹⣿⣧⣀⠀⠀⠀⠀⡀⣴⠁⢘⡙⢿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⠗⠂⠄⠀⣴⡟⠀⠀⡃⠀⠉⠉⠟⡿⣿⣿⣿⣿',
   '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠾⠛⠂⢹⠀⠀⠀⢡⠀⠀⠀⠀⠀⠙⠛⠿⢿',
-}
-local center = {
-  {
-    icon = '  ',
-    icon_hl = 'Title',
-    desc = 'Recently latest session                  ',
-    keymap = 'SPC s l',
-    action = 'SessionLoad',
-  },
-  {
-    icon = '  ',
-    desc = 'Find  File                              ',
-    action = 'Telescope find_files find_command=rg,--hidden,--files',
-    keymap = 'SPC f f',
-  },
-  {
-    icon = '  ',
-    desc = 'Find  word                              ',
-    action = 'Telescope live_grep',
-    keymap = 'SPC f w',
-  },
+  '',
+  '',
 }
 local footer = {
   ' ',
@@ -72,8 +56,79 @@ local footer = {
 }
 
 db.setup {
+  theme = 'doom',
   config = {
     header = header,
+    center = {
+      {
+        desc = ' Open files ',
+        desc_hl = '@variable',
+        group = 'Label',
+        action = 'Telescope find_files',
+        key = '<C-o>',
+      },
+      {
+        desc = ' Create a new file ',
+        desc_hl = '@variable',
+        group = 'Label',
+        action = function()
+          vim.ui.input({ prompt = 'File name:' }, function(input)
+            if input == nil then
+              return
+            end
+            vim.cmd('e ' .. input)
+          end)
+        end,
+        key = '<C-S-n>',
+      },
+      {
+        desc = 'פּ Open file tree',
+        desc_hl = '@variable',
+        group = 'Label',
+        key = '<C-n>',
+        action = 'NvimTreeToggle',
+      },
+      {
+        desc = ' Telescope',
+        desc_hl = '@variable',
+        group = 'Label',
+        action = function()
+          vim.cmd [[Telescope]]
+        end,
+        key = 'T',
+      },
+      {
+        desc = ' Jump to folder',
+        desc_hl = '@variable',
+        group = 'Label',
+        action = 'Telescope zoxide list',
+        key = '<leader>z',
+      },
+      {
+        desc = ' List available sessions',
+        desc_hl = '@variable',
+        group = 'Label',
+        key = 'S',
+        action = function()
+          vim.cmd [[Telescope persisted]]
+        end,
+      },
+      {
+        desc = '祝Load latest saved session',
+        desc_hl = '@variable',
+        group = 'Label',
+        key = '<leader>s',
+        action = 'SessionLoadLast',
+      },
+      {
+        desc = ' Exit Neovim',
+        desc_hl = '@variable',
+        group = 'Label',
+        key = '<C-q>',
+        action = 'q!',
+      },
+    },
     footer = footer,
   },
 }
+vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#f7db32' })

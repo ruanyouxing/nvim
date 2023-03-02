@@ -16,14 +16,14 @@ function editor.autosave()
 end
 
 function editor.autosession()
-  require('auto-session').setup {
-    log_level = 'info',
-    auto_session_enable_last_session = true,
-    auto_session_root_dir = vim.fn.stdpath 'data' .. '/session',
-    auto_session_enabled = true,
-    auto_save_enabled = true,
-    auto_restore_enable = true,
-    auto_session_suppress_dirs = nil,
+  require('persisted').setup {
+    save_dir = vim.fn.expand(vim.fn.stdpath 'data' .. '/sessions/'),
+    autosave = true,
+    should_autosave = true,
+    use_git_branch = true,
+    telescope = {
+      reset_prompt_after_deletion = true,
+    },
   }
 end
 

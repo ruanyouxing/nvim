@@ -24,6 +24,15 @@ plugin { 'SmiteshP/nvim-navic', lazy = true }
 plugin { 'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'nvim-navic', event = 'BufRead' }
 plugin {
   'glepnir/dashboard-nvim',
+  -- dependencies = {
+  --   'glepnir/dbsession.nvim',
+  --   cmd = { 'SessionSave', 'SessionDelete', 'SessionLoad' },
+  --   config = function()
+  --     require('dbsession').setup {
+  --       auto_save_on_exit = true,
+  --     }
+  --   end,
+  -- },
   config = function()
     require 'modules.ui.dashboard'
   end,
@@ -48,7 +57,7 @@ plugin {
   lazy = true,
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget, lazy = true }
-plugin { 'projekt0n/github-nvim-theme', lazy = false, priority = 10000, config = conf.github_theme }
+plugin { 'projekt0n/github-nvim-theme', lazy = false, priority = 1000, config = conf.github_theme }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
@@ -98,8 +107,6 @@ plugin {
   event = 'CmdlineEnter',
   lazy = true,
   dependencies = {
-    -- { 'roxma/nvim-yarp', build = ':UpdateRemotePlugins' },
-    -- 'roxma/vim-hug-neovim-rpc',
     'romgrk/fzy-lua-native',
   },
   config = conf.wilder,

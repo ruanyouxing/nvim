@@ -18,6 +18,12 @@ add_section {
   end,
 }
 add_section {
+  'Telescope: List sessions',
+  function()
+    vim.cmd [[Telescope persisted]]
+  end,
+}
+add_section {
   'Compile',
   function()
     require('keymap.config').compile_func()
@@ -210,9 +216,12 @@ add_section {
     vim.cmd [[vsplit]]
   end,
 }
-add_section{'Split buffers horizontally', function ()
-  vim.cmd[[sp]]
-end}
+add_section {
+  'Split buffers horizontally',
+  function()
+    vim.cmd [[sp]]
+  end,
+}
 add_section {
   'Close splits',
   function()
@@ -285,6 +294,12 @@ add_section {
   'Spectre',
   function()
     require('spectre').open()
+  end,
+}
+add_section {
+  'Save current session',
+  function()
+    require('persisted').save { override = true }
   end,
 }
 table.sort(keys)

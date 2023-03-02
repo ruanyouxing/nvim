@@ -10,7 +10,10 @@ local is_gitrepo = function()
 end
 
 plugin { 'Pocco81/AutoSave.nvim', config = conf.autosave }
-plugin { 'rmagatti/auto-session', config = conf.autosession }
+plugin {
+  'olimorris/persisted.nvim',
+  config = conf.autosession,
+}
 plugin {
   'famiu/bufdelete.nvim',
   event = 'BufDelete',
@@ -19,9 +22,9 @@ plugin { 'max397574/better-escape.nvim', event = 'InsertEnter', config = conf.be
 plugin {
   'norcalli/nvim-colorizer.lua',
   config = function()
-    require('colorizer').setup {'*'}
+    require('colorizer').setup { '*' }
   end,
-  cmd = 'ColorizerToggle'
+  cmd = 'ColorizerToggle',
 }
 plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, cmd = 'DiffviewOpen' }
 plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }

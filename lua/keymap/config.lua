@@ -16,16 +16,16 @@ M.compile_func = function()
     else
       compiler_name = 'gcc '
     end
-    local outputFileName = vim.fn.input { prompt = 'File name: ', cancelreturn = vim.fn.expand '%:r' .. '.o' }
-    termOpts['cmd'] = compiler_name
-        .. vim.fn.expand '%:p'
-        .. ' -o '
-        .. outputFileName
-        .. ' && '
-        .. './'
-        .. outputFileName
-    local compile = Terminal:new(termOpts)
-    compile:toggle()
+    vim.ui.input({ prompt = 'File name (press Ctrl-C to use default file output): ' }, function(input)
+      if input == nil then
+        input = vim.fn.expand('%:r' .. '.o')
+      elseif input == 'q' then
+        return
+      end
+      termOpts['cmd'] = compiler_name .. vim.fn.expand '%:p' .. ' -o ' .. input .. ' && ' .. './' .. input
+      local compile = Terminal:new(termOpts)
+      compile:toggle()
+    end)
   elseif vim.bo.filetype == 'python' then
     termOpts['cmd'] = 'python ' .. vim.fn.expand '%:p'
     local compile = Terminal:new(termOpts)
@@ -192,7 +192,10 @@ function M.set_keymaps()
     {
       'H',
       function()
-        require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true }
+        require('hop').hint_words {
+          direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+          current_line_only = true,
+        }
       end,
     },
     {
@@ -262,7 +265,10 @@ function M.set_keymaps()
     {
       'H',
       function()
-        require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR, current_line_only = true }
+        require('hop').hint_words {
+          direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+          current_line_only = true,
+        }
       end,
     },
     {
