@@ -22,7 +22,7 @@ autocmd({ 'User' }, {
   pattern = 'PersistedSavePost',
   callback = function()
     vim.notify 'Session saved'
-    SessionStatus = { { '   Session saved', 'SessionHL' } }
+    SessionStatus = { { '   Session saved', 'SessionHL' } }
   end,
 })
 autocmd({ 'User' }, {
