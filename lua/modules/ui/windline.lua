@@ -1,7 +1,7 @@
 local config = {}
 ---@diagnostic disable: undefined-field
 ---@diagnostic disable: unused-local
-
+SessionStatus = {}
 local create_cava_colors = function(colors)
   local HSL = require 'wlanimation.utils'
   local d_colors = {
@@ -181,6 +181,15 @@ function config.setup()
       elseif is_mac then
         return { { '  Darwin' } }
       end
+    end,
+  }
+  addComponent {
+    name = 'Sessions',
+    hl_colors = {
+      SessionHL = { 'green', 'bg' },
+    },
+    text = function()
+      return SessionStatus
     end,
   }
   divideComps() -- End left side components

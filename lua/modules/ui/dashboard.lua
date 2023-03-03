@@ -8,7 +8,6 @@ local function file_exists(file)
   end
   return f ~= nil
 end
-
 local function lines_from(file)
   if not file_exists(file) then
     return {}
@@ -26,8 +25,6 @@ for _ in pairs(lines_from(lockfile)) do
 end
 local header = {
   desc = '',
-  '',
-  '',
   '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
   '⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',

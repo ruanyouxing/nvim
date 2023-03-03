@@ -12,10 +12,23 @@ autocmd({ 'ColorScheme' }, {
     require('modules.ui.config').cokeline()
   end,
 })
-vim.api.nvim_create_autocmd({ 'User' }, {
+autocmd({ 'User' }, {
+  pattern = 'PersistedLoadPost',
+  callback = function()
+    SessionStatus = { { '   Session loaded', 'SessionHL' } }
+  end,
+})
+autocmd({ 'User' }, {
   pattern = 'PersistedSavePost',
-  group = vim.api.nvim_create_augroup('PersistedHooks', {}),
   callback = function()
     vim.notify 'Session saved'
+    SessionStatus = { { '   Session saved', 'SessionHL' } }
+  end,
+})
+autocmd({ 'User' }, {
+  pattern = 'PersistedDeletePost',
+  callback = function()
+    vim.notify 'Session saved'
+    SessionStatus = { { '  ﳠ Session deleted', 'SessionHL' } }
   end,
 })
