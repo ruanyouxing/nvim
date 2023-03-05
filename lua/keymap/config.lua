@@ -45,16 +45,22 @@ function M.set_keymaps()
   nmap { ' ', '' }
   xmap { ' ', '' }
   nmap {
-    { 'Y',       'y$' },
-    { '<C-a>',   'ggVG' },
+    { 'Y', 'y$' },
+    { '<C-a>', 'ggVG' },
     { '<C-S-h>', '<C-w>h' },
     { '<C-S-l>', '<C-w>l' },
     { '<C-S-j>', '<C-w>j' },
     { '<C-S-k>', '<C-w>k' },
-    { '<C-h>',   '1<C-w><' },
-    { '<C-l>',   '1<C-w>>' },
-    { '<C-k>',   '1<C-w>-' },
-    { '<C-j>',   '1<C-w>+' },
+    { '<C-h>', '1<C-w><' },
+    { '<C-l>', '1<C-w>>' },
+    { '<C-k>', '1<C-w>-' },
+    { '<C-j>', '1<C-w>+' },
+    -- {
+    --   'mm',
+    --   function()
+    --     require('grapple').toggle()
+    --   end,
+    -- },
     {
       'zM',
       function()
@@ -185,10 +191,6 @@ function M.set_keymaps()
     },
   }
   nmap {
-    { 'j', plug 'faster_move_j',  opts(silent) },
-    { 'k', plug 'faster_move_k',  opts(silent) },
-    { 'j', plug 'faster_move_gj', opts(silent) },
-    { 'k', plug 'faster_move_gk', opts(silent) },
     {
       'H',
       function()
@@ -211,6 +213,12 @@ function M.set_keymaps()
       end,
     },
   }
+  nmap {
+    { 'j', plug 'faster_move_j', opts(silent) },
+    { 'k', plug 'faster_move_k', opts(silent) },
+    { 'j', plug 'faster_move_gj', opts(silent) },
+    { 'k', plug 'faster_move_gk', opts(silent) },
+  }
   vmap {
     { 'j', plug 'faster_vmove_j' },
     { 'k', plug 'faster_vmove_k' },
@@ -222,14 +230,14 @@ function M.set_keymaps()
 
   -- Cokeline
   nmap {
-    { '<C-]>',   plug 'cokeline-focus-next' },
-    { '<C-[>',   plug 'cokeline-focus-prev' },
-    { '<Tab>',   plug 'cokeline-switch-next' },
+    { '<C-]>', plug 'cokeline-focus-next' },
+    { '<C-[>', plug 'cokeline-focus-prev' },
+    { '<Tab>', plug 'cokeline-switch-next' },
     { '<S-Tab>', plug 'cokeline-switch-prev' },
   }
   for i = 1, 9 do
     nmap {
-      { ('<F%s>'):format(i),      (plug 'cokeline-focus-%s)'):format(i) },
+      { ('<F%s>'):format(i), (plug 'cokeline-focus-%s)'):format(i) },
       { ('<Leader>%s'):format(i), (plug 'cokeline-switch-%s)'):format(i) },
     }
   end
@@ -243,7 +251,7 @@ function M.set_keymaps()
 
   vmap {
     { 'jk', '<ESC>' },
-    { 'q',  '<ESC>' },
+    { 'q', '<ESC>' },
     {
       '<S-Space>',
       function()

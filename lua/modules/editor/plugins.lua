@@ -30,6 +30,16 @@ plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, cm
 plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }
 plugin { 'terrortylor/nvim-comment', config = conf.comment, event = 'ModeChanged' }
 plugin { 'kyazdani42/nvim-web-devicons', lazy = true }
+-- plugin {
+--   'cbochs/grapple.nvim',
+--   config = conf.bookmark,
+--   lazy = true,
+-- }
+plugin {
+  'LeonHeidelbach/trailblazer.nvim',
+  config = conf.bookmark,
+  lazy = true,
+}
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
 plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }

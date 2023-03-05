@@ -199,6 +199,13 @@ function ui.cokeline()
   }
 end
 
+function ui.kanagawa()
+  require('kanagawa').setup {
+    globalStatus = true,
+    dimInactive = true,
+  }
+end
+
 function ui.github_theme()
   require('github-theme').setup {
     theme_style = 'dimmed',

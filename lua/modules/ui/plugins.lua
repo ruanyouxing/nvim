@@ -7,11 +7,11 @@ plugin {
     require('ayu').setup {
       mirage = true,
     }
-    vim.cmd [[colorscheme ayu-mirage]]
   end,
   lazy = false,
   priority = 10000,
 }
+plugin { 'rebelot/kanagawa.nvim', config = conf.kanagawa, lazy = false, priority = 10000 }
 plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead' }
 plugin {
   'jcdickinson/wpm.nvim',

@@ -129,7 +129,7 @@ function config.setup()
     text = function(bufnr)
       if git_comps.is_git(bufnr) then
         return {
-          { git_comps.git_branch { icon = ' ' }, 'GitBranchHl', 90 },
+          { git_comps.git_branch { icon = '  ' }, 'GitBranchHl', 90 },
         }
       end
     end,
@@ -143,23 +143,9 @@ function config.setup()
     text = function(bufnr)
       if lsp_comps.check_lsp(bufnr) then
         return {
-          { ' ', 'Blank' },
+          { '  ', 'Blank' },
           { lsp_comps.lsp_name { icon = ' ' }, 'LspHl' },
         }
-      end
-    end,
-  }
-  addComponent {
-    name = 'LazyUpdates',
-    hl_colors = {
-      TextHl = { 'orange_alt', 'bg' },
-    },
-    text = function()
-      local lazy_status = require 'lazy.status'
-      if lazy_status.has_updates() then
-        return { { '  ' }, { lazy_status.updates(), 'TextHl' } }
-      else
-        return { { '  ' .. 0, 'TextHl' } }
       end
     end,
   }
@@ -192,6 +178,31 @@ function config.setup()
       return SessionStatus
     end,
   }
+  addComponent {
+    name = 'LazyUpdates',
+    hl_colors = {
+      TextHl = { 'orange_alt', 'bg' },
+    },
+    text = function()
+      local lazy_status = require 'lazy.status'
+      if lazy_status.has_updates() then
+        return { { '   ' }, { lazy_status.updates(), 'TextHl' } }
+      else
+        return { { '' } }
+      end
+    end,
+  }
+  -- addComponent {
+  --   name = 'Tags',
+  --   hl_colors = { Tags = { 'blue', 'bg' } },
+  --   text = function()
+  --     if require('grapple').exists() then
+  --       return { { '  笠[' .. require('grapple').key() .. ']', 'Tags' } }
+  --     else
+  --       return { { ' ' } }
+  --     end
+  --   end,
+  -- }
   divideComps() -- End left side components
   addComponent {
     name = 'Hydra',
