@@ -1,5 +1,5 @@
-if not vim.g.vscode then
-  require 'core'
-else
+if vim.g.vscode then
   require 'vscode'
+else
+  require 'core'
 end
