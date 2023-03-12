@@ -55,12 +55,12 @@ function M.set_keymaps()
     { '<C-l>', '1<C-w>>' },
     { '<C-k>', '1<C-w>-' },
     { '<C-j>', '1<C-w>+' },
-    -- {
-    --   'mm',
-    --   function()
-    --     require('grapple').toggle()
-    --   end,
-    -- },
+    {
+      'mm',
+      function()
+        require('trailblazer').new_trail_mark()
+      end,
+    },
     {
       'zM',
       function()

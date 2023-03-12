@@ -1,5 +1,6 @@
 local autocmd = vim.api.nvim_create_autocmd
 local all = '*'
+local User = { 'User' }
 autocmd({ 'TextYankPost' }, {
   pattern = all,
   callback = function()
@@ -12,20 +13,22 @@ autocmd({ 'ColorScheme' }, {
     require('modules.ui.config').cokeline()
   end,
 })
-autocmd({ 'User' }, {
+autocmd(User, {
   pattern = 'PersistedLoadPost',
   callback = function()
     SessionStatus = { { '   Session loaded', 'SessionHL' } }
+    require('trailblazer')
   end,
 })
-autocmd({ 'User' }, {
+autocmd(User, {
   pattern = 'PersistedSavePost',
   callback = function()
+    require('trailblazer').save_trailblazer_state_to_file()
     vim.notify 'Session saved'
     SessionStatus = { { '   Session saved', 'SessionHL' } }
   end,
 })
-autocmd({ 'User' }, {
+autocmd(User, {
   pattern = 'PersistedDeletePost',
   callback = function()
     vim.notify 'Session saved'

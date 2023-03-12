@@ -131,16 +131,17 @@ function editor.gitsigns()
 end
 
 function editor.bookmark()
-  -- require('grapple').setup {
-  --   popup_options = {
-  --     border = 'rounded',
-  --   },
-  -- }
-  require('trailblazer').setup{
+  require('trailblazer').setup {
     auto_save_trailblazer_state_on_exit = true,
-    auto_save_trailblazer_state_on_enter = true,
-    custom_session_storage_dir = vim.fn.stdpath('data')..'/trailblazer/',
-    mappings = {}
+    auto_load_trailblazer_state_on_enter = true,
+    custom_session_storage_dir = vim.fn.stdpath 'data' .. '/trailblazer/',
+    mappings = {},
+    event_list = {
+      'TrailBlazerTrailMarkStackSaved',
+      'TrailBlazerTrailMarkStackDeleted',
+      'TrailBlazerCurrentTrailMarkStackChanged',
+      'TrailBlazerTrailMarkStackSortModeChanged',
+    },
   }
 end
 

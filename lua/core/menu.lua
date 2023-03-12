@@ -300,6 +300,19 @@ add_section {
   'Save current session',
   function()
     require('persisted').save { override = true }
+    require('trailblazer').save_trailblazer_state_to_file()
+  end,
+}
+add_section {
+  'List marks',
+  function()
+    require('trailblazer').toggle_trail_mark_list()
+  end,
+}
+add_section {
+  'Delete all marks',
+  function()
+    require('trailblazer').delete_all_trail_marks()
   end,
 }
 table.sort(keys)
