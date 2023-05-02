@@ -11,6 +11,12 @@ add_section {
     vim.cmd [[Telescope]]
   end,
 }
+add_section{
+  'Navigator',
+  function ()
+    require('nvim-navbuddy').open()
+  end
+}
 add_section {
   'Telescope: Find in buffer',
   function()

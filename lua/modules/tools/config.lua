@@ -98,6 +98,14 @@ function tools.mason_tools()
   }
 end
 
+function tools.navbuddy()
+  require('nvim-navbuddy').setup {
+    lsp = {
+      auto_attach = true,
+    },
+  }
+end
+
 function tools.keystack()
   _G.DAPStopped = true
   local keystack = require 'keystack'
@@ -275,7 +283,7 @@ function tools.telescope()
   require('telescope').load_extension 'zoxide'
   require('telescope').load_extension 'media_files'
   require('telescope').load_extension 'notify'
-  require('telescope').load_extension('persisted')
+  require('telescope').load_extension 'persisted'
   require('telescope').setup {
     mappings = {
       i = {
@@ -317,16 +325,19 @@ end
 
 function tools.zenmode()
   require('true-zen').setup {
-    modes = { -- configurations per mode
+    modes = {
+      -- configurations per mode
       ataraxis = {
         shade = 'dark',
         backdrop = 0,
-        minimum_writing_area = { -- minimum size of main window
+        minimum_writing_area = {
+          -- minimum size of main window
           width = 70,
           height = 44,
         },
         quit_untoggles = true, -- type :q or :qa to quit Ataraxis mode
-        padding = { -- padding windows
+        padding = {
+          -- padding windows
           left = 52,
           right = 52,
           top = 0,
@@ -337,7 +348,8 @@ function tools.zenmode()
       },
       minimalist = {
         ignored_buf_types = { 'nofile' }, -- save current options from any window except ones displaying these kinds of buffers
-        options = { -- options to be disabled when entering Minimalist mode
+        options = {
+          -- options to be disabled when entering Minimalist mode
           number = false,
           relativenumber = false,
           showtabline = 0,

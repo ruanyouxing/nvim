@@ -30,11 +30,16 @@ plugin { 'sindrets/diffview.nvim', config = conf.diffview, cond = is_gitrepo, cm
 plugin { 'lewis6991/gitsigns.nvim', config = conf.gitsigns, cond = is_gitrepo, event = 'BufRead' }
 plugin { 'terrortylor/nvim-comment', config = conf.comment, event = 'ModeChanged' }
 plugin { 'kyazdani42/nvim-web-devicons', lazy = true }
--- plugin {
---   'cbochs/grapple.nvim',
---   config = conf.bookmark,
---   lazy = true,
--- }
+local jump_modes = { 'n', 'o', 'x' }
+plugin {
+  'chrisgrieser/nvim-spider',
+  keys = {
+    { mode = jump_modes, 'w', "<cmd>lua require('spider').motion('w')<CR>" },
+    { mode = jump_modes, 'e', "<cmd>lua require('spider').motion('e')<CR>" },
+    { mode = jump_modes, 'b', "<cmd>lua require('spider').motion('b')<CR>" },
+    { mode = jump_modes, 'ge', "<cmd>lua require('spider').motion('ge')<CR>" },
+  },
+}
 plugin {
   'LeonHeidelbach/trailblazer.nvim',
   config = conf.bookmark,

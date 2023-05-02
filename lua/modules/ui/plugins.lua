@@ -48,7 +48,6 @@ plugin {
   lazy = true,
 }
 plugin { 'j-hui/fidget.nvim', config = conf.fidget, lazy = true }
-plugin { 'projekt0n/github-nvim-theme', lazy = false, priority = 1000, config = conf.github_theme }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
@@ -102,6 +101,7 @@ plugin {
   },
   config = conf.wilder,
 }
+plugin { 'mrjones2014/smart-splits.nvim', config = conf.splits, build = './kitty/install-kittens.bash'}
 plugin {
   'fgheng/winbar.nvim',
   config = conf.winbar,

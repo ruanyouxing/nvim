@@ -1,5 +1,5 @@
 local M = {}
-
+local smart_splits = require 'smart-splits'
 M.compile_func = function()
   local Terminal = require('toggleterm.terminal').Terminal
   local termOpts = {
@@ -47,14 +47,54 @@ function M.set_keymaps()
   nmap {
     { 'Y', 'y$' },
     { '<C-a>', 'ggVG' },
-    { '<C-S-h>', '<C-w>h' },
-    { '<C-S-l>', '<C-w>l' },
-    { '<C-S-j>', '<C-w>j' },
-    { '<C-S-k>', '<C-w>k' },
-    { '<C-h>', '1<C-w><' },
-    { '<C-l>', '1<C-w>>' },
-    { '<C-k>', '1<C-w>-' },
-    { '<C-j>', '1<C-w>+' },
+    {
+      '<C-S-h>',
+      function()
+        smart_splits.move_cursor_left()
+      end,
+    },
+    {
+      '<C-S-l>',
+      function()
+        smart_splits.move_cursor_right()
+      end,
+    },
+    {
+      '<C-S-j>',
+      function()
+        smart_splits.move_cursor_up()
+      end,
+    },
+    {
+      '<C-S-k>',
+      function()
+        smart_splits.move_cursor_down()
+      end,
+    },
+    {
+      '<C-h>',
+      function()
+        smart_splits.resize_left()
+      end,
+    },
+    {
+      '<C-l>',
+      function()
+        smart_splits.resize_right()
+      end,
+    },
+    {
+      '<C-k>',
+      function()
+        smart_splits.resize_up()
+      end,
+    },
+    {
+      '<C-j>',
+      function()
+        smart_splits.resize_down()
+      end,
+    },
     {
       'mm',
       function()

@@ -29,6 +29,7 @@ plugin {
   event = 'BufRead',
   config = conf.mason,
 }
+plugin { 'SmiteshP/nvim-navbuddy', config = conf.navbuddy }
 plugin { 'stevearc/overseer.nvim', config = conf.overseer, cmd = 'OverseerRun' }
 plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
 

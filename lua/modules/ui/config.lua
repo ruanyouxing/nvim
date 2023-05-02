@@ -27,6 +27,7 @@ function ui.blankline()
       'TelescopePrompt',
       'undotree',
       'flutterToolsOutline',
+      'dashboard',
       '', -- for all buffers without a file type
     },
     buftype_exclude = { 'terminal', 'nofile' },
@@ -64,8 +65,9 @@ end
 
 function ui.catppuccin()
   require('catppuccin').setup {
-    flavour = 'mocha',
+    flavour = 'macchiato',
   }
+  vim.cmd 'colorscheme catppuccin'
 end
 
 function ui.cokeline()
@@ -203,17 +205,6 @@ function ui.kanagawa()
   require('kanagawa').setup {
     globalStatus = true,
     dimInactive = true,
-  }
-end
-
-function ui.github_theme()
-  require('github-theme').setup {
-    theme_style = 'dimmed',
-    function_style = 'italic',
-    dev = true,
-    overrides = function(c)
-      return { StatusLine = { bg = c.bg, fg = c.fg } }
-    end,
   }
 end
 
@@ -597,6 +588,12 @@ function ui.winbar()
   require('barbecue').setup {
     show_modified = true,
     create_autocmd = false,
+  }
+end
+
+function ui.splits()
+  require('smart-splits').setup {
+    default_amount = 1,
   }
 end
 
