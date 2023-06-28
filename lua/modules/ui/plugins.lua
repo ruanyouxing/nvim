@@ -101,7 +101,7 @@ plugin {
   },
   config = conf.wilder,
 }
-plugin { 'mrjones2014/smart-splits.nvim', config = conf.splits, build = './kitty/install-kittens.bash'}
+plugin { 'mrjones2014/smart-splits.nvim', config = conf.splits, build = './kitty/install-kittens.bash' }
 plugin {
   'fgheng/winbar.nvim',
   config = conf.winbar,

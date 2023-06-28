@@ -170,6 +170,19 @@ function config.setup()
     end,
   }
   addComponent {
+    name = 'hbac',
+    hl_colors = {
+      pinned = { 'red', 'bg' },
+    },
+    text = function(bufnr)
+      if require('hbac.state').is_pinned(bufnr) then
+        return { { '  Pinned', 'pinned' } }
+      else
+        return { { '' } }
+      end
+    end,
+  }
+  addComponent {
     name = 'Sessions',
     hl_colors = {
       SessionHL = { 'green', 'bg' },
@@ -210,7 +223,7 @@ function config.setup()
       HydraHl = { 'blue', 'bg', 'bold' },
       FileNameHL = { 'green', 'bg', 'bold' },
     },
-    text = function()
+    text = function(bufnr)
       local hydrStatusline = require 'hydra.statusline'
       if hydrStatusline.is_active() then
         return {
@@ -219,8 +232,16 @@ function config.setup()
             'HydraHl',
           },
         }
+      elseif vim.bo.filetype == 'CompetiTest'and not vim.fn.pumvisible() then
+        return {
+          {
+            vim.api.nvim_buf_get_var(bufnr, 'competitest_title'),
+            'FileNameHL',
+          },
+        }
       else
         return {
+
           { b_components.cache_file_icon { default = '' }, 'FileNameHL' },
           { ' ' },
           { b_components.cache_file_name('[No Name]', 'unique'), 'FileNameHL' },

@@ -339,6 +339,31 @@ add_section {
     require('trailblazer').delete_all_trail_marks()
   end,
 }
+
+add_section {
+  'Competitest: Add a testcase',
+  function()
+    vim.cmd 'CompetiTestAdd'
+  end,
+}
+add_section {
+  'Competitest: Edit a testcase',
+  function()
+    vim.cmd 'CompetiTestEdit'
+  end,
+}
+add_section {
+  'Competitest: Run testcases',
+  function()
+    vim.cmd 'CompetiTestRun'
+  end,
+}
+add_section {
+  'Competitest: Delete a testcase',
+  function()
+    vim.cmd [[CompetiTestDelete]]
+  end,
+}
 table.sort(keys)
 M.trigger_menu = function()
   vim.ui.select(keys, { prompt = 'Options' }, function(item)

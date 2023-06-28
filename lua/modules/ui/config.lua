@@ -307,7 +307,7 @@ end
 
 function ui.minimap()
   require('codewindow').setup {
-    auto_enable = true,
+    auto_enable = false,
     exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
     use_lsp = true,
     use_treesitter = true,

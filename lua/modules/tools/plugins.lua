@@ -90,5 +90,10 @@ plugin {
   },
 }
 plugin { 'nyngwang/NeoZoom.lua', cmd = 'NeoZoomToggle', config = conf.zoom }
-plugin {'axkirillov/hbac.nvim', config = conf.autoclose, event = 'BufRead'}
-
+plugin { 'axkirillov/hbac.nvim', config = conf.autoclose, event = 'BufRead' }
+plugin {
+  'xeluxee/competitest.nvim',
+  config = conf.cptest,
+  lazy = true,
+  cmd = { 'CompetiTestRun', 'CompetiTestAdd', 'CompetiTestDelete', 'CompetiTestEdit' },
+}
