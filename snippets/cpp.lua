@@ -21,11 +21,26 @@ addSnippets(s(
   )
 ))
 
-addSnippets(
-  s(
-    'Class',
-    fmt(
-      [[
+addSnippets(s(
+  'file_handling',
+  fmt(
+    [[
+  fstream {var};
+  {var}.open("{fileName}",{mode});
+  {actions}
+  {var}.close();
+
+
+]],
+    { var = i(1), fileName = i(2), mode = i(3), actions = i(4) },
+    { repeat_duplicates = true }
+  )
+))
+
+addSnippets(s(
+  'Class',
+  fmt(
+    [[
   class {className} {classInheritence} {{
     private:
       {privateVars}
@@ -39,17 +54,16 @@ addSnippets(
     }}
   }};
 ]],
-      {
-        className = i(1),
-        classInheritence = i(2),
-        privateVars = i(3),
-        publicVars = i(4),
-        constructorFunc = i(5),
-        destructionFunc = i(6),
-      },
-      { repeat_duplicates = true }
-    )
+    {
+      className = i(1),
+      classInheritence = i(2),
+      privateVars = i(3),
+      publicVars = i(4),
+      constructorFunc = i(5),
+      destructionFunc = i(6),
+    },
+    { repeat_duplicates = true }
   )
-)
+))
 
 return snippets
