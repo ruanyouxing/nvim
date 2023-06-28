@@ -454,4 +454,15 @@ function tools.zoom()
   }
 end
 
+function tools.autoclose()
+  require('hbac').setup {
+    autoclose = true,
+    threshold = 5,
+    close_command = function(bufnr)
+      vim.api.nvim_buf_delete(bufnr, {})
+    end,
+    close_buffers_with_windows = false,
+  }
+end
+
 return tools
