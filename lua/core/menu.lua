@@ -6,16 +6,34 @@ local add_section = function(section_info)
   table.insert(keys, section_info[1])
 end
 add_section {
+  'Hbac: Pin this tab',
+  function()
+    require('hbac').toggle_pin()
+  end,
+}
+add_section {
+  'Hbac: Close unpinned tabs',
+  function()
+    require('hbac').close_unpinned()
+  end,
+}
+add_section {
+  'Hbac: Toggle autoclose',
+  function()
+    require('hbac').toggle_autoclose()
+  end,
+}
+add_section {
   'Telescope',
   function()
     vim.cmd [[Telescope]]
   end,
 }
-add_section{
+add_section {
   'Navigator',
-  function ()
+  function()
     require('nvim-navbuddy').open()
-  end
+  end,
 }
 add_section {
   'Telescope: Find in buffer',

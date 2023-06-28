@@ -48,49 +48,49 @@ function M.set_keymaps()
     { 'Y', 'y$' },
     { '<C-a>', 'ggVG' },
     {
-      '<C-S-h>',
+      '<C-h>',
       function()
         smart_splits.move_cursor_left()
       end,
     },
     {
-      '<C-S-l>',
+      '<C-l>',
       function()
         smart_splits.move_cursor_right()
       end,
     },
     {
-      '<C-S-j>',
+      '<C-j>',
       function()
         smart_splits.move_cursor_up()
       end,
     },
     {
-      '<C-S-k>',
+      '<C-k>',
       function()
         smart_splits.move_cursor_down()
       end,
     },
     {
-      '<C-h>',
+      '<C-S-h>',
       function()
         smart_splits.resize_left()
       end,
     },
     {
-      '<C-l>',
+      '<C-S-l>',
       function()
         smart_splits.resize_right()
       end,
     },
     {
-      '<C-k>',
+      '<C-S-k>',
       function()
         smart_splits.resize_up()
       end,
     },
     {
-      '<C-j>',
+      '<C-S-j>',
       function()
         smart_splits.resize_down()
       end,
