@@ -46,7 +46,8 @@ function pack:boot_strap()
       border = 'rounded',
     },
     checker = {
-      enabled = true
+      enabled = true,
+      notify = false
     },
     performance = {
       cache = {

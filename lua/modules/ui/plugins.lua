@@ -107,3 +107,4 @@ plugin {
   config = conf.winbar,
   event = 'UIEnter',
 }
+plugin { 'luukvbaal/statuscol.nvim', config = conf.statuscol, event = 'BufWinEnter' }

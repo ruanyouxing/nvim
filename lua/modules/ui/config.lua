@@ -71,7 +71,7 @@ function ui.catppuccin()
 end
 
 function ui.cokeline()
-  local get_hex = require('cokeline.utils').get_hex
+  local get_hex = require('cokeline/utils').get_hex
   local mappings = require 'cokeline/mappings'
   local errors_fg = get_hex('DiagnosticError', 'fg')
   local warnings_fg = get_hex('DiagnosticWarn', 'fg')
@@ -91,11 +91,11 @@ function ui.cokeline()
       bg = get_hex('ColorColumn', 'bg'),
     },
     components = {
-      -- {
-      --   text = '',
-      --   fg = get_hex('ColorColumn', 'bg'),
-      --   bg = get_hex('Normal', 'bg'),
-      -- },
+      {
+        text = '',
+        fg = get_hex('ColorColumn', 'bg'),
+        bg = get_hex('Normal', 'bg'),
+      },
       {
         text = ' ',
       },
@@ -128,7 +128,7 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return buffer.filename .. ' '
+          return buffer.filename
         end,
         fg = function(buffer)
           if buffer.is_modified then
@@ -148,8 +148,8 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return (buffer.diagnostics.errors ~= 0 and ' ' .. buffer.diagnostics.errors .. ' ')
-            or (buffer.diagnostics.warnings ~= 0 and ' ' .. buffer.diagnostics.warnings .. ' ')
+          return (buffer.diagnostics.errors ~= 0 and ' E' .. buffer.diagnostics.errors)
+            or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
             or ''
         end,
         fg = function(buffer)
@@ -160,7 +160,7 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return (buffer.diagnostics.hints ~= 0 and ' ' .. buffer.diagnostics.hints .. ' ') or ''
+          return (buffer.diagnostics.hints ~= 0 and ' H' .. buffer.diagnostics.hints) or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.hints ~= 0 and hints_fg) or nil
@@ -168,7 +168,7 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return buffer.is_modified and '● ' or ' '
+          return buffer.is_modified and ' ● ' or '  '
         end,
         fg = function(buffer)
           return buffer.is_modified and green or nil
@@ -181,11 +181,11 @@ function ui.cokeline()
           return buffer.is_focused and green or nil
         end,
       },
-      -- {
-      --   text = '',
-      --   fg = get_hex('ColorColumn', 'bg'),
-      --   bg = get_hex('Normal', 'bg'),
-      -- },
+      {
+        text = '',
+        fg = get_hex('ColorColumn', 'bg'),
+        bg = get_hex('Normal', 'bg'),
+      },
     },
     sidebar = {
       filetype = 'NvimTree',
@@ -521,6 +521,7 @@ end
 function ui.noice()
   require('noice').setup {
     cmdline = { view = 'cmdline' },
+    presets = { inc_rename = true },
     lsp = { signature = { enabled = false } },
   }
 end
@@ -594,6 +595,28 @@ end
 function ui.splits()
   require('smart-splits').setup {
     default_amount = 1,
+  }
+end
+
+function ui.statuscol()
+  vim.opt.foldcolumn = '1'
+  vim.opt.foldlevel = 99
+  vim.o.foldenable = true
+  vim.opt.foldmethod = 'expr'
+  vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
+  vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+  local builtin = require 'statuscol.builtin'
+  require('statuscol').setup {
+    ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
+    segments = {
+      { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
+      { text = { '%s' }, click = 'v:lua.ScSa' },
+      {
+        text = { builtin.lnumfunc, ' ' },
+        condition = { true, builtin.not_empty },
+        click = 'v:lua.ScLa',
+      },
+    },
   }
 end
 

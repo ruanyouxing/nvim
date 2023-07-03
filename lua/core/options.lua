@@ -68,4 +68,4 @@ vim.g.syntax_on = true
 vim.g.smartindent = true
 vim.g.loaded_matchit = 1
 vim.g.matchup_surround_enabled = 1
-vim.cmd[[hi NonText guifg=bg]]
+vim.cmd [[hi NonText guifg=bg]]

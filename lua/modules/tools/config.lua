@@ -41,18 +41,6 @@ function tools.fm()
   }
 end
 
-function tools.fold_preview()
-  require('fold-preview').setup {
-    border = 'rounded',
-    default_keybindings = false,
-  }
-  vim.api.nvim_create_autocmd('CursorHold', {
-    pattern = '*',
-    callback = function()
-      require('fold-preview').show_preview()
-    end,
-  })
-end
 
 function tools.hop()
   require('hop').setup {

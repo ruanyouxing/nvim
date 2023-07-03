@@ -2,7 +2,6 @@ local plugin = require('core.pack').package
 local plug = require('core.keymap').plug
 local conf = require 'modules.tools.config'
 plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
-plugin { 'anuvyklack/fold-preview.nvim', event = 'BufEnter', config = conf.fold_preview }
 plugin { 'is0n/fm-nvim', config = conf.fm, cmd = 'Ranger' }
 plugin {
   'phaazon/hop.nvim',
