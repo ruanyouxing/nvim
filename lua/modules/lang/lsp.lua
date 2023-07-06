@@ -24,6 +24,7 @@ function lsp.lsp_installer()
     'bashls',
     'cssls',
     'html',
+    'nil_ls',
     'pyright',
     'jsonls',
     'tsserver',
