@@ -53,7 +53,7 @@ plugin { 'rcarriga/nvim-notify', config = conf.notify }
 plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
 plugin {
   'kosayoda/nvim-lightbulb',
-  dependencies = 'mason-lspconfig.nvim',
+  dependencies = 'nvim-lspconfig',
   config = conf.lightbulb,
   event = 'BufEnter',
 }

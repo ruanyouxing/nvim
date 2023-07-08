@@ -138,13 +138,11 @@ function config.setup()
     name = 'LspName',
     hl_colors = {
       LspHl = { 'red', 'bg', 'bold' },
-      Blank = { 'bg', 'nocolor' },
     },
     text = function(bufnr)
       if lsp_comps.check_lsp(bufnr) then
         return {
-          { '  ', 'Blank' },
-          { lsp_comps.lsp_name { icon = ' ' }, 'LspHl' },
+          { lsp_comps.lsp_name { icon = '   ' }, 'LspHl' },
         }
       end
     end,
@@ -232,7 +230,7 @@ function config.setup()
             'HydraHl',
           },
         }
-      elseif vim.bo.filetype == 'CompetiTest'and not vim.fn.pumvisible() then
+      elseif vim.bo.filetype == 'CompetiTest' and not vim.fn.pumvisible() then
         return {
           {
             vim.api.nvim_buf_get_var(bufnr, 'competitest_title'),
@@ -257,7 +255,7 @@ function config.setup()
     },
     text = function()
       return {
-        { '   ', 'FSizeHl' },
+        { ' 󰉉 ', 'FSizeHl' },
         { b_components.cache_file_size(), 'FSizeHl' },
         { ' ' },
       }
@@ -318,9 +316,9 @@ function config.setup()
       if git_comps.is_git(bufnr) then
         return {
           { ' ' },
-          { git_comps.diff_added { format = '  %s ' }, 'DiffAdd' },
-          { git_comps.diff_changed { format = ' 柳%s ' }, 'DiffMod' },
-          { git_comps.diff_removed { format = '  %s ' }, 'DiffRemove' },
+          { git_comps.diff_added { format = ' %s ' }, 'DiffAdd' },
+          { git_comps.diff_changed { format = ' %s ' }, 'DiffMod' },
+          { git_comps.diff_removed { format = ' %s ' }, 'DiffRemove' },
         }
       end
     end,

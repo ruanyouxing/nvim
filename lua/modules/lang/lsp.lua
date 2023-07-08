@@ -1,6 +1,6 @@
 local lsp = {}
 
-function lsp.lsp_installer()
+function lsp.lspconfig()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local completionItem = capabilities.textDocument.completion.completionItem
   completionItem.documentationFormat = {
@@ -18,27 +18,36 @@ function lsp.lsp_installer()
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  require('mason').setup()
-  local lsp_installer = require 'mason-lspconfig'
-  local servers = {
-    'bashls',
-    'cssls',
-    'html',
-    'nil_ls',
-    'pyright',
-    'jsonls',
-    'tsserver',
+  require('lazy-lsp').setup {
+    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint' },
+    default_config = {
+      on_attach = function(client, bufnr)
+        if client.server_capabilities['documentSymbolProvider'] then
+          require('nvim-navic').attach(client, bufnr)
+        end
+      end,
+      capabilities = capabilities,
+      flags = { debounce_text_changes = 500 },
+    },
+    config = {
+      lua_ls = {
+        settings = {
+          Lua = {
+            diagnostics = { globals = { 'vim', 'packer_plugins' } },
+            workspace = {
+              library = {
+                [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+                [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+              },
+              maxPreload = 100000,
+              preloadFileSize = 10000,
+            },
+            telemetry = { enable = false },
+          },
+        },
+      },
+    },
   }
-
-  lsp_installer.setup {
-    ensure_isntalled = { servers, 'lua_ls', 'clangd' },
-    automatic_installation = true,
-  }
-  local on_attach = function(client, bufnr)
-    if client.server_capabilities['documentSymbolProvider'] then
-      require('nvim-navic').attach(client, bufnr)
-    end
-  end
   local clangd_defaults = require 'lspconfig.server_configurations.clangd'
   local clangd_configs = vim.tbl_deep_extend('force', clangd_defaults['default_config'], {
     cmd = {
@@ -104,29 +113,6 @@ function lsp.lsp_installer()
       },
     },
   }
-  require('lspconfig').lua_ls.setup {
-    settings = {
-      Lua = {
-        diagnostics = { globals = { 'vim', 'packer_plugins' } },
-        workspace = {
-          library = {
-            [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-            [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-          },
-          maxPreload = 100000,
-          preloadFileSize = 10000,
-        },
-        telemetry = { enable = false },
-      },
-    },
-  }
-  for _, name in ipairs(servers) do
-    require('lspconfig')[name].setup {
-      capabilities = capabilities,
-      on_attach = on_attach,
-      flags = { debounce_text_changes = 500 },
-    }
-  end
 end
 
 function lsp.lsputils()

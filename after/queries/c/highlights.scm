@@ -5,4 +5,4 @@
 (("for"      @keyword) (#set! conceal ""))
 (("while"    @keyword) (#set! conceal ""))
 (("typedef"  @keyword) (#set! conceal ""))
-(("#include" @keyword) (#set! conceal ""))
+(("#include" @keyword) (#set! conceal ""))
