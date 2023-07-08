@@ -275,7 +275,7 @@ function M.set_keymaps()
   }
   imap {
     { '<C-c>', cmd 'PickColorInsert' },
-    { '<C-i>', cmd 'IconPickerInsert alt_font symbols nerd_font emoji' },
+    { '<C-i>', cmd 'IconPickerInsert nerd_font_v3 alt_font symbols emoji' },
   }
 
   -- Cokeline
