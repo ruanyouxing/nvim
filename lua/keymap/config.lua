@@ -102,6 +102,16 @@ function M.set_keymaps()
       end,
     },
     {
+      'F',
+      function()
+        if vim.fn.foldclosed '.' == -1 then
+          vim.cmd [[foldclose]]
+        else
+        vim.cmd [[foldopen]]
+        end
+      end,
+    },
+    {
       'zM',
       function()
         require('ufo').closeAllFolds()

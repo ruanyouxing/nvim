@@ -168,7 +168,7 @@ function ui.cokeline()
       },
       {
         text = function(buffer)
-          return buffer.is_modified and ' ● ' or '  '
+          return buffer.is_modified and ' ● ' or '  '
         end,
         fg = function(buffer)
           return buffer.is_modified and green or nil
@@ -233,12 +233,6 @@ function ui.fidget()
 end
 
 function ui.fold()
-  vim.wo.foldlevel = 99
-  vim.wo.foldenable = true
-  vim.o.fillchars = [[eob: ,fold: ,foldopen:▼,foldsep: ,foldclose:⏵]]
-  vim.o.foldcolumn = '1'
-  vim.o.foldlevelstart = -1
-
   require('ufo').setup {
     provider_selector = function()
       return { 'treesitter' }

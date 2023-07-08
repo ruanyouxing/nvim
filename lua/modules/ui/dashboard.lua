@@ -58,14 +58,14 @@ db.setup {
     header = header,
     center = {
       {
-        desc = ' Open files ',
+        desc = '  Open files ',
         desc_hl = '@variable',
         group = 'Label',
         action = 'Telescope find_files',
         key = '<C-o>',
       },
       {
-        desc = ' Create a new file ',
+        desc = '  Create a new file ',
         desc_hl = '@variable',
         group = 'Label',
         action = function()
@@ -79,14 +79,14 @@ db.setup {
         key = '<C-S-n>',
       },
       {
-        desc = 'פּ Open file tree',
+        desc = '󰙅  Open file tree',
         desc_hl = '@variable',
         group = 'Label',
         key = '<C-n>',
         action = 'NvimTreeToggle',
       },
       {
-        desc = ' Telescope',
+        desc = '  Telescope',
         desc_hl = '@variable',
         group = 'Label',
         action = function()
@@ -95,7 +95,7 @@ db.setup {
         key = 'T',
       },
       {
-        desc = ' List available sessions',
+        desc = '  List available sessions',
         desc_hl = '@variable',
         group = 'Label',
         key = 'S',
@@ -104,14 +104,14 @@ db.setup {
         end,
       },
       {
-        desc = '祝Load latest saved session',
+        desc = '  Load latest saved session',
         desc_hl = '@variable',
         group = 'Label',
         key = '<leader>s',
         action = 'SessionLoadLast',
       },
       {
-        desc = ' Exit Neovim',
+        desc = '󰗼 Exit Neovim',
         desc_hl = '@variable',
         group = 'Label',
         key = '<C-q>',
