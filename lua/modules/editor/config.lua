@@ -158,6 +158,7 @@ function editor.treesitter()
       'make',
       'python',
       'rust',
+      'nix',
       'html',
       'javascript',
       'typescript',
