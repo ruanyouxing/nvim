@@ -20,6 +20,10 @@ function lsp.lspconfig()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   require('lazy-lsp').setup {
     excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint' },
+    preffered_servers = {
+      yaml = { 'yamlls' },
+      javascript = {'tsserver'},
+    },
     default_config = {
       on_attach = function(client, bufnr)
         if client.server_capabilities['documentSymbolProvider'] then
