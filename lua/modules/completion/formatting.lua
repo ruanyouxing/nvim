@@ -12,7 +12,7 @@ function format.setup()
     },
     formatting.prettier,
     formatting.clang_format,
-    formatting.nixpkgs_fmt,
+    formatting.alejandra,
     diagnostics.eslint.with {
       extra_args = { '--config', vim.fn.expand(config_dir .. '/.eslintrc.json') },
     },
