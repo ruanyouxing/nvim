@@ -197,7 +197,7 @@ function config.setup()
     text = function()
       local lazy_status = require 'lazy.status'
       if lazy_status.has_updates() then
-        return { { '   ' }, { lazy_status.updates(), 'TextHl' } }
+        return { { '  ' }, { lazy_status.updates(), 'TextHl' } }
       else
         return { { '' } }
       end
@@ -239,7 +239,7 @@ function config.setup()
         }
       else
         return {
-
+          { ' ' },
           { b_components.cache_file_icon { default = '' }, 'FileNameHL' },
           { ' ' },
           { b_components.cache_file_name('[No Name]', 'unique'), 'FileNameHL' },

@@ -388,10 +388,8 @@ function ui.notify()
   vim.notify = require 'notify'
   require('notify').setup {
     stages = 'slide',
-    on_open = nil,
-    on_close = nil,
     render = 'default',
-    timeout = 500,
+    timeout = 300,
     background_colour = '#ffffff',
     minimum_width = 50,
     icons = {
