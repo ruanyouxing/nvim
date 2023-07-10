@@ -17,41 +17,82 @@ function lsp.lspconfig()
   completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
+  local servers = {
+    'bashls',
+    'lua_ls',
+    'html',
+    'cssls',
+    'jsonls',
+    'pyright',
+    'tsserver',
+    'nil_ls',
+    'rust_analyzer'
+  }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  require('lazy-lsp').setup {
-    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint' },
-    preffered_servers = {
-      yaml = { 'yamlls' },
-      javascript = {'tsserver'},
-    },
-    default_config = {
+  local lspconfig = require 'lspconfig'
+  for _, name in ipairs(servers) do
+    lspconfig[name].setup {
+      capabilities = capabilities,
       on_attach = function(client, bufnr)
         if client.server_capabilities['documentSymbolProvider'] then
           require('nvim-navic').attach(client, bufnr)
         end
       end,
-      capabilities = capabilities,
       flags = { debounce_text_changes = 500 },
-    },
-    config = {
-      lua_ls = {
-        settings = {
-          Lua = {
-            diagnostics = { globals = { 'vim', 'packer_plugins' } },
-            workspace = {
-              library = {
-                [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-                [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-              },
-              maxPreload = 100000,
-              preloadFileSize = 10000,
-            },
-            telemetry = { enable = false },
+    }
+  end
+  lspconfig.lua_ls.setup {
+    settings = {
+      Lua = {
+        diagnostics = { globals = { 'vim', 'packer_plugins' } },
+        workspace = {
+          library = {
+            [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+            [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
           },
+          maxPreload = 100000,
+          preloadFileSize = 10000,
         },
+        telemetry = { enable = false },
       },
     },
   }
+  -- require('lazy-lsp').setup {
+  --   excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint',
+  --   'rls', 'rome' },
+  --   preffered_servers = {
+  --     yaml = { 'yamlls' },
+  --     javascript = {'tsserver'},
+  --     rust = {'rust_analyzer'},
+  --   },
+  --   default_config = {
+  --     on_attach = function(client, bufnr)
+  --       if client.server_capabilities['documentSymbolProvider'] then
+  --         require('nvim-navic').attach(client, bufnr)
+  --       end
+  --     end,
+  --     capabilities = capabilities,
+  --     flags = { debounce_text_changes = 500 },
+  --   },
+  --   config = {
+  --     lua_ls = {
+  --       settings = {
+  --         Lua = {
+  --           diagnostics = { globals = { 'vim', 'packer_plugins' } },
+  --           workspace = {
+  --             library = {
+  --               [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+  --               [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+  --             },
+  --             maxPreload = 100000,
+  --             preloadFileSize = 10000,
+  --           },
+  --           telemetry = { enable = false },
+  --         },
+  --       },
+  --     },
+  --   },
+  -- }
   local clangd_defaults = require 'lspconfig.server_configurations.clangd'
   local clangd_configs = vim.tbl_deep_extend('force', clangd_defaults['default_config'], {
     cmd = {
