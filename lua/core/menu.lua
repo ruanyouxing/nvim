@@ -12,6 +12,12 @@ add_section {
   end,
 }
 add_section {
+  'Colorizer',
+  function()
+    vim.cmd [[ColorizerToggle]]
+  end,
+}
+add_section {
   'Hbac: Close unpinned tabs',
   function()
     require('hbac').close_unpinned()

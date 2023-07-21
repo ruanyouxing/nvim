@@ -407,40 +407,6 @@ function tools.yank()
   }
 end
 
-function tools.zoom()
-  require('neo-zoom').setup {
-    winopts = {
-      offset = {
-        width = 150,
-        height = 0.85,
-      },
-      border = 'double',
-    },
-    exclude_filetypes = { 'lspinfo', 'mason', 'lazy', 'fzf', 'qf' },
-    exclude_buftypes = { 'terminal' },
-    presets = {
-      {
-        filetypes = { 'dapui_.*', 'dap-repl' },
-        config = {
-          top = 0.25,
-          left = 0.6,
-          width = 0.4,
-          height = 0.65,
-        },
-        callbacks = {
-          function()
-            vim.wo.wrap = true
-          end,
-        },
-      },
-    },
-    popup = {
-      enabled = true,
-      exclude_filetypes = {},
-      exclude_buftypes = {},
-    },
-  }
-end
 
 function tools.autoclose()
   require('hbac').setup {

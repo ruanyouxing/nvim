@@ -22,17 +22,16 @@ addSnippets(s(
 ))
 
 addSnippets(s(
-  'file_handling',
+  'file_setup',
   fmt(
     [[
-  fstream {var};
-  {var}.open("{fileName}",{mode});
-  {actions}
-  {var}.close();
-
-
+   freopen("{var}.inp", "r", stdin);
+   freopen("{var}.out", "w", stdout);
+   ios::sync_with_stdio(false);
+   cin.tie(0);
+   cout.tie(0);
 ]],
-    { var = i(1), fileName = i(2), mode = i(3), actions = i(4) },
+    { var = i(1) },
     { repeat_duplicates = true }
   )
 ))
