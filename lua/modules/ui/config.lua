@@ -410,13 +410,6 @@ function ui.tokyonight()
   vim.g.tokyonight_sidebars = { 'qf', 'vista_kind', 'terminal', 'packer' }
 end
 
-function ui.transparent()
-  require('transparent').setup {
-    enable = false,
-    extra_groups = 'all',
-  }
-end
-
 function ui.twilight()
   require('twilight').setup {
     dimming = {
