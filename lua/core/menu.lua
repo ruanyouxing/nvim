@@ -349,25 +349,29 @@ add_section {
 add_section {
   'Competitest: Add a testcase',
   function()
-    vim.cmd 'CompetiTestAdd'
+    pcall(require, 'competitest')
+    vim.cmd 'CompetiTest add_testcase'
   end,
 }
 add_section {
   'Competitest: Edit a testcase',
   function()
-    vim.cmd 'CompetiTestEdit'
+    pcall(require, 'competitest')
+    vim.cmd 'CompetiTest edit_testcase'
   end,
 }
 add_section {
   'Competitest: Run testcases',
   function()
-    vim.cmd 'CompetiTestRun'
+    pcall(require, 'competitest')
+    vim.cmd 'CompetiTest run'
   end,
 }
 add_section {
   'Competitest: Delete a testcase',
   function()
-    vim.cmd [[CompetiTestDelete]]
+    pcall(require, 'competitest')
+    vim.cmd [[CompetiTest delete_testcase]]
   end,
 }
 table.sort(keys)
