@@ -1,5 +1,15 @@
 local lsp = {}
 
+Servers = {
+  'bashls',
+  'lua_ls',
+  'html',
+  'cssls',
+  'jsonls',
+  'pyright',
+  'tsserver',
+  'rust_analyzer',
+}
 function lsp.lspconfig()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   local completionItem = capabilities.textDocument.completion.completionItem
@@ -17,21 +27,10 @@ function lsp.lspconfig()
   completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
-  local servers = {
-    'bashls',
-    'lua_ls',
-    'html',
-    'cssls',
-    'jsonls',
-    'pyright',
-    'tsserver',
-    'nil_ls',
-    'rust_analyzer'
-  }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  local lspconfig = require 'lspconfig'
-  for _, name in ipairs(servers) do
-    lspconfig[name].setup {
+  require('mason').setup {}
+  for _, name in ipairs(Servers) do
+    require('lspconfig')[name].setup {
       capabilities = capabilities,
       on_attach = function(client, bufnr)
         if client.server_capabilities['documentSymbolProvider'] then
@@ -41,7 +40,7 @@ function lsp.lspconfig()
       flags = { debounce_text_changes = 500 },
     }
   end
-  lspconfig.lua_ls.setup {
+  require('lspconfig').lua_ls.setup {
     settings = {
       Lua = {
         diagnostics = { globals = { 'vim', 'packer_plugins' } },
@@ -173,6 +172,23 @@ function lsp.lsputils()
       sym.workspace_handler(nil, result, { bufnr = bufn }, nil)
     end
   end
+end
+
+function lsp.mason()
+  require('mason-tool-installer').setup {
+    ensure_installed = {
+      'prettier',
+      'clang-format',
+      'codelldb',
+      'black',
+      'stylua',
+      'shellcheck',
+      Servers,
+    },
+    auto_update = true,
+    run_on_start = true,
+    start_delay = 2000,
+  }
 end
 
 return lsp

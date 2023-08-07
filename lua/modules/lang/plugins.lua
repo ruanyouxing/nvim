@@ -2,14 +2,21 @@ local plugin = require('core.pack').package
 local conf = require 'modules.lang.config'
 local lsp = require 'modules.lang.lsp'
 plugin { 'p00f/clangd_extensions.nvim', lazy = true }
+plugin { 'williamboman/mason-lspconfig.nvim', event = 'BufRead', config = lsp.lspconfig }
 plugin {
-  'dundalek/lazy-lsp.nvim',
-  dependencies = { 'nvim-lspconfig' },
-  lazy = true;
+  'williamboman/mason.nvim',
+  dependencies = {
+    {
+      'WhoIsSethDaniel/mason-tool-installer.nvim',
+      cmd = 'Mason',
+      config = lsp.mason,
+    },
+  },
+  event = 'BufRead',
 }
-plugin { 'LnL7/vim-nix', ft = 'nix' }
+
 plugin { 'lukas-reineke/headlines.nvim', ft = { 'markdown', 'org', 'norg' }, config = conf.headlines }
-plugin { 'neovim/nvim-lspconfig', config = lsp.lspconfig, event = 'BufRead' }
+plugin { 'neovim/nvim-lspconfig', lazy = true }
 plugin {
   'RishabhRD/nvim-lsputils',
   dependencies = { 'RishabhRD/popfix', lazy = true },
