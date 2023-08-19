@@ -175,16 +175,19 @@ function lsp.lsputils()
 end
 
 function lsp.mason()
+  local packages = {
+    'prettier',
+    'clang-format',
+    'codelldb',
+    'black',
+    'stylua',
+    'shellcheck',
+  }
+  for _,v in ipairs(Servers) do
+    table.insert(packages,v)
+  end
   require('mason-tool-installer').setup {
-    ensure_installed = {
-      'prettier',
-      'clang-format',
-      'codelldb',
-      'black',
-      'stylua',
-      'shellcheck',
-      Servers,
-    },
+    ensure_installed = packages,
     auto_update = true,
     run_on_start = true,
     start_delay = 2000,
