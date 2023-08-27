@@ -140,22 +140,22 @@ function ui.cokeline()
         end,
         style = function(buffer)
           return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
-            or buffer.is_modified and 'italic,bold'
-            or buffer.is_focused and 'bold'
-            or buffer.diagnostics.errors ~= 0 and 'underline'
-            or nil
+              or buffer.is_modified and 'italic,bold'
+              or buffer.is_focused and 'bold'
+              or buffer.diagnostics.errors ~= 0 and 'underline'
+              or nil
         end,
       },
       {
         text = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and ' E' .. buffer.diagnostics.errors)
-            or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
-            or ''
+              or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
+              or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and errors_fg)
-            or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-            or nil
+              or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+              or nil
         end,
       },
       {
@@ -313,32 +313,32 @@ end
 function ui.navic()
   require('nvim-navic').setup {
     icons = {
-      File = ' ',
+      File = '󰈙 ',
       Module = ' ',
-      Namespace = ' ',
-      Package = ' ',
-      Class = ' ',
-      Method = ' ',
+      Namespace = '󰌗 ',
+      Package = '󰏓 ',
+      Class = '󰌗 ',
+      Method = '󰆧 ',
       Property = ' ',
-      Field = ' ',
+      Field = '󰮄 ',
       Constructor = ' ',
-      Enum = '練',
-      Interface = '練',
-      Function = ' ',
-      Variable = ' ',
-      Constant = ' ',
-      String = ' ',
-      Number = ' ',
+      Enum = '󰕘 ',
+      Interface = '󰕘',
+      Function = '󰊕 ',
+      Variable = '󰀫 ',
+      Constant = '󰏿 ',
+      String = '󰀬 ',
+      Number = '󰎠 ',
       Boolean = '◩ ',
-      Array = ' ',
-      Object = ' ',
-      Key = ' ',
-      Null = 'ﳠ ',
+      Array = '󰅪 ',
+      Object = '󰅩 ',
+      Key = '󰌋 ',
+      Null = '󰟢 ',
       EnumMember = ' ',
-      Struct = ' ',
+      Struct = ' ',
       Event = ' ',
-      Operator = ' ',
-      TypeParameter = ' ',
+      Operator = '󰆕 ',
+      TypeParameter = '󰊄 ',
     },
     highlight = false,
     separator = ' > ',
@@ -380,7 +380,36 @@ function ui.outline()
     position = 'left',
     show_numbers = true,
     show_relative_numbers = true,
-    symbols = { Function = { icon = '', hl = '@function' }, Variable = { icon = '', hl = '@constant' } },
+    symbols = {
+    File = { icon = "󰈙 ", hl = "@text.uri" },
+    Module = { icon = " ", hl = "@namespace" },
+    Namespace = { icon = "󰌗 ", hl = "@namespace" },
+    Package = { icon = "󰏓 ", hl = "@namespace" },
+    Class = { icon = "󰌗 " , hl = "@type" },
+    Method = { icon = "󰆧 ", hl = "@method" },
+    Property = { icon = "  ", hl = "@method" },
+    Field = { icon = "󰮄 ", hl = "@field" },
+    Constructor = { icon = " ", hl = "@constructor" },
+    Enum = { icon = "󰕘 ", hl = "@type" },
+    Interface = { icon = "󰕘 ", hl = "@type" },
+    Function = { icon = "󰊕 ", hl = "@function" },
+    Variable = { icon = "󰀫 ", hl = "@constant" },
+    Constant = { icon = "󰏿 ", hl = "@constant" },
+    String = { icon = "󰀬 ", hl = "@string" },
+    Number = { icon = "󰎠 ", hl = "@number" },
+    Boolean = { icon = "◩ ", hl = "@boolean" },
+    Array = { icon = "󰅪 ", hl = "@constant" },
+    Object = { icon = "󰅩 ", hl = "@type" },
+    Key = { icon = "󰌋 ", hl = "@type" },
+    Null = { icon = "󰟢 ",hl = "@type" },
+    EnumMember = { icon = " ", hl = "@field" },
+    Struct = { icon = " ", hl = "@type" },
+    Event = { icon = " ", hl = "@type" },
+    Operator = { icon = "󰆕 ", hl = "@operator" },
+    TypeParameter = { icon = "󰊄 ", hl = "@parameter" },
+    Component = { icon = "󰆼 ", hl = "@function" },
+  },
+
   }
 end
 
@@ -413,11 +442,11 @@ end
 function ui.twilight()
   require('twilight').setup {
     dimming = {
-      alpha = 0.25, -- amount of dimming
+      alpha = 0.25,     -- amount of dimming
       color = { 'Normal', '#ffffff' },
       inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
     },
-    context = 10, -- amount of lines we will try to show around the current line
+    context = 10,       -- amount of lines we will try to show around the current line
     treesitter = true,
     expand = {
       'function',
@@ -595,7 +624,7 @@ function ui.statuscol()
     ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
     segments = {
       { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-      { text = { '%s' }, click = 'v:lua.ScSa' },
+      { text = { '%s' },             click = 'v:lua.ScSa' },
       {
         text = { builtin.lnumfunc, ' ' },
         condition = { true, builtin.not_empty },
@@ -606,3 +635,4 @@ function ui.statuscol()
 end
 
 return ui
+1
