@@ -635,4 +635,3 @@ function ui.statuscol()
 end
 
 return ui
-1
