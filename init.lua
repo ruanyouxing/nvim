@@ -1,5 +1,5 @@
 if vim.g.vscode then
-  require 'vscode'
+  vim.cmd[[source ~/.config/nvim/lua/vscode/init.vim ]]
 else
   require 'core'
 end
