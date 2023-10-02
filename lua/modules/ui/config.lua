@@ -3,64 +3,49 @@ local ui = {}
 function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
-  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent1', { fg = '#E06C75', nocombine = true })
-  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent2', { fg = '#E5C07B', nocombine = true })
-  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent3', { fg = '#98C379', nocombine = true })
-  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent4', { fg = '#56B6C2', nocombine = true })
-  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent5', { fg = '#61AFEF', nocombine = true })
-  vim.api.nvim_set_hl(0, 'IndentBlanklineIndent6', { fg = '#C678DD', nocombine = true })
-  require('indent_blankline').setup {
-    char = '│',
-    show_first_indent_level = true,
-    filetype_exclude = {
-      'log',
-      'fugitive',
-      'gitcommit',
-      'vimwiki',
-      'markdown',
-      'txt',
-      'vista',
-      'help',
-      'todoist',
-      'NvimTree',
-      'git',
-      'TelescopePrompt',
-      'undotree',
-      'flutterToolsOutline',
-      'dashboard',
-      '', -- for all buffers without a file type
+require('ibl').overwrite {
+    exclude = {
+      filetypes = {
+        'log',
+        'fugitive',
+        'gitcommit',
+        'vimwiki',
+        'markdown',
+        'txt',
+        'vista',
+        'help',
+        'todoist',
+        'NvimTree',
+        'git',
+        'TelescopePrompt',
+        'undotree',
+        'flutterToolsOutline',
+        'dashboard',
+        '',
+      },
     },
-    buftype_exclude = { 'terminal', 'nofile' },
-    show_trailing_blankline_indent = false,
-    show_current_context = true,
-    context_patterns = {
-      'class',
-      'function',
-      'method',
-      'block',
-      'list_literal',
-      'selector',
-      '^if',
-      '^table',
-      'if_statement',
-      'while',
-      'for',
-      'type',
-      'var',
-      'import',
-    },
-    space_char_blankline = ' ',
-    char_highlight_list = {
-      'IndentBlanklineIndent1',
-      'IndentBlanklineIndent2',
-      'IndentBlanklineIndent3',
-      'IndentBlanklineIndent4',
-      'IndentBlanklineIndent5',
-      'IndentBlanklineIndent6',
-    },
-    show_current_context_start = true,
   }
-  vim.api.nvim_create_autocmd({ 'CursorMoved' }, { pattern = '*', command = 'IndentBlanklineRefresh' })
+  local highlight = {
+    'RainbowRed',
+    'RainbowYellow',
+    'RainbowBlue',
+    'RainbowOrange',
+    'RainbowGreen',
+    'RainbowViolet',
+    'RainbowCyan',
+  }
+  local hooks = require 'ibl.hooks'
+  hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
+    vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
+    vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
+    vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
+    vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
+    vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
+    vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
+  end)
+
+  require('ibl').setup { indent = { highlight = highlight } }
 end
 
 function ui.catppuccin()
