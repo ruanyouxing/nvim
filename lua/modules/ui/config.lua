@@ -3,28 +3,6 @@ local ui = {}
 function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
-  require('ibl').overwrite {
-    exclude = {
-      filetypes = {
-        'log',
-        'fugitive',
-        'gitcommit',
-        'vimwiki',
-        'markdown',
-        'txt',
-        'vista',
-        'help',
-        'todoist',
-        'NvimTree',
-        'git',
-        'TelescopePrompt',
-        'undotree',
-        'flutterToolsOutline',
-        'dashboard',
-        '',
-      },
-    },
-  }
   local highlight = {
     'RainbowRed',
     'RainbowYellow',
@@ -45,7 +23,30 @@ function ui.blankline()
     vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
   end)
 
-  require('ibl').setup { indent = { highlight = highlight } }
+  require('ibl').setup {
+    indent = { highlight = highlight },
+    exclude = {
+      filetypes = {
+        'log',
+        'fugitive',
+        'gitcommit',
+        'vimwiki',
+        'markdown',
+        'txt',
+        'vista',
+        'help',
+        'todoist',
+        'NvimTree',
+        'git',
+        'TelescopePrompt',
+        'undotree',
+        'flutterToolsOutline',
+        'dashboard',
+        '',
+      buftypes = { 'nofile', 'terminal' },
+      },
+    },
+  }
 end
 
 function ui.catppuccin()
