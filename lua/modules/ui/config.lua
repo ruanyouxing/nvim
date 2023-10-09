@@ -3,28 +3,6 @@ local ui = {}
 function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
-require('ibl').overwrite {
-    exclude = {
-      filetypes = {
-        'log',
-        'fugitive',
-        'gitcommit',
-        'vimwiki',
-        'markdown',
-        'txt',
-        'vista',
-        'help',
-        'todoist',
-        'NvimTree',
-        'git',
-        'TelescopePrompt',
-        'undotree',
-        'flutterToolsOutline',
-        'dashboard',
-        '',
-      },
-    },
-  }
   local highlight = {
     'RainbowRed',
     'RainbowYellow',
@@ -45,7 +23,30 @@ require('ibl').overwrite {
     vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
   end)
 
-  require('ibl').setup { indent = { highlight = highlight } }
+  require('ibl').setup {
+    indent = { highlight = highlight },
+    exclude = {
+      filetypes = {
+        'log',
+        'fugitive',
+        'gitcommit',
+        'vimwiki',
+        'markdown',
+        'txt',
+        'vista',
+        'help',
+        'todoist',
+        'NvimTree',
+        'git',
+        'TelescopePrompt',
+        'undotree',
+        'flutterToolsOutline',
+        'dashboard',
+        '',
+      buftypes = { 'nofile', 'terminal' },
+      },
+    },
+  }
 end
 
 function ui.catppuccin()
@@ -330,34 +331,6 @@ function ui.navic()
     depth_limit = 2,
     depth_limit_indicator = '..',
   }
-  vim.api.nvim_set_hl(0, 'NavicIconsFile', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsModule', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsNamespace', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsPackage', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsClass', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsMethod', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsProperty', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsField', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsConstructor', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsEnum', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsInterface', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsFunction', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsVariable', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsConstant', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsString', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsNumber', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsBoolean', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsArray', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsObject', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsKey', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsNull', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsEnumMember', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsStruct', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsEvent', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsOperator', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicIconsTypeParameter', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicText', { default = true, bg = '#000000', fg = '#ffffff' })
-  vim.api.nvim_set_hl(0, 'NavicSeparator', { default = true, bg = '#000000', fg = '#ffffff' })
 end
 
 function ui.outline()
@@ -366,35 +339,34 @@ function ui.outline()
     show_numbers = true,
     show_relative_numbers = true,
     symbols = {
-    File = { icon = "󰈙 ", hl = "@text.uri" },
-    Module = { icon = " ", hl = "@namespace" },
-    Namespace = { icon = "󰌗 ", hl = "@namespace" },
-    Package = { icon = "󰏓 ", hl = "@namespace" },
-    Class = { icon = "󰌗 " , hl = "@type" },
-    Method = { icon = "󰆧 ", hl = "@method" },
-    Property = { icon = "  ", hl = "@method" },
-    Field = { icon = "󰮄 ", hl = "@field" },
-    Constructor = { icon = " ", hl = "@constructor" },
-    Enum = { icon = "󰕘 ", hl = "@type" },
-    Interface = { icon = "󰕘 ", hl = "@type" },
-    Function = { icon = "󰊕 ", hl = "@function" },
-    Variable = { icon = "󰀫 ", hl = "@constant" },
-    Constant = { icon = "󰏿 ", hl = "@constant" },
-    String = { icon = "󰀬 ", hl = "@string" },
-    Number = { icon = "󰎠 ", hl = "@number" },
-    Boolean = { icon = "◩ ", hl = "@boolean" },
-    Array = { icon = "󰅪 ", hl = "@constant" },
-    Object = { icon = "󰅩 ", hl = "@type" },
-    Key = { icon = "󰌋 ", hl = "@type" },
-    Null = { icon = "󰟢 ",hl = "@type" },
-    EnumMember = { icon = " ", hl = "@field" },
-    Struct = { icon = " ", hl = "@type" },
-    Event = { icon = " ", hl = "@type" },
-    Operator = { icon = "󰆕 ", hl = "@operator" },
-    TypeParameter = { icon = "󰊄 ", hl = "@parameter" },
-    Component = { icon = "󰆼 ", hl = "@function" },
-  },
-
+      File = { icon = '󰈙 ', hl = '@text.uri' },
+      Module = { icon = ' ', hl = '@namespace' },
+      Namespace = { icon = '󰌗 ', hl = '@namespace' },
+      Package = { icon = '󰏓 ', hl = '@namespace' },
+      Class = { icon = '󰌗 ', hl = '@type' },
+      Method = { icon = '󰆧 ', hl = '@method' },
+      Property = { icon = '  ', hl = '@method' },
+      Field = { icon = '󰮄 ', hl = '@field' },
+      Constructor = { icon = ' ', hl = '@constructor' },
+      Enum = { icon = '󰕘 ', hl = '@type' },
+      Interface = { icon = '󰕘 ', hl = '@type' },
+      Function = { icon = '󰊕 ', hl = '@function' },
+      Variable = { icon = '󰀫 ', hl = '@constant' },
+      Constant = { icon = '󰏿 ', hl = '@constant' },
+      String = { icon = '󰀬 ', hl = '@string' },
+      Number = { icon = '󰎠 ', hl = '@number' },
+      Boolean = { icon = '◩ ', hl = '@boolean' },
+      Array = { icon = '󰅪 ', hl = '@constant' },
+      Object = { icon = '󰅩 ', hl = '@type' },
+      Key = { icon = '󰌋 ', hl = '@type' },
+      Null = { icon = '󰟢 ', hl = '@type' },
+      EnumMember = { icon = ' ', hl = '@field' },
+      Struct = { icon = ' ', hl = '@type' },
+      Event = { icon = ' ', hl = '@type' },
+      Operator = { icon = '󰆕 ', hl = '@operator' },
+      TypeParameter = { icon = '󰊄 ', hl = '@parameter' },
+      Component = { icon = '󰆼 ', hl = '@function' },
+    },
   }
 end
 
