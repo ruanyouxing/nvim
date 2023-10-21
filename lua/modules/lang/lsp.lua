@@ -28,6 +28,7 @@ function lsp.lspconfig()
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  table.insert(capabilities, {offsetEncoding = "utf-16"})
   require('mason').setup {}
   for _, name in ipairs(Servers) do
     require('lspconfig')[name].setup {
@@ -56,25 +57,26 @@ function lsp.lspconfig()
       },
     },
   }
-  local clangd_defaults = require 'lspconfig.server_configurations.clangd'
-  local clangd_configs = vim.tbl_deep_extend('force', clangd_defaults['default_config'], {
-    cmd = {
-      'clangd',
-      '--offset-encoding=utf-16',
-      '-j=4',
-      '--background-index',
-      '--clang-tidy',
-      '--fallback-style=llvm',
-      '--all-scopes-completion',
-      '--completion-style=detailed',
-      '--header-insertion=iwyu',
-      '--header-insertion-decorators',
-      '--pch-storage=memory',
+end
+
+function lsp.clangd_setup()
+  require('lspconfig').clangd.setup { capabilities = { offsetEncoding = { 'utf-16' } } }
+  require('clangd_extensions').setup {
+    server = {
+      cmd = {
+        'clangd',
+        '--offset-encoding=utf-16',
+        '-j=4',
+        '--background-index',
+        '--clang-tidy',
+        '--fallback-style=llvm',
+        '--all-scopes-completion',
+        '--completion-style=detailed',
+        '--header-insertion=iwyu',
+        '--header-insertion-decorators',
+        '--pch-storage=memory',
+      },
     },
-  })
-  local clangd = require 'clangd_extensions'
-  clangd.setup {
-    server = clangd_configs,
     extensions = {
       autoSetHints = true,
       hover_with_actions = true,
@@ -139,7 +141,6 @@ function lsp.lsputils()
     handlr['workspace/symbol'] = sym.workspace_handler
   else
     local bufnr = vim.api.nvim_buf_get_number(0)
-
     handlr['textDocument/codeAction'] = function(_, _, actions)
       ca.code_action_handler(nil, actions, nil, nil, nil)
     end
@@ -183,8 +184,8 @@ function lsp.mason()
     'stylua',
     'shellcheck',
   }
-  for _,v in ipairs(Servers) do
-    table.insert(packages,v)
+  for _, v in ipairs(Servers) do
+    table.insert(packages, v)
   end
   require('mason-tool-installer').setup {
     ensure_installed = packages,

@@ -1,7 +1,7 @@
 local plugin = require('core.pack').package
 local conf = require 'modules.lang.config'
 local lsp = require 'modules.lang.lsp'
-plugin { 'p00f/clangd_extensions.nvim', lazy = true }
+plugin { 'p00f/clangd_extensions.nvim', ft = {'c','cpp'}, config = lsp.clangd_setup }
 plugin { 'williamboman/mason-lspconfig.nvim', event = 'BufRead', config = lsp.lspconfig }
 plugin {
   'williamboman/mason.nvim',
