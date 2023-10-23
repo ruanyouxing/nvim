@@ -123,6 +123,7 @@ function lsp.clangd_setup()
       },
     },
   }
+  require('clangd_extensions.inlay_hints').set_inlay_hints()
 end
 
 function lsp.lsputils()
