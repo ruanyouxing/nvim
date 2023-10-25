@@ -2,6 +2,7 @@ local lsp = {}
 
 Servers = {
   'bashls',
+  'clangd',
   'lua_ls',
   'html',
   'cssls',
@@ -28,7 +29,7 @@ function lsp.lspconfig()
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  table.insert(capabilities, {offsetEncoding = "utf-16"})
+  capabilities.offsetEncoding = {'utf-16'}
   require('mason').setup {}
   for _, name in ipairs(Servers) do
     require('lspconfig')[name].setup {
@@ -60,7 +61,6 @@ function lsp.lspconfig()
 end
 
 function lsp.clangd_setup()
-  require('lspconfig').clangd.setup { capabilities = { offsetEncoding = { 'utf-16' } } }
   require('clangd_extensions').setup {
     extensions = {
       autoSetHints = true,
