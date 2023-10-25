@@ -26,6 +26,9 @@ function lsp.lspconfig()
       rust = { 'rust_analyzer' },
       cpp = { 'clangd' },
     },
+    cmd_overrides = {
+      clangd = {'clangd','--offset-encoding=utf-16'}
+    },
     default_config = {
       on_attach = function(client, bufnr)
         if client.server_capabilities['documentSymbolProvider'] then

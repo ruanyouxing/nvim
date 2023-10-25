@@ -3,7 +3,8 @@ local conf = require 'modules.lang.config'
 local lsp = require 'modules.lang.lsp'
 plugin { 'p00f/clangd_extensions.nvim', ft = {'c','cpp'}, config = conf.clangd_exts }
 plugin {
-  'dundalek/lazy-lsp.nvim',
+  -- 'dundalek/lazy-lsp.nvim',
+  'ruanyouxing/lazy-lsp.nvim',
   dependencies = { 'nvim-lspconfig' },
   lazy = true;
 }
