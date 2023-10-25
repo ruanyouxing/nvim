@@ -18,6 +18,7 @@ function lsp.lspconfig()
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
+  capabilities.offsetEncoding = { 'utf-16' }
   require('lazy-lsp').setup {
     excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint', 'rls', 'rome' },
     preffered_servers = {
@@ -25,9 +26,6 @@ function lsp.lspconfig()
       javascript = { 'tsserver' },
       rust = { 'rust_analyzer' },
       cpp = { 'clangd' },
-    },
-    cmd_overrides = {
-      clangd = {'clangd','--offset-encoding=utf-16'}
     },
     default_config = {
       on_attach = function(client, bufnr)
