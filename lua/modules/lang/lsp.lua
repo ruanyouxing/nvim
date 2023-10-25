@@ -17,7 +17,7 @@ function lsp.lspconfig()
   completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
-  capabilities = table.insert(require('cmp_nvim_lsp').default_capabilities(capabilities), { offsetEncoding = 'utf-16' })
+  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   require('lazy-lsp').setup {
     excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint', 'rls', 'rome' },
     preffered_servers = {
@@ -36,6 +36,15 @@ function lsp.lspconfig()
       flags = { debounce_text_changes = 500 },
     },
     config = {
+      clangd = {
+        on_attach = function(client, bufnr)
+          if client.server_capabilities['documentSymbolProvider'] then
+            require('nvim-navic').attach(client, bufnr)
+          end
+          require('clangd_extensions.inlay_hints').setup_autocmd()
+          require('clangd_extensions.inlay_hints').set_inlay_hints()
+        end,
+      },
       lua_ls = {
         settings = {
           Lua = {
