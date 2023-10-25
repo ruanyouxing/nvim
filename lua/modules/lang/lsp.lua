@@ -17,13 +17,14 @@ function lsp.lspconfig()
   completionItem.resolveSupport = {
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
-    require('lazy-lsp').setup {
-    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint',
-    'rls', 'rome' },
+  capabilities = table.insert(require('cmp_nvim_lsp').default_capabilities(capabilities), { offsetEncoding = 'utf-16' })
+  require('lazy-lsp').setup {
+    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint', 'rls', 'rome' },
     preffered_servers = {
       yaml = { 'yamlls' },
-      javascript = {'tsserver'},
-      rust = {'rust_analyzer'},
+      javascript = { 'tsserver' },
+      rust = { 'rust_analyzer' },
+      cpp = { 'clangd' },
     },
     default_config = {
       on_attach = function(client, bufnr)
@@ -49,72 +50,6 @@ function lsp.lspconfig()
             },
             telemetry = { enable = false },
           },
-        },
-      },
-    },
-  }
-  capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  local clangd_defaults = require 'lspconfig.server_configurations.clangd'
-  local clangd_configs = vim.tbl_deep_extend('force', clangd_defaults['default_config'], {
-    cmd = {
-      'clangd',
-      '--offset-encoding=utf-16',
-      '-j=4',
-      '--background-index',
-      '--clang-tidy',
-      '--fallback-style=llvm',
-      '--all-scopes-completion',
-      '--completion-style=detailed',
-      '--header-insertion=iwyu',
-      '--header-insertion-decorators',
-      '--pch-storage=memory',
-    },
-  })
-  local clangd = require 'clangd_extensions'
-  clangd.setup {
-    server = clangd_configs,
-    extensions = {
-      autoSetHints = true,
-      hover_with_actions = true,
-      inlay_hints = {
-        only_current_line = false,
-        only_current_line_autocmd = 'CursorHold',
-        show_parameter_hints = true,
-        parameter_hints_prefix = '<- ',
-        other_hints_prefix = '=> ',
-        max_len_align = false,
-        max_len_align_padding = 1,
-        right_align = false,
-        right_align_padding = 7,
-        highlight = 'Comment',
-        priority = 100,
-      },
-      ast = {
-        role_icons = {
-          type = '',
-          declaration = '',
-          expression = '',
-          specifier = '',
-          statement = '',
-          ['template argument'] = '',
-        },
-        {
-          Compound = '',
-          Recovery = '',
-          TranslationUnit = '',
-          PackExpansion = '',
-          TemplateTypeParm = '',
-          TemplateTemplateParm = '',
-          TemplateParamObject = '',
-        },
-        highlights = {
-          detail = 'Comment',
-        },
-        memory_usage = {
-          border = 'rounded',
-        },
-        symbol_info = {
-          border = 'rounded',
         },
       },
     },
@@ -170,6 +105,57 @@ function lsp.lsputils()
       sym.workspace_handler(nil, result, { bufnr = bufn }, nil)
     end
   end
+end
+
+function lsp.clangd_exts()
+  local clangd = require 'clangd_extensions'
+  clangd.setup {
+    extensions = {
+      autoSetHints = true,
+      hover_with_actions = true,
+      inlay_hints = {
+        only_current_line = false,
+        only_current_line_autocmd = 'CursorHold',
+        show_parameter_hints = true,
+        parameter_hints_prefix = '<- ',
+        other_hints_prefix = '=> ',
+        max_len_align = false,
+        max_len_align_padding = 1,
+        right_align = false,
+        right_align_padding = 7,
+        highlight = 'Comment',
+        priority = 100,
+      },
+      ast = {
+        role_icons = {
+          type = '',
+          declaration = '',
+          expression = '',
+          specifier = '',
+          statement = '',
+          ['template argument'] = '',
+        },
+        {
+          Compound = '',
+          Recovery = '',
+          TranslationUnit = '',
+          PackExpansion = '',
+          TemplateTypeParm = '',
+          TemplateTemplateParm = '',
+          TemplateParamObject = '',
+        },
+        highlights = {
+          detail = 'Comment',
+        },
+        memory_usage = {
+          border = 'rounded',
+        },
+        symbol_info = {
+          border = 'rounded',
+        },
+      },
+    },
+  }
 end
 
 return lsp
