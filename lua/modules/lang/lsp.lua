@@ -62,21 +62,6 @@ end
 function lsp.clangd_setup()
   require('lspconfig').clangd.setup { capabilities = { offsetEncoding = { 'utf-16' } } }
   require('clangd_extensions').setup {
-    server = {
-      cmd = {
-        'clangd',
-        '--offset-encoding=utf-16',
-        '-j=4',
-        '--background-index',
-        '--clang-tidy',
-        '--fallback-style=llvm',
-        '--all-scopes-completion',
-        '--completion-style=detailed',
-        '--header-insertion=iwyu',
-        '--header-insertion-decorators',
-        '--pch-storage=memory',
-      },
-    },
     extensions = {
       autoSetHints = true,
       hover_with_actions = true,
