@@ -16,18 +16,6 @@ plugin {
   config = conf.hydra,
   keys = '<leader>l',
 }
--- plugin {
---   'williamboman/mason.nvim',
---   dependencies = {
---     {
---       'WhoIsSethDaniel/mason-tool-installer.nvim',
---       cmd = 'Mason',
---       config = conf.mason_tools,
---     },
---   },
---   event = 'BufRead',
---   config = conf.mason,
--- }
 plugin { 'SmiteshP/nvim-navbuddy', config = conf.navbuddy }
 plugin { 'stevearc/overseer.nvim', config = conf.overseer, cmd = 'OverseerRun' }
 plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
