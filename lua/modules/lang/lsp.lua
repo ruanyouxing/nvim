@@ -29,7 +29,7 @@ function lsp.lspconfig()
     properties = { 'documentation', 'detail', 'additionalTextEdits' },
   }
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-  capabilities.offsetEncoding = {'utf-16'}
+  capabilities.offsetEncoding = { 'utf-16' }
   require('mason').setup {}
   for _, name in ipairs(Servers) do
     require('lspconfig')[name].setup {
