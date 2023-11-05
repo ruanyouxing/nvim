@@ -225,7 +225,7 @@ function ui.fold()
     end,
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
-      local suffix = ('  %d '):format(endLnum - lnum)
+      local suffix = (' ↓ %d '):format(endLnum - lnum)
       local sufWidth = vim.fn.strdisplaywidth(suffix)
       local targetWidth = width - sufWidth
       local curWidth = 0
@@ -525,14 +525,14 @@ end
 function ui.specs()
   require('specs').setup {
     show_jumps = true,
-    min_jump = 10,
+    min_jump = 30,
     popup = {
       delay_ms = 0,
-      inc_ms = 10,
+      inc_ms = 30,
       blend = 10,
       width = 10,
       winhl = 'PMenu',
-      fader = require('specs').pulse_fader,
+      fader = require('specs').linear_fader,
       resizer = require('specs').slide_resizer,
     },
     ignore_filetypes = {},

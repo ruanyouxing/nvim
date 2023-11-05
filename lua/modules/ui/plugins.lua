@@ -33,7 +33,7 @@ plugin {
 }
 plugin { 'stevearc/dressing.nvim', config = conf.dressing }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin }
-plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
+plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, lazy = true }
 plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline, event = 'UIEnter' }
 plugin {
   'noib3/nvim-cokeline',
@@ -41,7 +41,7 @@ plugin {
   config = conf.cokeline,
 }
 plugin { 'yamatsum/nvim-cursorline', config = conf.cursorline }
-plugin {'kevinhwang91/nvim-hlslens', config = conf.hlslens, event = {'CmdlineEnter', 'CmdWinEnter'}}
+plugin { 'kevinhwang91/nvim-hlslens', config = conf.hlslens, event = { 'CmdlineEnter', 'CmdWinEnter' } }
 plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
