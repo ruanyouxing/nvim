@@ -41,6 +41,7 @@ plugin {
   config = conf.cokeline,
 }
 plugin { 'yamatsum/nvim-cursorline', config = conf.cursorline }
+plugin {'kevinhwang91/nvim-hlslens', config = conf.hlslens, event = {'CmdlineEnter', 'CmdWinEnter'}}
 plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',

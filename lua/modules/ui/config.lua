@@ -43,7 +43,7 @@ function ui.blankline()
         'flutterToolsOutline',
         'dashboard',
         '',
-      buftypes = { 'nofile', 'terminal' },
+        buftypes = { 'nofile', 'terminal' },
       },
     },
   }
@@ -126,22 +126,22 @@ function ui.cokeline()
         end,
         style = function(buffer)
           return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
-              or buffer.is_modified and 'italic,bold'
-              or buffer.is_focused and 'bold'
-              or buffer.diagnostics.errors ~= 0 and 'underline'
-              or nil
+            or buffer.is_modified and 'italic,bold'
+            or buffer.is_focused and 'bold'
+            or buffer.diagnostics.errors ~= 0 and 'underline'
+            or nil
         end,
       },
       {
         text = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and ' E' .. buffer.diagnostics.errors)
-              or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
-              or ''
+            or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
+            or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and errors_fg)
-              or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-              or nil
+            or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+            or nil
         end,
       },
       {
@@ -225,7 +225,7 @@ function ui.fold()
     end,
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
-      local suffix = ('  %d '):format(endLnum - lnum)
+      local suffix = ('  %d '):format(endLnum - lnum)
       local sufWidth = vim.fn.strdisplaywidth(suffix)
       local targetWidth = width - sufWidth
       local curWidth = 0
@@ -256,6 +256,15 @@ function ui.highlight()
   require('local-highlight').setup {
     hlGroup = 'TSDefinitionUsage',
   }
+end
+
+function ui.hlslens()
+  require('hlslens').setup {
+    calm_down = true,
+    nearest_only = true,
+    nearest_float_when = 'always',
+  }
+
 end
 
 function ui.lightbulb()
@@ -399,11 +408,11 @@ end
 function ui.twilight()
   require('twilight').setup {
     dimming = {
-      alpha = 0.25,     -- amount of dimming
+      alpha = 0.25, -- amount of dimming
       color = { 'Normal', '#ffffff' },
       inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
     },
-    context = 10,       -- amount of lines we will try to show around the current line
+    context = 10, -- amount of lines we will try to show around the current line
     treesitter = true,
     expand = {
       'function',
@@ -581,7 +590,7 @@ function ui.statuscol()
     ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
     segments = {
       { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-      { text = { '%s' },             click = 'v:lua.ScSa' },
+      { text = { '%s' }, click = 'v:lua.ScSa' },
       {
         text = { builtin.lnumfunc, ' ' },
         condition = { true, builtin.not_empty },
