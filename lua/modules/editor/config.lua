@@ -166,17 +166,10 @@ function editor.treesitter()
       'css',
     },
     sync_install = false,
-    highlight = {
-      enable = true,
-    },
-    autotag = {
-      enable = true,
-      filetypes = { 'html', 'xml' },
-    },
+    highlight = { enable = true },
+    autotag = { enable = true, filetypes = { 'html', 'xml' } },
     context_commentstring = { enable = true },
-    matchup = {
-      enable = true,
-    },
+    matchup = { enable = true },
     refactor = {
       highlight_definitions = { enable = true, enable_autocmd = false },
       highlight_current_scope = { enable = true },
