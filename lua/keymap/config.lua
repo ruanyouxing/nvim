@@ -45,8 +45,14 @@ function M.set_keymaps()
   nmap { ' ', '' }
   xmap { ' ', '' }
   nmap {
-    { 'Y',     'y$' },
+    { 'Y', 'y$' },
     { '<C-a>', 'ggVG' },
+    {
+      'gx',
+      function()
+        vim.cmd [[URLOpenUnderCursor]]
+      end,
+    },
     {
       '<C-h>',
       function()
@@ -264,8 +270,8 @@ function M.set_keymaps()
     },
   }
   nmap {
-    { 'j', plug 'faster_move_j',  opts(silent) },
-    { 'k', plug 'faster_move_k',  opts(silent) },
+    { 'j', plug 'faster_move_j', opts(silent) },
+    { 'k', plug 'faster_move_k', opts(silent) },
     { 'j', plug 'faster_move_gj', opts(silent) },
     { 'k', plug 'faster_move_gk', opts(silent) },
   }
@@ -280,14 +286,14 @@ function M.set_keymaps()
 
   -- Cokeline
   nmap {
-    { '<C-]>',   plug 'cokeline-focus-next' },
-    { '<C-[>',   plug 'cokeline-focus-prev' },
-    { '<Tab>',   plug 'cokeline-switch-next' },
+    { '<C-]>', plug 'cokeline-focus-next' },
+    { '<C-[>', plug 'cokeline-focus-prev' },
+    { '<Tab>', plug 'cokeline-switch-next' },
     { '<S-Tab>', plug 'cokeline-switch-prev' },
   }
   for i = 1, 9 do
     nmap {
-      { ('<F%s>'):format(i),      (plug 'cokeline-focus-%s)'):format(i) },
+      { ('<F%s>'):format(i), (plug 'cokeline-focus-%s)'):format(i) },
       { ('<Leader>%s'):format(i), (plug 'cokeline-switch-%s)'):format(i) },
     }
   end
@@ -298,7 +304,7 @@ function M.set_keymaps()
 
   vmap {
     { 'jk', '<ESC>' },
-    { 'q',  '<ESC>' },
+    { 'q', '<ESC>' },
     {
       '<S-Space>',
       function()
