@@ -6,8 +6,7 @@ Servers = {
   'lua_ls',
   'html',
   'cssls',
-  'jsonls',
-  'pyright',
+  'jsonls', 'pyright',
   'tsserver',
   'rust_analyzer',
 }
@@ -127,6 +126,14 @@ function lsp.mason()
     auto_update = true,
     run_on_start = true,
     start_delay = 2000,
+  }
+end
+
+function lsp.timeout()
+  vim.g.lspTimeoutConfig = {
+    stopTimeout = 1000 * 5,
+    startTimeOut = 1000 * 10,
+    silent = false,
   }
 end
 

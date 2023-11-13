@@ -36,3 +36,8 @@ autocmd(User, {
     SessionStatus = { { ' 󰩹 ', 'SessionHL' } }
   end,
 })
+autocmd({ 'LspAttach' }, {
+  callback = function()
+    require('null-ls').enable {}
+  end,
+})
