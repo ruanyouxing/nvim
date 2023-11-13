@@ -6,7 +6,8 @@ Servers = {
   'lua_ls',
   'html',
   'cssls',
-  'jsonls', 'pyright',
+  'jsonls',
+  'pyright',
   'tsserver',
   'rust_analyzer',
 }
@@ -131,8 +132,8 @@ end
 
 function lsp.timeout()
   vim.g.lspTimeoutConfig = {
-    stopTimeout = 1000 * 5,
-    startTimeOut = 1000 * 10,
+    stopTimeout = 1000 * 60 * 2,
+    startTimeOut = 1000 * 5,
     silent = false,
   }
 end
