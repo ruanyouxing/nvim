@@ -47,6 +47,7 @@ plugin {
 }
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
 plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
+plugin { 'gsuuon/tshjkl.nvim', config = true, opts = { keymaps = { toggle = 'XX', } }, keys = {'XX'} }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
 plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
 plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
