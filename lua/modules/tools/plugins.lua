@@ -23,12 +23,12 @@ plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
 plugin {
   'nvim-telescope/telescope.nvim',
   dependencies = {
-    { 'sharkdp/fd',                                lazy = true },
-    { 'BurntSushi/ripgrep',                        lazy = true },
+    { 'sharkdp/fd', lazy = true },
+    { 'BurntSushi/ripgrep', lazy = true },
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
-    { 'jvgrootveld/telescope-zoxide',              lazy = true },
-    { 'nvim-lua/popup.nvim',                       lazy = true },
-    { 'nvim-lua/plenary.nvim',                     lazy = true },
+    { 'jvgrootveld/telescope-zoxide', lazy = true },
+    { 'nvim-lua/popup.nvim', lazy = true },
+    { 'nvim-lua/plenary.nvim', lazy = true },
   },
   config = conf.telescope,
   lazy = true,
@@ -56,18 +56,31 @@ plugin {
 plugin { 'nvim-pack/nvim-spectre', config = conf.spectre, lazy = true }
 plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm, cmd = 'ToggleTerm' }
 plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode, cmd = 'TZAtaraxis' }
-plugin { 'mbbill/undotree', event = 'TextChanged' }
+plugin {
+  'kevinhwang91/nvim-fundo',
+  dependencies = 'undotree',
+  lazy = true,
+  config = conf.undo,
+  run = function()
+    require('fundo').install()
+  end,
+}
+plugin {
+  'mbbill/undotree',
+  cmd = { 'UndotreeShow', 'UndotreeToggle', 'UndotreeFocus', 'UndotreePersistUndo' },
+  lazy = true,
+}
 plugin { 'nvim-treesitter/playground', dependencies = 'nvim-treesitter', cmd = 'TSPlaygroundToggle' }
 plugin { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
 plugin {
   'gbprod/yanky.nvim',
   config = conf.yank,
   keys = {
-    { 'p',  plug 'YankyPutAfter',   mode = { 'n', 'x' } },
-    { 'P',  plug 'YankyPutBefore',  mode = { 'n', 'x' } },
-    { 'gp', plug 'YankyGPutAfter',  mode = { 'n', 'x' } },
+    { 'p', plug 'YankyPutAfter', mode = { 'n', 'x' } },
+    { 'P', plug 'YankyPutBefore', mode = { 'n', 'x' } },
+    { 'gp', plug 'YankyGPutAfter', mode = { 'n', 'x' } },
     { 'gP', plug 'YankyGPutBefore', mode = { 'n', 'x' } },
-    { 'y',  plug 'YankyYank',       mode = { 'n', 'x' } },
+    { 'y', plug 'YankyYank', mode = { 'n', 'x' } },
     {
       '<C-S-y>',
       function()

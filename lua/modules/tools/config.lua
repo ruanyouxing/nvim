@@ -41,7 +41,6 @@ function tools.fm()
   }
 end
 
-
 function tools.hop()
   require('hop').setup {
     keys = 'etovxqpdygfblzhckisuran',
@@ -407,6 +406,11 @@ function tools.yank()
   }
 end
 
+function tools.undo()
+  require('fundo').setup {
+    limit_archives_size = 1024,
+  }
+end
 
 function tools.autoclose()
   require('hbac').setup {
