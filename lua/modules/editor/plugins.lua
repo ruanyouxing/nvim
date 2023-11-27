@@ -34,9 +34,9 @@ local jump_modes = { 'n', 'o', 'x' }
 plugin {
   'chrisgrieser/nvim-spider',
   keys = {
-    { mode = jump_modes, 'w', "<cmd>lua require('spider').motion('w')<CR>" },
-    { mode = jump_modes, 'e', "<cmd>lua require('spider').motion('e')<CR>" },
-    { mode = jump_modes, 'b', "<cmd>lua require('spider').motion('b')<CR>" },
+    { mode = jump_modes, 'w',  "<cmd>lua require('spider').motion('w')<CR>" },
+    { mode = jump_modes, 'e',  "<cmd>lua require('spider').motion('e')<CR>" },
+    { mode = jump_modes, 'b',  "<cmd>lua require('spider').motion('b')<CR>" },
     { mode = jump_modes, 'ge', "<cmd>lua require('spider').motion('ge')<CR>" },
   },
 }
@@ -47,8 +47,14 @@ plugin {
 }
 plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
 plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
-plugin { 'gsuuon/tshjkl.nvim', config = true, opts = { keymaps = { toggle = 'XX', } }, keys = {'XX'} }
-plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
+plugin { 'gsuuon/tshjkl.nvim', config = true, opts = { keymaps = { toggle = 'XX' } }, keys = { 'XX' } }
+plugin {
+  'JoosepAlviste/nvim-ts-context-commentstring',
+  dependencies = 'nvim-treesitter',
+  config = function()
+    require('ts_context_commentstring').setup { enable_autocmd = true }
+  end,
+}
 plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
 plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
 plugin { 'hiphish/rainbow-delimiters.nvim', event = 'BufRead', config = conf.rainbow }

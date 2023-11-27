@@ -16,8 +16,7 @@
 (("in"       @keyword) (#set! conceal "⭘"))
 (("do"       @keyword) (#set! conceal ""))
 (("~="	     @keyword) (#set! conceal "≠"))
-(("comment_start"    @comment) (#set! conceal ""))
-
+(("--"       @keyword) (#set! conceal  ""))
 ((function_call name: (identifier) @TSNote (#eq? @TSNote "require")) (#set! conceal ""))
 ((function_call name: (identifier) @TSNote (#eq? @TSNote "print"  )) (#set! conceal ""))
 ((function_call name: (identifier) @TSNote (#eq? @TSNote "pairs"  )) (#set! conceal "P"))
