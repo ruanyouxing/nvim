@@ -13,12 +13,6 @@ function format.setup()
     formatting.prettier,
     formatting.clang_format,
     formatting.alejandra,
-    diagnostics.eslint.with {
-      extra_args = { '--config', vim.fn.expand(config_dir .. '/.eslintrc.json') },
-    },
-    code_action.eslint.with {
-      extra_args = { '--config', vim.fn.expand(config_dir .. '/.eslintrc.json') },
-    },
   }
   null_ls.setup {
     sources = sources,
