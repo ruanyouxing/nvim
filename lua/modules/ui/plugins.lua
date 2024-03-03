@@ -117,4 +117,5 @@ plugin {
   config = conf.winbar,
   event = 'UIEnter',
 }
+plugin {'tamton-aquib/keys.nvim', config = conf.keystrokes, event = 'UIEnter'}
 plugin { 'luukvbaal/statuscol.nvim', config = conf.statuscol, event = 'BufWinEnter' }

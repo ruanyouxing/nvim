@@ -4,7 +4,7 @@ local config = {}
 SessionStatus = {}
 function config.setup()
   local windline = require 'windline'
-  -- Uncomment these to use cava statusbar 
+  -- Uncomment these to use cava statusbar
 
   -- local create_cava_colors = function(colors)
   --   local HSL = require 'wlanimation.utils'
