@@ -11,7 +11,9 @@ function format.setup()
       extra_args = { '--config-path', vim.fn.expand(config_dir .. '/stylua.toml') },
     },
     formatting.prettier,
-    formatting.clang_format,
+    formatting.clang_format.with{
+      extra_args = {'-style=file:'.. vim.fn.expand(config_dir.. '/.clang_format')}
+    },
     formatting.alejandra,
   }
   null_ls.setup {
