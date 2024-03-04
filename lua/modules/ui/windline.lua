@@ -216,6 +216,7 @@ function config.setup()
   --     end
   --   end,
   -- }
+
   divideComps() -- End left side components
   addComponent {
     name = 'Hydra',
@@ -250,6 +251,23 @@ function config.setup()
     end,
   }
   divideComps() -- End center components
+  addComponent {
+    name = 'Pigeon',
+    hl_colors = {
+      PigeonHl = { 'red', 'bg' },
+      PigeonTimeHL = { 'blue', 'bg', 'italic' },
+    },
+    text = function()
+      return {
+        { require('pigeon.datetime').current_time(), 'PigeonTimeHL' },
+        { '  ' },
+        { require('pigeon.datetime').current_day(),  'PigeonHl' },
+        { ' ' },
+        { require('pigeon.datetime').current_date(), 'PigeonHl' },
+        { ' ' },
+      }
+    end,
+  }
   addComponent {
     name = 'FileSize',
     hl_colors = {
@@ -299,7 +317,7 @@ function config.setup()
       return {
         { ' ' },
         { require('wpm').wpm, 'WpmHl' },
-        { ' | ', 'WpmHl' },
+        { ' | ',              'WpmHl' },
         {
           require('wpm').historic_graph(),
           'WpmHl',

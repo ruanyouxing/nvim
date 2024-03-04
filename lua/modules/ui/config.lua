@@ -605,4 +605,22 @@ function ui.statuscol()
   }
 end
 
+function ui.pigeon()
+  require('pigeon').setup {
+    enabled = true,
+    os = 'osx',
+    plugin_manager = 'lazy',
+    datetime = {
+      date = {
+        format = '%d/%m',
+        icon = ''
+      },
+      time = {
+        posttext = '',
+        icon = ' '
+      }
+    }
+  }
+end
+
 return ui

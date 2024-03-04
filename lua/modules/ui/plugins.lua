@@ -86,7 +86,10 @@ plugin {
 }
 plugin { 'folke/tokyonight.nvim', config = conf.tokyonight }
 plugin { 'folke/twilight.nvim', event = 'CursorMoved', config = conf.twilight }
-plugin { 'sontungexpt/url-open', event = 'VeryLazy', cmd = 'URLOpenUnderCursor',
+plugin {
+  'sontungexpt/url-open',
+  event = 'VeryLazy',
+  cmd = 'URLOpenUnderCursor',
   config = function()
     local status_ok, url_open = pcall(require, 'url-open')
     if not status_ok then
@@ -117,5 +120,6 @@ plugin {
   config = conf.winbar,
   event = 'UIEnter',
 }
-plugin {'tamton-aquib/keys.nvim', config = conf.keystrokes, event = 'UIEnter'}
+plugin { 'tamton-aquib/keys.nvim', config = conf.keystrokes, event = 'UIEnter' }
 plugin { 'luukvbaal/statuscol.nvim', config = conf.statuscol, event = 'BufWinEnter' }
+plugin { 'Pheon-Dev/pigeon', config = conf.pigeon, lazy = true }
