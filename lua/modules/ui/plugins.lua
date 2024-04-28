@@ -23,7 +23,7 @@ plugin {
 plugin { 'SmiteshP/nvim-navic', lazy = true }
 plugin { 'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'nvim-navic', event = 'BufRead' }
 plugin {
-  'glepnir/dashboard-nvim',
+  'nvimdev/dashboard-nvim',
   config = function()
     require 'modules.ui.dashboard'
   end,
