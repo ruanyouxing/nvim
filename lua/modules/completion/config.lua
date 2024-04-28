@@ -62,6 +62,7 @@ function completion.cmp()
     { name = 'path' },
     { name = 'buffer' },
     { name = 'emoji' },
+    { name = 'mocword' },
     {
       keyword_length = 2,
       option = {

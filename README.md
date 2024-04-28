@@ -11,6 +11,9 @@
 
  > Install requires Neovim 0.9+. Always review the code before installing a configuration.
 
+If you want to use word completion, please install [mocword
+database](https://github.com/high-moctane/mocword-data) first, then insall 
+[mocword](https://github.com/high-moctane/mocword) </br>
 Clone the repository and install the plugins:
 
 ```sh
