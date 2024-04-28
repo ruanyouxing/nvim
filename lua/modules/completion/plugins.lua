@@ -22,5 +22,6 @@ plugin {
   lazy = true,
 }
 plugin { 'L3MON4D3/LuaSnip', event = 'InsertEnter', config = conf.snippets }
+plugin {'TwIStOy/luasnip-snippets', event = 'InsertEnter', dependencies  = 'L3MON4D3/LuaSnip', config = conf.snippets_extenders}
 plugin { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
 plugin { 'nvimtools/none-ls.nvim', config = null_ls.setup, event = 'BufRead' }
