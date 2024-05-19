@@ -23,12 +23,12 @@ plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
 plugin {
   'nvim-telescope/telescope.nvim',
   dependencies = {
-    { 'sharkdp/fd', lazy = true },
-    { 'BurntSushi/ripgrep', lazy = true },
+    { 'sharkdp/fd',                                lazy = true },
+    { 'BurntSushi/ripgrep',                        lazy = true },
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
-    { 'jvgrootveld/telescope-zoxide', lazy = true },
-    { 'nvim-lua/popup.nvim', lazy = true },
-    { 'nvim-lua/plenary.nvim', lazy = true },
+    { 'jvgrootveld/telescope-zoxide',              lazy = true },
+    { 'nvim-lua/popup.nvim',                       lazy = true },
+    { 'nvim-lua/plenary.nvim',                     lazy = true },
   },
   config = conf.telescope,
   lazy = true,
@@ -76,11 +76,11 @@ plugin {
   'gbprod/yanky.nvim',
   config = conf.yank,
   keys = {
-    { 'p', plug 'YankyPutAfter', mode = { 'n', 'x' } },
-    { 'P', plug 'YankyPutBefore', mode = { 'n', 'x' } },
-    { 'gp', plug 'YankyGPutAfter', mode = { 'n', 'x' } },
+    { 'p',  plug 'YankyPutAfter',   mode = { 'n', 'x' } },
+    { 'P',  plug 'YankyPutBefore',  mode = { 'n', 'x' } },
+    { 'gp', plug 'YankyGPutAfter',  mode = { 'n', 'x' } },
     { 'gP', plug 'YankyGPutBefore', mode = { 'n', 'x' } },
-    { 'y', plug 'YankyYank', mode = { 'n', 'x' } },
+    { 'y',  plug 'YankyYank',       mode = { 'n', 'x' } },
     {
       '<C-S-y>',
       function()
@@ -96,3 +96,4 @@ plugin {
   lazy = true,
   cmd = { 'CompetiTestRun', 'CompetiTestAdd', 'CompetiTestDelete', 'CompetiTestEdit' },
 }
+plugin { 'IogaMaster/neocord', event = 'VeryLazy', config = conf.neocord }

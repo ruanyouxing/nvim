@@ -447,4 +447,11 @@ function tools.cptest()
   }
 end
 
+function tools.neocord()
+  require('neocord').setup{
+    logo = 'auto',
+    editing_text = 'Cooking %s',
+    plugin_manager_text = 'Cooking plugins',
+  }
+end
 return tools
