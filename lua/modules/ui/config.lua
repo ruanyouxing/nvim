@@ -4,9 +4,9 @@ function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
   local highlight = {
+    'RainbowBlue',
     'RainbowRed',
     'RainbowYellow',
-    'RainbowBlue',
     'RainbowOrange',
     'RainbowGreen',
     'RainbowViolet',
@@ -14,17 +14,18 @@ function ui.blankline()
   }
   local hooks = require 'ibl.hooks'
   hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
     vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
     vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
-    vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
     vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
     vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
     vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
     vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
   end)
 
+  vim.g.rainbow_delimiters = { highlight = highlight }
   require('ibl').setup {
-    indent = { highlight = highlight },
+    scope = { highlight = highlight },
     exclude = {
       filetypes = {
         'log',
@@ -43,10 +44,11 @@ function ui.blankline()
         'flutterToolsOutline',
         'dashboard',
         '',
-        buftypes = { 'nofile', 'terminal' },
       },
+      buftypes = { 'nofile', 'terminal' },
     },
   }
+  hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 end
 
 function ui.catppuccin()
@@ -126,22 +128,22 @@ function ui.cokeline()
         end,
         style = function(buffer)
           return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
-            or buffer.is_modified and 'italic,bold'
-            or buffer.is_focused and 'bold'
-            or buffer.diagnostics.errors ~= 0 and 'underline'
-            or nil
+              or buffer.is_modified and 'italic,bold'
+              or buffer.is_focused and 'bold'
+              or buffer.diagnostics.errors ~= 0 and 'underline'
+              or nil
         end,
       },
       {
         text = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and ' E' .. buffer.diagnostics.errors)
-            or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
-            or ''
+              or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
+              or ''
         end,
         fg = function(buffer)
           return (buffer.diagnostics.errors ~= 0 and errors_fg)
-            or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-            or nil
+              or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+              or nil
         end,
       },
       {
@@ -267,9 +269,20 @@ function ui.hlslens()
 end
 
 function ui.keystrokes()
-  require('keys').setup {
-    enable_on_startup = true,
+  require('screenkey').setup{
+    win_opts = {
+      width = 30,
+      height = 3,
+      border = 'rounded'
+    },
+    disable = {
+      filetypes = {'dashboard', ''},
+      buftypes = {'nofile'}
+    },
+    show_leader = true,
+    group_mappings = true
   }
+  vim.cmd[[Screenkey]]
 end
 
 function ui.lightbulb()
@@ -413,11 +426,11 @@ end
 function ui.twilight()
   require('twilight').setup {
     dimming = {
-      alpha = 0.25, -- amount of dimming
+      alpha = 0.25,     -- amount of dimming
       color = { 'Normal', '#ffffff' },
       inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
     },
-    context = 10, -- amount of lines we will try to show around the current line
+    context = 10,       -- amount of lines we will try to show around the current line
     treesitter = true,
     expand = {
       'function',
@@ -543,12 +556,6 @@ function ui.specs()
     ignore_filetypes = {},
     ignore_buftypes = { nofile = true },
   }
-  vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
-    pattern = '*',
-    callback = function()
-      require('specs').show_specs()
-    end,
-  })
 end
 
 function ui.winbar()
@@ -595,7 +602,7 @@ function ui.statuscol()
     ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
     segments = {
       { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-      { text = { '%s' }, click = 'v:lua.ScSa' },
+      { text = { '%s' },             click = 'v:lua.ScSa' },
       {
         text = { builtin.lnumfunc, ' ' },
         condition = { true, builtin.not_empty },
@@ -613,13 +620,13 @@ function ui.pigeon()
     datetime = {
       date = {
         format = '%d/%m',
-        icon = ''
+        icon = '',
       },
       time = {
         posttext = '',
-        icon = ' '
-      }
-    }
+        icon = ' ',
+      },
+    },
   }
 end
 

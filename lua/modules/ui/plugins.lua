@@ -12,6 +12,7 @@ plugin {
   priority = 10000,
 }
 plugin { 'rebelot/kanagawa.nvim', config = conf.kanagawa, lazy = false, priority = 10000 }
+plugin { 'scottmckendry/cyberdream.nvim', lazy = false, priority = 1000 }
 plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead' }
 plugin {
   'jcdickinson/wpm.nvim',
@@ -74,7 +75,7 @@ plugin {
   end,
 }
 plugin { 'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline' }
-plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
+plugin { 'cxwx/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
 plugin {
@@ -120,6 +121,6 @@ plugin {
   config = conf.winbar,
   event = 'UIEnter',
 }
-plugin { 'tamton-aquib/keys.nvim', config = conf.keystrokes, event = 'UIEnter' }
+plugin { 'NStefan002/screenkey.nvim', config = conf.keystrokes, event = 'BufRead', cmd = 'Screenkey' }
 plugin { 'luukvbaal/statuscol.nvim', config = conf.statuscol, event = 'BufWinEnter' }
 plugin { 'Pheon-Dev/pigeon', config = conf.pigeon, lazy = true }

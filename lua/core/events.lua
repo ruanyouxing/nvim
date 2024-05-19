@@ -41,3 +41,9 @@ autocmd({ 'LspAttach' }, {
     require('null-ls').enable {}
   end,
 })
+-- vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+--   pattern = '*',
+--   callback = function()
+--     require('specs').show_specs()
+--   end,
+-- })

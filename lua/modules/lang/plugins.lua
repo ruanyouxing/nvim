@@ -16,7 +16,7 @@ plugin {
   event = 'BufRead',
 }
 
-plugin { 'lukas-reineke/headlines.nvim', ft = { 'markdown', 'org', 'norg' }, config = conf.headlines }
+plugin { 'lukas-reineke/headlines.nvim', ft = { 'org', 'norg' }, config = conf.headlines }
 plugin { 'neovim/nvim-lspconfig', lazy = true }
 plugin {
   'RishabhRD/nvim-lsputils',
@@ -30,6 +30,12 @@ plugin {
   init = function()
     vim.g.mkdp_filetypes = { 'markdown' }
   end,
+  ft = { 'markdown' },
+}
+plugin {
+  'MeanderingProgrammer/markdown.nvim',
+  name = 'render-markdown',
+  config = conf.markdown_render,
   ft = { 'markdown' },
 }
 plugin { 'Pocco81/HighStr.nvim', ft = { 'markdown', 'neorg' } }

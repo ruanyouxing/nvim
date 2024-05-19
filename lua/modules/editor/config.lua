@@ -250,7 +250,6 @@ function editor.treesitter()
 end
 
 function editor.rainbow()
-  -- This module contains a number of default definitions
   local rainbow_delimiters = require 'rainbow-delimiters'
 
   vim.g.rainbow_delimiters = {

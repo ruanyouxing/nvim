@@ -4,6 +4,10 @@ function lang.headlines()
   require('headlines').setup {}
 end
 
+function lang.markdown_render()
+  require('render-markdown').setup {}
+end
+
 function lang.clangd_setup()
   require('clangd_extensions').setup {
     extensions = {
@@ -53,6 +57,7 @@ function lang.clangd_setup()
     },
   }
 end
+
 function lang.filetypes()
   vim.g.did_load_filetypes = 1
   require('filetype').setup {
@@ -80,7 +85,6 @@ function lang.filetypes()
     },
   }
 end
-
 
 function lang.trouble()
   require('trouble').setup {
@@ -128,4 +132,5 @@ function lang.trouble()
     use_diagnostic_signs = true,
   }
 end
+
 return lang
