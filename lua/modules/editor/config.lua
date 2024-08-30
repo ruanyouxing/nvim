@@ -28,14 +28,7 @@ function editor.autosession()
 end
 
 function editor.better_escape()
-  require('better_escape').setup {
-    mapping = { 'jk', 'jj' },
-    timeout = 100,
-    clear_empty_lines = true,
-    keys = function()
-      return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>' or '<esc>'
-    end,
-  }
+  require('better_escape').setup {timeout = 100 }
 end
 
 function editor.diffview()

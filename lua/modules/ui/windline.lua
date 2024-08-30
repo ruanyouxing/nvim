@@ -124,6 +124,21 @@ function config.setup()
     end,
   }
   addComponent {
+    name = 'BetterEscape',
+    hl_colors = {
+      waiting = { 'green', 'bg' },
+      active = { 'purple', 'bg' },
+    },
+    text = function()
+      local ok, m  =pcall(require,'better_escape')
+      if ok and m.waiting then
+        return { { '✺', 'active' } }
+      else
+        return { { '✺', 'waiting' } }
+      end
+    end,
+  }
+  addComponent {
     name = 'GitBranch',
     hl_colors = {
       GitBranchHl = { 'orange', 'bg', 'bold' },
@@ -144,7 +159,7 @@ function config.setup()
     text = function(bufnr)
       if lsp_comps.check_lsp(bufnr) then
         return {
-          { lsp_comps.lsp_name { icon = '   ' }, 'LspHl' },
+          { lsp_comps.lsp_name { icon = '  ' }, 'LspHl' },
         }
       end
     end,
@@ -261,7 +276,7 @@ function config.setup()
       return {
         { require('pigeon.datetime').current_time(), 'PigeonTimeHL' },
         { '  ' },
-        { require('pigeon.datetime').current_day(),  'PigeonHl' },
+        { require('pigeon.datetime').current_day(), 'PigeonHl' },
         { ' ' },
         { require('pigeon.datetime').current_date(), 'PigeonHl' },
         { ' ' },
@@ -317,7 +332,7 @@ function config.setup()
       return {
         { ' ' },
         { require('wpm').wpm, 'WpmHl' },
-        { ' | ',              'WpmHl' },
+        { ' | ', 'WpmHl' },
         {
           require('wpm').historic_graph(),
           'WpmHl',
