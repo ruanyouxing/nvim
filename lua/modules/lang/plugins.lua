@@ -3,7 +3,19 @@ local conf = require 'modules.lang.config'
 local lsp = require 'modules.lang.lsp'
 plugin { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp' }, config = conf.clangd_setup }
 plugin { 'williamboman/mason-lspconfig.nvim', event = 'BufRead', config = lsp.lspconfig }
-plugin { 'hinell/lsp-timeout.nvim', dependencies = 'nvim-lspconfig', config = lsp.timeout }
+plugin {
+  'hinell/lsp-timeout.nvim',
+  dependencies = 'nvim-lspconfig',
+  config = lsp.timeout
+}
+plugin {
+  'MysticalDevil/inlay-hints.nvim',
+  dependencies = 'nvim-lspconfig',
+  config = function ()
+    require('inlay-hints').setup{}
+  end,
+  event = 'LspAttach',
+}
 plugin {
   'williamboman/mason.nvim',
   dependencies = {

@@ -38,6 +38,7 @@ function lsp.lspconfig()
         if client.server_capabilities['documentSymbolProvider'] then
           require('nvim-navic').attach(client, bufnr)
         end
+        require('inlay-hints').on_attach(client, bufnr)
       end,
       flags = { debounce_text_changes = 500 },
     }
@@ -45,6 +46,7 @@ function lsp.lspconfig()
   require('lspconfig').lua_ls.setup {
     settings = {
       Lua = {
+        hints = { enable = true },
         diagnostics = { globals = { 'vim', 'packer_plugins' } },
         workspace = {
           library = {
