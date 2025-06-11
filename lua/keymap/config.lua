@@ -135,7 +135,7 @@ function M.set_keymaps()
     {
       'T',
       function()
-        require('trouble').toggle()
+        vim.cmd [[Trouble diagnostics]]
       end,
     },
     { '<C-n>', cmd 'NvimTreeToggle' },

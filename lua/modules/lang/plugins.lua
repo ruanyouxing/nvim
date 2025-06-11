@@ -1,12 +1,12 @@
 local plugin = require('core.pack').package
 local conf = require 'modules.lang.config'
 local lsp = require 'modules.lang.lsp'
-plugin { 'p00f/clangd_extensions.nvim', ft = {'c','cpp'}, config = conf.clangd_exts }
+plugin { 'p00f/clangd_extensions.nvim', ft = { 'c', 'cpp' }, config = conf.clangd_exts }
 plugin {
   'dundalek/lazy-lsp.nvim',
   -- 'ruanyouxing/lazy-lsp.nvim',
   dependencies = { 'nvim-lspconfig' },
-  lazy = true;
+  lazy = true,
 }
 plugin { 'LnL7/vim-nix', ft = 'nix' }
 plugin { 'lukas-reineke/headlines.nvim', ft = { 'markdown', 'org', 'norg' }, config = conf.headlines }
@@ -28,5 +28,10 @@ plugin {
 plugin { 'Pocco81/HighStr.nvim', ft = { 'markdown', 'neorg' } }
 plugin { 'elkowar/yuck.vim', ft = 'yuck' }
 plugin { 'nathom/filetype.nvim', config = conf.filetypes, event = { 'BufRead', 'BufNewFile' } }
-plugin { 'folke/trouble.nvim', lazy = true, command = 'TroubleToggle' }
+plugin {
+  'folke/trouble.nvim',
+  lazy = true,
+  cmd = 'Trouble',
+  config = conf.trouble
+}
 return plugin
