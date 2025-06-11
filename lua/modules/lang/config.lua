@@ -38,7 +38,6 @@ function lang.trouble()
     position = 'bottom',
     height = 6,
     width = 50,
-    icons = true,
     mode = 'workspace_diagnostics',
     fold_open = '',
     fold_closed = '',
