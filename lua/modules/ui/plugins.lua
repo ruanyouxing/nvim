@@ -12,7 +12,7 @@ plugin {
   priority = 10000,
 }
 plugin { 'rebelot/kanagawa.nvim', config = conf.kanagawa, lazy = false, priority = 10000 }
-plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead' }
+plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead',dependencies = 'folke/snacks.nvim'}
 plugin {
   'jcdickinson/wpm.nvim',
   config = function()
@@ -73,7 +73,7 @@ plugin {
   end,
 }
 plugin { 'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline' }
-plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
+-- plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
 plugin {

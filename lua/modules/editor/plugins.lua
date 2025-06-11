@@ -50,8 +50,7 @@ plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
 plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
 plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
--- plugin { 'HiPhish/nvim-ts-rainbow2', event = 'BufRead' }
-plugin { 'p00f/nvim-ts-rainbow', event = 'BufRead' }
+plugin { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead'}
 plugin { 'andymass/vim-matchup', event = 'BufRead' }
 plugin { 'romgrk/nvim-treesitter-context', event = 'BufRead', config = conf.ts_context }
 plugin { 'abecodes/tabout.nvim', event = 'InsertEnter', config = conf.tabout }

@@ -43,7 +43,6 @@ function ui.blankline()
         'flutterToolsOutline',
         'dashboard',
         '',
-      buftypes = { 'nofile', 'terminal' },
       },
     },
   }
@@ -509,7 +508,7 @@ function ui.modes()
     set_cursor = true,
     set_cursorline = true,
     set_number = true,
-    ignore_filetypes = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
+    ignore = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
   }
 end
 

@@ -29,12 +29,8 @@ end
 
 function editor.better_escape()
   require('better_escape').setup {
-    mapping = { 'jk', 'jj' },
+    default_mappings = true;
     timeout = 100,
-    clear_empty_lines = true,
-    keys = function()
-      return vim.api.nvim_win_get_cursor(0)[2] > 1 and '<esc>' or '<esc>'
-    end,
   }
 end
 
@@ -178,7 +174,6 @@ function editor.treesitter()
       enable = true,
       filetypes = { 'html', 'xml' },
     },
-    context_commentstring = { enable = true },
     matchup = {
       enable = true,
     },
