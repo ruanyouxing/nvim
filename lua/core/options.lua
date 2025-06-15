@@ -51,7 +51,7 @@ vim.opt.showbreak = '↳  '
 vim.opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
 vim.opt.pumblend = 10
 
-vim.opt.textwidth = 80
+vim.opt.textwidth = 500
 vim.opt.expandtab = true
 vim.opt.autoindent = true
 vim.opt.tabstop = 2

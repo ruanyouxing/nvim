@@ -50,7 +50,6 @@ plugin {
 plugin { 'j-hui/fidget.nvim', config = conf.fidget, lazy = true }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
-plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
 plugin {
   'kosayoda/nvim-lightbulb',
   dependencies = 'nvim-lspconfig',
@@ -73,7 +72,7 @@ plugin {
   end,
 }
 plugin { 'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline' }
--- plugin { 'edluffy/specs.nvim', event = 'UIEnter', config = conf.specs }
+plugin { 'cxwx/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
 plugin {

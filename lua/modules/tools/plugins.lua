@@ -16,18 +16,6 @@ plugin {
   config = conf.hydra,
   keys = '<leader>l',
 }
--- plugin {
---   'williamboman/mason.nvim',
---   dependencies = {
---     {
---       'WhoIsSethDaniel/mason-tool-installer.nvim',
---       cmd = 'Mason',
---       config = conf.mason_tools,
---     },
---   },
---   event = 'BufRead',
---   config = conf.mason,
--- }
 plugin { 'SmiteshP/nvim-navbuddy', config = conf.navbuddy }
 plugin { 'stevearc/overseer.nvim', config = conf.overseer, cmd = 'OverseerRun' }
 plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
@@ -35,12 +23,12 @@ plugin { 'gbprod/stay-in-place.nvim', config = conf.stay_in_place }
 plugin {
   'nvim-telescope/telescope.nvim',
   dependencies = {
-    { 'sharkdp/fd', lazy = true },
-    { 'BurntSushi/ripgrep', lazy = true },
+    { 'sharkdp/fd',                                lazy = true },
+    { 'BurntSushi/ripgrep',                        lazy = true },
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
-    { 'jvgrootveld/telescope-zoxide', lazy = true },
-    { 'nvim-lua/popup.nvim', lazy = true },
-    { 'nvim-lua/plenary.nvim', lazy = true },
+    { 'jvgrootveld/telescope-zoxide',              lazy = true },
+    { 'nvim-lua/popup.nvim',                       lazy = true },
+    { 'nvim-lua/plenary.nvim',                     lazy = true },
   },
   config = conf.telescope,
   lazy = true,
@@ -75,11 +63,11 @@ plugin {
   'gbprod/yanky.nvim',
   config = conf.yank,
   keys = {
-    { 'p', plug 'YankyPutAfter', mode = { 'n', 'x' } },
-    { 'P', plug 'YankyPutBefore', mode = { 'n', 'x' } },
-    { 'gp', plug 'YankyGPutAfter', mode = { 'n', 'x' } },
+    { 'p',  plug 'YankyPutAfter',   mode = { 'n', 'x' } },
+    { 'P',  plug 'YankyPutBefore',  mode = { 'n', 'x' } },
+    { 'gp', plug 'YankyGPutAfter',  mode = { 'n', 'x' } },
     { 'gP', plug 'YankyGPutBefore', mode = { 'n', 'x' } },
-    { 'y', plug 'YankyYank', mode = { 'n', 'x' } },
+    { 'y',  plug 'YankyYank',       mode = { 'n', 'x' } },
     {
       '<C-S-y>',
       function()

@@ -69,23 +69,6 @@ function tools.highlight()
   }
 end
 
-function tools.mason_tools()
-  require('mason-tool-installer').setup {
-    ensure_installed = {
-      'prettier',
-      'clang-format',
-      'debugpy',
-      'codelldb',
-      'black',
-      'stylua',
-      'shellcheck',
-    },
-    auto_update = true,
-    run_on_start = true,
-    start_delay = 3000, -- 3 second delay
-  }
-end
-
 function tools.navbuddy()
   require('nvim-navbuddy').setup {
     lsp = {

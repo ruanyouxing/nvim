@@ -20,7 +20,7 @@ function lsp.lspconfig()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.offsetEncoding = { 'utf-16' }
   require('lazy-lsp').setup {
-    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint', 'rls', 'rome', 'nixd' },
+    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint', 'rls', 'rome', 'nixd', 'basedpyright', 'pylyzer', 'jedi_language_server', 'ruff'},
     preffered_servers = {
       yaml = { 'yamlls' },
       javascript = { 'tsserver' },
