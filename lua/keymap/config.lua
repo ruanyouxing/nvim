@@ -143,7 +143,7 @@ function M.set_keymaps()
       '<C-s>',
       function()
         require('codewindow').close_minimap()
-        require('symbols-outline').toggle_outline()
+        require('outline').toggle { focus_outline = false }
       end,
     },
     {

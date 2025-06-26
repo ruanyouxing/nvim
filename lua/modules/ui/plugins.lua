@@ -71,7 +71,7 @@ plugin {
     }
   end,
 }
-plugin { 'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline' }
+plugin { 'hedyhli/outline.nvim', config = conf.outline, cmd = 'Outline' }
 plugin { 'cxwx/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
