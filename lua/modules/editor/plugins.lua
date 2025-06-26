@@ -34,9 +34,9 @@ local jump_modes = { 'n', 'o', 'x' }
 plugin {
   'chrisgrieser/nvim-spider',
   keys = {
-    { mode = jump_modes, 'w', "<cmd>lua require('spider').motion('w')<CR>" },
-    { mode = jump_modes, 'e', "<cmd>lua require('spider').motion('e')<CR>" },
-    { mode = jump_modes, 'b', "<cmd>lua require('spider').motion('b')<CR>" },
+    { mode = jump_modes, 'w',  "<cmd>lua require('spider').motion('w')<CR>" },
+    { mode = jump_modes, 'e',  "<cmd>lua require('spider').motion('e')<CR>" },
+    { mode = jump_modes, 'b',  "<cmd>lua require('spider').motion('b')<CR>" },
     { mode = jump_modes, 'ge', "<cmd>lua require('spider').motion('ge')<CR>" },
   },
 }
@@ -45,12 +45,17 @@ plugin {
   config = conf.bookmark,
   lazy = true,
 }
-plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
+plugin {
+  'nvim-treesitter/nvim-treesitter',
+  event = 'BufRead',
+  build = ':TSUpdate',
+  config = require 'modules.editor.treesitter',
+}
 plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
 plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
 plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
-plugin { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead'}
+plugin { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead' }
 plugin { 'andymass/vim-matchup', event = 'BufRead' }
 plugin { 'romgrk/nvim-treesitter-context', event = 'BufRead', config = conf.ts_context }
 plugin { 'abecodes/tabout.nvim', event = 'InsertEnter', config = conf.tabout }
