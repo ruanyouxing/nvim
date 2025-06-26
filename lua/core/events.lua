@@ -17,7 +17,7 @@ autocmd(User, {
   pattern = 'PersistedLoadPost',
   callback = function()
     SessionStatus = { { '   Session loaded', 'SessionHL' } }
-    require('trailblazer')
+    require 'trailblazer'
   end,
 })
 autocmd(User, {
@@ -33,5 +33,11 @@ autocmd(User, {
   callback = function()
     vim.notify 'Session saved'
     SessionStatus = { { '  ﳠ Session deleted', 'SessionHL' } }
+  end,
+})
+autocmd({ 'FileType' }, {
+  pattern = 'css',
+  callback = function()
+    vim.cmd [[ColorizerToggle]]
   end,
 })
