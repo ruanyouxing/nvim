@@ -232,7 +232,7 @@ function M.set_keymaps()
       end,
     },
     {
-      '<leader><leader>',
+      '<leader>cc',
       function()
         if vim.o.conceallevel > 0 then
           vim.o.conceallevel = 0

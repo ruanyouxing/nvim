@@ -10,7 +10,7 @@ autocmd({ 'TextYankPost' }, {
 autocmd({ 'ColorScheme' }, {
   pattern = all,
   callback = function()
-    require('modules.ui.config').cokeline()
+    require 'modules.ui.cokeline'
   end,
 })
 autocmd(User, {
@@ -54,3 +54,4 @@ autocmd({ 'FileType' }, {
 --     require('specs').show_specs()
 --   end,
 -- })
+

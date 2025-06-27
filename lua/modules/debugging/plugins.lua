@@ -1,6 +1,5 @@
 local plugin = require('core.pack').package
 local conf = require 'modules.debugging.config'
-local ui = require 'modules.ui.config'
 
 plugin {
   'mfussenegger/nvim-dap',
@@ -9,6 +8,8 @@ plugin {
   dependencies = {
     'rcarriga/nvim-dap-ui',
     lazy = true,
-    config = ui.dap,
+    config = function()
+      require('dapui').setup {}
+    end,
   },
 }
