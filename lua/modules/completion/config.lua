@@ -62,6 +62,7 @@ function completion.cmp()
     { name = 'path' },
     { name = 'buffer' },
     { name = 'emoji' },
+    { name = 'mocword' },
     {
       keyword_length = 2,
       option = {
@@ -158,6 +159,13 @@ function completion.snippets()
   }
   require('luasnip/loaders/from_vscode').load()
   require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
+end
+
+function completion.snippets_extenders()
+  require('luasnip-snippets').setup {
+    user = { name = 'hungz' },
+    snippet = { lua = { vim_snippet = true } },
+  }
 end
 
 return completion

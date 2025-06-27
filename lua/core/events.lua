@@ -18,6 +18,8 @@ autocmd(User, {
   callback = function()
     SessionStatus = { { '   Session loaded', 'SessionHL' } }
     require 'trailblazer'
+    vim.notify 'Session loaded'
+    SessionStatus = { { ' 󰸞 ', 'SessionHL' } }
   end,
 })
 autocmd(User, {
@@ -25,14 +27,19 @@ autocmd(User, {
   callback = function()
     require('trailblazer').save_trailblazer_state_to_file()
     vim.notify 'Session saved'
-    SessionStatus = { { '   Session saved', 'SessionHL' } }
+    SessionStatus = { { ' 󰉉 ', 'SessionHL' } }
   end,
 })
 autocmd(User, {
   pattern = 'PersistedDeletePost',
   callback = function()
-    vim.notify 'Session saved'
-    SessionStatus = { { '  ﳠ Session deleted', 'SessionHL' } }
+    vim.notify 'Session removed'
+    SessionStatus = { { ' 󰩹 ', 'SessionHL' } }
+  end,
+})
+autocmd({ 'LspAttach' }, {
+  callback = function()
+    require('null-ls').enable {}
   end,
 })
 autocmd({ 'FileType' }, {
@@ -41,3 +48,9 @@ autocmd({ 'FileType' }, {
     vim.cmd [[ColorizerToggle]]
   end,
 })
+-- vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+--   pattern = '*',
+--   callback = function()
+--     require('specs').show_specs()
+--   end,
+-- })

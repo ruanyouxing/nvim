@@ -18,6 +18,10 @@ function format.setup()
     --     return diagnostics.code ~= "prettier/prettier"
     --   end
     -- }
+    formatting.clang_format.with{
+      extra_args = {'-style=file:'.. vim.fn.expand(config_dir.. '/.clang_format')}
+    },
+    formatting.alejandra,
   }
   null_ls.setup {
     sources = sources,

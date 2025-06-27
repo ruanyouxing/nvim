@@ -4,6 +4,60 @@ function lang.headlines()
   require('headlines').setup {}
 end
 
+function lang.markdown_render()
+  require('render-markdown').setup {}
+end
+
+function lang.clangd_setup()
+  require('clangd_extensions').setup {
+    extensions = {
+      autoSetHints = true,
+      hover_with_actions = true,
+      inlay_hints = {
+        only_current_line = false,
+        only_current_line_autocmd = 'CursorHold',
+        show_parameter_hints = true,
+        parameter_hints_prefix = '<- ',
+        other_hints_prefix = '=> ',
+        max_len_align = false,
+        max_len_align_padding = 1,
+        right_align = false,
+        right_align_padding = 7,
+        highlight = 'Comment',
+        priority = 100,
+      },
+      ast = {
+        role_icons = {
+          type = '',
+          declaration = '',
+          expression = '',
+          specifier = '',
+          statement = '',
+          ['template argument'] = '',
+        },
+        {
+          Compound = '',
+          Recovery = '',
+          TranslationUnit = '',
+          PackExpansion = '',
+          TemplateTypeParm = '',
+          TemplateTemplateParm = '',
+          TemplateParamObject = '',
+        },
+        highlights = {
+          detail = 'Comment',
+        },
+        memory_usage = {
+          border = 'rounded',
+        },
+        symbol_info = {
+          border = 'rounded',
+        },
+      },
+    },
+  }
+end
+
 function lang.filetypes()
   vim.g.did_load_filetypes = 1
   require('filetype').setup {
@@ -31,7 +85,6 @@ function lang.filetypes()
     },
   }
 end
-
 
 function lang.trouble()
   require('trouble').setup {
@@ -78,4 +131,5 @@ function lang.trouble()
     use_diagnostic_signs = true,
   }
 end
+
 return lang
