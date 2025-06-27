@@ -83,3 +83,8 @@ plugin {
   lazy = true,
   cmd = { 'CompetiTestRun', 'CompetiTestAdd', 'CompetiTestDelete', 'CompetiTestEdit' },
 }
+plugin {
+  'folke/which-key.nvim',
+  config = conf.which_key,
+  event = "VeryLazy"
+}

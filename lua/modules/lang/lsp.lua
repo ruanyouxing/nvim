@@ -20,11 +20,26 @@ function lsp.lspconfig()
   capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
   capabilities.offsetEncoding = { 'utf-16' }
   require('lazy-lsp').setup {
-    excluded_servers = { 'sqls', 'ccls', 'sourcekit', 'rnix', 'eslint', 'rls', 'rome', 'nixd', 'basedpyright', 'pylyzer', 'jedi_language_server', 'ruff'},
+    excluded_servers = {
+      'sqls',
+      'ccls',
+      'sourcekit',
+      'rnix',
+      'eslint',
+      'rls',
+      'rome',
+      'nixd',
+      'basedpyright',
+      'pylyzer',
+      'jedi_language_server',
+      'ruff',
+    },
     preffered_servers = {
       yaml = { 'yamlls' },
       javascript = { 'tsserver' },
       rust = { 'rust_analyzer' },
+      qml = { 'qmlls' },
+      python = { 'pyright' },
       cpp = { 'clangd' },
     },
     default_config = {
@@ -63,6 +78,10 @@ function lsp.lspconfig()
         },
       },
     },
+  }
+  require('lspconfig').qmlls.setup {
+    command = { 'qmlls', '-E' },
+    filetypes = { 'qml' },
   }
 end
 

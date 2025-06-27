@@ -45,6 +45,12 @@ function M.set_keymaps()
   nmap { ' ', '' }
   xmap { ' ', '' }
   nmap {
+    '<leader>?',
+    function()
+      require('which-key').show {}
+    end,
+  }
+  nmap {
     { 'Y',     'y$' },
     { '<C-a>', 'ggVG' },
     {
@@ -287,7 +293,7 @@ function M.set_keymaps()
   }
   for i = 1, 9 do
     nmap {
-      { ('<F%s>'):format(i),      (plug 'cokeline-focus-%s)'):format(i) },
+      { ('<C-%s>'):format(i),     (plug 'cokeline-focus-%s)'):format(i) },
       { ('<Leader>%s'):format(i), (plug 'cokeline-switch-%s)'):format(i) },
     }
   end

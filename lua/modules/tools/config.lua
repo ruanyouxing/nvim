@@ -41,7 +41,6 @@ function tools.fm()
   }
 end
 
-
 function tools.hop()
   require('hop').setup {
     keys = 'etovxqpdygfblzhckisuran',
@@ -314,7 +313,7 @@ function tools.zenmode()
           top = 0,
           bottom = 0,
         },
-        open_callback = nil, -- run a function when opening Ataraxis mode
+        open_callback = nil,  -- run a function when opening Ataraxis mode
         close_callback = nil, -- run a function when closing Ataraxis mode
       },
       minimalist = {
@@ -333,17 +332,17 @@ function tools.zenmode()
           ruler = false,
           numberwidth = 1,
         },
-        open_callback = nil, -- run a function when opening Minimalist mode
+        open_callback = nil,  -- run a function when opening Minimalist mode
         close_callback = nil, -- run a function when closing Minimalist mode
       },
       narrow = {
         folds_style = 'informative',
-        run_ataraxis = true, -- display narrowed text in a Ataraxis session
-        open_callback = nil, -- run a function when opening Narrow mode
+        run_ataraxis = true,  -- display narrowed text in a Ataraxis session
+        open_callback = nil,  -- run a function when opening Narrow mode
         close_callback = nil, -- run a function when closing Narrow mode
       },
       focus = {
-        open_callback = nil, -- run a function when opening Focus mode
+        open_callback = nil,  -- run a function when opening Focus mode
         close_callback = nil, -- run a function when closing Focus mode
       },
     },
@@ -389,7 +388,6 @@ function tools.yank()
     },
   }
 end
-
 
 function tools.autoclose()
   require('hbac').setup {
