@@ -86,5 +86,5 @@ plugin {
 plugin {
   'folke/which-key.nvim',
   config = conf.which_key,
-  event = "VeryLazy"
+  event = 'VeryLazy',
 }
