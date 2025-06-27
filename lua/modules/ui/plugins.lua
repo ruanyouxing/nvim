@@ -12,7 +12,7 @@ plugin {
   priority = 10000,
 }
 plugin { 'rebelot/kanagawa.nvim', config = conf.kanagawa, lazy = false, priority = 10000 }
-plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead',dependencies = 'folke/snacks.nvim'}
+plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead', dependencies = 'folke/snacks.nvim' }
 plugin {
   'jcdickinson/wpm.nvim',
   config = function()
@@ -107,3 +107,4 @@ plugin {
   event = 'UIEnter',
 }
 plugin { 'luukvbaal/statuscol.nvim', config = conf.statuscol, event = 'BufWinEnter' }
+-- plugin { 'Pheon-Dev/pigeon', lazy = true }
