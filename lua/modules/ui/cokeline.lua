@@ -1,6 +1,6 @@
 plugin {
   'noib3/nvim-cokeline',
-  event = 'UIEnter',
+  event = 'ColorScheme',
   config = function()
     local get_hex = require('cokeline.hlgroups').get_hl_attr
     local mappings = require 'cokeline/mappings'
