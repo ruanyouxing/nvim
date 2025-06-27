@@ -125,16 +125,19 @@ plugin {
     addComponent {
       name = 'BetterEscape',
       hl_colors = {
-        waiting = { 'green', 'bg' },
-        active = { 'purple', 'bg' },
+        Norm = { 'green', 'bg', 'bold' },
+        Border = { 'bg', 'nocolor', 'bold' },
+        Ins = { 'yellow', 'bg', 'bold' },
+        Visl = { 'purple', 'bg', 'bold' },
+        VBlck = { 'purple', 'bg', 'bold' },
+        VLine = { 'purple', 'bg', 'bold' },
+        Rplc = { 'red', 'bg', 'bold' },
+        Com = { 'blue', 'bg', 'bold' },
+        Shell = { 'blue', 'bg', 'bold' },
       },
       text = function()
         local ok, m = pcall(require, 'better_escape')
-        if ok and m.waiting then
-          return { { '✺', 'active' } }
-        else
-          return { { '✺', 'waiting' } }
-        end
+        return ok and m.waiting and {{ '✺', state.mode[1] }} or ''
       end,
     }
     addComponent {
