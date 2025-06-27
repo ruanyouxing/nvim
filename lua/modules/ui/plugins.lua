@@ -12,8 +12,7 @@ plugin {
   priority = 10000,
 }
 plugin { 'rebelot/kanagawa.nvim', config = conf.kanagawa, lazy = false, priority = 10000 }
-plugin { 'scottmckendry/cyberdream.nvim', lazy = false, priority = 1000 }
-plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead' }
+plugin { 'tzachar/local-highlight.nvim', config = conf.highlight, event = 'BufRead',dependencies = 'folke/snacks.nvim'}
 plugin {
   'jcdickinson/wpm.nvim',
   config = function()
@@ -24,7 +23,7 @@ plugin {
 plugin { 'SmiteshP/nvim-navic', lazy = true }
 plugin { 'utilyre/barbecue.nvim', config = conf.winbar, dependencies = 'nvim-navic', event = 'BufRead' }
 plugin {
-  'nvimdev/dashboard-nvim',
+  'glepnir/dashboard-nvim',
   config = function()
     require 'modules.ui.dashboard'
   end,
@@ -34,7 +33,7 @@ plugin {
 }
 plugin { 'stevearc/dressing.nvim', config = conf.dressing }
 plugin { 'catppuccin/nvim', name = 'catppuccin', config = conf.catppuccin }
-plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, lazy = true }
+plugin { 'gorbit99/codewindow.nvim', config = conf.minimap, event = 'BufRead' }
 plugin { 'lukas-reineke/indent-blankline.nvim', config = conf.blankline, event = 'UIEnter' }
 plugin {
   'noib3/nvim-cokeline',
@@ -42,7 +41,6 @@ plugin {
   config = conf.cokeline,
 }
 plugin { 'yamatsum/nvim-cursorline', config = conf.cursorline }
-plugin { 'kevinhwang91/nvim-hlslens', config = conf.hlslens, event = { 'CmdlineEnter', 'CmdWinEnter' } }
 plugin {
   'kevinhwang91/nvim-ufo',
   dependencies = 'kevinhwang91/promise-async',
@@ -52,7 +50,6 @@ plugin {
 plugin { 'j-hui/fidget.nvim', config = conf.fidget, lazy = true }
 plugin { 'SmiteshP/nvim-navic', event = 'BufReadPre', config = conf.navic, module = true }
 plugin { 'rcarriga/nvim-notify', config = conf.notify }
-plugin { 'antoinemadec/FixCursorHold.nvim', module = true, lazy = true }
 plugin {
   'kosayoda/nvim-lightbulb',
   dependencies = 'nvim-lspconfig',
@@ -74,7 +71,7 @@ plugin {
     }
   end,
 }
-plugin { 'simrat39/symbols-outline.nvim', config = conf.outline, cmd = 'SymbolsOutline' }
+plugin { 'hedyhli/outline.nvim', config = conf.outline, cmd = 'Outline' }
 plugin { 'cxwx/specs.nvim', event = 'UIEnter', config = conf.specs }
 plugin { 'windwp/windline.nvim', config = require('modules.ui.windline').setup, event = 'BufWinEnter' }
 plugin { 'mvllow/modes.nvim', event = 'UIEnter', config = conf.modes }
@@ -87,18 +84,6 @@ plugin {
 }
 plugin { 'folke/tokyonight.nvim', config = conf.tokyonight }
 plugin { 'folke/twilight.nvim', event = 'CursorMoved', config = conf.twilight }
-plugin {
-  'sontungexpt/url-open',
-  event = 'VeryLazy',
-  cmd = 'URLOpenUnderCursor',
-  config = function()
-    local status_ok, url_open = pcall(require, 'url-open')
-    if not status_ok then
-      return
-    end
-    url_open.setup {}
-  end,
-}
 plugin {
   'lukas-reineke/virt-column.nvim',
   event = 'UIEnter',
@@ -121,6 +106,4 @@ plugin {
   config = conf.winbar,
   event = 'UIEnter',
 }
-plugin { 'NStefan002/screenkey.nvim', config = conf.keystrokes, event = 'BufRead', cmd = 'Screenkey' }
 plugin { 'luukvbaal/statuscol.nvim', config = conf.statuscol, event = 'BufWinEnter' }
-plugin { 'Pheon-Dev/pigeon', config = conf.pigeon, lazy = true }

@@ -68,23 +68,6 @@ function tools.highlight()
   }
 end
 
-function tools.mason_tools()
-  require('mason-tool-installer').setup {
-    ensure_installed = {
-      'prettier',
-      'clang-format',
-      'debugpy',
-      'codelldb',
-      'black',
-      'stylua',
-      'shellcheck',
-    },
-    auto_update = true,
-    run_on_start = true,
-    start_delay = 3000, -- 3 second delay
-  }
-end
-
 function tools.navbuddy()
   require('nvim-navbuddy').setup {
     lsp = {
@@ -330,7 +313,7 @@ function tools.zenmode()
           top = 0,
           bottom = 0,
         },
-        open_callback = nil, -- run a function when opening Ataraxis mode
+        open_callback = nil,  -- run a function when opening Ataraxis mode
         close_callback = nil, -- run a function when closing Ataraxis mode
       },
       minimalist = {
@@ -349,17 +332,17 @@ function tools.zenmode()
           ruler = false,
           numberwidth = 1,
         },
-        open_callback = nil, -- run a function when opening Minimalist mode
+        open_callback = nil,  -- run a function when opening Minimalist mode
         close_callback = nil, -- run a function when closing Minimalist mode
       },
       narrow = {
         folds_style = 'informative',
-        run_ataraxis = true, -- display narrowed text in a Ataraxis session
-        open_callback = nil, -- run a function when opening Narrow mode
+        run_ataraxis = true,  -- display narrowed text in a Ataraxis session
+        open_callback = nil,  -- run a function when opening Narrow mode
         close_callback = nil, -- run a function when closing Narrow mode
       },
       focus = {
-        open_callback = nil, -- run a function when opening Focus mode
+        open_callback = nil,  -- run a function when opening Focus mode
         close_callback = nil, -- run a function when closing Focus mode
       },
     },
@@ -406,12 +389,6 @@ function tools.yank()
   }
 end
 
-function tools.undo()
-  require('fundo').setup {
-    limit_archives_size = 1024,
-  }
-end
-
 function tools.autoclose()
   require('hbac').setup {
     autoclose = true,
@@ -447,11 +424,4 @@ function tools.cptest()
   }
 end
 
-function tools.neocord()
-  require('neocord').setup{
-    logo = 'auto',
-    editing_text = 'Cooking %s',
-    plugin_manager_text = 'Cooking plugins',
-  }
-end
 return tools

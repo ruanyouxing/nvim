@@ -16,6 +16,7 @@ autocmd({ 'ColorScheme' }, {
 autocmd(User, {
   pattern = 'PersistedLoadPost',
   callback = function()
+    SessionStatus = { { '   Session loaded', 'SessionHL' } }
     require 'trailblazer'
     vim.notify 'Session loaded'
     SessionStatus = { { ' 󰸞 ', 'SessionHL' } }
@@ -39,6 +40,12 @@ autocmd(User, {
 autocmd({ 'LspAttach' }, {
   callback = function()
     require('null-ls').enable {}
+  end,
+})
+autocmd({ 'FileType' }, {
+  pattern = 'css',
+  callback = function()
+    vim.cmd [[ColorizerToggle]]
   end,
 })
 -- vim.api.nvim_create_autocmd({ 'CursorMoved' }, {

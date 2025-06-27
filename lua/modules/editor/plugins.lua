@@ -45,19 +45,17 @@ plugin {
   config = conf.bookmark,
   lazy = true,
 }
-plugin { 'nvim-treesitter/nvim-treesitter', event = 'BufRead', build = ':TSUpdate', config = conf.treesitter }
-plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
-plugin { 'gsuuon/tshjkl.nvim', config = true, opts = { keymaps = { toggle = 'XX' } }, keys = { 'XX' } }
 plugin {
-  'JoosepAlviste/nvim-ts-context-commentstring',
-  dependencies = 'nvim-treesitter',
-  config = function()
-    require('ts_context_commentstring').setup { enable_autocmd = true }
-  end,
+  'nvim-treesitter/nvim-treesitter',
+  event = 'BufRead',
+  build = ':TSUpdate',
+  config = require 'modules.editor.treesitter',
 }
+plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
+plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
 plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
 plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
-plugin { 'hiphish/rainbow-delimiters.nvim', event = 'BufRead', config = conf.rainbow }
+plugin { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead' }
 plugin { 'andymass/vim-matchup', event = 'BufRead' }
 plugin { 'romgrk/nvim-treesitter-context', event = 'BufRead', config = conf.ts_context }
 plugin { 'abecodes/tabout.nvim', event = 'InsertEnter', config = conf.tabout }

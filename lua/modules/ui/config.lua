@@ -4,9 +4,9 @@ function ui.blankline()
   vim.opt.termguicolors = true
   vim.opt.list = true
   local highlight = {
-    'RainbowBlue',
     'RainbowRed',
     'RainbowYellow',
+    'RainbowBlue',
     'RainbowOrange',
     'RainbowGreen',
     'RainbowViolet',
@@ -14,18 +14,17 @@ function ui.blankline()
   }
   local hooks = require 'ibl.hooks'
   hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
     vim.api.nvim_set_hl(0, 'RainbowRed', { fg = '#E06C75' })
     vim.api.nvim_set_hl(0, 'RainbowYellow', { fg = '#E5C07B' })
+    vim.api.nvim_set_hl(0, 'RainbowBlue', { fg = '#61AFEF' })
     vim.api.nvim_set_hl(0, 'RainbowOrange', { fg = '#D19A66' })
     vim.api.nvim_set_hl(0, 'RainbowGreen', { fg = '#98C379' })
     vim.api.nvim_set_hl(0, 'RainbowViolet', { fg = '#C678DD' })
     vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
   end)
 
-  vim.g.rainbow_delimiters = { highlight = highlight }
   require('ibl').setup {
-    scope = { highlight = highlight },
+    indent = { highlight = highlight },
     exclude = {
       filetypes = {
         'log',
@@ -45,10 +44,8 @@ function ui.blankline()
         'dashboard',
         '',
       },
-      buftypes = { 'nofile', 'terminal' },
     },
   }
-  hooks.register(hooks.type.SCOPE_HIGHLIGHT, hooks.builtin.scope_highlight_from_extmark)
 end
 
 function ui.catppuccin()
@@ -227,7 +224,7 @@ function ui.fold()
     end,
     fold_virt_text_handler = function(virtText, lnum, endLnum, width, truncate)
       local newVirtText = {}
-      local suffix = (' ↓ %d '):format(endLnum - lnum)
+      local suffix = ('  %d '):format(endLnum - lnum)
       local sufWidth = vim.fn.strdisplaywidth(suffix)
       local targetWidth = width - sufWidth
       local curWidth = 0
@@ -258,31 +255,6 @@ function ui.highlight()
   require('local-highlight').setup {
     hlGroup = 'TSDefinitionUsage',
   }
-end
-
-function ui.hlslens()
-  require('hlslens').setup {
-    calm_down = true,
-    nearest_only = true,
-    nearest_float_when = 'always',
-  }
-end
-
-function ui.keystrokes()
-  require('screenkey').setup{
-    win_opts = {
-      width = 30,
-      height = 3,
-      border = 'rounded'
-    },
-    disable = {
-      filetypes = {'dashboard', ''},
-      buftypes = {'nofile'}
-    },
-    show_leader = true,
-    group_mappings = true
-  }
-  vim.cmd[[Screenkey]]
 end
 
 function ui.lightbulb()
@@ -361,38 +333,47 @@ function ui.navic()
 end
 
 function ui.outline()
-  require('symbols-outline').setup {
-    position = 'left',
-    show_numbers = true,
-    show_relative_numbers = true,
+  require('outline').setup {
+    outline_window = {
+      position = 'left',
+      width = 27,
+      show_cursorline = true,
+      hide_cursor = true,
+      auto_jump = true,
+    },
+    symbol_folding = {
+      auto_unfold = { only = 2 },
+    },
     symbols = {
-      File = { icon = '󰈙 ', hl = '@text.uri' },
-      Module = { icon = ' ', hl = '@namespace' },
-      Namespace = { icon = '󰌗 ', hl = '@namespace' },
-      Package = { icon = '󰏓 ', hl = '@namespace' },
-      Class = { icon = '󰌗 ', hl = '@type' },
-      Method = { icon = '󰆧 ', hl = '@method' },
-      Property = { icon = '  ', hl = '@method' },
-      Field = { icon = '󰮄 ', hl = '@field' },
-      Constructor = { icon = ' ', hl = '@constructor' },
-      Enum = { icon = '󰕘 ', hl = '@type' },
-      Interface = { icon = '󰕘 ', hl = '@type' },
-      Function = { icon = '󰊕 ', hl = '@function' },
-      Variable = { icon = '󰀫 ', hl = '@constant' },
-      Constant = { icon = '󰏿 ', hl = '@constant' },
-      String = { icon = '󰀬 ', hl = '@string' },
-      Number = { icon = '󰎠 ', hl = '@number' },
-      Boolean = { icon = '◩ ', hl = '@boolean' },
-      Array = { icon = '󰅪 ', hl = '@constant' },
-      Object = { icon = '󰅩 ', hl = '@type' },
-      Key = { icon = '󰌋 ', hl = '@type' },
-      Null = { icon = '󰟢 ', hl = '@type' },
-      EnumMember = { icon = ' ', hl = '@field' },
-      Struct = { icon = ' ', hl = '@type' },
-      Event = { icon = ' ', hl = '@type' },
-      Operator = { icon = '󰆕 ', hl = '@operator' },
-      TypeParameter = { icon = '󰊄 ', hl = '@parameter' },
-      Component = { icon = '󰆼 ', hl = '@function' },
+      icons = {
+        File = { icon = '󰈙 ', hl = '@text.uri' },
+        Module = { icon = ' ', hl = '@namespace' },
+        Namespace = { icon = '󰌗 ', hl = '@namespace' },
+        Package = { icon = '󰏓 ', hl = '@namespace' },
+        Class = { icon = '󰌗 ', hl = '@type' },
+        Method = { icon = '󰆧 ', hl = '@method' },
+        Property = { icon = '  ', hl = '@method' },
+        Field = { icon = '󰮄 ', hl = '@field' },
+        Constructor = { icon = ' ', hl = '@constructor' },
+        Enum = { icon = '󰕘 ', hl = '@type' },
+        Interface = { icon = '󰕘 ', hl = '@type' },
+        Function = { icon = '󰊕 ', hl = '@function' },
+        Variable = { icon = '󰀫 ', hl = '@constant' },
+        Constant = { icon = '󰏿 ', hl = '@constant' },
+        String = { icon = '󰀬 ', hl = '@string' },
+        Number = { icon = '󰎠 ', hl = '@number' },
+        Boolean = { icon = '◩ ', hl = '@boolean' },
+        Array = { icon = '󰅪 ', hl = '@constant' },
+        Object = { icon = '󰅩 ', hl = '@type' },
+        Key = { icon = '󰌋 ', hl = '@type' },
+        Null = { icon = '󰟢 ', hl = '@type' },
+        EnumMember = { icon = ' ', hl = '@field' },
+        Struct = { icon = ' ', hl = '@type' },
+        Event = { icon = ' ', hl = '@type' },
+        Operator = { icon = '󰆕 ', hl = '@operator' },
+        TypeParameter = { icon = '󰊄 ', hl = '@parameter' },
+        Component = { icon = '󰆼 ', hl = '@function' },
+      },
     },
   }
 end
@@ -536,26 +517,32 @@ function ui.modes()
     set_cursor = true,
     set_cursorline = true,
     set_number = true,
-    ignore_filetypes = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
+    ignore = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
   }
 end
 
 function ui.specs()
   require('specs').setup {
     show_jumps = true,
-    min_jump = 30,
+    min_jump = 10,
     popup = {
       delay_ms = 0,
-      inc_ms = 30,
+      inc_ms = 10,
       blend = 10,
       width = 10,
       winhl = 'PMenu',
-      fader = require('specs').linear_fader,
+      fader = require('specs').pulse_fader,
       resizer = require('specs').slide_resizer,
     },
     ignore_filetypes = {},
     ignore_buftypes = { nofile = true },
   }
+  vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+    pattern = '*',
+    callback = function()
+      require('specs').show_specs()
+    end,
+  })
 end
 
 function ui.winbar()
@@ -607,24 +594,6 @@ function ui.statuscol()
         text = { builtin.lnumfunc, ' ' },
         condition = { true, builtin.not_empty },
         click = 'v:lua.ScLa',
-      },
-    },
-  }
-end
-
-function ui.pigeon()
-  require('pigeon').setup {
-    enabled = true,
-    os = 'osx',
-    plugin_manager = 'lazy',
-    datetime = {
-      date = {
-        format = '%d/%m',
-        icon = '',
-      },
-      time = {
-        posttext = '',
-        icon = ' ',
       },
     },
   }

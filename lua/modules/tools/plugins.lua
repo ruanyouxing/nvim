@@ -43,7 +43,6 @@ plugin {
   end,
   cmd = 'IconPickerInsert',
 }
-plugin { 'kawre/leetcode.nvim', lazy = 'leetcode.nvim' ~= vim.fn.argv()[1], opts = { arg = 'leetcode.nvim' } }
 plugin {
   'ziontee113/color-picker.nvim',
   lazy = true,
@@ -56,20 +55,8 @@ plugin {
 plugin { 'nvim-pack/nvim-spectre', config = conf.spectre, lazy = true }
 plugin { 'akinsho/toggleterm.nvim', config = conf.toggleterm, cmd = 'ToggleTerm' }
 plugin { 'Pocco81/true-zen.nvim', event = 'UIEnter', config = conf.zenmode, cmd = 'TZAtaraxis' }
-plugin {
-  'kevinhwang91/nvim-fundo',
-  dependencies = 'undotree',
-  lazy = true,
-  config = conf.undo,
-  run = function()
-    require('fundo').install()
-  end,
-}
-plugin {
-  'mbbill/undotree',
-  cmd = { 'UndotreeShow', 'UndotreeToggle', 'UndotreeFocus', 'UndotreePersistUndo' },
-  lazy = true,
-}
+
+plugin { 'mbbill/undotree', event = 'TextChanged' }
 plugin { 'nvim-treesitter/playground', dependencies = 'nvim-treesitter', cmd = 'TSPlaygroundToggle' }
 plugin { 'dstein64/vim-startuptime', cmd = 'StartupTime' }
 plugin {
@@ -96,4 +83,8 @@ plugin {
   lazy = true,
   cmd = { 'CompetiTestRun', 'CompetiTestAdd', 'CompetiTestDelete', 'CompetiTestEdit' },
 }
-plugin { 'IogaMaster/neocord', event = 'VeryLazy', config = conf.neocord }
+plugin {
+  'folke/which-key.nvim',
+  config = conf.which_key,
+  event = 'VeryLazy',
+}
