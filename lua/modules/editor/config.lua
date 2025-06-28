@@ -8,7 +8,7 @@ function editor.autosave()
         message = function() -- message to print on save
           return ('AutoSave: saved at ' .. vim.fn.strftime '%H:%M:%S')
         end,
-        dim = 0.18, -- dim the color of `message`
+        dim = 0.18,               -- dim the color of `message`
         cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
       },
     },
@@ -29,7 +29,7 @@ end
 
 function editor.better_escape()
   require('better_escape').setup {
-    default_mappings = true;
+    default_mappings = true,
     timeout = 100,
   }
 end
@@ -37,10 +37,10 @@ end
 function editor.diffview()
   local cb = require('diffview.config').diffview_callback
   require('diffview').setup {
-    diff_binaries = false, -- Show diffs for binaries
+    diff_binaries = false,    -- Show diffs for binaries
     enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
-    use_icons = true, -- Requires nvim-web-devicons
-    icons = { -- Only applies when use_icons is true.
+    use_icons = true,         -- Requires nvim-web-devicons
+    icons = {                 -- Only applies when use_icons is true.
       folder_closed = '',
       folder_open = '',
     },
@@ -52,22 +52,22 @@ function editor.diffview()
       DiffviewOpen = {},
       DiffviewFileHistory = {},
     },
-    hooks = {}, -- See ':h diffview-config-hooks'
+    hooks = {},                                -- See ':h diffview-config-hooks'
     key_bindings = {
-      disable_defaults = false, -- Disable the default key bindings
+      disable_defaults = false,                -- Disable the default key bindings
       view = {
-        ['<tab>'] = cb 'select_next_entry', -- Open the diff for the next file
-        ['<s-tab>'] = cb 'select_prev_entry', -- Open the diff for the previous file
-        ['gf'] = cb 'goto_file', -- Open the file in a new split in previous tabpage
+        ['<tab>'] = cb 'select_next_entry',    -- Open the diff for the next file
+        ['<s-tab>'] = cb 'select_prev_entry',  -- Open the diff for the previous file
+        ['gf'] = cb 'goto_file',               -- Open the file in a new split in previous tabpage
         ['<C-w><C-f>'] = cb 'goto_file_split', -- Open the file in a new split
-        ['<C-w>gf'] = cb 'goto_file_tab', -- Open the file in a new tabpage
-        ['<leader>e'] = cb 'focus_files', -- Bring focus to the files panel
-        ['<leader>b'] = cb 'toggle_files', -- Toggle the files panel.
+        ['<C-w>gf'] = cb 'goto_file_tab',      -- Open the file in a new tabpage
+        ['<leader>e'] = cb 'focus_files',      -- Bring focus to the files panel
+        ['<leader>b'] = cb 'toggle_files',     -- Toggle the files panel.
       },
       file_history_panel = {
-        ['g!'] = cb 'options', -- Open the option panel
+        ['g!'] = cb 'options',               -- Open the option panel
         ['<C-A-d>'] = cb 'open_in_diffview', -- Open the entry under the cursor in a diffview
-        ['y'] = cb 'copy_hash', -- Copy the commit hash of the entry under the cursor
+        ['y'] = cb 'copy_hash',              -- Copy the commit hash of the entry under the cursor
         ['zR'] = cb 'open_all_folds',
         ['zM'] = cb 'close_all_folds',
         ['j'] = cb 'next_entry',
@@ -140,7 +140,6 @@ function editor.bookmark()
     mappings = {},
   }
 end
-
 
 function editor.ts_context()
   require('treesitter-context').setup {
