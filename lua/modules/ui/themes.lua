@@ -1,4 +1,3 @@
-local plugin = require('core.pack').package
 plugin {
   'Shatur/neovim-ayu',
   config = function()

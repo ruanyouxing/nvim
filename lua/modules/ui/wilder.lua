@@ -1,4 +1,3 @@
-local plugin = require('core.pack').package
 plugin {
   'gelguy/wilder.nvim',
   event = 'CmdlineEnter',

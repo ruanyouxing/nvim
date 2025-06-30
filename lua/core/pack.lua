@@ -7,7 +7,7 @@ function pack:load_modules_packages()
   local modules_dir = self.helper.path_join(self.config_path, 'lua', 'modules')
   self.repos = {}
 
-  local list = vim.fs.find('init.lua', { path = modules_dir, type = 'file', limit = 10 })
+  local list = vim.fn.split(vim.fn.glob(modules_dir .. '/*/*lua', '\n'))
   if #list == 0 then
     return
   end
@@ -22,6 +22,7 @@ function pack:load_modules_packages()
     local _, pos = f:find(modules_dir)
     f = f:sub(pos - 6, #f - 4)
     if not vim.tbl_contains(disable_modules, f) then
+      _G.plugin = self.package
       require(f)
     end
   end
@@ -47,13 +48,13 @@ function pack:boot_strap()
     },
     checker = {
       enabled = true,
-      notify = false
+      notify = false,
     },
     performance = {
       cache = {
-        disable_events = {}
-      }
-    }
+        disable_events = {},
+      },
+    },
   }
   self:load_modules_packages()
   lazy.setup(self.repos, opts)

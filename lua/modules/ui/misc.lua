@@ -1,9 +1,4 @@
 ---@diagnostic disable: different-requires
-local plugin = require('core.pack').package
-local config_list = { 'themes', 'lsp_ui', 'notification', 'wilder', 'cokeline', 'windline', 'blankline', 'dashboard', 'ufo', 'cursor' }
-for _, v in ipairs(config_list) do
-  require('modules.ui.' .. v)
-end
 plugin {
   'tzachar/local-highlight.nvim',
   config = function()
@@ -13,9 +8,6 @@ plugin {
   end,
   event = 'BufRead',
   dependencies = 'folke/snacks.nvim',
-}
-plugin {
-  'typicode/bg.nvim',
 }
 plugin {
   'stevearc/dressing.nvim',
@@ -49,13 +41,6 @@ plugin {
   end,
 }
 plugin {
-  'kyazdani42/nvim-tree.lua',
-  config = function()
-    require('nvim-tree').setup()
-  end,
-  cmd = 'NvimTreeToggle',
-}
-plugin {
   'folke/twilight.nvim',
   event = 'CursorMoved',
   config = function()
@@ -77,43 +62,7 @@ plugin {
     }
   end,
 }
-plugin {
-  'lukas-reineke/virt-column.nvim',
-  event = 'UIEnter',
-  config = function()
-    require('virt-column').setup()
-  end,
-}
-plugin {
-  'mrjones2014/smart-splits.nvim',
-  config = function()
-    require('smart-splits').setup { default_amount = 1 }
-  end,
-  build = './kitty/install-kittens.bash',
-}
-plugin {
-  'luukvbaal/statuscol.nvim',
-  config = function()
-    vim.opt.foldcolumn = '1'
-    vim.opt.foldlevel = 99
-    vim.o.foldenable = true
-    vim.opt.foldmethod = 'expr'
-    vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-    vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
-    local builtin = require 'statuscol.builtin'
-    require('statuscol').setup {
-      ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
-      segments = {
-        { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-        { text = { '%s' },             click = 'v:lua.ScSa' },
-        {
-          text = { builtin.lnumfunc, ' ' },
-          condition = { true, builtin.not_empty },
-          click = 'v:lua.ScLa',
-        },
-      },
-    }
-  end,
-  event = 'BufWinEnter',
-}
 -- plugin { 'Pheon-Dev/pigeon', lazy = true }
+plugin { 'kyazdani42/nvim-web-devicons', lazy = true }
+plugin { 'mbbill/undotree', event = 'TextChanged' }
+plugin { 'typicode/bg.nvim' }

@@ -1,5 +1,3 @@
-plugin = require('core.pack').package
-
 plugin {
   'rcarriga/nvim-notify',
   config = function()
