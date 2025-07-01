@@ -5,7 +5,8 @@ plugin {
     'nvim-tree/nvim-web-devicons',
     'MunifTanjim/nui.nvim',
   },
-  lazy = true,
+  lazy = false,
+  event = 'VimEnter',
   cmd = 'Neotree',
   config = function()
     require('neo-tree').setup {
@@ -60,9 +61,13 @@ plugin {
               use_float = false,
             },
           },
+          ['-'] = {
+            'navigate_up',
+          },
         },
       },
       filesystem = {
+        hijack_netrw_behavior = 'open_current',
         filtered_items = {
           hide_dotfiles = false,
           hide_gitignored = false,
