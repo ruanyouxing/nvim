@@ -137,7 +137,7 @@ plugin {
       },
       text = function()
         local ok, m = pcall(require, 'better_escape')
-        return ok and m.waiting and {{ '✺', state.mode[1] }} or ''
+        return ok and m.waiting and { { '✺', state.mode[1] } } or ''
       end,
     }
     addComponent {
@@ -178,11 +178,11 @@ plugin {
         local is_mac = vim.fn.has 'macunix' == 1
         local system_name = not is_wsl() and not is_mac
         if system_name then
-          return { { '   Linux x64', 'osname' } }
+          return { { '  NixOS', 'osname' } }
         elseif is_wsl() then
-          return { { '  WSL', 'osname' } }
+          return { { '  ', 'osname' } }
         elseif is_mac then
-          return { { '  Darwin' } }
+          return { { ' ' } }
         end
       end,
     }

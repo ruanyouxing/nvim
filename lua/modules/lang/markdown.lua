@@ -1,6 +1,6 @@
 plugin {
   'Pocco81/HighStr.nvim',
-  ft = { 'markdown', 'neorg' },
+  ft = { 'markdown' },
   config = function()
     local high_str = require 'high-str'
     high_str.setup {
@@ -32,7 +32,7 @@ plugin {
 }
 plugin {
   'lukas-reineke/headlines.nvim',
-  ft = { 'markdown', 'org', 'norg' },
+  ft = { 'markdown' },
   config = function()
     require('headlines').setup {}
   end,
@@ -46,4 +46,5 @@ plugin {
       completions = { lsp = { enabled = true } },
     }
   end,
+  cmd = 'RenderMarkdown',
 }

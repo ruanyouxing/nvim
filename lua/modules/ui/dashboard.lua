@@ -86,7 +86,7 @@ plugin {
             desc_hl = '@variable',
             group = 'Label',
             key = '<C-n>',
-            action = 'NvimTreeToggle',
+            action = 'Neotree toggle',
           },
           {
             desc = '  Telescope',

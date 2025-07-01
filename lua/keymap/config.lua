@@ -144,7 +144,7 @@ function M.set_keymaps()
         vim.cmd [[Trouble diagnostics toggle]]
       end,
     },
-    { '<C-n>', cmd 'NvimTreeToggle' },
+    { '<C-n>', cmd 'Neotree toggle' },
     {
       '<C-s>',
       function()
