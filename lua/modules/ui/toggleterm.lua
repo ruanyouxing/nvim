@@ -2,7 +2,7 @@ plugin {
   'akinsho/toggleterm.nvim',
   config = function()
     require('toggleterm').setup {
-      size = 7,
+      size = 12,
       border = 'curved',
       winbar = {
         enabled = true,
@@ -17,7 +17,7 @@ plugin {
       start_in_insert = true,
       direction = 'horizontal',
       persist_size = true,
-      shell = 'zsh',
+      shell = 'powershell',
       close_on_exit = true,
     }
   end,

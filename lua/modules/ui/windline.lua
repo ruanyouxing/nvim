@@ -175,9 +175,14 @@ plugin {
         local is_wsl = function()
           return os.getenv 'WSL_DISTRO_NAME' ~= nil
         end
+        local is_windows = function()
+          return vim.loop.os_uname().sysname == 'Windows_NT'
+        end
         local is_mac = vim.fn.has 'macunix' == 1
         local system_name = not is_wsl() and not is_mac
-        if system_name then
+        if is_windows() then
+          return { { '  Windows', 'osname' } }
+        elseif system_name then
           return { { '  NixOS', 'osname' } }
         elseif is_wsl() then
           return { { '  ', 'osname' } }
@@ -334,7 +339,7 @@ plugin {
         return {
           { ' ' },
           { require('wpm').wpm, 'WpmHl' },
-          { ' | ',              'WpmHl' },
+          { ' | ', 'WpmHl' },
           {
             require('wpm').historic_graph(),
             'WpmHl',
