@@ -25,7 +25,48 @@ plugin {
     }
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
     capabilities.offsetEncoding = { 'utf-16' }
+
+    vim.lsp.config('*', {
+      on_attach = function(client, bufnr)
+        if client.server_capabilities['documentSymbolProvider'] then
+          require('nvim-navic').attach(client, bufnr)
+        end
+      end,
+      capabilities = capabilities,
+      flags = { debounce_text_changes = 500 },
+    })
+    vim.lsp.config('clangd', {
+      on_attach = function(client, bufnr)
+        if client.server_capabilities['documentSymbolProvider'] then
+          require('nvim-navic').attach(client, bufnr)
+        end
+        -- require('clangd_extensions.inlay_hints').setup_autocmd()
+        -- require('clangd_extensions.inlay_hints').set_inlay_hints()
+      end,
+    })
+    vim.lsp.config('qmlls', {
+      command = { 'qmlls', '-E' },
+      filetypes = { 'qml' },
+    })
+    vim.lsp.config('lua_ls', {
+      settings = {
+        Lua = {
+          diagnostics = { globals = { 'vim', 'packer_plugins' } },
+          workspace = {
+            library = {
+              [vim.fn.expand '$VIMRUNTIME/lua'] = true,
+              [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
+            },
+            maxPreload = 100000,
+            preloadFileSize = 10000,
+          },
+          telemetry = { enable = false },
+        },
+      },
+    })
     require('lazy-lsp').setup {
+      use_vim_lsp_config = true,
+      prefer_local = true,
       excluded_servers = {
         'sqls',
         'ccls',
@@ -40,7 +81,7 @@ plugin {
         'jedi_language_server',
         'ruff',
       },
-      preffered_servers = {
+      preferred_servers = {
         yaml = { 'yamlls' },
         javascript = { 'tsserver' },
         rust = { 'rust_analyzer' },
@@ -48,46 +89,6 @@ plugin {
         python = { 'pyright' },
         cpp = { 'clangd' },
       },
-      default_config = {
-        on_attach = function(client, bufnr)
-          if client.server_capabilities['documentSymbolProvider'] then
-            require('nvim-navic').attach(client, bufnr)
-          end
-        end,
-        capabilities = capabilities,
-        flags = { debounce_text_changes = 500 },
-      },
-      config = {
-        clangd = {
-          on_attach = function(client, bufnr)
-            if client.server_capabilities['documentSymbolProvider'] then
-              require('nvim-navic').attach(client, bufnr)
-            end
-            require('clangd_extensions.inlay_hints').setup_autocmd()
-            require('clangd_extensions.inlay_hints').set_inlay_hints()
-          end,
-        },
-        lua_ls = {
-          settings = {
-            Lua = {
-              diagnostics = { globals = { 'vim', 'packer_plugins' } },
-              workspace = {
-                library = {
-                  [vim.fn.expand '$VIMRUNTIME/lua'] = true,
-                  [vim.fn.expand '$VIMRUNTIME/lua/vim/lsp'] = true,
-                },
-                maxPreload = 100000,
-                preloadFileSize = 10000,
-              },
-              telemetry = { enable = false },
-            },
-          },
-        },
-      },
-    }
-    require('lspconfig').qmlls.setup {
-      command = { 'qmlls', '-E' },
-      filetypes = { 'qml' },
     }
   end,
   event = 'BufRead',

@@ -1,19 +1,19 @@
 plugin {
   'hrsh7th/nvim-cmp',
   dependencies = {
-    { 'kdheepak/cmp-latex-symbols', lazy = true },
-    { 'ray-x/cmp-treesitter',       lazy = true },
-    { 'hrsh7th/cmp-buffer',         lazy = true },
-    { 'hrsh7th/cmp-calc',           lazy = true },
-    { 'saadparwaiz1/cmp_luasnip',   lazy = true },
-    { 'hrsh7th/cmp-emoji',          lazy = true },
-    { 'hrsh7th/cmp-nvim-lsp',       lazy = true },
-    { 'hrsh7th/cmp-nvim-lua',       lazy = true },
-    { 'octaltree/cmp-look',         lazy = true },
-    { 'hrsh7th/cmp-path',           lazy = true },
-    { 'f3fora/cmp-spell',           lazy = true },
-    { 'yutkat/cmp-mocword',         event = 'InsertEnter' }, -- requires mocword binary & mocword dataset
-    -- { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true }, --use @ to find document symbols in find mode
+    { 'kdheepak/cmp-latex-symbols',           lazy = true },
+    { 'ray-x/cmp-treesitter',                 lazy = true },
+    { 'hrsh7th/cmp-buffer',                   lazy = true },
+    { 'hrsh7th/cmp-calc',                     lazy = true },
+    { 'saadparwaiz1/cmp_luasnip',             lazy = true },
+    { 'hrsh7th/cmp-emoji',                    lazy = true },
+    { 'hrsh7th/cmp-nvim-lsp',                 lazy = true },
+    { 'hrsh7th/cmp-nvim-lua',                 lazy = true },
+    { 'octaltree/cmp-look',                   lazy = true },
+    { 'hrsh7th/cmp-path',                     lazy = true },
+    { 'f3fora/cmp-spell',                     lazy = true },
+    { 'yutkat/cmp-mocword',                   event = 'InsertEnter' },               -- requires mocword binary & mocword dataset
+    { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true }, --use @ to find document symbols in find mode
   },
   config = function()
     local cmp = require 'cmp'
@@ -71,6 +71,7 @@ plugin {
       { name = 'emoji' },
       { name = 'mocword' },
       { name = 'render-markdown' },
+      { name = 'nvim_lsp_document_symbol' },
       {
         keyword_length = 2,
         option = {
