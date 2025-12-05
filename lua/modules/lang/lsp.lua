@@ -24,7 +24,7 @@ plugin {
       properties = { 'documentation', 'detail', 'additionalTextEdits' },
     }
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-    capabilities.offsetEncoding = { 'utf-16' }
+    capabilities.positionEncodings = { 'utf-16' }
 
     vim.lsp.config('*', {
       on_attach = function(client, bufnr)
@@ -35,15 +35,22 @@ plugin {
       capabilities = capabilities,
       flags = { debounce_text_changes = 500 },
     })
-    vim.lsp.config('clangd', {
+    vim.lsp.config('ccls', {
       on_attach = function(client, bufnr)
         if client.server_capabilities['documentSymbolProvider'] then
           require('nvim-navic').attach(client, bufnr)
         end
-        -- require('clangd_extensions.inlay_hints').setup_autocmd()
-        -- require('clangd_extensions.inlay_hints').set_inlay_hints()
       end,
     })
+    -- vim.lsp.config('clangd', {
+    --   on_attach = function(client, bufnr)
+    --     if client.server_capabilities['documentSymbolProvider'] then
+    --       require('nvim-navic').attach(client, bufnr)
+    --     end
+    --     -- require('clangd_extensions.inlay_hints').setup_autocmd()
+    --     -- require('clangd_extensions.inlay_hints').set_inlay_hints()
+    --   end,
+    -- })
     vim.lsp.config('qmlls', {
       command = { 'qmlls', '-E' },
       filetypes = { 'qml' },
@@ -69,7 +76,8 @@ plugin {
       prefer_local = true,
       excluded_servers = {
         'sqls',
-        'ccls',
+        'clangd',
+        -- 'ccls',
         'sourcekit',
         'rnix',
         'eslint',
@@ -87,7 +95,7 @@ plugin {
         rust = { 'rust_analyzer' },
         qml = { 'qmlls' },
         python = { 'pyright' },
-        cpp = { 'clangd' },
+        cpp = { 'ccls' },
       },
     }
   end,
@@ -152,54 +160,54 @@ plugin {
 plugin {
   'p00f/clangd_extensions.nvim',
   ft = { 'c', 'cpp' },
-  config = function()
-    local clangd = require 'clangd_extensions'
-    clangd.setup {
-      extensions = {
-        autoSetHints = true,
-        hover_with_actions = true,
-        inlay_hints = {
-          only_current_line = false,
-          only_current_line_autocmd = 'CursorHold',
-          show_parameter_hints = true,
-          parameter_hints_prefix = '<- ',
-          other_hints_prefix = '=> ',
-          max_len_align = false,
-          max_len_align_padding = 1,
-          right_align = false,
-          right_align_padding = 7,
-          highlight = 'Comment',
-          priority = 100,
-        },
-        ast = {
-          role_icons = {
-            type = '',
-            declaration = '',
-            expression = '',
-            specifier = '',
-            statement = '',
-            ['template argument'] = '',
-          },
-          {
-            Compound = '',
-            Recovery = '',
-            TranslationUnit = '',
-            PackExpansion = '',
-            TemplateTypeParm = '',
-            TemplateTemplateParm = '',
-            TemplateParamObject = '',
-          },
-          highlights = {
-            detail = 'Comment',
-          },
-          memory_usage = {
-            border = 'rounded',
-          },
-          symbol_info = {
-            border = 'rounded',
-          },
-        },
-      },
-    }
-  end,
+  -- config = function()
+  --   local clangd = require 'clangd_extensions'
+  --   clangd.setup {
+  --     extensions = {
+  --       autoSetHints = true,
+  --       hover_with_actions = true,
+  --       inlay_hints = {
+  --         only_current_line = false,
+  --         only_current_line_autocmd = 'CursorHold',
+  --         show_parameter_hints = true,
+  --         parameter_hints_prefix = '<- ',
+  --         other_hints_prefix = '=> ',
+  --         max_len_align = false,
+  --         max_len_align_padding = 1,
+  --         right_align = false,
+  --         right_align_padding = 7,
+  --         highlight = 'Comment',
+  --         priority = 100,
+  --       },
+  --       ast = {
+  --         role_icons = {
+  --           type = '',
+  --           declaration = '',
+  --           expression = '',
+  --           specifier = '',
+  --           statement = '',
+  --           ['template argument'] = '',
+  --         },
+  --         {
+  --           Compound = '',
+  --           Recovery = '',
+  --           TranslationUnit = '',
+  --           PackExpansion = '',
+  --           TemplateTypeParm = '',
+  --           TemplateTemplateParm = '',
+  --           TemplateParamObject = '',
+  --         },
+  --         highlights = {
+  --           detail = 'Comment',
+  --         },
+  --         memory_usage = {
+  --           border = 'rounded',
+  --         },
+  --         symbol_info = {
+  --           border = 'rounded',
+  --         },
+  --       },
+  --     },
+  --   }
+  -- end,
 }
