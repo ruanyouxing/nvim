@@ -1,6 +1,10 @@
+on_attach = function(client, bufnr)
+  if client.server_capabilities['documentSymbolProvider'] then
+    require('nvim-navic').attach(client, bufnr)
+  end
+end
 plugin {
   'dundalek/lazy-lsp.nvim',
-  -- 'ruanyouxing/lazy-lsp.nvim',
   dependencies = { 'nvim-lspconfig' },
   lazy = true,
 }
@@ -24,23 +28,14 @@ plugin {
       properties = { 'documentation', 'detail', 'additionalTextEdits' },
     }
     capabilities = require('cmp_nvim_lsp').default_capabilities(capabilities)
-    capabilities.positionEncodings = { 'utf-16' }
 
     vim.lsp.config('*', {
-      on_attach = function(client, bufnr)
-        if client.server_capabilities['documentSymbolProvider'] then
-          require('nvim-navic').attach(client, bufnr)
-        end
-      end,
+      on_attach = on_attach,
       capabilities = capabilities,
       flags = { debounce_text_changes = 500 },
     })
     vim.lsp.config('ccls', {
-      on_attach = function(client, bufnr)
-        if client.server_capabilities['documentSymbolProvider'] then
-          require('nvim-navic').attach(client, bufnr)
-        end
-      end,
+      on_attach = on_attach,
     })
     -- vim.lsp.config('clangd', {
     --   on_attach = function(client, bufnr)
@@ -77,7 +72,6 @@ plugin {
       excluded_servers = {
         'sqls',
         'clangd',
-        -- 'ccls',
         'sourcekit',
         'rnix',
         'eslint',
@@ -96,10 +90,11 @@ plugin {
         qml = { 'qmlls' },
         python = { 'pyright' },
         cpp = { 'ccls' },
+        lua = { 'lua_ls' },
       },
     }
   end,
-  event = 'BufRead',
+  event = 'BufEnter',
 }
 
 plugin {
@@ -155,7 +150,7 @@ plugin {
       end
     end
   end,
-  event = 'BufRead',
+  -- event = 'BufRead',
 }
 plugin {
   'p00f/clangd_extensions.nvim',
