@@ -24,12 +24,7 @@
           cp -r ${root} $out
         '';
       };
-      programs.neovim = {
-        enable = true;
-        defaultEditor = true;
-      };
-      xdg.configFile."nvim".source = root;
-      home.packages = with pkgs; [
+      utils = with pkgs; [
         gcc
         gnumake
         fd
