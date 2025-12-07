@@ -12,15 +12,14 @@
     }:
     let
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
+      pkgs = import nixpkgs { inherit system; };
       root = ./.;
-      neovim = pkgs.neovim;
     in
     {
       programs.neovim = {
         enable = true;
         defaultEditor = true;
-        package = neovim;
+        package = pkgs.neovim;
       };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "nvim-config";
