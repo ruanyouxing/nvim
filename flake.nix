@@ -14,8 +14,14 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       root = ./.;
+      neovim = pkgs.neovim;
     in
     {
+      programs.neovim = {
+        enable = true;
+        defaultEditor = true;
+        packages = neovim;
+      };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "nvim-config";
         phases = [ "installPhase" ];
@@ -24,7 +30,6 @@
           cp -r ${root} $out
         '';
       };
-      neovim = pkgs.neovim;
       utils = with pkgs; [
         gcc
         gnumake
