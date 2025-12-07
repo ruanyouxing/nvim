@@ -19,7 +19,6 @@
       programs.neovim = {
         enable = true;
         defaultEditor = true;
-        package = pkgs.neovim;
       };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "nvim-config";
