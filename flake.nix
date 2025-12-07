@@ -17,9 +17,10 @@
       name = "nvim-config";
       phases = ["installPhase"];
       installPhase = ''
-      mkdir -p $out
-      cp -r ${root} $out
+        mkdir -p $out
+        cp -r ${root} $out
       '';
     };
+    packages.neovim = pkgs.neovim-unwrapped;
   };
 }
