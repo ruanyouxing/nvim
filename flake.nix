@@ -14,22 +14,6 @@
       system = "x86_64-linux";
       pkgs = nixpkgs.legacyPackages.${system};
       root = ./.;
-    in
-    {
-      home = {
-        xdg.configFile."nvim-config".source = root;
-        sessionVariables = {
-          NVIM_APPNAME = "nvim-config";
-        };
-      };
-      packages.${system}.default = pkgs.stdenv.mkDerivation {
-        name = "nvim-config";
-        phases = [ "installPhase" ];
-        installPhase = ''
-          mkdir -p $out
-          cp -r ${root} $out
-        '';
-      };
       utils = with pkgs; [
         gcc
         gnumake
@@ -54,5 +38,22 @@
         alejandra
         lua-language-server
       ];
+    in
+    {
+        home = {
+          sessionVariables = {
+            NVIM_APPNAME = "nvim-config";
+          };
+          packages = utils;
+          file.".config/nvim-config".source = root;
+        };
+      packages.${system}.default = pkgs.stdenv.mkDerivation {
+        name = "nvim-config";
+        phases = [ "installPhase" ];
+        installPhase = ''
+          mkdir -p $out
+          cp -r ${root} $out
+        '';
+      };
     };
 }
