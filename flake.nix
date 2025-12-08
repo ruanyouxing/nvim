@@ -40,6 +40,7 @@
       ];
     in
     {
+      hmConfig = {
         home = {
           sessionVariables = {
             NVIM_APPNAME = "nvim-config";
@@ -47,6 +48,12 @@
           packages = utils;
           file.".config/nvim-config".source = root;
         };
+        programs.neovim = {
+          enable = true;
+          defaultEditor = true;
+          packages = pkgs.neovim;
+        };
+      };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "nvim-config";
         phases = [ "installPhase" ];
