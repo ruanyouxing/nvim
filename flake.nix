@@ -51,7 +51,7 @@
         programs.neovim = {
           enable = true;
           defaultEditor = true;
-          packages = pkgs.neovim;
+          package = pkgs.neovim;
         };
       };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
