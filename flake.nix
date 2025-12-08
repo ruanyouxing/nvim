@@ -16,6 +16,12 @@
       root = ./.;
     in
     {
+      home = {
+        xdg.configFile."nvim-config".source = root;
+        sessionVariables = {
+          NVIM_APPNAME = "nvim-config";
+        };
+      };
       packages.${system}.default = pkgs.stdenv.mkDerivation {
         name = "nvim-config";
         phases = [ "installPhase" ];
