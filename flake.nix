@@ -46,6 +46,7 @@
         stylua
         shellcheck
         alejandra
+        lua-language-server
       ];
     };
 }
