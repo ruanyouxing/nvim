@@ -19,7 +19,8 @@ function pack:load_modules_packages()
   end
 
   for _, f in pairs(list) do
-    local _, pos = f:find(modules_dir)
+    -- local _, pos = f:find(modules_dir)
+    local _, pos = string.find(f, modules_dir, 1, true)
     f = f:sub(pos - 6, #f - 4)
     if not vim.tbl_contains(disable_modules, f) then
       _G.plugin = self.package
