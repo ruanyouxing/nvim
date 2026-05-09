@@ -9,8 +9,7 @@ plugin {
   },
 }
 plugin {
-  'phaazon/hop.nvim',
-  branch = 'v2',
+  'smoka7/hop.nvim',
   event = 'BufEnter',
   config = function()
     require('hop').setup {
