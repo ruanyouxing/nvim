@@ -6,7 +6,6 @@ return {
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
     { 'jvgrootveld/telescope-zoxide',              lazy = true },
     { 'nvim-lua/popup.nvim',                       lazy = true },
-    { 'nvim-lua/plenary.nvim',                     lazy = true },
   },
   config = function()
     local actions = require 'telescope.actions'
