@@ -11,7 +11,18 @@ local editing = { {
   end,
   event = 'InsertEnter',
 }
-, { 'andymass/vim-matchup', event = 'BufRead' }
+, {
+  'andymass/vim-matchup',
+  event = 'BufRead',
+  config = function()
+    vim.g.matchup_treesitter = 1
+    require('match-up').setup {
+      treesitter = {
+        stopline = 500
+      }
+    }
+  end
+}
 , {
   'abecodes/tabout.nvim',
   event = 'InsertEnter',
