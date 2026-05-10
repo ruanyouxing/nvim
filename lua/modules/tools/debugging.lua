@@ -1,4 +1,4 @@
-plugin {
+return {
   'mfussenegger/nvim-dap',
   lazy = true,
   config = function()

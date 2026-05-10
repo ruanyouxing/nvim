@@ -1,4 +1,4 @@
-plugin {
+local notification = { {
   'rcarriga/nvim-notify',
   config = function()
     vim.notify = require 'notify'
@@ -18,7 +18,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'folke/noice.nvim',
   dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
   config = function()
@@ -28,4 +28,5 @@ plugin {
       lsp = { signature = { enabled = false } },
     }
   end,
-}
+} }
+return notification

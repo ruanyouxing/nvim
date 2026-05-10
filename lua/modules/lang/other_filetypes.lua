@@ -1,4 +1,4 @@
-plugin {
+filetypes = { {
   'nathom/filetype.nvim',
   config = function()
     vim.g.did_load_filetypes = 1
@@ -29,5 +29,7 @@ plugin {
   end,
   event = { 'BufRead', 'BufNewFile' },
 }
-plugin { 'LnL7/vim-nix', ft = 'nix' }
-plugin { 'elkowar/yuck.vim', ft = 'yuck' }
+, { 'LnL7/vim-nix', ft = 'nix' }
+, { 'elkowar/yuck.vim', ft = 'yuck' }
+}
+return filetype

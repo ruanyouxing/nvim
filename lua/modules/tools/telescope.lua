@@ -1,4 +1,4 @@
-plugin {
+return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'sharkdp/fd',                                lazy = true },

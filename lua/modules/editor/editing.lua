@@ -1,5 +1,5 @@
 local plug = require('core.keymap').plug
-plugin {
+local editing = { {
   'windwp/nvim-autopairs',
   config = function()
     require('nvim-autopairs').setup {
@@ -11,8 +11,8 @@ plugin {
   end,
   event = 'InsertEnter',
 }
-plugin { 'andymass/vim-matchup', event = 'BufRead' }
-plugin {
+, { 'andymass/vim-matchup', event = 'BufRead' }
+, {
   'abecodes/tabout.nvim',
   event = 'InsertEnter',
   config = function()
@@ -36,7 +36,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'gbprod/yanky.nvim',
   config = function()
     local utils = require 'yanky.utils'
@@ -87,7 +87,7 @@ plugin {
     },
   },
 }
-plugin {
+, {
   'max397574/better-escape.nvim',
   event = 'InsertEnter',
   config = function()
@@ -97,7 +97,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'terrortylor/nvim-comment',
   config = function()
     require('nvim_comment').setup {
@@ -112,3 +112,5 @@ plugin {
   end,
   event = 'ModeChanged',
 }
+}
+return editing

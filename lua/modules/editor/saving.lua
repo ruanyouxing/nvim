@@ -1,4 +1,4 @@
-plugin {
+local autosave = { {
   'Pocco81/AutoSave.nvim',
   config = function()
     local autosave = require 'auto-save'
@@ -15,7 +15,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'olimorris/persisted.nvim',
   config = function()
     require('persisted').setup {
@@ -29,7 +29,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'axkirillov/hbac.nvim',
   config = function()
     require('hbac').setup {
@@ -43,7 +43,8 @@ plugin {
   end,
   event = 'BufRead',
 }
-plugin {
+, {
   'famiu/bufdelete.nvim',
   event = 'BufDelete',
-}
+} }
+return autosave

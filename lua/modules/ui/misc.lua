@@ -1,5 +1,5 @@
 ---@diagnostic disable: different-requires
-plugin {
+local misc = { {
   'tzachar/local-highlight.nvim',
   config = function()
     require('local-highlight').setup {
@@ -9,7 +9,7 @@ plugin {
   event = 'BufRead',
   dependencies = 'folke/snacks.nvim',
 }
-plugin {
+, {
   'stevearc/dressing.nvim',
   config = function()
     require('dressing').setup {
@@ -20,7 +20,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'mvllow/modes.nvim',
   event = 'UIEnter',
   config = function()
@@ -40,7 +40,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'folke/twilight.nvim',
   event = 'CursorMoved',
   config = function()
@@ -62,7 +62,8 @@ plugin {
     }
   end,
 }
--- plugin { 'Pheon-Dev/pigeon', lazy = true }
-plugin { 'kyazdani42/nvim-web-devicons', lazy = true }
-plugin { 'mbbill/undotree', event = 'TextChanged' }
-plugin { 'typicode/bg.nvim' }
+-- ,{ 'Pheon-Dev/pigeon', lazy = true }
+, { 'kyazdani42/nvim-web-devicons', lazy = true }
+, { 'mbbill/undotree', event = 'TextChanged' }
+, { 'typicode/bg.nvim' } }
+return misc

@@ -1,4 +1,4 @@
-plugin {
+column = { {
   'luukvbaal/statuscol.nvim',
   config = function()
     vim.opt.foldcolumn = '1'
@@ -23,10 +23,11 @@ plugin {
   end,
   event = 'BufWinEnter',
 }
-plugin {
+, {
   'lukas-reineke/virt-column.nvim',
   event = 'UIEnter',
   config = function()
     require('virt-column').setup()
   end,
-}
+} }
+return column

@@ -5,7 +5,7 @@ local is_gitrepo = function()
   end
   return false
 end
-plugin {
+local git_plugins = { {
   'sindrets/diffview.nvim',
   config = function()
     local cb = require('diffview.config').diffview_callback
@@ -68,7 +68,7 @@ plugin {
   cond = is_gitrepo,
   cmd = 'DiffviewOpen',
 }
-plugin {
+, {
   'lewis6991/gitsigns.nvim',
   config = function()
     require('gitsigns').setup {
@@ -92,4 +92,5 @@ plugin {
   end,
   cond = is_gitrepo,
   event = 'BufRead',
+}
 }

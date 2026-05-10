@@ -1,5 +1,5 @@
 SessionStatus = {}
-plugin {
+local statusbar = { {
   'windwp/windline.nvim',
   config = function()
     local windline = require 'windline'
@@ -410,10 +410,11 @@ plugin {
   event = 'BufWinEnter',
 }
 
-plugin {
+, {
   'jcdickinson/wpm.nvim',
   config = function()
     require('wpm').setup { sample_interval = 1000 }
   end,
   event = 'BufEnter',
-}
+} }
+return statusbar

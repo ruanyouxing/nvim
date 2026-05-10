@@ -1,4 +1,4 @@
-plugin {
+return {
   'Jxstxs/keystack.nvim',
   config = function()
     _G.DAPStopped = true

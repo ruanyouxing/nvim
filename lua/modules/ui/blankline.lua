@@ -1,4 +1,4 @@
-plugin {
+return {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
     vim.opt.termguicolors = true

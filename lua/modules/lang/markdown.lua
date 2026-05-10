@@ -1,4 +1,4 @@
-plugin {
+local markdown = { {
   'Pocco81/HighStr.nvim',
   ft = { 'markdown' },
   config = function()
@@ -22,7 +22,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'iamcco/markdown-preview.nvim',
   build = 'cd app && yarn install',
   init = function()
@@ -30,14 +30,14 @@ plugin {
   end,
   ft = { 'markdown' },
 }
-plugin {
+, {
   'lukas-reineke/headlines.nvim',
   ft = { 'markdown' },
   config = function()
     require('headlines').setup {}
   end,
 }
-plugin {
+, {
   'MeanderingProgrammer/render-markdown.nvim',
 
   ft = { 'markdown' },
@@ -47,4 +47,6 @@ plugin {
     }
   end,
   cmd = 'RenderMarkdown',
-}
+} }
+
+return markdown

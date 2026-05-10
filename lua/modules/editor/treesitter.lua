@@ -1,10 +1,11 @@
-plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
-plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
-plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
-plugin { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead' }
-plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
-plugin { 'nvim-treesitter/playground', dependencies = 'nvim-treesitter', cmd = 'TSPlaygroundToggle' }
-plugin {
+local treesitter = {
+  { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
+  , { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
+, { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
+, { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead' }
+, { 'windwp/nvim-ts-autotag', event = 'BufRead' }
+, { 'nvim-treesitter/playground', dependencies = 'nvim-treesitter', cmd = 'TSPlaygroundToggle' }
+, {
   'nvim-treesitter/nvim-treesitter',
   event = 'BufRead',
   build = ':TSUpdate',
@@ -126,7 +127,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'romgrk/nvim-treesitter-context',
   event = 'BufRead',
   config = function()
@@ -149,4 +150,6 @@ plugin {
       exact_patterns = {},
     }
   end,
+},
 }
+return treesitter

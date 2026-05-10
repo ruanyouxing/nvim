@@ -1,4 +1,4 @@
-plugin {
+local cmp = { {
   'hrsh7th/nvim-cmp',
   dependencies = {
     { 'kdheepak/cmp-latex-symbols',           lazy = true },
@@ -159,7 +159,7 @@ plugin {
   end,
   lazy = true,
 }
-plugin {
+, {
   'L3MON4D3/LuaSnip',
   event = 'InsertEnter',
   config = function()
@@ -174,7 +174,7 @@ plugin {
     require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
   end,
 }
-plugin {
+, {
   'TwIStOy/luasnip-snippets',
   event = 'InsertEnter',
   dependencies = 'L3MON4D3/LuaSnip',
@@ -185,4 +185,6 @@ plugin {
     }
   end,
 }
-plugin { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
+, { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
+}
+return cmp

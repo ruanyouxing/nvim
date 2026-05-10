@@ -1,4 +1,4 @@
-plugin {
+local picker = { {
   'ziontee113/icon-picker.nvim',
   event = 'InsertEnter',
   dependencies = 'dressing.nvim',
@@ -7,7 +7,7 @@ plugin {
   end,
   cmd = 'IconPickerInsert',
 }
-plugin {
+, {
   'ziontee113/color-picker.nvim',
   lazy = true,
   event = 'InsertEnter',
@@ -15,4 +15,5 @@ plugin {
     require 'color-picker'
   end,
   cmd = 'PickColorInsert',
-}
+} }
+return picker
