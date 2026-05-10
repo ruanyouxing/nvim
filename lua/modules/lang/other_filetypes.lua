@@ -32,4 +32,4 @@ filetypes = { {
 , { 'LnL7/vim-nix', ft = 'nix' }
 , { 'elkowar/yuck.vim', ft = 'yuck' }
 }
-return filetype
+return filetypes

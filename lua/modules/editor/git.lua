@@ -94,3 +94,4 @@ local git_plugins = { {
   event = 'BufRead',
 }
 }
+return git_plugins
