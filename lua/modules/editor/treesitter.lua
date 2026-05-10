@@ -5,9 +5,10 @@ plugin { 'windwp/nvim-ts-autotag', event = 'BufRead' }
 plugin { 'nvim-treesitter/playground', dependencies = 'nvim-treesitter', cmd = 'TSPlaygroundToggle' }
 plugin {
   'nvim-treesitter/nvim-treesitter',
-  event = 'BufRead',
+  branch = 'master',
   build = ':TSUpdate',
   main = 'nvim-treesitter.configs',
+  lazy = false,
   config = function()
     require('nvim-treesitter.configs').setup {
       ensure_installed = {
