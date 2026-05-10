@@ -100,7 +100,7 @@
         "x86_64-darwin"
       ];
       perSystem = {pkgs, ...}: let
-        neovim = mnw.lib.wrap {inherit inputs pkgs;} ./nixcore;
+        neovim = mnw.lib.wrap {inherit inputs pkgs;} ./nix;
       in {
         packages = {
           inherit neovim;

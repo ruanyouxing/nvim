@@ -32,8 +32,8 @@ in {
       nvim-treesitter-with-grammars
       nvim-ts-context-commentstring
     ];
-    dev.hungz = {
-      pure = ../.;
+    dev.nvim = {
+      pure = pkgs.lib.cleanSource ../.;
       impure = "/home/hungz/.dotfiles/nvim";
     };
   };
