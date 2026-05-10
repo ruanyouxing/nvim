@@ -1,4 +1,3 @@
-plugin { 'nvim-treesitter/nvim-treesitter-refactor', event = 'BufRead' }
 plugin { 'JoosepAlviste/nvim-ts-context-commentstring', event = 'BufRead' }
 plugin { 'nvim-treesitter/nvim-treesitter-textobjects', event = 'BufRead' }
 plugin { 'https://gitlab.com/HiPhish/rainbow-delimiters.nvim', event = 'BufRead' }
@@ -8,6 +7,7 @@ plugin {
   'nvim-treesitter/nvim-treesitter',
   event = 'BufRead',
   build = ':TSUpdate',
+  main = 'nvim-treesitter.configs',
   config = function()
     require('nvim-treesitter.configs').setup {
       ensure_installed = {
@@ -45,16 +45,6 @@ plugin {
       },
       matchup = {
         enable = true,
-      },
-      refactor = {
-        highlight_definitions = { enable = true, enable_autocmd = false },
-        highlight_current_scope = { enable = true },
-        smart_rename = {
-          enable = true,
-          keymaps = {
-            smart_rename = 'grr',
-          },
-        },
       },
       textobjects = {
         select = {
