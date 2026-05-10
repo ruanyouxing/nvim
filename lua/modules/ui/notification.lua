@@ -20,7 +20,6 @@ local notification = { {
 }
 , {
   'folke/noice.nvim',
-  dependencies = { 'MunifTanjim/nui.nvim', module = 'nui' },
   config = function()
     require('noice').setup {
       cmdline = { view = 'cmdline' },
