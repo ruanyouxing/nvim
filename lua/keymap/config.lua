@@ -268,14 +268,14 @@ function M.set_keymaps()
     },
   }
   nmap {
-    { 'j', plug 'faster_move_j',  opts(silent) },
-    { 'k', plug 'faster_move_k',  opts(silent) },
-    { 'j', plug 'faster_move_gj', opts(silent) },
-    { 'k', plug 'faster_move_gk', opts(silent) },
+    -- { 'j', plug 'faster_move_j',  opts(silent) }, PHSix/faster.nvim
+    -- { 'k', plug 'faster_move_k',  opts(silent) },
+    -- { 'j', plug 'faster_move_gj', opts(silent) },
+    -- { 'k', plug 'faster_move_gk', opts(silent) },
   }
   vmap {
-    { 'j', plug 'faster_vmove_j' },
-    { 'k', plug 'faster_vmove_k' },
+    -- { 'j', plug 'faster_vmove_j' },
+    -- { 'k', plug 'faster_vmove_k' },
   }
   imap {
     { '<C-c>', cmd 'PickColorInsert' },
