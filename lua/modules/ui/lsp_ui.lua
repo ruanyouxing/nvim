@@ -154,20 +154,21 @@ plugin {
   lazy = true,
 }
 plugin { 'onsails/lspkind.nvim', lazy = true }
-plugin {
-  'gorbit99/codewindow.nvim',
-  config = function()
-    require('codewindow').setup {
-      auto_enable = false,
-      exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
-      use_lsp = true,
-      use_treesitter = true,
-      use_git = true,
-      show_cursor = true,
-    }
-  end,
-  event = 'BufRead',
-}
+-- This shit has bugs
+-- plugin {
+--   'gorbit99/codewindow.nvim',
+--   config = function()
+--     require('codewindow').setup {
+--       auto_enable = false,
+--       exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
+--       use_lsp = true,
+--       use_treesitter = true,
+--       use_git = true,
+--       show_cursor = true,
+--     }
+--   end,
+--   event = 'BufRead',
+-- }
 plugin {
   'hasansujon786/nvim-navbuddy',
   config = function()
