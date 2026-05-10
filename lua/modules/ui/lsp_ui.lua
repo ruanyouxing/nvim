@@ -154,20 +154,20 @@ lsp_ui = { {
   lazy = true,
 }
 , { 'onsails/lspkind.nvim', lazy = true }
-, {
-  'gorbit99/codewindow.nvim',
-  config = function()
-    require('codewindow').setup {
-      auto_enable = false,
-      exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
-      use_lsp = true,
-      use_treesitter = true,
-      use_git = true,
-      show_cursor = true,
-    }
-  end,
-  event = 'BufRead',
-}
+-- , {
+--   'gorbit99/codewindow.nvim',
+--   config = function()
+--     require('codewindow').setup {
+--       auto_enable = false,
+--       exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
+--       use_lsp = true,
+--       use_treesitter = true,
+--       use_git = true,
+--       show_cursor = true,
+--     }
+--   end,
+--   event = 'BufRead',
+-- }
 , {
   'hasansujon786/nvim-navbuddy',
   config = function()
