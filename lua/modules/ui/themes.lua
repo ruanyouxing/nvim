@@ -1,4 +1,4 @@
-plugin {
+local themes = { {
   'Shatur/neovim-ayu',
   config = function()
     require('ayu').setup {
@@ -8,7 +8,7 @@ plugin {
   lazy = false,
   priority = 10000,
 }
-plugin {
+, {
   'catppuccin/nvim',
   name = 'catppuccin',
   config = function()
@@ -19,7 +19,7 @@ plugin {
   end,
 }
 
-plugin {
+, {
   'rebelot/kanagawa.nvim',
   config = function()
     require('kanagawa').setup {
@@ -30,7 +30,7 @@ plugin {
   lazy = false,
   priority = 10000,
 }
-plugin {
+, {
   'folke/tokyonight.nvim',
   config = function()
     vim.g.tokyonight_style = 'night'
@@ -41,7 +41,7 @@ plugin {
   end,
 }
 
-plugin {
+, {
   'rose-pine/neovim',
   name = 'rose-pine',
   config = function()
@@ -49,4 +49,5 @@ plugin {
       dark_variant = 'moon',
     }
   end,
-}
+} }
+return themes

@@ -1,19 +1,19 @@
-plugin {
+local cmp = { {
   'hrsh7th/nvim-cmp',
   dependencies = {
+    { 'hrsh7th/cmp-emoji',                    lazy = true },
     { 'kdheepak/cmp-latex-symbols',           lazy = true },
     { 'ray-x/cmp-treesitter',                 lazy = true },
     { 'hrsh7th/cmp-buffer',                   lazy = true },
     { 'hrsh7th/cmp-calc',                     lazy = true },
     { 'saadparwaiz1/cmp_luasnip',             lazy = true },
-    { 'hrsh7th/cmp-emoji',                    lazy = true },
     { 'hrsh7th/cmp-nvim-lsp',                 lazy = true },
     { 'hrsh7th/cmp-nvim-lua',                 lazy = true },
     { 'octaltree/cmp-look',                   lazy = true },
     { 'hrsh7th/cmp-path',                     lazy = true },
     { 'f3fora/cmp-spell',                     lazy = true },
-    { 'yutkat/cmp-mocword',                   event = 'InsertEnter' },               -- requires mocword binary & mocword dataset
-    { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true }, --use @ to find document symbols in find mode
+    { 'yutkat/cmp-mocword',                   event = 'InsertEnter' }, -- requires mocword binary & mocword dataset
+    { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true },
   },
   config = function()
     local cmp = require 'cmp'
@@ -159,7 +159,7 @@ plugin {
   end,
   lazy = true,
 }
-plugin {
+, {
   'L3MON4D3/LuaSnip',
   event = 'InsertEnter',
   config = function()
@@ -174,7 +174,7 @@ plugin {
     require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
   end,
 }
-plugin {
+, {
   'TwIStOy/luasnip-snippets',
   event = 'InsertEnter',
   dependencies = 'L3MON4D3/LuaSnip',
@@ -185,4 +185,5 @@ plugin {
     }
   end,
 }
-plugin { 'rafamadriz/friendly-snippets', event = 'InsertEnter' }
+}
+return cmp

@@ -1,4 +1,4 @@
-plugin {
+return {
   'gelguy/wilder.nvim',
   event = 'CmdlineEnter',
   lazy = true,

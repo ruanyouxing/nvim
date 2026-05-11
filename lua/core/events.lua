@@ -54,3 +54,10 @@ autocmd({ 'FileType' }, {
 --     require('specs').show_specs()
 --   end,
 -- })
+local treesitter_augroup = vim.api.nvim_create_augroup("nvim_treesitter", { clear = true })
+autocmd('FileType', {
+  pattern = '*',
+  callback = function(args)
+    pcall(vim.treesitter.start, args.buf)
+  end,
+})

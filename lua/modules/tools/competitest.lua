@@ -1,4 +1,4 @@
-plugin {
+return {
   'xeluxee/competitest.nvim',
   config = function()
     require('competitest').setup {

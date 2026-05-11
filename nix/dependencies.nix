@@ -1,0 +1,31 @@
+{pkgs, ...}: {
+  extraBinPath = with pkgs; [
+    lua-language-server
+    stylua
+    clang-tools
+    ccls
+    pyright
+    python313Packages.debugpy
+    python313Packages.pip
+    black
+    pylint
+    nil
+    nixpkgs-fmt
+    alejandra
+    eslint_d
+    prettier
+    shellcheck
+    ripgrep
+    fd
+    tree-sitter
+    gcc
+    gnumake
+    fzf
+    lazygit
+    luajit
+    nodejs
+    yarn
+    haskellPackages.greenclip
+    lldb
+  ];
+}

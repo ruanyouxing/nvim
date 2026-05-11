@@ -1,4 +1,4 @@
-plugin {
+lsp_ui = { {
   'hedyhli/outline.nvim',
   config = function()
     require('outline').setup {
@@ -48,7 +48,7 @@ plugin {
   cmd = 'Outline',
 }
 
-plugin {
+, {
   'utilyre/barbecue.nvim',
   config = function()
     vim.opt.updatetime = 200
@@ -74,7 +74,7 @@ plugin {
   event = 'BufRead',
 }
 
-plugin {
+, {
   'SmiteshP/nvim-navic',
   event = 'BufReadPre',
   config = function()
@@ -115,7 +115,7 @@ plugin {
   end,
   module = true,
 }
-plugin {
+, {
   'kosayoda/nvim-lightbulb',
   dependencies = 'nvim-lspconfig',
   config = function()
@@ -146,16 +146,16 @@ plugin {
   end,
   event = 'BufEnter',
 }
-plugin {
+, {
   'j-hui/fidget.nvim',
   config = function()
     require('fidget').setup {}
   end,
   lazy = true,
 }
-plugin { 'onsails/lspkind.nvim', lazy = true }
+, { 'onsails/lspkind.nvim', lazy = true }
+-- , {
 -- This shit has bugs
--- plugin {
 --   'gorbit99/codewindow.nvim',
 --   config = function()
 --     require('codewindow').setup {
@@ -169,7 +169,7 @@ plugin { 'onsails/lspkind.nvim', lazy = true }
 --   end,
 --   event = 'BufRead',
 -- }
-plugin {
+, {
   'hasansujon786/nvim-navbuddy',
   config = function()
     require('nvim-navbuddy').setup {
@@ -179,7 +179,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'folke/trouble.nvim',
   lazy = true,
   cmd = 'Trouble',
@@ -228,4 +228,5 @@ plugin {
       use_diagnostic_signs = true,
     }
   end,
-}
+} }
+return lsp_ui

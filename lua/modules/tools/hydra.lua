@@ -1,4 +1,4 @@
-plugin {
+return {
   'anuvyklack/hydra.nvim',
   dependencies = 'anuvyklack/keymap-layer.nvim',
   config = function()

@@ -1,4 +1,4 @@
-plugin {
+return {
   'is0n/fm-nvim',
   config = function()
     require('fm-nvim').setup {

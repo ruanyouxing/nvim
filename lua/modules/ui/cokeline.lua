@@ -1,4 +1,4 @@
-plugin {
+return {
   'noib3/nvim-cokeline',
   event = 'ColorScheme',
   config = function()

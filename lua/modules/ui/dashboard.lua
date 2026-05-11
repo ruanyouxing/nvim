@@ -1,4 +1,4 @@
-plugin {
+return {
   'glepnir/dashboard-nvim',
   config = function()
     local db = require 'dashboard'
@@ -111,7 +111,9 @@ plugin {
             desc_hl = '@variable',
             group = 'Label',
             key = '<leader>s',
-            action = 'SessionLoadLast',
+            action = function()
+              require('persisted').load { last = true }
+            end,
           },
           {
             desc = '󰗼 Exit Neovim',

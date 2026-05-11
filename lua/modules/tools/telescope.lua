@@ -1,4 +1,4 @@
-plugin {
+return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'sharkdp/fd',                                lazy = true },
@@ -6,7 +6,6 @@ plugin {
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
     { 'jvgrootveld/telescope-zoxide',              lazy = true },
     { 'nvim-lua/popup.nvim',                       lazy = true },
-    { 'nvim-lua/plenary.nvim',                     lazy = true },
   },
   config = function()
     local actions = require 'telescope.actions'
@@ -15,6 +14,11 @@ plugin {
     require('telescope').load_extension 'notify'
     require('telescope').load_extension 'persisted'
     require('telescope').setup {
+      defaults = {
+        preview = {
+          treesitter = false
+        },
+      },
       mappings = {
         i = {
           ['<esc>'] = actions.close,

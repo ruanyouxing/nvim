@@ -1,4 +1,4 @@
-plugin {
+local cursor = { {
   'yamatsum/nvim-cursorline',
   config = function()
     require('nvim-cursorline').setup {
@@ -7,7 +7,7 @@ plugin {
     }
   end,
 }
-plugin {
+, {
   'cxwx/specs.nvim',
   event = 'UIEnter',
   config = function()
@@ -33,4 +33,5 @@ plugin {
       end,
     })
   end,
-}
+} }
+return cursor

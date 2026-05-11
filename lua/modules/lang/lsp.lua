@@ -3,12 +3,13 @@ on_attach = function(client, bufnr)
     require('nvim-navic').attach(client, bufnr)
   end
 end
-plugin {
-  'dundalek/lazy-lsp.nvim',
-  dependencies = { 'nvim-lspconfig' },
-  lazy = true,
-}
-plugin {
+local lsp = {
+  {
+    'dundalek/lazy-lsp.nvim',
+    dependencies = { 'nvim-lspconfig' },
+    lazy = true,
+  }
+  , {
   'neovim/nvim-lspconfig',
   config = function()
     local capabilities = vim.lsp.protocol.make_client_capabilities()
@@ -97,7 +98,7 @@ plugin {
   event = 'BufEnter',
 }
 
-plugin {
+, {
   'p00f/clangd_extensions.nvim',
   ft = { 'c', 'cpp' },
   -- config = function()
@@ -151,3 +152,5 @@ plugin {
   --   }
   -- end,
 }
+}
+return lsp

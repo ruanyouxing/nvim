@@ -40,7 +40,6 @@ function M.set_keymaps()
   local cmd, cu = keymap.cmd, keymap.cu
   local plug = keymap.plug
   _G.OnFocus = 0
-  vim.g.mapleader = ' '
   nmap { ' ', '' }
   xmap { ' ', '' }
   nmap {

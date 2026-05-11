@@ -1,4 +1,4 @@
-plugin {
+local misc = { {
   'stevearc/overseer.nvim',
   config = function()
     require('overseer').setup {
@@ -7,7 +7,7 @@ plugin {
   end,
   cmd = 'OverseerRun',
 }
-plugin {
+, {
   'nvim-pack/nvim-spectre',
   config = function()
     require('spectre').setup {
@@ -19,15 +19,17 @@ plugin {
   lazy = true,
 }
 
-plugin {
+, {
   'folke/which-key.nvim',
   event = 'VeryLazy',
 }
-plugin {
+, {
   'norcalli/nvim-colorizer.lua',
   config = function()
     require('colorizer').setup { '*' }
   end,
   cmd = 'ColorizerToggle',
 }
-plugin { 'PHSix/faster.nvim', event = 'VimEnter' }
+, { 'PHSix/faster.nvim', event = 'VimEnter' }
+}
+return misc

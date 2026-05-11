@@ -1,77 +1,25 @@
-local uv, api, fn = vim.loop, vim.api, vim.fn
+require('lazy').setup({
+  dev = {
+    path = mnw.configDir .. '/pack/mnw/opt',
+    patterns = { '' },
+    fallback = true,
+  },
 
-local pack = {}
-pack.__index = pack
-
-function pack:load_modules_packages()
-  local modules_dir = self.helper.path_join(self.config_path, 'lua', 'modules')
-  self.repos = {}
-
-  local list = vim.fn.split(vim.fn.glob(modules_dir .. '/*/*lua', '\n'))
-  if #list == 0 then
-    return
-  end
-
-  local disable_modules = {}
-
-  if fn.exists 'g:disable_modules' == 1 then
-    disable_modules = vim.split(vim.g.disable_modules, ',', { trimempty = true })
-  end
-
-  for _, f in pairs(list) do
-    -- local _, pos = f:find(modules_dir)
-    local _, pos = string.find(f, modules_dir, 1, true)
-    f = f:sub(pos - 6, #f - 4)
-    if not vim.tbl_contains(disable_modules, f) then
-      _G.plugin = self.package
-      require(f)
-    end
-  end
-end
-
-function pack:boot_strap()
-  self.helper = require 'core.helper'
-  self.data_path = self.helper.data_path()
-  self.config_path = self.helper.config_path()
-  local lazy_path = self.helper.path_join(self.data_path, 'lazy', 'lazy.nvim')
-  local state = uv.fs_stat(lazy_path)
-  if not state then
-    local cmd = '!git clone https://github.com/folke/lazy.nvim ' .. lazy_path
-    api.nvim_command(cmd)
-  end
-  vim.opt.runtimepath:prepend(lazy_path)
-  local lazy = require 'lazy'
-  local opts = {
-    lockfile = self.helper.path_join(self.data_path, 'lazy-lock.json'),
-    version = '*',
-    ui = {
-      border = 'rounded',
+  performance = {
+    reset_packpath = false,
+    rtp = {
+      reset = false,
     },
-    checker = {
-      enabled = true,
-      notify = false,
-    },
-    performance = {
-      cache = {
-        disable_events = {},
-      },
-    },
-  }
-  self:load_modules_packages()
-  lazy.setup(self.repos, opts)
+  },
 
-  for k, v in pairs(self) do
-    if type(v) ~= 'function' then
-      self[k] = nil
-    end
-  end
-end
+  install = {
+    missing = true,
+  },
 
-function pack.package(repo)
-  if not pack.repos then
-    pack.repos = {}
-  end
-  table.insert(pack.repos, repo)
-end
-
-return pack
+  spec = {
+    { import = 'modules.editor' },
+    { import = 'modules.tools' },
+    { import = 'modules.ui' },
+    { import = 'modules.lang' },
+  },
+})
