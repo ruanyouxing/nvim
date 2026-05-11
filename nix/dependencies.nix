@@ -1,4 +1,5 @@
-{pkgs, ...}: {
+{ pkgs, ... }:
+{
   extraBinPath = with pkgs; [
     lua-language-server
     stylua
@@ -9,7 +10,7 @@
     python313Packages.pip
     black
     pylint
-    nil
+    nixd
     nixpkgs-fmt
     alejandra
     eslint_d

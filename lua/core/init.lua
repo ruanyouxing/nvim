@@ -23,5 +23,6 @@ vim.g.mapleader = ' '
 require 'core.options'
 require 'core.events'
 require 'core.pack'
+require 'core.lsp'
 require('keymap.config').set_keymaps()
-vim.cmd[[colorscheme catppuccin]]
+vim.cmd [[colorscheme catppuccin]]
