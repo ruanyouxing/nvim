@@ -1,17 +1,5 @@
 local plug = require('core.keymap').plug
-local editing = { {
-  'windwp/nvim-autopairs',
-  config = function()
-    require('nvim-autopairs').setup {
-      check_ts = true,
-    }
-  --   local cmp_autopairs = require 'nvim-autopairs.completion.cmp'
-  --   local cmp = require 'cmp'
-  --   cmp.event:on('confirm_done', cmp_autopairs.on_confirm_done { map_char = { tex = '' } })
-  end,
-  event = 'InsertEnter',
-}
-, {
+return { {
   'andymass/vim-matchup',
   event = 'BufRead',
   config = function()
@@ -23,30 +11,30 @@ local editing = { {
     }
   end
 }
-, {
-  'abecodes/tabout.nvim',
-  event = 'InsertEnter',
-  config = function()
-    require('tabout').setup {
-      tabkey = '<Tab>',
-      backwards_tabkey = '<S-Tab>',
-      ignore_beginning = false,
-      act_as_tab = true,
-      enable_backward = true,
-      completion = true,
-      tabouts = {
-        { open = "'", close = "'" },
-        { open = '"', close = '"' },
-        { open = '`', close = '`' },
-        { open = '(', close = ')' },
-        { open = '{', close = '}' },
-        { open = '<', close = '>' },
-        { open = '[', close = ']' },
-      },
-      exclude = {},
-    }
-  end,
-}
+-- , { -- Tabout for blink?
+--   'abecodes/tabout.nvim',
+--   event = 'InsertEnter',
+--   config = function()
+--     require('tabout').setup {
+--       tabkey = '<Tab>',
+--       backwards_tabkey = '<S-Tab>',
+--       ignore_beginning = false,
+--       act_as_tab = true,
+--       enable_backward = true,
+--       completion = true,
+--       tabouts = {
+--         { open = "'", close = "'" },
+--         { open = '"', close = '"' },
+--         { open = '`', close = '`' },
+--         { open = '(', close = ')' },
+--         { open = '{', close = '}' },
+--         { open = '<', close = '>' },
+--         { open = '[', close = ']' },
+--       },
+--       exclude = {},
+--     }
+--   end,
+-- }
 , {
   'gbprod/yanky.nvim',
   config = function()
@@ -125,4 +113,3 @@ local editing = { {
   dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
 }
 }
-return editing

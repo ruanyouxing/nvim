@@ -134,7 +134,7 @@ return {
   {
     'saghen/blink.cmp',
     lazy = false,
-    version = 'v0.*',
+    -- version = 'v0.*',
     dependencies = {
       {
         'L3MON4D3/LuaSnip',
@@ -170,7 +170,7 @@ return {
       sources = {
         default = { 'lsp', 'path', 'snippets', 'buffer' },
         providers = {
-          lsp = { fallbacks = { 'buffer' } }, -- Chỉ hiện buffer khi LSP không có kết quả để đỡ rối
+          lsp = { fallbacks = { 'buffer' } },
         },
       },
       keymap = {
@@ -192,12 +192,18 @@ return {
           draw = {
             columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
           },
-          border = 'rounded',
+          border = 'none',
           winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
+          scrollbar = false,
+
         },
         documentation = {
           auto_show = true,
-          window = { border = 'rounded' },
+          auto_show_delay_ms = 200,
+          window = {
+            border = 'none',
+            scrollbar = false
+          },
         },
       },
 
@@ -223,5 +229,35 @@ return {
         end
       end
     end,
+  },
+  {
+    'saghen/blink.pairs',
+    opts = {
+      mappings = {
+        enabled = true,
+        cmdline = true,
+        disabled_filetypes = {},
+        -- wrap = {
+        --   ['<C-b>'] = 'motion',
+        --   ['<C-S-b>'] = 'motion_reverse',
+        -- },
+        pairs = {},
+      },
+      highlights = {
+        enabled = true,
+        cmdline = true,
+        groups = { 'BlinkPairsOrange', 'BlinkPairsPurple', 'BlinkPairsBlue' },
+        unmatched_group = 'BlinkPairsUnmatched',
+        matchparen = {
+          enabled = true,
+          cmdline = false,
+          include_surrounding = false,
+          group = 'BlinkPairsMatchParen',
+          priority = 250,
+        },
+      },
+      debug = false,
+    }
   }
+
 }
