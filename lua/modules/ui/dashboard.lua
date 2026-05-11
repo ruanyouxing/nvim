@@ -111,7 +111,9 @@ return {
             desc_hl = '@variable',
             group = 'Label',
             key = '<leader>s',
-            action = 'SessionLoadLast',
+            action = function()
+              require('persisted').load { last = true }
+            end,
           },
           {
             desc = '󰗼 Exit Neovim',
