@@ -35,10 +35,10 @@ return {
             .repeat_last_move_previous()
       end
     },
-    { mode = { "n", "x", "o" }, "f", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_f_expr() end, { expr = true } },
-    { mode = { "n", "x", "o" }, "F", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_F_expr() end, { expr = true } },
-    { mode = { "n", "x", "o" }, "t", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_t_expr() end, { expr = true } },
-    { mode = { "n", "x", "o" }, "T", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_T_expr() end, { expr = true } },
+    { mode = { "n", "x", "o" }, "f", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_f_expr() end, expr = true },
+    { mode = { "n", "x", "o" }, "F", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_F_expr() end, expr = true },
+    { mode = { "n", "x", "o" }, "t", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_t_expr() end, expr = true },
+    { mode = { "n", "x", "o" }, "T", function() require("nvim-treesitter-textobjects.repeatable_move").builtin_T_expr() end, expr = true },
 
     {
       "af",

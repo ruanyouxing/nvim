@@ -14,6 +14,11 @@ return {
     require('telescope').load_extension 'notify'
     require('telescope').load_extension 'persisted'
     require('telescope').setup {
+      defaults = {
+        preview = {
+          treesitter = false
+        },
+      },
       mappings = {
         i = {
           ['<esc>'] = actions.close,

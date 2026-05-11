@@ -122,6 +122,7 @@ local editing = { {
     }
   end,
   event = 'ModeChanged',
+  dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
 }
 }
 return editing

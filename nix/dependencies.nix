@@ -1,4 +1,4 @@
-{pkgs,...}: {
+{pkgs, ...}: {
   extraBinPath = with pkgs; [
     lua-language-server
     stylua
