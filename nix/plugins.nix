@@ -25,15 +25,7 @@ in {
   plugins = {
     start = with pkgs.vimPlugins; [
       lazy-nvim
-      plenary-nvim
-      promise-async
-      snacks-nvim
-      nvim-lspconfig
-      nui-nvim
-      nvim-nio
       nvim-treesitter-with-grammars
-      dressing-nvim
-      catppuccin-nvim
     ];
     opt = with pkgs.vimPlugins; [
       smart-splits-nvim
