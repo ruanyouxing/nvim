@@ -1,20 +1,10 @@
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-local completionItem = capabilities.textDocument.completion.completionItem
-completionItem.documentationFormat = { 'markdown', 'plaintext' }
-completionItem.snippetSupport = true
-completionItem.preselectSupport = true
-completionItem.insertReplaceSupport = true
-completionItem.labelDetailsSupport = true
-completionItem.deprecatedSupport = true
-completionItem.commitCharactersSupport = true
-completionItem.tagSupport = { valueSet = { 1 } }
-completionItem.resolveSupport = { properties = { 'documentation', 'detail', 'additionalTextEdits' } }
 
-local ok, cmp_nvim_lsp = pcall(require, 'cmp_nvim_lsp')
+local ok, blink = pcall(require, 'blink.cmp')
+
 if ok then
-  capabilities = cmp_nvim_lsp.default_capabilities(capabilities)
+  capabilities = blink.get_lsp_capabilities(capabilities)
 end
-
 local function on_attach(client, bufnr)
   if client.server_capabilities['documentSymbolProvider'] then
     local navic_ok, navic = pcall(require, 'nvim-navic')
