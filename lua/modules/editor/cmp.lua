@@ -1,20 +1,5 @@
 local cmp = { {
   'hrsh7th/nvim-cmp',
-  dependencies = {
-    { 'hrsh7th/cmp-emoji',                    lazy = true },
-    { 'kdheepak/cmp-latex-symbols',           lazy = true },
-    { 'ray-x/cmp-treesitter',                 lazy = true },
-    { 'hrsh7th/cmp-buffer',                   lazy = true },
-    { 'hrsh7th/cmp-calc',                     lazy = true },
-    { 'saadparwaiz1/cmp_luasnip',             lazy = true },
-    { 'hrsh7th/cmp-nvim-lsp',                 lazy = true },
-    { 'hrsh7th/cmp-nvim-lua',                 lazy = true },
-    { 'octaltree/cmp-look',                   lazy = true },
-    { 'hrsh7th/cmp-path',                     lazy = true },
-    { 'f3fora/cmp-spell',                     lazy = true },
-    { 'yutkat/cmp-mocword',                   event = 'InsertEnter' }, -- requires mocword binary & mocword dataset
-    { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true },
-  },
   config = function()
     local cmp = require 'cmp'
     local luasnip = require 'luasnip'
@@ -177,13 +162,25 @@ local cmp = { {
 , {
   'TwIStOy/luasnip-snippets',
   event = 'InsertEnter',
-  dependencies = 'L3MON4D3/LuaSnip',
   config = function()
     require('luasnip-snippets').setup {
       user = { name = 'hungz' },
       snippet = { lua = { vim_snippet = true } },
     }
   end,
-}
+},
+  { 'hrsh7th/cmp-emoji',                    lazy = true },
+  { 'kdheepak/cmp-latex-symbols',           lazy = true },
+  { 'ray-x/cmp-treesitter',                 lazy = true },
+  { 'hrsh7th/cmp-buffer',                   lazy = true },
+  { 'hrsh7th/cmp-calc',                     lazy = true },
+  { 'saadparwaiz1/cmp_luasnip',             lazy = true },
+  { 'hrsh7th/cmp-nvim-lsp',                 lazy = true },
+  { 'hrsh7th/cmp-nvim-lua',                 lazy = true },
+  { 'octaltree/cmp-look',                   lazy = true },
+  { 'hrsh7th/cmp-path',                     lazy = true },
+  { 'f3fora/cmp-spell',                     lazy = true },
+  { 'yutkat/cmp-mocword',                   event = 'InsertEnter' },   -- requires mocword binary & mocword dataset
+  { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true },
 }
 return cmp

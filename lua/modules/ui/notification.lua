@@ -20,12 +20,11 @@ local notification = { {
 }
 , {
   'folke/noice.nvim',
-  config = function()
-    require('noice').setup {
-      cmdline = { view = 'cmdline' },
-      presets = { inc_rename = true },
-      lsp = { signature = { enabled = false } },
-    }
-  end,
+  opts = {
+
+    cmdline = { view = 'cmdline' },
+    presets = { inc_rename = true },
+    lsp = { signature = { enabled = false } },
+  }
 } }
 return notification

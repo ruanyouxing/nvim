@@ -1,8 +1,5 @@
-return {
+return { {
   'nvim-neo-tree/neo-tree.nvim',
-  dependencies = {
-    'nvim-tree/nvim-web-devicons',
-  },
   lazy = false,
   event = 'VimEnter',
   cmd = 'Neotree',
@@ -80,4 +77,6 @@ return {
       },
     }
   end,
-}
+}, {
+  'nvim-tree/nvim-web-devicons', lazy = true
+} }

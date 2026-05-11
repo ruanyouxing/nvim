@@ -24,3 +24,4 @@ require 'core.options'
 require 'core.events'
 require 'core.pack'
 require('keymap.config').set_keymaps()
+vim.cmd[[colorscheme catppuccin]]

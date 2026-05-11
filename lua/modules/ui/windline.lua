@@ -412,9 +412,9 @@ local statusbar = { {
 
 , {
   'jcdickinson/wpm.nvim',
-  config = function()
-    require('wpm').setup { sample_interval = 1000 }
-  end,
+  opts = {
+    sample_interval = 1000
+  },
   event = 'BufEnter',
 } }
 return statusbar

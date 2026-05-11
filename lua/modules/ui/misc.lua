@@ -63,7 +63,6 @@ local misc = { {
   end,
 }
 -- ,{ 'Pheon-Dev/pigeon', lazy = true }
-, { 'kyazdani42/nvim-web-devicons', lazy = true }
 , { 'mbbill/undotree', event = 'TextChanged' }
 }
 return misc

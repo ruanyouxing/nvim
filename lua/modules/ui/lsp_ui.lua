@@ -171,13 +171,11 @@ lsp_ui = { {
 -- }
 , {
   'hasansujon786/nvim-navbuddy',
-  config = function()
-    require('nvim-navbuddy').setup {
-      lsp = {
-        auto_attach = true,
-      },
+  opts = {
+    lsp = {
+      auto_attach = true
     }
-  end,
+  }
 }
 , {
   'folke/trouble.nvim',
