@@ -155,6 +155,7 @@ lsp_ui = { {
 }
 , { 'onsails/lspkind.nvim', lazy = true }
 -- , {
+-- This shit has bugs
 --   'gorbit99/codewindow.nvim',
 --   config = function()
 --     require('codewindow').setup {
