@@ -1,19 +1,19 @@
-local picker = { {
-  'ziontee113/icon-picker.nvim',
-  event = 'InsertEnter',
-  dependencies = 'dressing.nvim',
-  config = function()
-    require 'icon-picker'
-  end,
-  cmd = 'IconPickerInsert',
-}
-, {
-  'ziontee113/color-picker.nvim',
-  lazy = true,
-  event = 'InsertEnter',
-  config = function()
-    require 'color-picker'
-  end,
-  cmd = 'PickColorInsert',
-} }
-return picker
+-- local picker = { {
+--   'ziontee113/icon-picker.nvim',
+--   event = 'InsertEnter',
+--   dependencies = 'dressing.nvim',
+--   config = function()
+--     require 'icon-picker'
+--   end,
+--   cmd = 'IconPickerInsert',
+-- }
+-- , {
+--   'ziontee113/color-picker.nvim',
+--   lazy = true,
+--   event = 'InsertEnter',
+--   config = function()
+--     require 'color-picker'
+--   end,
+--   cmd = 'PickColorInsert',
+-- } }
+return {}

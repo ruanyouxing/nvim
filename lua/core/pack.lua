@@ -13,7 +13,7 @@ require('lazy').setup({
   },
 
   install = {
-    missing = false,
+    missing = false, -- true
   },
 
   spec = {
