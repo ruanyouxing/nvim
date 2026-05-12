@@ -1,27 +1,7 @@
--- local cmp = { {
---   'hrsh7th/nvim-cmp',
---   config = function()
---     local cmp = require 'cmp'
---     local luasnip = require 'luasnip'
---     local mapping = cmp.mapping
-
---     local t = function(str)
---       return vim.api.nvim_replace_termcodes(str, true, true, true)
---     end
-
---     local has_words_before = function()
---       local line, col = table.unpack(vim.api.nvim_win_get_cursor(0))
---       return col ~= 0 and vim.api.nvim_buf_get_lines(0, line - 1, line, true)[1]:sub(col, col):match '%s' == nil
---     end
-
 --     local sources = {
 --       { name = 'nvim_lsp' },
 --       { name = 'calc' },
---       { name = 'latex_symbols' },
 --       { name = 'treesitter' },
---       { name = 'luasnip' },
---       { name = 'path' },
---       { name = 'buffer' },
 --       { name = 'emoji' },
 --       { name = 'mocword' },
 --       { name = 'render-markdown' },
@@ -88,48 +68,7 @@
 --       }),
 --     })
 --   end,
---   lazy = true,
 -- }
--- , {
---   'L3MON4D3/LuaSnip',
---   event = 'InsertEnter',
---   config = function()
---     local ls = require 'luasnip'
---     ls.config.set_config {
---       history = true,
---       enable_autosnippets = true,
---       update_events = 'TextChanged,TextChangedI',
---       store_selection_keys = true,
---     }
---     require('luasnip/loaders/from_vscode').load()
---     require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
---   end,
--- }
--- , {
---   'TwIStOy/luasnip-snippets',
---   event = 'InsertEnter',
---   config = function()
---     require('luasnip-snippets').setup {
---       user = { name = 'hungz' },
---       snippet = { lua = { vim_snippet = true } },
---     }
---   end,
--- },
---   { 'hrsh7th/cmp-emoji',                    lazy = true },
---   { 'kdheepak/cmp-latex-symbols',           lazy = true },
---   { 'ray-x/cmp-treesitter',                 lazy = true },
---   { 'hrsh7th/cmp-buffer',                   lazy = true },
---   { 'hrsh7th/cmp-calc',                     lazy = true },
---   { 'saadparwaiz1/cmp_luasnip',             lazy = true },
---   { 'hrsh7th/cmp-nvim-lsp',                 lazy = true },
---   { 'hrsh7th/cmp-nvim-lua',                 lazy = true },
---   { 'octaltree/cmp-look',                   lazy = true },
---   { 'hrsh7th/cmp-path',                     lazy = true },
---   { 'f3fora/cmp-spell',                     lazy = true },
---   { 'yutkat/cmp-mocword',                   event = 'InsertEnter' },   -- requires mocword binary & mocword dataset
---   { 'hrsh7th/cmp-nvim-lsp-document-symbol', event = 'CmdlineEnter', lazy = true },
--- }
--- return cmp
 return {
   {
     'saghen/blink.cmp',
@@ -148,7 +87,7 @@ return {
             store_selection_keys = true,
           }
           require('luasnip.loaders.from_vscode').load()
-          require('luasnip.loaders.from_lua').load { paths = '~/.config/nvim/snippets/' }
+          require('luasnip.loaders.from_lua').load { paths = mnw.configDir .. '/snippets' }
         end,
       },
       {
@@ -160,17 +99,56 @@ return {
           }
         end,
       },
+      { 'erooke/blink-cmp-latex' },
     },
 
     opts = {
       snippets = {
         preset = 'luasnip',
+        expand = function(snippets)
+          require('luasnip').lsp_expand(snippets)
+        end,
+        active = function(filter)
+          if filter and filter.direction then
+            return require('luasnip').jumpable(filter.direction)
+          end
+        end,
+        jump = function(direction)
+          require('luasnip').jump(direction)
+        end
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex' },
         providers = {
-          lsp = { fallbacks = { 'buffer' } },
+          buffer = {
+            name = 'Buffer',
+            opts = {
+              get_bufnrs = function()
+                return vim.tbl_filter(function(bufnr)
+                  return vim.bo[bufnr].buftype == ''
+                end, vim.api.nvim_list_bufs())
+              end
+            }
+          },
+          lsp = {
+            name = 'LSP',
+            module = 'blink.cmp.sources.lsp',
+          },
+          snippets = {
+            name = 'LuaSnip',
+            module = 'blink.cmp.sources.snippets',
+          },
+          path = {
+            name = 'Path',
+            opts = {
+              show_hidden_files_by_default = true,
+            }
+          },
+          latex = {
+            name = 'Latex',
+            module = 'blink-cmp-latex',
+          }
         },
       },
       keymap = {
@@ -190,12 +168,47 @@ return {
         },
         menu = {
           draw = {
-            columns = { { 'kind_icon' }, { 'label', 'label_description', gap = 1 } },
+            columns = {
+              { 'kind_icon' },
+              { 'label',      'label_description', gap = 1 },
+              { 'source_name' }
+            },
+            components = {
+              kind_icon = {
+                text = function(ctx)
+                  local icon = ctx.kind_icon
+                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                    local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                    if dev_icon then
+                      icon = dev_icon
+                    end
+                  else
+                    icon = require("lspkind").symbol_map[ctx.kind] or ""
+                  end
+
+                  return icon .. ctx.icon_gap
+                end,
+                highlight = function(ctx)
+                  local hl = ctx.kind_hl
+                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
+                    local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+                    if dev_icon then
+                      hl = dev_hl
+                    end
+                  end
+                  return hl
+                end,
+              },
+              source_name = {
+                width = { max = 20 },
+                text = function(ctx) return ctx.source_name end,
+                highlight = 'BlinkCmpSource'
+              },
+            },
           },
           border = 'none',
           winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,CursorLine:PmenuSel,Search:None',
           scrollbar = false,
-
         },
         documentation = {
           auto_show = true,
@@ -209,26 +222,6 @@ return {
 
       signature = { enabled = true, window = { border = 'rounded' } },
     },
-
-    config = function(_, opts)
-      require('blink.cmp').setup(opts)
-      local kind_colors = {
-        { fg = '#EED8DA', bg = '#B5585F', kinds = { 'Field', 'Property', 'Event' } },
-        { fg = '#C3E88D', bg = '#9FBD73', kinds = { 'Text', 'Enum', 'Keyword' } },
-        { fg = '#FFE082', bg = '#D4BB6C', kinds = { 'Constant', 'Constructor', 'Reference' } },
-        { fg = '#EADFF0', bg = '#A377BF', kinds = { 'Function', 'Struct', 'Class', 'Module', 'Operator' } },
-        { fg = '#C5CDD9', bg = '#7E8294', kinds = { 'Variable', 'File' } },
-        { fg = '#F5EBD9', bg = '#D4A959', kinds = { 'Unit', 'Snippet', 'Folder' } },
-        { fg = '#DDE5F5', bg = '#6C8ED4', kinds = { 'Method', 'Value', 'EnumMember' } },
-        { fg = '#D8EEEB', bg = '#58B5A8', kinds = { 'Interface', 'Color', 'TypeParameter' } },
-      }
-
-      for _, group in ipairs(kind_colors) do
-        for _, kind in ipairs(group.kinds) do
-          vim.api.nvim_set_hl(0, 'BlinkCmpKind' .. kind, { fg = group.fg, bg = group.bg })
-        end
-      end
-    end,
   },
   {
     'saghen/blink.pairs',
@@ -258,6 +251,12 @@ return {
       },
       debug = false,
     }
+  },
+  {
+    'saghen/blink.compat',
+    version = '2.*',
+    lazy = true,
+    opts = {}
   }
 
 }
