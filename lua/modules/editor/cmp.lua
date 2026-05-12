@@ -1,10 +1,6 @@
 --     local sources = {
 --       { name = 'nvim_lsp' },
---       { name = 'calc' },
---       { name = 'treesitter' },
---       { name = 'emoji' },
---       { name = 'mocword' },
---       { name = 'render-markdown' },
+--       { name = 'mocword' }, --dictionary
 --       { name = 'nvim_lsp_document_symbol' },
 --       {
 --         keyword_length = 2,
@@ -21,7 +17,6 @@
 --     if vim.o.ft == 'lua' then
 --       table.insert(sources, { name = 'nvim_lua' })
 --     end
---     local lspkind = require 'lspkind'
 --     cmp.setup {
 --       enabled = function()
 --         local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
@@ -39,22 +34,6 @@
 --           col_offset = -3,
 --           side_padding = 0,
 --         },
---       },
---       formatting = {
---         fields = { 'kind', 'abbr', 'menu' },
---         format = function(entry, vim_item)
---           local kind = lspkind.cmp_format { mode = 'symbol_text', maxwidth = 50 } (entry, vim_item)
---           local strings = vim.split(kind.kind, '%s', { trimempty = true })
---           kind.kind = ' ' .. (strings[1] or '') .. ' '
---           kind.menu = '    [' .. (strings[2] or '') .. ']'
-
---           return kind
---         end,
---       },
---       snippet = {
---         expand = function(args)
---           luasnip.lsp_expand(args.body)
---         end,
 --       },
 --       sorting = {},
 --       sources = sources,
@@ -100,6 +79,8 @@ return {
         end,
       },
       { 'erooke/blink-cmp-latex' },
+      { 'moyiz/blink-emoji.nvim' },
+      { 'joelazar/blink-calc' },
     },
 
     opts = {
@@ -119,7 +100,10 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc' },
+        per_filetype = {
+          markdown = { inherit_defaults = true, 'render-markdown', 'emoji' },
+        },
         providers = {
           buffer = {
             name = 'Buffer',
@@ -133,11 +117,9 @@ return {
           },
           lsp = {
             name = 'LSP',
-            module = 'blink.cmp.sources.lsp',
           },
           snippets = {
-            name = 'LuaSnip',
-            module = 'blink.cmp.sources.snippets',
+            name = 'Snippets',
           },
           path = {
             name = 'Path',
@@ -148,7 +130,19 @@ return {
           latex = {
             name = 'Latex',
             module = 'blink-cmp-latex',
-          }
+          },
+          calc = {
+            name = 'Calc',
+            module = 'blink-calc',
+          },
+          ['render-markdown'] = {
+            name = 'MD',
+            module = 'render-markdown.integ.blink',
+          },
+          emoji = {
+            name = 'Emoji',
+            module = 'blink-emoji',
+          },
         },
       },
       keymap = {
@@ -201,7 +195,7 @@ return {
               },
               source_name = {
                 width = { max = 20 },
-                text = function(ctx) return ctx.source_name end,
+                text = function(ctx) return "[" .. ctx.source_name .. "]" end,
                 highlight = 'BlinkCmpSource'
               },
             },
@@ -230,10 +224,6 @@ return {
         enabled = true,
         cmdline = true,
         disabled_filetypes = {},
-        -- wrap = {
-        --   ['<C-b>'] = 'motion',
-        --   ['<C-S-b>'] = 'motion_reverse',
-        -- },
         pairs = {},
       },
       highlights = {
