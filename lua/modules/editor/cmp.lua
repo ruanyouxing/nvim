@@ -27,18 +27,10 @@ return {
             update_events = 'TextChanged,TextChangedI',
             store_selection_keys = true,
           }
-          require('luasnip.loaders.from_vscode').load()
-          require('luasnip.loaders.from_lua').load { paths = mnw.configDir .. '/snippets' }
+          require('luasnip.loaders.from_vscode').lazy_load()
+          require('luasnip.loaders.from_lua').lazy_load { paths = mnw.configDir .. '/snippets' }
         end,
-      },
-      {
-        'TwIStOy/luasnip-snippets',
-        config = function()
-          require('luasnip-snippets').setup {
-            user = { name = 'hungz' },
-            snippet = { lua = { vim_snippet = true } },
-          }
-        end,
+        dependencies = { 'rafamadriz/friendly-snippets' }
       },
       { 'erooke/blink-cmp-latex' },
       { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
