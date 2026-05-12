@@ -2,8 +2,7 @@ return {
   'nvimtools/none-ls.nvim',
   config = function()
     local null_ls = require 'null-ls'
-    local custom_dir = os.getenv('CUSTOM_NVIM_DIR')
-    local config_dir = custom_dir and custom_dir or vim.fn.stdpath 'config'
+    local config_dir = vim.fn.stdpath 'config'
     local formatting = null_ls.builtins.formatting
     local code_action = null_ls.builtins.code_actions
     local diagnostics = null_ls.builtins.diagnostics
