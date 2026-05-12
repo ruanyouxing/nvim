@@ -321,12 +321,6 @@ add_section {
   end,
 }
 add_section {
-  'Spectre',
-  function()
-    require('spectre').open()
-  end,
-}
-add_section {
   'Save current session',
   function()
     require('persisted').save { override = true }
