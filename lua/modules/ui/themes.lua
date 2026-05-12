@@ -3,7 +3,8 @@ local themes = {
     'catppuccin/nvim',
     name = 'catppuccin',
     opts = {
-      flavour = 'macchiato'
+      flavour = 'macchiato',
+      auto_integrations = true,
     },
     lazy = false,
     priority = 10000,

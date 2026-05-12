@@ -1,3 +1,4 @@
+_G.SessionStatus = ""
 local autocmd = vim.api.nvim_create_autocmd
 local all = '*'
 local User = { 'User' }
@@ -16,25 +17,27 @@ autocmd({ 'ColorScheme' }, {
 autocmd(User, {
   pattern = 'PersistedLoadPost',
   callback = function()
-    SessionStatus = { { '   Session loaded', 'SessionHL' } }
+    _G.SessionStatus = ' Session loaded'
     require 'trailblazer'
     vim.notify 'Session loaded'
-    SessionStatus = { { ' 󰸞 ', 'SessionHL' } }
+    _G.SessionStatus = '󰸞 '
   end,
 })
+
 autocmd(User, {
   pattern = 'PersistedSavePost',
   callback = function()
     require('trailblazer').save_trailblazer_state_to_file()
     vim.notify 'Session saved'
-    SessionStatus = { { ' 󰉉 ', 'SessionHL' } }
+    _G.SessionStatus = '󰉉 '
   end,
 })
+
 autocmd(User, {
   pattern = 'PersistedDeletePost',
   callback = function()
     vim.notify 'Session removed'
-    SessionStatus = { { ' 󰩹 ', 'SessionHL' } }
+    _G.SessionStatus = '󰩹 '
   end,
 })
 autocmd({ 'LspAttach' }, {
