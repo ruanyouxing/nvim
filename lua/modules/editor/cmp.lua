@@ -1,7 +1,5 @@
 --     local sources = {
---       { name = 'nvim_lsp' },
 --       { name = 'mocword' }, --dictionary
---       { name = 'nvim_lsp_document_symbol' },
 --       {
 --         keyword_length = 2,
 --         option = {
@@ -15,7 +13,6 @@
 --       table.insert(sources, { name = 'look' })
 --     end
 --     if vim.o.ft == 'lua' then
---       table.insert(sources, { name = 'nvim_lua' })
 --     end
 --     cmp.setup {
 --       enabled = function()
@@ -79,8 +76,17 @@ return {
         end,
       },
       { 'erooke/blink-cmp-latex' },
-      { 'moyiz/blink-emoji.nvim' },
+      { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
       { 'joelazar/blink-calc' },
+      {
+        'folke/lazydev.nvim',
+        ft = 'lua',
+        opts = {
+          libary = {
+            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
+          }
+        }
+      }
     },
 
     opts = {
@@ -100,7 +106,7 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc', 'lazydev' },
         per_filetype = {
           markdown = { inherit_defaults = true, 'render-markdown', 'emoji' },
         },
@@ -142,6 +148,11 @@ return {
           emoji = {
             name = 'Emoji',
             module = 'blink-emoji',
+          },
+          lazydev = {
+            name = "LazyDev",
+            module = "lazydev.integrations.blink",
+            score_offset = 100,
           },
         },
       },
