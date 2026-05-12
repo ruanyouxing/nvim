@@ -10,10 +10,10 @@ local git_plugins = { {
   config = function()
     local cb = require('diffview.config').diffview_callback
     require('diffview').setup {
-      diff_binaries = false,    -- Show diffs for binaries
-      enhanced_diff_hl = false, -- See ':h diffview-config-enhanced_diff_hl'
-      use_icons = true,         -- Requires nvim-web-devicons
-      icons = {                 -- Only applies when use_icons is true.
+      diff_binaries = false,
+      enhanced_diff_hl = false,
+      use_icons = true,
+      icons = {
         folder_closed = '',
         folder_open = '',
       },
@@ -21,26 +21,26 @@ local git_plugins = { {
         fold_closed = '',
         fold_open = '',
       },
-      default_args = { -- Default args prepended to the arg-list for the listed commands
+      default_args = {
         DiffviewOpen = {},
         DiffviewFileHistory = {},
       },
-      hooks = {},                                -- See ':h diffview-config-hooks'
+      hooks = {},
       key_bindings = {
-        disable_defaults = false,                -- Disable the default key bindings
+        disable_defaults = false,
         view = {
-          ['<tab>'] = cb 'select_next_entry',    -- Open the diff for the next file
-          ['<s-tab>'] = cb 'select_prev_entry',  -- Open the diff for the previous file
-          ['gf'] = cb 'goto_file',               -- Open the file in a new split in previous tabpage
-          ['<C-w><C-f>'] = cb 'goto_file_split', -- Open the file in a new split
-          ['<C-w>gf'] = cb 'goto_file_tab',      -- Open the file in a new tabpage
-          ['<leader>e'] = cb 'focus_files',      -- Bring focus to the files panel
-          ['<leader>b'] = cb 'toggle_files',     -- Toggle the files panel.
+          ['<tab>'] = cb 'select_next_entry',
+          ['<s-tab>'] = cb 'select_prev_entry',
+          ['gf'] = cb 'goto_file',
+          ['<C-w><C-f>'] = cb 'goto_file_split',
+          ['<C-w>gf'] = cb 'goto_file_tab',
+          ['<leader>e'] = cb 'focus_files',
+          ['<leader>b'] = cb 'toggle_files',
         },
         file_history_panel = {
-          ['g!'] = cb 'options',               -- Open the option panel
-          ['<C-A-d>'] = cb 'open_in_diffview', -- Open the entry under the cursor in a diffview
-          ['y'] = cb 'copy_hash',              -- Copy the commit hash of the entry under the cursor
+          ['g!'] = cb 'options',
+          ['<C-A-d>'] = cb 'open_in_diffview',
+          ['y'] = cb 'copy_hash',
           ['zR'] = cb 'open_all_folds',
           ['zM'] = cb 'close_all_folds',
           ['j'] = cb 'next_entry',
