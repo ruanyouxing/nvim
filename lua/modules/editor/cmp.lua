@@ -1,50 +1,15 @@
---     local sources = {
---       { name = 'mocword' }, --dictionary
---       {
---         keyword_length = 2,
---         option = {
---           convert_case = true,
---           loud = true,
---         },
---       },
---     }
---     if vim.o.ft == 'markdown' then
---       table.insert(sources, { name = 'spell' })
---       table.insert(sources, { name = 'look' })
---     end
---     if vim.o.ft == 'lua' then
---     end
---     cmp.setup {
---       enabled = function()
---         local buftype = vim.api.nvim_buf_get_option(0, 'buftype')
---         if buftype == 'prompt' then
---           return false
---         end
---         return true
---       end,
---       view = {
---         entries = { name = 'custom', selection_order = 'near_cursor' },
---       },
---       window = {
---         completion = {
---           winhighlight = 'Normal:Pmenu,FloatBorder:Pmenu,Search:None',
---           col_offset = -3,
---           side_padding = 0,
---         },
---       },
---       sorting = {},
---       sources = sources,
---     }
---     cmp.setup.cmdline('/', {
---       mapping = cmp.mapping.preset.cmdline(),
---       sources = cmp.config.sources({
---         { name = 'nvim_lsp_document_symbol' },
---       }, {
---         { name = 'buffer' },
---       }),
---     })
---   end,
--- }
+local function devicons_highlight(ctx)
+  local hl = ctx.kind_hl
+  if vim.tbl_contains({ "Path" }, ctx.source_name) then
+    local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+    if dev_icon then
+      hl = dev_hl
+    end
+  end
+  return hl
+end
+
+
 return {
   {
     'saghen/blink.cmp',
@@ -191,23 +156,14 @@ return {
                     icon = require("lspkind").symbol_map[ctx.kind] or ""
                   end
 
-                  return icon .. ctx.icon_gap
+                  return icon .. ctx.icon_gap .. " " .. ctx.kind
                 end,
-                highlight = function(ctx)
-                  local hl = ctx.kind_hl
-                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                    local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
-                    if dev_icon then
-                      hl = dev_hl
-                    end
-                  end
-                  return hl
-                end,
+                highlight = devicons_highlight
               },
               source_name = {
                 width = { max = 20 },
                 text = function(ctx) return "[" .. ctx.source_name .. "]" end,
-                highlight = 'BlinkCmpSource'
+                highlight = devicons_highlight
               },
             },
           },
