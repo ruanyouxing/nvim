@@ -96,20 +96,19 @@ return { {
     }
   end,
 }
-, {
-  'terrortylor/nvim-comment',
-  config = function()
-    require('nvim_comment').setup {
-      comment_empty = false,
-      create_mappings = true,
-      line_mapping = 'gcc',
-      operator_mapping = 'gc',
-      hook = function()
-        require('ts_context_commentstring.internal').update_commentstring()
-      end,
-    }
-  end,
-  event = 'ModeChanged',
-  dependencies = 'JoosepAlviste/nvim-ts-context-commentstring',
-}
+,
+  {
+    'JoosepAlviste/nvim-ts-context-commentstring',
+    config = function()
+      require('ts_context_commentstring').setup {
+        enable_autocmd = false,
+      }
+      local get_option = vim.filetype.get_option
+      vim.filetype.get_option = function(filetype, option)
+        return option == "commentstring"
+            and require("ts_context_commentstring.internal").calculate_commentstring()
+            or get_option(filetype, option)
+      end
+    end
+  }
 }

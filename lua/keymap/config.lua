@@ -168,12 +168,7 @@ function M.set_keymaps()
         require('telescope.builtin').find_files()
       end,
     },
-    {
-      '<C-w>',
-      function()
-        require('bufdelete').bufdelete(0, true)
-      end,
-    },
+    -- <C-w> now moves to lua/modules/tools/snacks.lua
     { '<C-y>', cmd 'redo' },
     { '<C-z>', cmd 'u' },
     {
@@ -182,7 +177,7 @@ function M.set_keymaps()
         buf.format()
       end,
     },
-    { '<leader>t', cmd 'ToggleTerm' },
+    -- toggleterm is replaced by snacks.terminal.toggle()
     {
       '<leader>z',
       function()
@@ -207,21 +202,7 @@ function M.set_keymaps()
         require('codewindow').toggle_focus()
       end,
     },
-    {
-      'lg',
-      function()
-        local Terminal = require('toggleterm.terminal').Terminal
-        local lazygit = Terminal:new {
-          cmd = 'lazygit',
-          hidden = true,
-          direction = 'float',
-          float_opts = {
-            border = 'double',
-          },
-        }
-        lazygit:toggle()
-      end,
-    },
+    -- lg moved to snacks.lua
     {
       '<leader>cc',
       function()

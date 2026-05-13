@@ -6,7 +6,6 @@ local misc = { {
     hlGroup = 'TSDefinitionUsage',
   },
   event = 'BufRead',
-  dependencies = 'folke/snacks.nvim',
 }
 , {
   'stevearc/dressing.nvim',
