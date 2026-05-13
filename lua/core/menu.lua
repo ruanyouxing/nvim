@@ -204,21 +204,6 @@ add_section {
   end,
 }
 add_section {
-  'Toggle zen-mode',
-  function()
-    if OnFocus == 0 then
-      OnFocus = 1
-      vim.cmd [[TZAtaraxis]]
-      vim.o.statusline = 0
-    else
-      vim.cmd [[TZAtaraxis]]
-      vim.opt.statusline = '%!v:lua.WindLine.show()'
-      require('codewindow').open_minimap()
-      OnFocus = 0
-    end
-  end,
-}
-add_section {
   'Toggle minimap',
   function()
     require('codewindow').toggle_minimap()
