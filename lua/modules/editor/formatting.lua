@@ -1,7 +1,6 @@
 config_dir = vim.fn.stdpath 'config'
 return {
   'stevearc/conform.nvim',
-  event = { "BufReadPre", "BufNewFile" },
   cmd = { "ConformInfo" },
   setup = {
     formatters_by_ft = {
@@ -44,5 +43,6 @@ return {
       })
     end,
     { desc = "Format file or range" }
-  } }
+  } },
+  event = 'BufRead'
 }
