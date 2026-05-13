@@ -47,13 +47,8 @@ function M.set_keymaps()
     { 'Y',     'y$' },
     { '<C-a>', 'ggVG' },
     -- smart-splits is now in smart_splits.lua
-    {
-      'mm',
-      function()
-        require('trailblazer').new_trail_mark()
-      end,
-    },
     -- folds now in ufo.lua
+    -- traiblazer now in bookmarks.lua
     {
       'T',
       function()
@@ -73,44 +68,15 @@ function M.set_keymaps()
         require('core.menu').trigger_menu()
       end,
     },
-    {
-      '<C-t>',
-      function()
-        require('telescope.builtin').find_files()
-      end,
-    },
     -- <C-w> now moves to lua/modules/tools/snacks.lua
     { '<C-y>', cmd 'redo' },
     { '<C-z>', cmd 'u' },
-    {
-      '<leader>f',
-      function()
-        buf.format()
-      end,
-    },
+    -- <leader>f now in lua/modules/editor/formatting.lua
     -- toggleterm is replaced by snacks.terminal.toggle()
-    {
-      '<leader>z',
-      function()
-        require('telescope').extensions.zoxide.list {}
-      end,
-    },
     {
       '<leader>cp',
       function()
         require('keymap.config').compile_func()
-      end,
-    },
-    {
-      '<leader>mm',
-      function()
-        require('codewindow').toggle_minimap()
-      end,
-    },
-    {
-      '<leader>mf',
-      function()
-        require('codewindow').toggle_focus()
       end,
     },
     -- lg moved to snacks.lua

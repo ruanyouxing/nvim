@@ -10,7 +10,6 @@
     black
     pylint
     nixd
-    nixpkgs-fmt
     alejandra
     eslint_d
     prettier

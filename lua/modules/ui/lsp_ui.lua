@@ -84,97 +84,103 @@ return { {
 , {
   'SmiteshP/nvim-navic',
   event = 'BufReadPre',
-  config = function()
-    require('nvim-navic').setup {
-      icons = {
-        File = '󰈙 ',
-        Module = ' ',
-        Namespace = '󰌗 ',
-        Package = '󰏓 ',
-        Class = '󰌗 ',
-        Method = '󰆧 ',
-        Property = ' ',
-        Field = '󰮄 ',
-        Constructor = ' ',
-        Enum = '󰕘 ',
-        Interface = '󰕘',
-        Function = '󰊕 ',
-        Variable = '󰀫 ',
-        Constant = '󰏿 ',
-        String = '󰀬 ',
-        Number = '󰎠 ',
-        Boolean = '◩ ',
-        Array = '󰅪 ',
-        Object = '󰅩 ',
-        Key = '󰌋 ',
-        Null = '󰟢 ',
-        EnumMember = ' ',
-        Struct = ' ',
-        Event = ' ',
-        Operator = '󰆕 ',
-        TypeParameter = '󰊄 ',
-      },
-      highlight = false,
-      separator = ' > ',
-      depth_limit = 2,
-      depth_limit_indicator = '..',
-    }
-  end,
+  opts = {
+    icons = {
+      File = '󰈙 ',
+      Module = ' ',
+      Namespace = '󰌗 ',
+      Package = '󰏓 ',
+      Class = '󰌗 ',
+      Method = '󰆧 ',
+      Property = ' ',
+      Field = '󰮄 ',
+      Constructor = ' ',
+      Enum = '󰕘 ',
+      Interface = '󰕘',
+      Function = '󰊕 ',
+      Variable = '󰀫 ',
+      Constant = '󰏿 ',
+      String = '󰀬 ',
+      Number = '󰎠 ',
+      Boolean = '◩ ',
+      Array = '󰅪 ',
+      Object = '󰅩 ',
+      Key = '󰌋 ',
+      Null = '󰟢 ',
+      EnumMember = ' ',
+      Struct = ' ',
+      Event = ' ',
+      Operator = '󰆕 ',
+      TypeParameter = '󰊄 ',
+    },
+    highlight = false,
+    separator = ' > ',
+    depth_limit = 2,
+    depth_limit_indicator = '..',
+  },
   module = true,
 }
 , {
   'kosayoda/nvim-lightbulb',
   dependencies = 'nvim-lspconfig',
-  config = function()
-    require('nvim-lightbulb').setup {
-      autocmd = {
-        enabled = true,
-      },
-      sign = {
-        enabled = true,
-        priority = 10,
-      },
-      float = {
-        enabled = false,
-        text = '',
-        win_opts = {},
-      },
-      virtual_text = {
-        enabled = false,
-        text = '💡',
-        hl_mode = 'replace',
-      },
-      status_text = {
-        enabled = false,
-        text = '💡',
-        text_unavailable = '',
-      },
-    }
-  end,
+  opts = {
+    autocmd = {
+      enabled = true,
+    },
+    sign = {
+      enabled = true,
+      priority = 10,
+    },
+    float = {
+      enabled = false,
+      text = '',
+      win_opts = {},
+    },
+    virtual_text = {
+      enabled = false,
+      text = '💡',
+      hl_mode = 'replace',
+    },
+    status_text = {
+      enabled = false,
+      text = '💡',
+      text_unavailable = '',
+    },
+  },
   event = 'BufEnter',
 }
 , {
   'j-hui/fidget.nvim',
-  config = function()
-    require('fidget').setup {}
-  end,
+  opts = {},
   lazy = true,
 }
 , { 'onsails/lspkind.nvim', lazy = true }
 -- , {
 -- This shit has bugs
 --   'gorbit99/codewindow.nvim',
---   config = function()
---     require('codewindow').setup {
+--   opts = {
 --       auto_enable = false,
 --       exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
 --       use_lsp = true,
 --       use_treesitter = true,
 --       use_git = true,
 --       show_cursor = true,
---     }
---   end,
+--     },
 --   event = 'BufRead',
+--   keys = {
+-- {
+--   '<leader>mm',
+--   function()
+--     require('codewindow').toggle_minimap()
+--   end,
+-- },
+-- {
+--   '<leader>mf',
+--   function()
+--     require('codewindow').toggle_focus()
+--   end,
+-- },
+--   }
 -- }
 , {
   'hasansujon786/nvim-navbuddy',
@@ -188,49 +194,47 @@ return { {
   'folke/trouble.nvim',
   lazy = true,
   cmd = 'Trouble',
-  config = function()
-    require('trouble').setup {
-      position = 'bottom',
-      height = 6,
-      width = 50,
-      mode = 'workspace_diagnostics',
-      fold_open = '',
-      fold_closed = '',
-      group = true,
-      padding = true,
-      action_keys = {
-        close = 'q',
-        cancel = '<esc>',
-        refresh = 'r',
-        jump = { '<cr>', '<tab>' },
-        open_split = { '<c-x>' },
-        open_vsplit = { '<c-v>' },
-        open_tab = { '<c-t>' },
-        jump_close = { 'o' },
-        toggle_mode = 'm',
-        toggle_preview = 'P',
-        hover = 'K',
-        preview = 'p',
-        close_folds = { 'zM', 'zm' },
-        open_folds = { 'zR', 'zr' },
-        toggle_fold = { 'zA', 'za' },
-        previous = 'k',
-        next = 'j',
-      },
-      indent_lines = true,
-      auto_open = false,
-      auto_close = false,
-      auto_preview = true,
-      auto_fold = false,
-      auto_jump = { 'lsp_definitions' },
-      signs = {
-        error = '',
-        warning = '',
-        hint = '',
-        information = '',
-        other = '﫠',
-      },
-      use_diagnostic_signs = true,
-    }
-  end,
+  opts = {
+    position = 'bottom',
+    height = 6,
+    width = 50,
+    mode = 'workspace_diagnostics',
+    fold_open = '',
+    fold_closed = '',
+    group = true,
+    padding = true,
+    action_keys = {
+      close = 'q',
+      cancel = '<esc>',
+      refresh = 'r',
+      jump = { '<cr>', '<tab>' },
+      open_split = { '<c-x>' },
+      open_vsplit = { '<c-v>' },
+      open_tab = { '<c-t>' },
+      jump_close = { 'o' },
+      toggle_mode = 'm',
+      toggle_preview = 'P',
+      hover = 'K',
+      preview = 'p',
+      close_folds = { 'zM', 'zm' },
+      open_folds = { 'zR', 'zr' },
+      toggle_fold = { 'zA', 'za' },
+      previous = 'k',
+      next = 'j',
+    },
+    indent_lines = true,
+    auto_open = false,
+    auto_close = false,
+    auto_preview = true,
+    auto_fold = false,
+    auto_jump = { 'lsp_definitions' },
+    signs = {
+      error = '',
+      warning = '',
+      hint = '',
+      information = '',
+      other = '﫠',
+    },
+    use_diagnostic_signs = true,
+  },
 } }
