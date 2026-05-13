@@ -89,12 +89,18 @@ return { {
 , {
   'max397574/better-escape.nvim',
   event = 'InsertEnter',
-  config = function()
-    require('better_escape').setup {
-      default_mappings = true,
-      timeout = 100,
+  opts = {
+    default_mappings = true,
+    timeout = 100,
+    mappings = {
+      t = {
+        j = {
+          k = false,
+          j = false,
+        }
+      }
     }
-  end,
+  }
 }
 ,
   {
