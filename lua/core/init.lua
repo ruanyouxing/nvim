@@ -22,7 +22,7 @@ createdir()
 vim.g.mapleader = ' '
 require 'core.options'
 require 'core.events'
-require 'core.pack'
 require 'core.lsp'
+require 'core.pack'
 require('keymap.config').set_keymaps()
 vim.cmd [[colorscheme catppuccin]]

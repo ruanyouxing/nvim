@@ -30,8 +30,10 @@ return {
         if #clients == 0 then return '' end
 
         local names = {}
+        for _, client in ipairs(clients) do
+          table.insert(names, client.name)
+        end
 
-        -- Nếu sau khi lọc không còn server nào thì trả về chuỗi rỗng
         if #names == 0 then return '' end
 
         return '  ' .. table.concat(names, ', ')
