@@ -40,11 +40,6 @@ autocmd(User, {
     _G.SessionStatus = '󰩹 '
   end,
 })
-autocmd({ 'LspAttach' }, {
-  callback = function()
-    require('null-ls').enable {}
-  end,
-})
 autocmd({ 'FileType' }, {
   pattern = 'css',
   callback = function()

@@ -34,7 +34,7 @@ return {
     -- },
   },
   keys = { {
-    modes = { "n", "v" },
+    mode = { "n", "v" },
     "<leader>f",
     function()
       require("conform").format({
