@@ -11,6 +11,11 @@ local misc = { {
 , {
   'folke/which-key.nvim',
   event = 'VeryLazy',
+  keys = { {
+    '<leader>?', function()
+    require('which-key').show {}
+  end
+  }, }
 }
 , {
   'norcalli/nvim-colorizer.lua',

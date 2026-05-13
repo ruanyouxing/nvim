@@ -1,4 +1,54 @@
 return {
   'mrjones2014/smart-splits.nvim',
-  opts = { default_amount = 1 }
+  opts = { default_amount = 1 },
+  keys = {
+    {
+      '<C-h>',
+      function()
+        require('smart-splits').move_cursor_left()
+      end,
+    },
+    {
+      '<C-l>',
+      function()
+        require('smart-splits').move_cursor_right()
+      end,
+    },
+    {
+      '<C-j>',
+      function()
+        require('smart-splits').move_cursor_up()
+      end,
+    },
+    {
+      '<C-k>',
+      function()
+        require('smart-splits').move_cursor_down()
+      end,
+    },
+    {
+      '<C-S-h>',
+      function()
+        require('smart-splits').resize_left()
+      end,
+    },
+    {
+      '<C-S-l>',
+      function()
+        require('smart-splits').resize_right()
+      end,
+    },
+    {
+      '<C-S-k>',
+      function()
+        require('smart-splits').resize_up()
+      end,
+    },
+    {
+      '<C-S-j>',
+      function()
+        require('smart-splits').resize_down()
+      end,
+    },
+  }
 }

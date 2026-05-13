@@ -3,80 +3,80 @@ return { {
   lazy = false,
   event = 'VimEnter',
   cmd = 'Neotree',
-  config = function()
-    require('neo-tree').setup {
-      sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
-      enable_cursor_hijack = true,
-      popup_border_style = '',
-      open_files_using_relative_path = true,
-      source_selector = {
-        winbar = true,
-        statusline = true,
-        tabs_layout = 'active',
-        separator = { left = '/', right = '\\', override = 'right' },
-        show_separator_on_edge = true,
-        highlight_separator = 'NeoTreeTabSeparatorInactive',
-        highlight_separator_active = 'NeoTreeTabSeparatorActive',
+  opts = {
+    sources = { 'filesystem', 'buffers', 'git_status', 'document_symbols' },
+    enable_cursor_hijack = true,
+    popup_border_style = '',
+    open_files_using_relative_path = true,
+    source_selector = {
+      winbar = true,
+      statusline = true,
+      tabs_layout = 'active',
+      separator = { left = '/', right = '\\', override = 'right' },
+      show_separator_on_edge = true,
+      highlight_separator = 'NeoTreeTabSeparatorInactive',
+      highlight_separator_active = 'NeoTreeTabSeparatorActive',
+    },
+    default_component_configs = {
+      indent = {
+        with_expanders = true,
+        expander_collapsed = '',
+        expander_expanded = '',
+        expander_highlight = 'NeoTreeExpander',
       },
-      default_component_configs = {
-        indent = {
-          with_expanders = true,
-          expander_collapsed = '',
-          expander_expanded = '',
-          expander_highlight = 'NeoTreeExpander',
+      git_status = {
+        symbols = {
+          added = '',
+          modified = '',
+          renamed = '',
+          untracked = '',
+          deleted = '',
+          ignored = '',
+          unstaged = '',
+          staged = '',
+          conflict = '',
         },
-        git_status = {
-          symbols = {
-            added = '',
-            modified = '',
-            renamed = '',
-            untracked = '',
-            deleted = '',
-            ignored = '',
-            unstaged = '',
-            staged = '',
-            conflict = '',
+      },
+      name = {
+        trailing_slash = true,
+        use_git_status_colors = true,
+        highlight = 'NeoTreeFileName',
+      },
+      symlink_target = {
+        enabled = true,
+      },
+    },
+    window = {
+      width = '32',
+      mappings = {
+        ['P'] = {
+          'toggle_preview',
+          config = {
+            use_float = false,
           },
         },
-        name = {
-          trailing_slash = true,
-          use_git_status_colors = true,
-          highlight = 'NeoTreeFileName',
-        },
-        symlink_target = {
-          enabled = true,
+        ['-'] = {
+          'navigate_up',
         },
       },
-      window = {
-        width = '32',
-        mappings = {
-          ['P'] = {
-            'toggle_preview',
-            config = {
-              use_float = false,
-            },
-          },
-          ['-'] = {
-            'navigate_up',
-          },
-        },
+    },
+    filesystem = {
+      hijack_netrw_behavior = 'open_current',
+      filtered_items = {
+        hide_dotfiles = false,
+        hide_gitignored = false,
+        hide_hidden = false,
+        visible = true,
       },
-      filesystem = {
-        hijack_netrw_behavior = 'open_current',
-        filtered_items = {
-          hide_dotfiles = false,
-          hide_gitignored = false,
-          hide_hidden = false,
-          visible = true,
-        },
-        follow_current_file = {
-          enabled = true,
-          leave_dirs_open = true,
-        },
-        use_libuv_file_watcher = true,
+      follow_current_file = {
+        enabled = true,
+        leave_dirs_open = true,
       },
-    }
-  end,
+      use_libuv_file_watcher = true,
+    },
+  },
+
+  keys = { { '<C-n>', function() vim.cmd ':Neotree toggle' end } },
 }, {
   'nvim-tree/nvim-web-devicons', lazy = true
 } }

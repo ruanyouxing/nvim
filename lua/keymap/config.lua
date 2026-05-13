@@ -42,111 +42,22 @@ function M.set_keymaps()
   _G.OnFocus = 0
   nmap { ' ', '' }
   xmap { ' ', '' }
-  nmap {
-    '<leader>?',
-    function()
-      require('which-key').show {}
-    end,
-  }
+  -- which-key is now in misc.lua
   nmap {
     { 'Y',     'y$' },
     { '<C-a>', 'ggVG' },
-    {
-      '<C-h>',
-      function()
-        require('smart-splits').move_cursor_left()
-      end,
-    },
-    {
-      '<C-l>',
-      function()
-        require('smart-splits').move_cursor_right()
-      end,
-    },
-    {
-      '<C-j>',
-      function()
-        require('smart-splits').move_cursor_up()
-      end,
-    },
-    {
-      '<C-k>',
-      function()
-        require('smart-splits').move_cursor_down()
-      end,
-    },
-    {
-      '<C-S-h>',
-      function()
-        require('smart-splits').resize_left()
-      end,
-    },
-    {
-      '<C-S-l>',
-      function()
-        require('smart-splits').resize_right()
-      end,
-    },
-    {
-      '<C-S-k>',
-      function()
-        require('smart-splits').resize_up()
-      end,
-    },
-    {
-      '<C-S-j>',
-      function()
-        require('smart-splits').resize_down()
-      end,
-    },
+    -- smart-splits is now in smart_splits.lua
     {
       'mm',
       function()
         require('trailblazer').new_trail_mark()
       end,
     },
-    {
-      'F',
-      function()
-        if vim.fn.foldclosed '.' == -1 then
-          vim.cmd [[foldclose]]
-        else
-          vim.cmd [[foldopen]]
-        end
-      end,
-    },
-    {
-      'zM',
-      function()
-        require('ufo').closeAllFolds()
-      end,
-    },
-    {
-      'K',
-      function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
-        if not winid then
-          vim.lsp.buf.hover()
-        end
-      end,
-    },
-    {
-      'zR',
-      function()
-        require('ufo').openAllFolds()
-      end,
-    },
+    -- folds now in ufo.lua
     {
       'T',
       function()
         vim.cmd [[Trouble diagnostics toggle]]
-      end,
-    },
-    { '<C-n>', cmd 'Neotree toggle' },
-    {
-      '<C-s>',
-      function()
-        require('outline').toggle { focus_outline = false }
       end,
     },
     {
