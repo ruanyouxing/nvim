@@ -33,6 +33,24 @@ return {
         width = 0.8,
       },
     },
+    notifier = {
+      enabled = true,
+      timeout = 1000,
+      width = { min = 50, max = 0.4 },
+      margin = { top = 0, right = 1, bottom = 0 },
+      padding = true,
+      sort = { "level", "added" },
+
+      style = "compact",
+
+      icons = {
+        error = " ",
+        warn  = " ",
+        info  = " ",
+        debug = " ",
+        trace = "✎ ",
+      },
+    },
   },
   keys = {
     {
