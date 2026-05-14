@@ -1,44 +1,48 @@
+config_dir = vim.fn.stdpath 'config'
 return {
-  'nvimtools/none-ls.nvim',
-  config = function()
-    local null_ls = require 'null-ls'
-    local custom_dir = os.getenv('CUSTOM_NVIM_DIR')
-    local config_dir = custom_dir and custom_dir or vim.fn.stdpath 'config'
-    local formatting = null_ls.builtins.formatting
-    local code_action = null_ls.builtins.code_actions
-    local diagnostics = null_ls.builtins.diagnostics
-    local hover = null_ls.builtins.hover
-    local sources = {
-      formatting.stylua.with {
-        extra_args = { '--config-path', vim.fn.expand(config_dir .. '/stylua.toml') },
+  'stevearc/conform.nvim',
+  cmd = { "ConformInfo" },
+  setup = {
+    formatters_by_ft = {
+      lua = { "stylua" },
+      c = { "clang_format" },
+      cpp = { "clang_format" },
+      nix = { "alejandra" },
+      javascript = { "prettier" },
+      typescript = { "prettier" },
+      javascriptreact = { "prettier" },
+      typescriptreact = { "prettier" },
+      json = { "prettier" },
+      html = { "prettier" },
+      css = { "prettier" },
+      markdown = { "prettier" },
+      yaml = { "prettier" },
+    },
+    formatters = {
+      stylua = {
+        prepend_args = { '--config-path', vim.fn.expand(config_dir .. '/stylua.toml') },
       },
-      formatting.prettier,
-      formatting.clang_format,
-      formatting.alejandra,
-      -- null_ls.builtins.diagnostics.eslint_d.with {
-      --   filter = function(diagnostics)
-      --     return diagnostics.code ~= "prettier/prettier"
-      --   end
-      -- }
-      formatting.clang_format.with {
-        extra_args = { '-style=file:' .. vim.fn.expand(config_dir .. '/.clang_format') },
+      clang_format = {
+        prepend_args = { '-style=file:' .. vim.fn.expand(config_dir .. '/.clang_format') },
       },
-      formatting.alejandra,
-    }
-    null_ls.setup {
-      sources = sources,
-      --     on_attach = function(_, bufnr)
-      --       vim.api.nvim_create_autocmd({ 'BufWritePre' }, {
-      --         buffer = bufnr,
-      --         callback = function()
-      --           vim.lsp.buf.format()
-      --         end,
-      --       })
-      --     end,
-    }
-    vim.api.nvim_create_user_command('Format', function()
-      vim.lsp.buf.format()
-    end, {})
-  end,
-  event = 'BufRead',
+    },
+
+    -- format_on_save = {
+    --   timeout_ms = 500,
+    --   lsp_fallback = true, -- Nếu conform không tìm thấy formatter, sẽ dùng LSP mặc định
+    -- },
+  },
+  keys = { {
+    mode = { "n", "v" },
+    "<leader>f",
+    function()
+      require("conform").format({
+        lsp_fallback = true,
+        async = false,
+        timeout_ms = 1000,
+      })
+    end,
+    { desc = "Format file or range" }
+  } },
+  event = 'BufRead'
 }

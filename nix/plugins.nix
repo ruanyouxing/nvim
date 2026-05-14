@@ -26,6 +26,8 @@ in {
     start = with pkgs.vimPlugins; [
       lazy-nvim
       nvim-treesitter-with-grammars
+      blink-cmp
+      blink-pairs
     ];
     opt = with pkgs.vimPlugins; [
       smart-splits-nvim

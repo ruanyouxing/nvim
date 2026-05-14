@@ -1,13 +1,11 @@
 ---@diagnostic disable: different-requires
 local misc = { {
   'tzachar/local-highlight.nvim',
-  config = function()
-    require('local-highlight').setup {
-      hlGroup = 'TSDefinitionUsage',
-    }
-  end,
+  opts = {
+
+    hlGroup = 'TSDefinitionUsage',
+  },
   event = 'BufRead',
-  dependencies = 'folke/snacks.nvim',
 }
 , {
   'stevearc/dressing.nvim',

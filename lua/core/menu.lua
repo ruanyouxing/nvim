@@ -204,21 +204,6 @@ add_section {
   end,
 }
 add_section {
-  'Toggle zen-mode',
-  function()
-    if OnFocus == 0 then
-      OnFocus = 1
-      vim.cmd [[TZAtaraxis]]
-      vim.o.statusline = 0
-    else
-      vim.cmd [[TZAtaraxis]]
-      vim.opt.statusline = '%!v:lua.WindLine.show()'
-      require('codewindow').open_minimap()
-      OnFocus = 0
-    end
-  end,
-}
-add_section {
   'Toggle minimap',
   function()
     require('codewindow').toggle_minimap()
@@ -318,12 +303,6 @@ add_section {
   'Close a buffer',
   function()
     require('cokeline/mappings').pick 'close'
-  end,
-}
-add_section {
-  'Spectre',
-  function()
-    require('spectre').open()
   end,
 }
 add_section {

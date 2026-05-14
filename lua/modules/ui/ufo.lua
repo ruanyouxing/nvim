@@ -32,5 +32,38 @@ return {
       table.insert(newVirtText, { suffix, 'MoreMsg' })
       return newVirtText
     end,
+  },
+  keys = {
+    {
+      'F',
+      function()
+        if vim.fn.foldclosed '.' == -1 then
+          vim.cmd [[foldclose]]
+        else
+          vim.cmd [[foldopen]]
+        end
+      end,
+    },
+    {
+      'zM',
+      function()
+        require('ufo').closeAllFolds()
+      end,
+    },
+    {
+      'K',
+      function()
+        local winid = require('ufo').peekFoldedLinesUnderCursor()
+        if not winid then
+          vim.lsp.buf.hover()
+        end
+      end,
+    },
+    {
+      'zR',
+      function()
+        require('ufo').openAllFolds()
+      end,
+    },
   }
 }

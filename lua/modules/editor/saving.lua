@@ -42,9 +42,5 @@ local autosave = { {
     }
   end,
   event = 'BufRead',
-}
-, {
-  'famiu/bufdelete.nvim',
-  event = 'BufDelete',
 } }
 return autosave

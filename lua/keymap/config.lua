@@ -42,112 +42,17 @@ function M.set_keymaps()
   _G.OnFocus = 0
   nmap { ' ', '' }
   xmap { ' ', '' }
-  nmap {
-    '<leader>?',
-    function()
-      require('which-key').show {}
-    end,
-  }
+  -- which-key is now in misc.lua
   nmap {
     { 'Y',     'y$' },
     { '<C-a>', 'ggVG' },
-    {
-      '<C-h>',
-      function()
-        require('smart-splits').move_cursor_left()
-      end,
-    },
-    {
-      '<C-l>',
-      function()
-        require('smart-splits').move_cursor_right()
-      end,
-    },
-    {
-      '<C-j>',
-      function()
-        require('smart-splits').move_cursor_up()
-      end,
-    },
-    {
-      '<C-k>',
-      function()
-        require('smart-splits').move_cursor_down()
-      end,
-    },
-    {
-      '<C-S-h>',
-      function()
-        require('smart-splits').resize_left()
-      end,
-    },
-    {
-      '<C-S-l>',
-      function()
-        require('smart-splits').resize_right()
-      end,
-    },
-    {
-      '<C-S-k>',
-      function()
-        require('smart-splits').resize_up()
-      end,
-    },
-    {
-      '<C-S-j>',
-      function()
-        require('smart-splits').resize_down()
-      end,
-    },
-    {
-      'mm',
-      function()
-        require('trailblazer').new_trail_mark()
-      end,
-    },
-    {
-      'F',
-      function()
-        if vim.fn.foldclosed '.' == -1 then
-          vim.cmd [[foldclose]]
-        else
-          vim.cmd [[foldopen]]
-        end
-      end,
-    },
-    {
-      'zM',
-      function()
-        require('ufo').closeAllFolds()
-      end,
-    },
-    {
-      'K',
-      function()
-        local winid = require('ufo').peekFoldedLinesUnderCursor()
-        if not winid then
-          vim.lsp.buf.hover()
-        end
-      end,
-    },
-    {
-      'zR',
-      function()
-        require('ufo').openAllFolds()
-      end,
-    },
+    -- smart-splits is now in smart_splits.lua
+    -- folds now in ufo.lua
+    -- traiblazer now in bookmarks.lua
     {
       'T',
       function()
         vim.cmd [[Trouble diagnostics toggle]]
-      end,
-    },
-    { '<C-n>', cmd 'Neotree toggle' },
-    {
-      '<C-s>',
-      function()
-        require('codewindow').close_minimap()
-        require('outline').toggle { focus_outline = false }
       end,
     },
     {
@@ -163,72 +68,18 @@ function M.set_keymaps()
         require('core.menu').trigger_menu()
       end,
     },
-    {
-      '<C-t>',
-      function()
-        require('telescope.builtin').find_files()
-      end,
-    },
-    {
-      '<C-w>',
-      function()
-        require('bufdelete').bufdelete(0, true)
-      end,
-    },
+    -- <C-w> now moves to lua/modules/tools/snacks.lua
     { '<C-y>', cmd 'redo' },
     { '<C-z>', cmd 'u' },
-    {
-      '<leader>f',
-      function()
-        buf.format()
-      end,
-    },
-    { '<leader>t', cmd 'ToggleTerm' },
-    {
-      '<leader>s',
-      function()
-        require('spectre').open()
-      end,
-    },
-    {
-      '<leader>z',
-      function()
-        require('telescope').extensions.zoxide.list {}
-      end,
-    },
+    -- <leader>f now in lua/modules/editor/formatting.lua
+    -- toggleterm is replaced by snacks.terminal.toggle()
     {
       '<leader>cp',
       function()
         require('keymap.config').compile_func()
       end,
     },
-    {
-      '<leader>mm',
-      function()
-        require('codewindow').toggle_minimap()
-      end,
-    },
-    {
-      '<leader>mf',
-      function()
-        require('codewindow').toggle_focus()
-      end,
-    },
-    {
-      'lg',
-      function()
-        local Terminal = require('toggleterm.terminal').Terminal
-        local lazygit = Terminal:new {
-          cmd = 'lazygit',
-          hidden = true,
-          direction = 'float',
-          float_opts = {
-            border = 'double',
-          },
-        }
-        lazygit:toggle()
-      end,
-    },
+    -- lg moved to snacks.lua
     {
       '<leader>cc',
       function()

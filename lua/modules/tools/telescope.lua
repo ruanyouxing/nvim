@@ -1,8 +1,6 @@
 return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
-    { 'sharkdp/fd',                                lazy = true },
-    { 'BurntSushi/ripgrep',                        lazy = true },
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
     { 'jvgrootveld/telescope-zoxide',              lazy = true },
     { 'nvim-lua/popup.nvim',                       lazy = true },
@@ -36,4 +34,20 @@ return {
   end,
   lazy = true,
   cmd = 'Telescope',
+  keys = {
+    {
+      '<C-t>',
+      function()
+        require('telescope.builtin').find_files()
+      end,
+      desc = 'Open files'
+    },
+    {
+      '<leader>z',
+      function()
+        require('telescope').extensions.zoxide.list {}
+      end,
+      desc = 'Telescope: jump to path'
+    },
+  }
 }

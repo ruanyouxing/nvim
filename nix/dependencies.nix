@@ -4,14 +4,12 @@
     lua-language-server
     stylua
     clang-tools
-    ccls
     pyright
     python313Packages.debugpy
     python313Packages.pip
     black
     pylint
     nixd
-    nixpkgs-fmt
     alejandra
     eslint_d
     prettier
