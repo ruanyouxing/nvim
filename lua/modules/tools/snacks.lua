@@ -19,6 +19,9 @@ return {
           relativenumber = false,
         },
       },
+      opts = {
+        auto_close = true,
+      },
     },
     lazygit = {
       configure = true,

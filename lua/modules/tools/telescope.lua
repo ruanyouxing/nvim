@@ -49,5 +49,12 @@ return {
       end,
       desc = 'Telescope: jump to path'
     },
+    {
+      '<C-f>',
+      function ()
+        require('telescope.builtin').live_grep()
+      end,
+      desc = 'Live grep'
+    }
   }
 }
