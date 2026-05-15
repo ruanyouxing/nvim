@@ -1,8 +1,6 @@
 return {
   'lukas-reineke/indent-blankline.nvim',
   config = function()
-    vim.opt.termguicolors = true
-    vim.opt.list = true
     local highlight = {
       'RainbowRed',
       'RainbowYellow',

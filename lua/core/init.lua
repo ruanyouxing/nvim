@@ -3,4 +3,4 @@ require 'core.options'
 require 'core.events'
 require 'core.pack'
 require 'core.keymaps'.set_keybinds()
-vim.cmd [[colorscheme catppuccin]]
+vim.cmd.colorscheme("catppuccin")

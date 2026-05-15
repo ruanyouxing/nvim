@@ -1,5 +1,28 @@
-local opt       = vim.opt
+local opt             = vim.opt
+local default_plugins = {
+  "netrw",
+  "netrwPlugin",
+  "netrwSettings",
+  "netrwFileHandlers",
+  "gzip",
+  "zip",
+  "zipPlugin",
+  "tar",
+  "tarPlugin",
+  "getscript",
+  "getscriptPlugin",
+  "vimball",
+  "vimballPlugin",
+  "2html_plugin",
+  "logipat",
+  "rrhelper",
+  "spellfile_plugin",
+  "matchit"
+}
 
+for _, plugin in pairs(default_plugins) do
+  vim.g["loaded_" .. plugin] = 1
+end
 local cache_dir = vim.fn.stdpath("cache") .. "/"
 opt.directory   = cache_dir .. "swap/"
 opt.undodir     = cache_dir .. "undo/"
@@ -64,6 +87,8 @@ local options   = {
   breakindentopt = 'shift:2,min:20',
   number         = true,
   relativenumber = true,
+
+  termguicolors  = true
 }
 
 for k, v in pairs(options) do
