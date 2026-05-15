@@ -31,7 +31,7 @@ local options   = {
   timeout        = true,
   ttimeout       = true,
   timeoutlen     = 500,
-  ttimeoutlen    = 0,
+  ttimeoutlen    = 100,
   updatetime     = 100,
   redrawtime     = 1500,
 
