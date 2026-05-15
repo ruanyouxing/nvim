@@ -54,7 +54,7 @@ return {
     },
     cmd = 'Outline',
   }
-,
+  ,
   {
     'utilyre/barbecue.nvim',
     opts = {
@@ -64,7 +64,7 @@ return {
     dependencies = 'nvim-navic',
     event = 'LspAttach',
   }
-,
+  ,
   {
     'SmiteshP/nvim-navic',
     opts = {
@@ -102,6 +102,7 @@ return {
       depth_limit_indicator = '..',
     },
     module = true,
+    event = 'LspAttach',
   },
   {
     'kosayoda/nvim-lightbulb',
@@ -136,7 +137,7 @@ return {
     opts = {},
     lazy = true,
   },
-  { 'onsails/lspkind.nvim', lazy = true }  -- , {
+  { 'onsails/lspkind.nvim', lazy = true } -- , {
   -- This shit has bugs
   --   'gorbit99/codewindow.nvim',
   --   opts = {
@@ -163,7 +164,7 @@ return {
   -- },
   --   }
   -- }
-,
+  ,
   {
     'hasansujon786/nvim-navbuddy',
     opts = {
