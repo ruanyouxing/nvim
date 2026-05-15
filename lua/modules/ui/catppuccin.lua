@@ -6,5 +6,5 @@ return {
     auto_integrations = true,
   },
   lazy = false,
-  priority = 10000,
+  priority = 1000,
 }

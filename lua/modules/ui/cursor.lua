@@ -1,4 +1,4 @@
-local cursor = {
+return {
   {
     'yamatsum/nvim-cursorline',
     config = function()
@@ -7,10 +7,11 @@ local cursor = {
         cursorword = { enable = true, min_length = 3, hl = { underline = true } },
       }
     end,
+    event = 'CursorMoved',
   },
   {
     'cxwx/specs.nvim',
-    event = 'UIEnter',
+    event = 'CursorMoved',
     config = function()
       require('specs').setup {
         show_jumps = true,
@@ -27,13 +28,6 @@ local cursor = {
         ignore_filetypes = {},
         ignore_buftypes = { nofile = true },
       }
-      vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
-        pattern = '*',
-        callback = function()
-          require('specs').show_specs()
-        end,
-      })
     end,
   },
 }
-return cursor

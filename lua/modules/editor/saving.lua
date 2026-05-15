@@ -1,16 +1,8 @@
-local autosave = {
+return {
   {
     'Pocco81/AutoSave.nvim',
     event = 'VeryLazy',
-    opts = {
-      execution_message = {
-        message = function() -- message to print on save
-          return ('AutoSave: saved at ' .. vim.fn.strftime '%H:%M:%S')
-        end,
-        dim = 0.18, -- dim the color of `message`
-        cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
-      },
-    },
+    opts = {},
   },
   {
     'olimorris/persisted.nvim',
@@ -36,6 +28,4 @@ local autosave = {
       close_buffers_with_windows = false,
     },
     event = 'VeryLazy',
-  },
-}
-return autosave
+  } }
