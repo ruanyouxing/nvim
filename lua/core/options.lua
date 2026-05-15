@@ -1,91 +1,76 @@
-local cache_dir = os.getenv 'HOME' .. '/.cache/nvim/'
+local opt       = vim.opt
 
-vim.opt.termguicolors = true
-vim.opt.title = true
-vim.opt.mouse = 'a'
-vim.opt.hidden = true
-vim.opt.fileformats = 'unix,mac,dos'
-vim.opt.magic = true
-vim.opt.fileencoding = 'utf-8'
-vim.opt.encoding = 'utf-8'
-vim.opt.viewoptions = 'folds,cursor,curdir,slash,unix'
-vim.opt.sessionoptions = 'curdir,help,tabpages,winsize'
-vim.opt.clipboard = 'unnamedplus'
-vim.opt.wildignorecase = true
-vim.opt.wildignore =
-  '.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**'
-vim.opt.backup = false
-vim.opt.writebackup = false
-vim.opt.swapfile = false
-vim.opt.directory = cache_dir .. 'swag/'
-vim.opt.undofile = true
-vim.opt.undodir = cache_dir .. 'undo/'
-vim.opt.backupdir = cache_dir .. 'backup/'
-vim.opt.viewdir = cache_dir .. 'view/'
-vim.opt.spellfile = cache_dir .. 'spell/en.uft-8.add'
-vim.opt.history = 2000
-vim.opt.shada = "!,'300,<50,@100,s10,h"
-vim.opt.backupskip = '/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim'
-vim.opt.smarttab = true
-vim.opt.shiftround = true
-vim.opt.timeout = true
-vim.opt.timeoutlen = 200
-vim.opt.updatetime = 100
-vim.opt.redrawtime = 1500
-vim.opt.ignorecase = true
-vim.opt.smartcase = true
-vim.opt.incsearch = true
-vim.opt.startofline = false
-vim.opt.backspace = 'indent,eol,start'
-vim.opt.jumpoptions = 'stack'
-vim.opt.sidescrolloff = 5
-vim.opt.fillchars.append = '-'
-vim.opt.foldlevelstart = 99
-vim.opt.foldmethod = 'manual'
-vim.opt.ruler = false
-vim.opt.list = true
-vim.opt.previewheight = 12
-vim.opt.showcmd = false
-vim.opt.laststatus = 3
-vim.opt.display = 'lastline'
-vim.opt.showbreak = '↳  '
-vim.opt.listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←'
-vim.opt.pumblend = 10
+local cache_dir = vim.fn.stdpath("cache") .. "/"
+opt.directory   = cache_dir .. "swap/"
+opt.undodir     = cache_dir .. "undo/"
+opt.backupdir   = cache_dir .. "backup/"
+opt.viewdir     = cache_dir .. "view/"
+opt.spellfile   = cache_dir .. "spell/en.utf-8.add"
+local options   = {
+  title          = true,
+  mouse          = 'a',
+  viewoptions    = 'folds,cursor,curdir,slash,unix',
+  sessionoptions = 'curdir,help,tabpages,winsize',
+  clipboard      = 'unnamedplus',
 
-vim.opt.textwidth = 500
-vim.opt.expandtab = true
-vim.opt.autoindent = true
-vim.opt.tabstop = 2
-vim.opt.shiftwidth = 2
-vim.opt.breakindentopt = 'shift:2,min:20'
-vim.opt.number = true
-vim.opt.relativenumber = true
-vim.opt.foldenable = true
-vim.opt.signcolumn = 'yes'
-vim.opt.conceallevel = 2
-vim.opt.concealcursor = 'nv'
 
-vim.g.syntax_on = true
-vim.g.smartindent = true
+  ignorecase     = true,
+  smartcase      = true,
+  wildignorecase = true,
+  wildignore     =
+  '.git,.hg,.svn,*.pyc,*.o,*.out,*.jpg,*.jpeg,*.png,*.gif,*.zip,**/tmp/**,*.DS_Store,**/node_modules/**,**/bower_modules/**',
+
+  backup         = false,
+  writebackup    = false,
+  swapfile       = false,
+  undofile       = true,
+  history        = 2000,
+  shada          = "!,'300,<50,@100,s10,h",
+  backupskip     = '/tmp/*,$TMPDIR/*,$TMP/*,$TEMP/*,*/shm/*,/private/var/*,.vault.vim',
+
+  timeout        = true,
+  ttimeout       = true,
+  timeoutlen     = 500,
+  ttimeoutlen    = 0,
+  updatetime     = 100,
+  redrawtime     = 1500,
+
+  startofline    = false,
+  jumpoptions    = 'stack',
+  sidescrolloff  = 5,
+  ruler          = false,
+  list           = true,
+  previewheight  = 12,
+  showcmd        = false,
+  laststatus     = 3,
+  display        = 'lastline',
+  showbreak      = '↳  ',
+  listchars      = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←',
+  pumblend       = 10,
+  signcolumn     = 'yes',
+  conceallevel   = 2,
+  concealcursor  = 'nv',
+
+  foldlevelstart = 99,
+  foldmethod     = 'manual',
+  foldenable     = true,
+
+  textwidth      = 500,
+  expandtab      = true,
+  smartindent    = true,
+  shiftround     = true,
+  tabstop        = 2,
+  shiftwidth     = 2,
+  breakindentopt = 'shift:2,min:20',
+  number         = true,
+  relativenumber = true,
+}
+
+for k, v in pairs(options) do
+  opt[k] = v
+end
+
+opt.fillchars:append({ diff = "-", fold = "-" })
+
 vim.g.loaded_matchit = 1
-vim.g.matchup_surround_enabled = 1
-vim.g.loaded_gzip = 1
-vim.g.loaded_tar = 1
-vim.g.loaded_tarPlugin = 1
-vim.g.loaded_zip = 1
-vim.g.loaded_zipPlugin = 1
-vim.g.loaded_getscript = 1
-vim.g.loaded_getscriptPlugin = 1
-vim.g.loaded_vimball = 1
-vim.g.loaded_vimballPlugin = 1
-vim.g.loaded_matchit = 1
-vim.g.loaded_matchparen = 1
-vim.g.loaded_2html_plugin = 1
-vim.g.loaded_logiPat = 1
-vim.g.loaded_rrhelper = 1
-vim.g.loaded_netrw = 1
-vim.g.loaded_netrwPlugin = 1
-vim.g.loaded_netrwSettings = 1
-vim.opt.updatetime = 200
-vim.g.loaded_netrwFileHandlers = 1
-vim.cmd [[hi NonText guifg=bg]]
+vim.g.matchup_matchparen_offscreen = { method = 'popup' }
