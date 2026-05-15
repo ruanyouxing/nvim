@@ -77,6 +77,8 @@ autocmd({
 }, {
   group = vim.api.nvim_create_augroup('barbecue.updater', {}),
   callback = function()
-    require('barbecue.ui').update()
+    if package.loaded['barbecue.ui'] then
+      require('barbecue.ui').update()
+    end
   end,
 })
