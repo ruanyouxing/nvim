@@ -8,7 +8,7 @@
     python313Packages.pip
     black
     pylint
-    nil
+    nixd
     alejandra
     eslint_d
     prettier
