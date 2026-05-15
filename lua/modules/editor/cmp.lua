@@ -13,7 +13,7 @@ end
 return {
   {
     'saghen/blink.cmp',
-    event = 'InsertEnter',
+    event = { 'InsertEnter', 'CmdlineEnter' },
     dependencies = {
       { 'erooke/blink-cmp-latex' },
       { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
