@@ -122,6 +122,7 @@ return { {
 }
 , {
   'kosayoda/nvim-lightbulb',
+  event = 'LspAttach',
   opts = {
     autocmd = {
       enabled = true,
@@ -146,7 +147,6 @@ return { {
       text_unavailable = '',
     },
   },
-  event = 'BufEnter',
 }
 , {
   'j-hui/fidget.nvim',
@@ -187,7 +187,8 @@ return { {
     lsp = {
       auto_attach = true
     }
-  }
+  },
+  lazy = true,
 }
 , {
   'folke/trouble.nvim',

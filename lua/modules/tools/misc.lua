@@ -24,6 +24,6 @@ local misc = { {
   end,
   cmd = 'ColorizerToggle',
 }
-, { 'PHSix/faster.nvim', event = 'VimEnter' }
+, { 'PHSix/faster.nvim', event = 'CursorMoved' }
 }
 return misc

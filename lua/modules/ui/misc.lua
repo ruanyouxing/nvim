@@ -2,21 +2,19 @@
 local misc = { {
   'tzachar/local-highlight.nvim',
   opts = {
-
     hlGroup = 'TSDefinitionUsage',
   },
   event = 'BufRead',
 }
 , {
   'stevearc/dressing.nvim',
-  config = function()
-    require('dressing').setup {
-      input = { relative = 'editor' },
-      select = {
-        backend = { 'telescope', 'fzf', 'builtin' },
-      },
-    }
-  end,
+  event = 'VeryLazy',
+  opts = {
+    input = { relative = 'editor' },
+    select = {
+      backend = { 'telescope', 'fzf', 'builtin' },
+    },
+  }
 }
 , {
   'mvllow/modes.nvim',
@@ -38,29 +36,7 @@ local misc = { {
     }
   end,
 }
-, {
-  'folke/twilight.nvim',
-  event = 'CursorMoved',
-  config = function()
-    require('twilight').setup {
-      dimming = {
-        alpha = 0.25,     -- amount of dimming
-        color = { 'Normal', '#ffffff' },
-        inactive = false, -- when true, other windows will be fully dimmed (unless they contain the same buffer)
-      },
-      context = 10,       -- amount of lines we will try to show around the current line
-      treesitter = true,
-      expand = {
-        'function',
-        'method',
-        'table',
-        'if_statement',
-      },
-      exclude = {},
-    }
-  end,
-}
 -- ,{ 'Pheon-Dev/pigeon', lazy = true }
-, { 'mbbill/undotree', event = 'TextChanged' }
+, { 'mbbill/undotree', cmd = 'UndotreeToggle' }
 }
 return misc

@@ -1,33 +1,28 @@
 local autosave = { {
   'Pocco81/AutoSave.nvim',
-  config = function()
-    local autosave = require 'auto-save'
-    autosave.setup {
-      {
-        execution_message = {
-          message = function() -- message to print on save
-            return ('AutoSave: saved at ' .. vim.fn.strftime '%H:%M:%S')
-          end,
-          dim = 0.18,               -- dim the color of `message`
-          cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
-        },
-      },
-    }
-  end,
+  event = 'VeryLazy',
+  opts = {
+    execution_message = {
+      message = function() -- message to print on save
+        return ('AutoSave: saved at ' .. vim.fn.strftime '%H:%M:%S')
+      end,
+      dim = 0.18,               -- dim the color of `message`
+      cleaning_interval = 1250, -- (milliseconds) automatically clean MsgArea after displaying `message`. See :h MsgArea
+    },
+  },
 }
 , {
   'olimorris/persisted.nvim',
-  config = function()
-    require('persisted').setup {
-      save_dir = vim.fn.expand(vim.fn.stdpath 'data' .. '/sessions/'),
-      autosave = true,
-      should_autosave = true,
-      use_git_branch = true,
-      telescope = {
-        reset_prompt_after_deletion = true,
-      },
-    }
-  end,
+  event = 'VeryLazy',
+  opts = {
+    save_dir = vim.fn.expand(vim.fn.stdpath 'data' .. '/sessions/'),
+    autosave = true,
+    should_autosave = true,
+    use_git_branch = true,
+    telescope = {
+      reset_prompt_after_deletion = true,
+    },
+  }
 }
 , {
   'axkirillov/hbac.nvim',

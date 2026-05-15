@@ -11,13 +11,14 @@ local motions = {
   }
   , {
   'smoka7/hop.nvim',
-  event = 'BufEnter',
+  lazy = true,
   config = function()
     require('hop').setup {
       keys = 'etovxqpdygfblzhckisuran',
     }
   end,
 }
+-- Will be replaced by flash.nvim soon I guess?
 , {
   'gbprod/stay-in-place.nvim',
   config = function()
