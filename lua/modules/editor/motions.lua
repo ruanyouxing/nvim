@@ -1,32 +1,84 @@
 local jump_modes = { 'n', 'o', 'x' }
-local motions = {
+return {
   {
     'chrisgrieser/nvim-spider',
     keys = {
-      { mode = jump_modes, 'w', "<cmd>lua require('spider').motion('w')<CR>" },
-      { mode = jump_modes, 'e', "<cmd>lua require('spider').motion('e')<CR>" },
-      { mode = jump_modes, 'b', "<cmd>lua require('spider').motion('b')<CR>" },
-      { mode = jump_modes, 'ge', "<cmd>lua require('spider').motion('ge')<CR>" },
+      {
+        mode = jump_modes,
+        'w',
+        function()
+          require('spider').motion('w')
+        end
+      },
+      {
+        mode = jump_modes,
+        'e',
+        function()
+          require('spider').motion('e')
+        end
+      },
+      {
+        mode = jump_modes,
+        'b',
+        function()
+          require('spider').motion('b')
+        end
+      },
+      {
+        mode = jump_modes,
+        'ge',
+        function()
+          require('spider').motion('ge')
+        end
+      },
     },
   },
   {
     'smoka7/hop.nvim',
     lazy = true,
-    config = function()
-      require('hop').setup {
-        keys = 'etovxqpdygfblzhckisuran',
-      }
-    end,
-  }  -- Will be replaced by flash.nvim soon I guess?
-,
-  {
-    'gbprod/stay-in-place.nvim',
-    config = function()
-      require('stay-in-place').setup {
-        set_keymaps = true,
-        preserve_visual_selection = true,
-      }
-    end,
-  },
+    opts = {
+      keys = 'etovxqpdygfblzhckisuran',
+    },
+    keys = {
+      {
+        mode = { 'n', 'v' },
+        '<S-Space>',
+        function()
+          require('hop').hint_lines_skip_whitespace()
+        end,
+      },
+      {
+        mode = 'v',
+        'w',
+        function()
+          require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR }
+        end,
+      },
+      {
+        mode = 'v',
+        'W',
+        function()
+          require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR }
+        end,
+      },
+      {
+        mode = { 'n', 'v' },
+        'L',
+        function()
+          require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true }
+        end,
+      },
+      {
+        mode = { 'n', 'v' },
+        'H',
+        function()
+          require('hop').hint_words {
+            direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
+            current_line_only = true,
+          }
+        end,
+      },
+    }
+  } -- Will be replaced by flash.nvim soon I guess?
+  ,
 }
-return motions

@@ -121,7 +121,7 @@ return {
             end
             return false
           end,
-
+          'select_next',
           'fallback',
         },
         ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },

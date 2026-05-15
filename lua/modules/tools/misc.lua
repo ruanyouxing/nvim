@@ -8,7 +8,7 @@ local misc = {
     end,
     cmd = 'OverseerRun',
   }
-,
+  ,
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -26,6 +26,5 @@ local misc = {
     end,
     cmd = 'ColorizerToggle',
   },
-  { 'PHSix/faster.nvim', event = 'CursorMoved' },
 }
 return misc
