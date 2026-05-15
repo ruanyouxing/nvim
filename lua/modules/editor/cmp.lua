@@ -117,6 +117,31 @@ return {
         preset = 'none',
         ['<CR>'] = { 'accept', 'fallback' },
         ['<S-Space>'] = { 'select_next', 'snippet_forward', 'fallback' },
+        ['<Tab>'] = {
+          function(cmp)
+            local col = vim.fn.col(".")
+            local line = vim.fn.getline(".")
+            local char = line:sub(col, col)
+
+            local closing_chars = {
+              [")"] = true,
+              ["]"] = true,
+              ["}"] = true,
+              [">"] = true,
+              ['"'] = true,
+              ["'"] = true,
+              ["`"] = true
+            }
+
+            if closing_chars[char] then
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Right>", true, true, true), "n", true)
+              return true
+            end
+            return false
+          end,
+
+          "fallback"
+        },
         ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
         ['<Up>'] = { 'select_prev', 'fallback' },
         ['<Down>'] = { 'select_next', 'fallback' },

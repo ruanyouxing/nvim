@@ -11,30 +11,6 @@ return { {
     }
   end
 }
--- , { -- Tabout for blink?
---   'abecodes/tabout.nvim',
---   event = 'InsertEnter',
---   config = function()
---     require('tabout').setup {
---       tabkey = '<Tab>',
---       backwards_tabkey = '<S-Tab>',
---       ignore_beginning = false,
---       act_as_tab = true,
---       enable_backward = true,
---       completion = true,
---       tabouts = {
---         { open = "'", close = "'" },
---         { open = '"', close = '"' },
---         { open = '`', close = '`' },
---         { open = '(', close = ')' },
---         { open = '{', close = '}' },
---         { open = '<', close = '>' },
---         { open = '[', close = ']' },
---       },
---       exclude = {},
---     }
---   end,
--- }
 , {
   'gbprod/yanky.nvim',
   config = function()

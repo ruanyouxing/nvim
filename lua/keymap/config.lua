@@ -128,10 +128,10 @@ function M.set_keymaps()
     { 'j', plug 'faster_vmove_j' },
     { 'k', plug 'faster_vmove_k' },
   }
-  imap {
-    { '<C-c>', cmd 'PickColorInsert' },
-    { '<C-i>', cmd 'IconPickerInsert nerd_font_v3 alt_font symbols emoji' },
-  }
+  -- imap {
+  --   { '<C-c>', cmd 'PickColorInsert' },
+  --   { '<C-i>', cmd 'IconPickerInsert nerd_font_v3 alt_font symbols emoji' },
+  -- }
 
   -- Cokeline
   nmap {
