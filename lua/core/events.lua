@@ -8,12 +8,6 @@ autocmd({ 'TextYankPost' }, {
     vim.highlight.on_yank()
   end,
 })
-autocmd({ 'ColorScheme' }, {
-  pattern = all,
-  callback = function()
-    require 'modules.ui.cokeline'
-  end,
-})
 autocmd(User, {
   pattern = 'PersistedLoadPost',
   callback = function()
@@ -46,7 +40,7 @@ autocmd({ 'FileType' }, {
     vim.cmd [[ColorizerToggle]]
   end,
 })
--- vim.api.nvim_create_autocmd({ 'CursorMoved' }, {
+-- autocmd({ 'CursorMoved' }, {
 --   pattern = '*',
 --   callback = function()
 --     require('specs').show_specs()
@@ -54,14 +48,14 @@ autocmd({ 'FileType' }, {
 -- })
 local treesitter_augroup = vim.api.nvim_create_augroup('nvim_treesitter', { clear = true })
 autocmd('FileType', {
-  pattern = '*',
+  pattern = all,
   callback = function(args)
     pcall(vim.treesitter.start, args.buf)
   end,
 })
 
 autocmd({ 'BufReadPre', 'BufNewFile' }, {
-  pattern = '*',
+  pattern = all,
   once = true,
   callback = function()
     require 'core.lsp'
