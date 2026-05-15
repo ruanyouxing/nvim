@@ -133,9 +133,10 @@ return {
 
       completion = {
         list = {
-          selection = { preselect = true, auto_insert = false },
+          selection = { preselect = true, auto_insert = true },
         },
         menu = {
+          auto_show = true,
           draw = {
             columns = {
               { 'kind_icon' },
@@ -183,6 +184,13 @@ return {
       },
 
       signature = { enabled = true, window = { border = 'rounded' } },
+      cmdline = {
+        keymap = { preset = 'inherit' },
+        completion = {
+          menu = { auto_show = true },
+          list = { selection = { preselect = false, auto_insert = false } },
+        },
+      },
     },
   },
   {
@@ -202,7 +210,7 @@ return {
         unmatched_group = 'BlinkPairsUnmatched',
         matchparen = {
           enabled = true,
-          cmdline = false,
+          cmdline = true,
           include_surrounding = false,
           group = 'BlinkPairsMatchParen',
           priority = 250,
