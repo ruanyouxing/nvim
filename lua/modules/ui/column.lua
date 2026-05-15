@@ -1,4 +1,4 @@
-column = {
+return {
   {
     'luukvbaal/statuscol.nvim',
     config = function()
@@ -13,7 +13,7 @@ column = {
         ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
         segments = {
           { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },
-          { text = { '%s' }, click = 'v:lua.ScSa' },
+          { text = { '%s' },             click = 'v:lua.ScSa' },
           {
             text = { builtin.lnumfunc, ' ' },
             condition = { true, builtin.not_empty },
@@ -26,10 +26,7 @@ column = {
   },
   {
     'lukas-reineke/virt-column.nvim',
-    event = 'UIEnter',
-    config = function()
-      require('virt-column').setup()
-    end,
+    event = { 'BufReadPost', 'BufNewFile' },
+    opts = {}
   },
 }
-return column

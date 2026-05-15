@@ -1,11 +1,11 @@
 ---@diagnostic disable: different-requires
-local misc = {
+return {
   {
     'tzachar/local-highlight.nvim',
     opts = {
       hlGroup = 'TSDefinitionUsage',
     },
-    event = 'BufRead',
+    event = 'VeryLazy',
   },
   {
     'stevearc/dressing.nvim',
@@ -19,25 +19,22 @@ local misc = {
   },
   {
     'mvllow/modes.nvim',
-    event = 'UIEnter',
-    config = function()
-      require('modes').setup {
-        colors = {
-          copy = '#f5c359',
-          delete = '#c75c6a',
-          insert = '#78ccc5',
-          visual = '#9745be',
-        },
+    event = 'VeryLazy',
+    opts = {
+      colors = {
+        copy = '#f5c359',
+        delete = '#c75c6a',
+        insert = '#78ccc5',
+        visual = '#9745be',
+      },
 
-        line_opacity = 0.15,
-        set_cursor = true,
-        set_cursorline = true,
-        set_number = true,
-        ignore = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
-      }
-    end,
-  }  -- ,{ 'Pheon-Dev/pigeon', lazy = true }
-,
+      line_opacity = 0.15,
+      set_cursor = true,
+      set_cursorline = true,
+      set_number = true,
+      ignore = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
+    }
+  } -- ,{ 'Pheon-Dev/pigeon', lazy = true }
+  ,
   { 'mbbill/undotree', cmd = 'UndotreeToggle' },
 }
-return misc
