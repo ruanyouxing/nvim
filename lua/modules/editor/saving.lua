@@ -26,16 +26,14 @@ local autosave = { {
 }
 , {
   'axkirillov/hbac.nvim',
-  config = function()
-    require('hbac').setup {
-      autoclose = true,
-      threshold = 5,
-      close_command = function(bufnr)
-        vim.api.nvim_buf_delete(bufnr, {})
-      end,
-      close_buffers_with_windows = false,
-    }
-  end,
-  event = 'BufRead',
+  opts = {
+    autoclose = true,
+    threshold = 5,
+    close_command = function(bufnr)
+      vim.api.nvim_buf_delete(bufnr, {})
+    end,
+    close_buffers_with_windows = false,
+  },
+  event = 'VeryLazy',
 } }
 return autosave

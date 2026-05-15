@@ -57,33 +57,16 @@ return { {
 
 , {
   'utilyre/barbecue.nvim',
-  config = function()
-    vim.opt.updatetime = 200
-    vim.api.nvim_create_autocmd({
-      'BufWinEnter',
-      'CursorHold',
-      'InsertLeave',
-      'BufWritePost',
-      'TextChanged',
-      'TextChangedI',
-    }, {
-      group = vim.api.nvim_create_augroup('barbecue.updater', {}),
-      callback = function()
-        require('barbecue.ui').update()
-      end,
-    })
-    require('barbecue').setup {
-      show_modified = true,
-      create_autocmd = false,
-    }
-  end,
+  opts = {
+    show_modified = true,
+    create_autocmd = false,
+  },
   dependencies = 'nvim-navic',
-  event = 'BufRead',
+  event = 'LspAttach',
 }
 
 , {
   'SmiteshP/nvim-navic',
-  event = 'BufReadPre',
   opts = {
     icons = {
       File = '󰈙 ',

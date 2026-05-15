@@ -1,4 +1,4 @@
-config_dir = vim.fn.stdpath 'config'
+config_dir = mnw.configDir
 return {
   'stevearc/conform.nvim',
   cmd = { "ConformInfo" },
@@ -20,7 +20,7 @@ return {
     },
     formatters = {
       stylua = {
-        prepend_args = { '--config-path', vim.fn.expand(config_dir .. '/stylua.toml') },
+        prepend_args = { '--config-path', vim.fn.expand(config_dir .. '/pack/mnw/start/nvim/stylua.toml') },
       },
       clang_format = {
         prepend_args = { '-style=file:' .. vim.fn.expand(config_dir .. '/.clang_format') },
@@ -44,5 +44,5 @@ return {
     end,
     { desc = "Format file or range" }
   } },
-  event = 'BufRead'
+  event = 'BufWritePre'
 }

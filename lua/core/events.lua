@@ -1,4 +1,4 @@
-_G.SessionStatus = ""
+_G.SessionStatus = ''
 local autocmd = vim.api.nvim_create_autocmd
 local all = '*'
 local User = { 'User' }
@@ -52,7 +52,7 @@ autocmd({ 'FileType' }, {
 --     require('specs').show_specs()
 --   end,
 -- })
-local treesitter_augroup = vim.api.nvim_create_augroup("nvim_treesitter", { clear = true })
+local treesitter_augroup = vim.api.nvim_create_augroup('nvim_treesitter', { clear = true })
 autocmd('FileType', {
   pattern = '*',
   callback = function(args)
@@ -64,6 +64,19 @@ autocmd({ 'BufReadPre', 'BufNewFile' }, {
   pattern = '*',
   once = true,
   callback = function()
-    require('core.lsp')
-  end
+    require 'core.lsp'
+  end,
+})
+autocmd({
+  'BufWinEnter',
+  'CursorHold',
+  'InsertLeave',
+  'BufWritePost',
+  'TextChanged',
+  'TextChangedI',
+}, {
+  group = vim.api.nvim_create_augroup('barbecue.updater', {}),
+  callback = function()
+    require('barbecue.ui').update()
+  end,
 })

@@ -1,6 +1,6 @@
 return {
   'windwp/nvim-ts-autotag',
-  event = 'BufRead',
+  event = 'InsertEnter',
   filetype = { 'html', 'javascript', 'jsx' },
   opts = {}
 }
