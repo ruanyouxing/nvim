@@ -1,4 +1,5 @@
 return {
+  cmd = { 'nixd' },
   settings = {
     nixd = {
       formatting = {

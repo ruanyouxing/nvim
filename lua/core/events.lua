@@ -59,3 +59,11 @@ autocmd('FileType', {
     pcall(vim.treesitter.start, args.buf)
   end,
 })
+
+autocmd({ 'BufReadPre', 'BufNewFile' }, {
+  pattern = '*',
+  once = true,
+  callback = function()
+    require('core.lsp')
+  end
+})
