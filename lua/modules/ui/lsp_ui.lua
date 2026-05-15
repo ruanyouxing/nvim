@@ -122,7 +122,6 @@ return { {
 }
 , {
   'kosayoda/nvim-lightbulb',
-  dependencies = 'nvim-lspconfig',
   opts = {
     autocmd = {
       enabled = true,
