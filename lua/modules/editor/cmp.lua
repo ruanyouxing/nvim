@@ -1,14 +1,13 @@
 local function devicons_highlight(ctx)
   local hl = ctx.kind_hl
-  if vim.tbl_contains({ "Path" }, ctx.source_name) then
-    local dev_icon, dev_hl = require("nvim-web-devicons").get_icon(ctx.label)
+  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+    local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
     if dev_icon then
       hl = dev_hl
     end
   end
   return hl
 end
-
 
 return {
   {
@@ -23,10 +22,10 @@ return {
         ft = 'lua',
         opts = {
           libary = {
-            { path = "${3rd}/luv/library", words = { "vim%.uv" } },
-          }
-        }
-      }
+            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+          },
+        },
+      },
     },
 
     opts = {
@@ -42,7 +41,7 @@ return {
         end,
         jump = function(direction)
           require('luasnip').jump(direction)
-        end
+        end,
       },
 
       sources = {
@@ -58,8 +57,8 @@ return {
                 return vim.tbl_filter(function(bufnr)
                   return vim.bo[bufnr].buftype == ''
                 end, vim.api.nvim_list_bufs())
-              end
-            }
+              end,
+            },
           },
           lsp = {
             name = 'LSP',
@@ -71,7 +70,7 @@ return {
             name = 'Path',
             opts = {
               show_hidden_files_by_default = true,
-            }
+            },
           },
           latex = {
             name = 'Latex',
@@ -90,8 +89,8 @@ return {
             module = 'blink-emoji',
           },
           lazydev = {
-            name = "LazyDev",
-            module = "lazydev.integrations.blink",
+            name = 'LazyDev',
+            module = 'lazydev.integrations.blink',
             score_offset = 100,
           },
         },
@@ -102,28 +101,28 @@ return {
         ['<S-Space>'] = { 'select_next', 'snippet_forward', 'fallback' },
         ['<Tab>'] = {
           function(cmp)
-            local col = vim.fn.col(".")
-            local line = vim.fn.getline(".")
+            local col = vim.fn.col '.'
+            local line = vim.fn.getline '.'
             local char = line:sub(col, col)
 
             local closing_chars = {
-              [")"] = true,
-              ["]"] = true,
-              ["}"] = true,
-              [">"] = true,
+              [')'] = true,
+              [']'] = true,
+              ['}'] = true,
+              ['>'] = true,
               ['"'] = true,
               ["'"] = true,
-              ["`"] = true
+              ['`'] = true,
             }
 
             if closing_chars[char] then
-              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<Right>", true, true, true), "n", true)
+              vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes('<Right>', true, true, true), 'n', true)
               return true
             end
             return false
           end,
 
-          "fallback"
+          'fallback',
         },
         ['<S-Tab>'] = { 'select_prev', 'snippet_backward', 'fallback' },
         ['<Up>'] = { 'select_prev', 'fallback' },
@@ -134,36 +133,38 @@ return {
 
       completion = {
         list = {
-          selection = { preselect = true, auto_insert = false }
+          selection = { preselect = true, auto_insert = false },
         },
         menu = {
           draw = {
             columns = {
               { 'kind_icon' },
               { 'label',      'label_description', gap = 1 },
-              { 'source_name' }
+              { 'source_name' },
             },
             components = {
               kind_icon = {
                 text = function(ctx)
                   local icon = ctx.kind_icon
-                  if vim.tbl_contains({ "Path" }, ctx.source_name) then
-                    local dev_icon, _ = require("nvim-web-devicons").get_icon(ctx.label)
+                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                    local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
                     if dev_icon then
                       icon = dev_icon
                     end
                   else
-                    icon = require("lspkind").symbol_map[ctx.kind] or ""
+                    icon = require('lspkind').symbol_map[ctx.kind] or ''
                   end
 
-                  return icon .. ctx.icon_gap .. " " .. ctx.kind
+                  return icon .. ctx.icon_gap .. ' ' .. ctx.kind
                 end,
-                highlight = devicons_highlight
+                highlight = devicons_highlight,
               },
               source_name = {
                 width = { max = 20 },
-                text = function(ctx) return "[" .. ctx.source_name .. "]" end,
-                highlight = devicons_highlight
+                text = function(ctx)
+                  return '[' .. ctx.source_name .. ']'
+                end,
+                highlight = devicons_highlight,
               },
             },
           },
@@ -176,7 +177,7 @@ return {
           auto_show_delay_ms = 200,
           window = {
             border = 'none',
-            scrollbar = false
+            scrollbar = false,
           },
         },
       },
@@ -208,13 +209,13 @@ return {
         },
       },
       debug = false,
-    }
+    },
   },
   {
     'saghen/blink.compat',
     version = '2.*',
     lazy = true,
-    opts = {}
+    opts = {},
   },
   {
     'L3MON4D3/LuaSnip',
@@ -231,7 +232,6 @@ return {
       require('luasnip.loaders.from_vscode').lazy_load()
       require('luasnip.loaders.from_lua').lazy_load { paths = mnw.configDir .. '/snippets' }
     end,
-    dependencies = { 'rafamadriz/friendly-snippets' }
+    dependencies = { 'rafamadriz/friendly-snippets' },
   },
-
 }

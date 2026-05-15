@@ -1,4 +1,4 @@
-require('lazy').setup({
+require('lazy').setup {
   dev = {
     path = mnw.configDir .. '/pack/mnw/opt',
     patterns = { '' },
@@ -14,7 +14,7 @@ require('lazy').setup({
 
   install = {
     missing = true,
-    colorscheme = { 'catppuccin-macchiato' }
+    colorscheme = { 'catppuccin-macchiato' },
   },
 
   spec = {
@@ -23,4 +23,4 @@ require('lazy').setup({
     { import = 'modules.ui' },
     { import = 'modules.lang' },
   },
-})
+}

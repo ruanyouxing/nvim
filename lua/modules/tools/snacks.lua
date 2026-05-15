@@ -4,15 +4,15 @@ return {
   lazy = false,
   opts = {
     bufdelete = {
-      enabled = true
+      enabled = true,
     },
     terminal = {
       enabled = true,
-      shell = "zsh",
+      shell = 'zsh',
       win = {
-        position = "bottom",
+        position = 'bottom',
         height = 7,
-        border = "rounded",
+        border = 'rounded',
         wo = {
           winbar = '',
           number = false,
@@ -25,7 +25,7 @@ return {
       configure = true,
       win = {
         style = 'lazygit',
-        border = "rounded",
+        border = 'rounded',
         position = 'float',
         height = 0.8,
         width = 0.8,
@@ -37,40 +37,40 @@ return {
       width = { min = 50, max = 0.4 },
       margin = { top = 0, right = 1, bottom = 0 },
       padding = true,
-      sort = { "level", "added" },
+      sort = { 'level', 'added' },
 
-      style = "compact",
+      style = 'compact',
 
       icons = {
-        error = " ",
-        warn  = " ",
-        info  = " ",
-        debug = " ",
-        trace = "✎ ",
+        error = ' ',
+        warn = ' ',
+        info = ' ',
+        debug = ' ',
+        trace = '✎ ',
       },
     },
   },
   keys = {
     {
-      "<C-w>",
+      '<C-w>',
       function()
         Snacks.bufdelete()
       end,
-      desc = "Delete buffer"
+      desc = 'Delete buffer',
     },
     {
       'lg',
       function()
         Snacks.lazygit.open()
       end,
-      desc = "Open Lazygit"
+      desc = 'Open Lazygit',
     },
     {
       '<leader>t',
       function()
         Snacks.terminal.toggle()
       end,
-      desc = 'Open toggle terminal'
-    }
-  }
+      desc = 'Open toggle terminal',
+    },
+  },
 }

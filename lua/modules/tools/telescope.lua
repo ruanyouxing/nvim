@@ -2,8 +2,8 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
-    { 'jvgrootveld/telescope-zoxide',              lazy = true },
-    { 'nvim-lua/popup.nvim',                       lazy = true },
+    { 'jvgrootveld/telescope-zoxide', lazy = true },
+    { 'nvim-lua/popup.nvim', lazy = true },
   },
   config = function()
     local actions = require 'telescope.actions'
@@ -13,7 +13,7 @@ return {
     require('telescope').setup {
       defaults = {
         preview = {
-          treesitter = false
+          treesitter = false,
         },
       },
       mappings = {
@@ -39,21 +39,21 @@ return {
       function()
         require('telescope.builtin').find_files()
       end,
-      desc = 'Open files'
+      desc = 'Open files',
     },
     {
       '<leader>z',
       function()
         require('telescope').extensions.zoxide.list {}
       end,
-      desc = 'Telescope: jump to path'
+      desc = 'Telescope: jump to path',
     },
     {
       '<C-f>',
-      function ()
+      function()
         require('telescope.builtin').live_grep()
       end,
-      desc = 'Live grep'
-    }
-  }
+      desc = 'Live grep',
+    },
+  },
 }

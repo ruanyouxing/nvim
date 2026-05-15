@@ -1,22 +1,22 @@
 config_dir = mnw.configDir
 return {
   'stevearc/conform.nvim',
-  cmd = { "ConformInfo" },
+  cmd = { 'ConformInfo' },
   setup = {
     formatters_by_ft = {
-      lua = { "stylua" },
-      c = { "clang_format" },
-      cpp = { "clang_format" },
-      nix = { "alejandra" },
-      javascript = { "prettier" },
-      typescript = { "prettier" },
-      javascriptreact = { "prettier" },
-      typescriptreact = { "prettier" },
-      json = { "prettier" },
-      html = { "prettier" },
-      css = { "prettier" },
-      markdown = { "prettier" },
-      yaml = { "prettier" },
+      lua = { 'stylua' },
+      c = { 'clang_format' },
+      cpp = { 'clang_format' },
+      nix = { 'alejandra' },
+      javascript = { 'prettier' },
+      typescript = { 'prettier' },
+      javascriptreact = { 'prettier' },
+      typescriptreact = { 'prettier' },
+      json = { 'prettier' },
+      html = { 'prettier' },
+      css = { 'prettier' },
+      markdown = { 'prettier' },
+      yaml = { 'prettier' },
     },
     formatters = {
       stylua = {
@@ -32,17 +32,19 @@ return {
     --   lsp_fallback = true, -- Nếu conform không tìm thấy formatter, sẽ dùng LSP mặc định
     -- },
   },
-  keys = { {
-    mode = { "n", "v" },
-    "<leader>f",
-    function()
-      require("conform").format({
-        lsp_fallback = true,
-        async = false,
-        timeout_ms = 1000,
-      })
-    end,
-    { desc = "Format file or range" }
-  } },
-  event = 'BufWritePre'
+  keys = {
+    {
+      mode = { 'n', 'v' },
+      '<leader>f',
+      function()
+        require('conform').format {
+          lsp_fallback = true,
+          async = false,
+          timeout_ms = 1000,
+        }
+      end,
+      { desc = 'Format file or range' },
+    },
+  },
+  event = 'BufWritePre',
 }

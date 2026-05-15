@@ -50,5 +50,5 @@ return {
         require('smart-splits').resize_down()
       end,
     },
-  }
+  },
 }

@@ -7,5 +7,5 @@ return {
     cmdline = { view = 'cmdline' },
     presets = { inc_rename = true },
     lsp = { signature = { enabled = false } },
-  }
+  },
 }

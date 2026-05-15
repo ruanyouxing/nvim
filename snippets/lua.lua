@@ -13,7 +13,7 @@ local sn = ls.snippet_node
 local fmt = require('luasnip.extras.fmt').fmt
 local rep = require('luasnip.extras').rep
 local function addSnippets(snippet)
-  table.insert(snippets,snippet)
+  table.insert(snippets, snippet)
 end
 addSnippets(s('FirstSnippet', { t 'This is my first Snippet!', i(1, 'placeholertext') }))
 addSnippets(s(

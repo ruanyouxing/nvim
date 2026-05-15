@@ -65,5 +65,5 @@ return {
         require('ufo').openAllFolds()
       end,
     },
-  }
+  },
 }
