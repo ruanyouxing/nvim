@@ -7,6 +7,7 @@ end
 local function plug(str)
   return string.format('<Plug>(%s)', str)
 end
+M.plug = plug
 
 local function cu(str)
   return '<C-u><cmd>' .. str .. '<CR>'

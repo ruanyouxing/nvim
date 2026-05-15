@@ -1,4 +1,4 @@
-local plug = require('core.keymap').plug
+local plug = require('core.keymaps').plug
 return {
   {
     'andymass/vim-matchup',
