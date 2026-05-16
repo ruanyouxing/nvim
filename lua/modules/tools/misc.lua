@@ -26,6 +26,6 @@ return {
     "aikhe/wrapped.nvim",
     dependencies = { "nvzone/volt" },
     cmd = { "WrappedNvim" },
-    opts = {},
+    opts = { path = "/home/hungz/.dotfiles/nvim/" },
   }
 }
