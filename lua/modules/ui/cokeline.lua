@@ -1,7 +1,7 @@
 return {
   'noib3/nvim-cokeline',
-  event = 'ColorScheme',
-  config = function()
+  event = 'UIEnter',
+  opts = function()
     local get_hex = require('cokeline.hlgroups').get_hl_attr
     local mappings = require 'cokeline/mappings'
     local errors_fg = get_hex('DiagnosticError', 'fg')
@@ -14,7 +14,7 @@ return {
     local is_picking_close = mappings.is_picking_close
     local normal_fg = get_hex('Normal', 'fg')
     local comment_fg = get_hex('Comment', 'fg')
-    require('cokeline').setup {
+    return {
       default_hl = {
         fg = function(buffer)
           return buffer.is_focused and normal_fg or comment_fg

@@ -1,11 +1,9 @@
-local misc = {
+return {
   {
     'stevearc/overseer.nvim',
-    config = function()
-      require('overseer').setup {
-        templates = { 'builtin', 'cpp_build' },
-      }
-    end,
+    opts = {
+      templates = { 'builtin', 'cpp_build' },
+    },
     cmd = 'OverseerRun',
   }
   ,
@@ -21,10 +19,13 @@ local misc = {
   },
   {
     'norcalli/nvim-colorizer.lua',
-    config = function()
-      require('colorizer').setup { '*' }
-    end,
+    opts = { '*' },
     cmd = 'ColorizerToggle',
   },
+  {
+    "aikhe/wrapped.nvim",
+    dependencies = { "nvzone/volt" },
+    cmd = { "WrappedNvim" },
+    opts = {},
+  }
 }
-return misc

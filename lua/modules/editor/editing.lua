@@ -16,10 +16,10 @@ return {
   },
   {
     'gbprod/yanky.nvim',
-    config = function()
+    opts = function()
       local utils = require 'yanky.utils'
       local mapping = require 'yanky.telescope.mapping'
-      require('yanky').setup {
+      return {
         ring = {
           history_length = 500,
           storage = 'shada',

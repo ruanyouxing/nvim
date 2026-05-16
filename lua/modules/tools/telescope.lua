@@ -2,15 +2,15 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
-    { 'jvgrootveld/telescope-zoxide', lazy = true },
-    { 'nvim-lua/popup.nvim', lazy = true },
+    { 'jvgrootveld/telescope-zoxide',              lazy = true },
+    { 'nvim-lua/popup.nvim',                       lazy = true },
   },
-  config = function()
+  opts = function()
     local actions = require 'telescope.actions'
     require('telescope').load_extension 'zoxide'
     require('telescope').load_extension 'media_files'
     require('telescope').load_extension 'persisted'
-    require('telescope').setup {
+    return {
       defaults = {
         preview = {
           treesitter = false,

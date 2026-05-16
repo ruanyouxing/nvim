@@ -75,8 +75,11 @@ local options   = {
   concealcursor  = 'nv',
 
   foldlevelstart = 99,
-  foldmethod     = 'manual',
+  foldmethod     = 'expr',
   foldenable     = true,
+  foldcolumn     = '1',
+  foldexpr       = 'v:lua.vim.treesitter.foldexpr()',
+  fillchars      = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]],
 
   textwidth      = 500,
   expandtab      = true,
@@ -95,5 +98,4 @@ for k, v in pairs(options) do
   opt[k] = v
 end
 
-opt.fillchars:append({ diff = "-", fold = "-" })
-
+-- opt.fillchars:append({ diff = "-", fold = "-" })

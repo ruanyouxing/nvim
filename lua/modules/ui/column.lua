@@ -1,15 +1,9 @@
 return {
   {
     'luukvbaal/statuscol.nvim',
-    config = function()
-      vim.opt.foldcolumn = '1'
-      vim.opt.foldlevel = 99
-      vim.o.foldenable = true
-      vim.opt.foldmethod = 'expr'
-      vim.opt.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
-      vim.o.fillchars = [[eob: ,fold: ,foldopen:,foldsep: ,foldclose:]]
+    opts = function()
       local builtin = require 'statuscol.builtin'
-      require('statuscol').setup {
+      return {
         ft_ignore = { 'NvimTree', 'Trouble', 'undotree' },
         segments = {
           { text = { builtin.foldfunc }, click = 'v:lua.ScFa' },

@@ -10,7 +10,7 @@ return {
     'sindrets/diffview.nvim',
     config = function()
       local cb = require('diffview.config').diffview_callback
-      require('diffview').setup {
+      return {
         diff_binaries = false,
         enhanced_diff_hl = false,
         use_icons = true,

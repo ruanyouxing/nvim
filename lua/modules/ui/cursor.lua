@@ -11,9 +11,9 @@ return {
   },
   {
     'cxwx/specs.nvim',
-    event = 'CursorMoved',
-    config = function()
-      require('specs').setup {
+    lazy = true,
+    opts = function()
+      return {
         show_jumps = true,
         min_jump = 10,
         popup = {
