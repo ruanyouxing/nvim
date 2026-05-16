@@ -1,4 +1,4 @@
-local jump_modes = { 'n', 'o', 'x' }
+local jump_modes = { 'n', 'o', 'x', 'v' }
 return {
   {
     'chrisgrieser/nvim-spider',
@@ -34,51 +34,65 @@ return {
     },
   },
   {
-    'smoka7/hop.nvim',
-    lazy = true,
+    "folke/flash.nvim",
+    event = "VeryLazy",
+    ---@type Flash.Config
     opts = {
-      keys = 'etovxqpdygfblzhckisuran',
+      modes = {
+        char = {
+          enabled = false,
+          jump_labels = true,
+        }
+      },
+      label = {
+        rainbow = {
+          enabled = true,
+          shade = 9,
+        },
+        uppercase = false,
+      }
     },
     keys = {
-      {
-        mode = { 'n', 'v' },
-        '<S-Space>',
-        function()
-          require('hop').hint_lines_skip_whitespace()
-        end,
-      },
-      {
-        mode = 'v',
-        'w',
-        function()
-          require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR }
-        end,
-      },
-      {
-        mode = 'v',
-        'W',
-        function()
-          require('hop').hint_words { direction = require('hop.hint').HintDirection.BEFORE_CURSOR }
-        end,
-      },
-      {
-        mode = { 'n', 'v' },
-        'L',
-        function()
-          require('hop').hint_words { direction = require('hop.hint').HintDirection.AFTER_CURSOR, current_line_only = true }
-        end,
-      },
-      {
-        mode = { 'n', 'v' },
-        'H',
-        function()
-          require('hop').hint_words {
-            direction = require('hop.hint').HintDirection.BEFORE_CURSOR,
-            current_line_only = true,
+      { "s", mode = jump_modes, function() require("flash").jump() end,       desc = "Flash Jump" },
+
+      { "S", mode = jump_modes, function() require("flash").treesitter() end, desc = "Flash Treesitter" }, {
+      'H',
+      mode = jump_modes,
+      function()
+        require('flash').jump {
+          search = {
+            forward = true,
+            wrap = false,
+            multi_window = false
           }
-        end,
+        }
+      end
+    },
+      {
+        'L',
+        mode = jump_modes,
+        function()
+          require('flash').jump {
+            search = {
+              forward = false,
+              wrap = false,
+              multi_window = false
+            } }
+        end
       },
-    }
-  } -- Will be replaced by flash.nvim soon I guess?
-  ,
+
+      {
+        "<S-Space>",
+        mode = jump_modes,
+        function()
+          require("flash").jump({
+            search = { mode = "search", max_length = 0 },
+            label = { after = { 0, 0 } },
+            pattern = "^"
+          })
+        end,
+        desc = "Flash Lines"
+      },
+    },
+  },
 }
