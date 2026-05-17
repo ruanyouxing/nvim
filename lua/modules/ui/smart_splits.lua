@@ -1,6 +1,7 @@
 return {
   'mrjones2014/smart-splits.nvim',
   opts = { default_amount = 1 },
+  pin = true,
   keys = {
     {
       '<C-h>',

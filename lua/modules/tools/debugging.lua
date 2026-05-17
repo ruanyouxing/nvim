@@ -108,5 +108,6 @@ return {
     'rcarriga/nvim-dap-ui',
     lazy = true,
     opts = {},
+    dependencies = { 'nvim-neotest/nvim-nio' }
   },
 }

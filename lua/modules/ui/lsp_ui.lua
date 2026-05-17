@@ -172,7 +172,7 @@ return {
         auto_attach = true,
       },
     },
-    lazy = true,
+    cmd = 'Navbuddy'
   },
   {
     'folke/trouble.nvim',

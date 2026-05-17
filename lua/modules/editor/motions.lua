@@ -33,10 +33,10 @@ return {
       },
     },
   },
+---@type "Flash.Config"
   {
     "folke/flash.nvim",
     event = "VeryLazy",
-    ---@type Flash.Config
     opts = {
       modes = {
         char = {
@@ -61,7 +61,7 @@ return {
       function()
         require('flash').jump {
           search = {
-            forward = true,
+            forward = false,
             wrap = false,
             multi_window = false
           }
@@ -74,7 +74,7 @@ return {
         function()
           require('flash').jump {
             search = {
-              forward = false,
+              forward = true,
               wrap = false,
               multi_window = false
             } }
