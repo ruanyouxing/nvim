@@ -136,7 +136,7 @@ return {
           globalstatus = true,
           disabled_filetypes = {
             statusline = {
-              'dashboard',
+              'snacks_dashboard',
               'TelescopePrompt',
             },
           },

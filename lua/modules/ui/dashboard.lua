@@ -1,110 +1,63 @@
 return {
-  'glepnir/dashboard-nvim',
-  config = function()
-    local db = require 'dashboard'
-    local version = vim.version()
-    local plugins_count = require('lazy').stats().count
-
-    local header = {
-      desc = '',
-      '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠆⠜⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⠿⠿⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿',
-      '⣿⣿⡏⠁⠀⠀⠀⠀⠀⣀⣠⣤⣤⣶⣶⣶⣶⣶⣦⣤⡄⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿',
-      '⣿⣿⣷⣄⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⡧⠇⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣾⣮⣭⣿⡻⣽⣒⠀⣤⣜⣭⠐⢐⣒⠢⢰⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⣏⣿⣿⣿⣿⣿⣿⡟⣾⣿⠂⢈⢿⣷⣞⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣷⣶⣾⡿⠿⣿⠗⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠻⠋⠉⠑⠀⠀⢘⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⣿⡿⠟⢹⣿⣿⡇⢀⣶⣶⠴⠶⠀⠀⢽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⣿⣿⣿⡿⠀⠀⢸⣿⣿⠀⠀⠣⠀⠀⠀⠀⠀⡟⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⠹⣿⣧⣀⠀⠀⠀⠀⡀⣴⠁⢘⡙⢿⣿⣿⣿⣿⣿⣿⣿⣿',
-      '⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⠗⠂⠄⠀⣴⡟⠀⠀⡃⠀⠉⠉⠟⡿⣿⣿⣿⣿',
-      '⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠾⠛⠂⢹⠀⠀⠀⢡⠀⠀⠀⠀⠀⠙⠛⠿⢿',
-      '',
-      '',
-    }
-    local footer = {
-      ' ',
-      ' Today is' .. os.date ' %d-%m-%Y 📆',
-      tostring(plugins_count) .. ' plugins installed',
-      'Version: ' .. version.major .. '.' .. version.minor .. '.' .. version.patch,
-      '',
-    }
-
-    db.setup {
-      theme = 'doom',
-      config = {
-        header = header,
-        center = {
+  "folke/snacks.nvim",
+  opts = {
+    dashboard = {
+      enabled = true,
+      preset = {
+        header = [[
+      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠿⠿⠿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⣿⠟⠋⠁⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⠁⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢺⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠆⠜⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⠿⠿⠛⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠉⠻⣿⣿⣿⣿⣿
+      ⣿⣿⡏⠁⠀⠀⠀⠀⠀⣀⣠⣤⣤⣶⣶⣶⣶⣶⣦⣤⡄⠀⠀⠀⠀⢀⣴⣿⣿⣿⣿⣿
+      ⣿⣿⣷⣄⠀⠀⠀⢠⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⢿⡧⠇⢀⣤⣶⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣾⣮⣭⣿⡻⣽⣒⠀⣤⣜⣭⠐⢐⣒⠢⢰⢸⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⣏⣿⣿⣿⣿⣿⣿⡟⣾⣿⠂⢈⢿⣷⣞⣸⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⣿⣽⣿⣿⣷⣶⣾⡿⠿⣿⠗⠈⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠻⠋⠉⠑⠀⠀⢘⢻⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⣿⡿⠟⢹⣿⣿⡇⢀⣶⣶⠴⠶⠀⠀⢽⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⣿⣿⣿⡿⠀⠀⢸⣿⣿⠀⠀⠣⠀⠀⠀⠀⠀⡟⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⣿⣿⣿⡿⠟⠋⠀⠀⠀⠀⠹⣿⣧⣀⠀⠀⠀⠀⡀⣴⠁⢘⡙⢿⣿⣿⣿⣿⣿⣿⣿⣿
+      ⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀⠀⠈⠙⢿⠗⠂⠄⠀⣴⡟⠀⠀⡃⠀⠉⠉⠟⡿⣿⣿⣿⣿
+      ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠾⠛⠂⢹⠀⠀⠀⢡⠀⠀⠀⠀⠀⠙⠛⠿⢿
+      ]],
+        keys = {
+          { icon = "󰈞 ", key = "f", desc = "Find file", action = ":Telescope find_files" },
+          { icon = "󰈢 ", key = "e", desc = "Recent files", action = ":Telescope oldfiles" },
           {
-            desc = '  Open files ',
-            desc_hl = '@variable',
-            group = 'Label',
-            action = 'Telescope find_files',
-            key = '<C-o>',
-          },
-          {
-            desc = '  Create a new file ',
-            desc_hl = '@variable',
-            group = 'Label',
+            icon = " ",
+            key = "<C-S-n>",
+            desc = "New file",
             action = function()
               vim.ui.input({ prompt = 'File name:' }, function(input)
-                if input == nil then
+                if input == nil or input == "" then
                   return
                 end
                 vim.cmd('e ' .. input)
               end)
-            end,
-            key = '<C-S-n>',
+            end
           },
+          { icon = "󰙅 ", key = "<C-n>", desc = "Open file tree", action = ":Neotree toggle" },
+          { icon = " ", key = "T", desc = "Telescope", action = ":Telescope" },
+          { icon = " ", key = "S", desc = "List available sessions", action = ":Telescope persisted" },
           {
-            desc = '󰙅  Open file tree',
-            desc_hl = '@variable',
-            group = 'Label',
-            key = '<C-n>',
-            action = 'Neotree toggle',
-          },
-          {
-            desc = '  Telescope',
-            desc_hl = '@variable',
-            group = 'Label',
+            icon = " ",
+            key = "<leader>s",
+            desc = "Load latest saved session",
             action = function()
-              vim.cmd [[Telescope]]
-            end,
-            key = 'T',
+              require('persisted')
+                  .load { last = true }
+            end
           },
-          {
-            desc = '  List available sessions',
-            desc_hl = '@variable',
-            group = 'Label',
-            key = 'S',
-            action = function()
-              vim.cmd [[Telescope persisted]]
-            end,
-          },
-          {
-            desc = '  Load latest saved session',
-            desc_hl = '@variable',
-            group = 'Label',
-            key = '<leader>s',
-            action = function()
-              require('persisted').load { last = true }
-            end,
-          },
-          {
-            desc = '󰗼 Exit Neovim',
-            desc_hl = '@variable',
-            group = 'Label',
-            key = '<C-q>',
-            action = 'q!',
-          },
+          { icon = "󰗼 ", key = "<C-q>", desc = "Exit Neovim", action = ":qa" },
         },
-        footer = footer,
       },
-    }
-    vim.api.nvim_set_hl(0, 'DashboardHeader', { fg = '#f7db32' })
-  end,
+      sections = {
+        { section = "header" },
+        { title = "Keys", icon = " ", section = "keys", padding = 2, indent = 3 },
+        { section = "startup" },
+      },
+    },
+  },
 }

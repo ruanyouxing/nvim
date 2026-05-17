@@ -135,7 +135,7 @@ return {
   {
     'j-hui/fidget.nvim',
     opts = {},
-    lazy = true,
+    event = 'LspAttach',
   },
   { 'onsails/lspkind.nvim', lazy = true } -- , {
   -- This shit has bugs

@@ -32,7 +32,7 @@ return {
       set_cursor = true,
       set_cursorline = true,
       set_number = true,
-      ignore = { 'NvimTree', 'TelescopePrompt', 'dashboard' },
+      ignore = { 'NvimTree', 'TelescopePrompt', 'snacks_dashboard' },
     }
   } -- ,{ 'Pheon-Dev/pigeon', lazy = true }
   ,
