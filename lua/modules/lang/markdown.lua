@@ -18,7 +18,7 @@ return {
         color_8 = { '#FFF9E3', 'smart' }, -- Cosmic latte
         color_9 = { '#7d5c34', 'smart' }, -- Fallow brown
       },
-    }
+    },
   },
   {
     'iamcco/markdown-preview.nvim',

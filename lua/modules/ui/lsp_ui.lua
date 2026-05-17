@@ -53,8 +53,7 @@ return {
       },
     },
     cmd = 'Outline',
-  }
-  ,
+  },
   {
     'utilyre/barbecue.nvim',
     opts = {
@@ -63,8 +62,7 @@ return {
     },
     dependencies = 'nvim-navic',
     event = 'LspAttach',
-  }
-  ,
+  },
   {
     'SmiteshP/nvim-navic',
     opts = {
@@ -137,8 +135,7 @@ return {
     opts = {},
     event = 'LspAttach',
   },
-  { 'onsails/lspkind.nvim', lazy = true } -- , {
-  -- This shit has bugs
+  { 'onsails/lspkind.nvim', lazy = true }  -- This shit has bugs
   --   'gorbit99/codewindow.nvim',
   --   opts = {
   --       auto_enable = false,
@@ -164,7 +161,7 @@ return {
   -- },
   --   }
   -- }
-  ,
+, -- , {
   {
     'hasansujon786/nvim-navbuddy',
     opts = {
@@ -172,7 +169,7 @@ return {
         auto_attach = true,
       },
     },
-    cmd = 'Navbuddy'
+    cmd = 'Navbuddy',
   },
   {
     'folke/trouble.nvim',

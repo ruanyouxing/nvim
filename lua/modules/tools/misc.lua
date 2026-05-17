@@ -5,8 +5,7 @@ return {
       templates = { 'builtin', 'cpp_build' },
     },
     cmd = 'OverseerRun',
-  }
-  ,
+  },
   {
     'folke/which-key.nvim',
     event = 'VeryLazy',
@@ -23,9 +22,9 @@ return {
     cmd = 'ColorizerToggle',
   },
   {
-    "aikhe/wrapped.nvim",
-    dependencies = { "nvzone/volt" },
-    cmd = { "WrappedNvim" },
-    opts = { path = "/home/hungz/.dotfiles/nvim/" },
-  }
+    'aikhe/wrapped.nvim',
+    dependencies = { 'nvzone/volt' },
+    cmd = { 'WrappedNvim' },
+    opts = { path = '/home/hungz/.dotfiles/nvim/' },
+  },
 }

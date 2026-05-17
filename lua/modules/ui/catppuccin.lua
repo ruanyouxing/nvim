@@ -1,12 +1,12 @@
 return {
-  "catppuccin/nvim",
-  name = "catppuccin",
+  'catppuccin/nvim',
+  name = 'catppuccin',
   build = ':CatppuccinCompile',
   lazy = false,
   priority = 1000,
   opts = {
-    flavour = "macchiato",
-    compile_path = vim.fn.stdpath("cache") .. "/catppuccin",
+    flavour = 'macchiato',
+    compile_path = vim.fn.stdpath 'cache' .. '/catppuccin',
     compile_check = false,
 
     transparent_background = false,

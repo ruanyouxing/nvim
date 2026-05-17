@@ -2,8 +2,8 @@ return {
   'nvim-telescope/telescope.nvim',
   dependencies = {
     { 'nvim-telescope/telescope-media-files.nvim', lazy = true },
-    { 'jvgrootveld/telescope-zoxide',              lazy = true },
-    { 'nvim-lua/popup.nvim',                       lazy = true },
+    { 'jvgrootveld/telescope-zoxide', lazy = true },
+    { 'nvim-lua/popup.nvim', lazy = true },
   },
   opts = function()
     local actions = require 'telescope.actions'

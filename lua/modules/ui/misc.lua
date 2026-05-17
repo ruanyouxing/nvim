@@ -33,8 +33,7 @@ return {
       set_cursorline = true,
       set_number = true,
       ignore = { 'NvimTree', 'TelescopePrompt', 'snacks_dashboard' },
-    }
-  } -- ,{ 'Pheon-Dev/pigeon', lazy = true }
-  ,
+    },
+  }, -- ,{ 'Pheon-Dev/pigeon', lazy = true }
   { 'mbbill/undotree', cmd = 'UndotreeToggle' },
 }

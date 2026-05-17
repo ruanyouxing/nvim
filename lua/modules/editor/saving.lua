@@ -28,4 +28,5 @@ return {
       close_buffers_with_windows = false,
     },
     event = 'VeryLazy',
-  } }
+  },
+}

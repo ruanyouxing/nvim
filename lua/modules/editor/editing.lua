@@ -12,7 +12,7 @@ return {
       treesitter = {
         stopline = 500,
       },
-    }
+    },
   },
   {
     'gbprod/yanky.nvim',
@@ -52,11 +52,11 @@ return {
       }
     end,
     keys = {
-      { 'p',  plug 'YankyPutAfter',   mode = { 'n', 'x' } },
-      { 'P',  plug 'YankyPutBefore',  mode = { 'n', 'x' } },
-      { 'gp', plug 'YankyGPutAfter',  mode = { 'n', 'x' } },
+      { 'p', plug 'YankyPutAfter', mode = { 'n', 'x' } },
+      { 'P', plug 'YankyPutBefore', mode = { 'n', 'x' } },
+      { 'gp', plug 'YankyGPutAfter', mode = { 'n', 'x' } },
       { 'gP', plug 'YankyGPutBefore', mode = { 'n', 'x' } },
-      { 'y',  plug 'YankyYank',       mode = { 'n', 'x' } },
+      { 'y', plug 'YankyYank', mode = { 'n', 'x' } },
       {
         '<C-S-y>',
         function()
@@ -91,7 +91,7 @@ return {
       local get_option = vim.filetype.get_option
       vim.filetype.get_option = function(filetype, option)
         return option == 'commentstring' and require('ts_context_commentstring.internal').calculate_commentstring()
-            or get_option(filetype, option)
+          or get_option(filetype, option)
       end
     end,
   },

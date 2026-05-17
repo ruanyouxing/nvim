@@ -5,7 +5,7 @@ return {
     return {
       signs = {
         DapBreakpoint = { text = '🟥', texthl = '', linehl = '', numhl = '' },
-        DapStopped    = { text = '🔴', texthl = '', linehl = '', numhl = '' },
+        DapStopped = { text = '🔴', texthl = '', linehl = '', numhl = '' },
       },
       adapters = {
         cppdbg = {
@@ -89,7 +89,7 @@ return {
   end,
 
   config = function(_, opts)
-    local dap = require('dap')
+    local dap = require 'dap'
     for name, sign in pairs(opts.signs) do
       vim.fn.sign_define(name, sign)
     end
@@ -108,6 +108,6 @@ return {
     'rcarriga/nvim-dap-ui',
     lazy = true,
     opts = {},
-    dependencies = { 'nvim-neotest/nvim-nio' }
+    dependencies = { 'nvim-neotest/nvim-nio' },
   },
 }
