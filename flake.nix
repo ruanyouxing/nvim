@@ -21,18 +21,28 @@
         "aarch64-darwin"
         "x86_64-darwin"
       ];
-      perSystem = {pkgs, ...}: let
+      perSystem = {
+        pkgs,
+        system,
+        ...
+      }: let
         neovim = mnw.lib.wrap {inherit inputs pkgs;} ./nix;
+        depsAttr = import ./nix/dependencies.nix {inherit pkgs;};
       in {
         _module.args.pkgs = import nixpkgs {
           system = "x86_64-linux";
           config.allowUnfree = true;
         };
+        legacyPackages.nvimDepedencies = depsAttr.extraBinPath;
         packages = {
           inherit neovim;
           inherit (neovim) devMode;
 
           default = neovim;
+          nvim-dependencies = pkgs.buildEnv {
+            name = "nvim-dependencies";
+            paths = depsAttr.extraBinPath;
+          };
         };
       };
     };
