@@ -30,7 +30,7 @@
         depsAttr = import ./nix/dependencies.nix {inherit pkgs;};
       in {
         _module.args.pkgs = import nixpkgs {
-          system = "x86_64-linux";
+          inherit system;
           config.allowUnfree = true;
         };
         legacyPackages.nvimDepedencies = depsAttr.extraBinPath;
