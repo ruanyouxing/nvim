@@ -1,6 +1,6 @@
 return {
   'noib3/nvim-cokeline',
-  event = 'UIEnter',
+  event = 'ColorScheme',
   opts = function()
     local get_hex = require('cokeline.hlgroups').get_hl_attr
     local mappings = require 'cokeline/mappings'
@@ -71,22 +71,22 @@ return {
           end,
           style = function(buffer)
             return ((buffer.is_focused and buffer.diagnostics.errors ~= 0) and 'bold,underline')
-              or buffer.is_modified and 'italic,bold'
-              or buffer.is_focused and 'bold'
-              or buffer.diagnostics.errors ~= 0 and 'underline'
-              or nil
+                or buffer.is_modified and 'italic,bold'
+                or buffer.is_focused and 'bold'
+                or buffer.diagnostics.errors ~= 0 and 'underline'
+                or nil
           end,
         },
         {
           text = function(buffer)
             return (buffer.diagnostics.errors ~= 0 and ' E' .. buffer.diagnostics.errors)
-              or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
-              or ''
+                or (buffer.diagnostics.warnings ~= 0 and ' W' .. buffer.diagnostics.warnings .. ' ')
+                or ''
           end,
           fg = function(buffer)
             return (buffer.diagnostics.errors ~= 0 and errors_fg)
-              or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
-              or nil
+                or (buffer.diagnostics.warnings ~= 0 and warnings_fg)
+                or nil
           end,
         },
         {
