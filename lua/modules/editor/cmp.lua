@@ -17,16 +17,6 @@ return {
       { 'erooke/blink-cmp-latex' },
       { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
       { 'joelazar/blink-calc' },
-      {
-        'folke/lazydev.nvim',
-        ft = 'lua',
-        opts = {
-          libary = {
-            { path = '${3rd}/luv/library',                      words = { 'vim%.uv' } },
-            { path = '/run/current-system/sw/share/hypr/stubs', words = { 'hl%.' } },
-          },
-        },
-      },
     },
 
     opts = {
@@ -242,5 +232,15 @@ return {
       require('luasnip.loaders.from_lua').lazy_load { paths = mnw.configDir .. '/snippets' }
     end,
     dependencies = { 'rafamadriz/friendly-snippets' },
+  },
+  {
+    'folke/lazydev.nvim',
+    ft = 'lua',
+    opts = {
+      library = {
+        { path = '${3rd}/luv/library',                      words = { 'vim%.uv' } },
+        { path = '/run/current-system/sw/share/hypr/stubs/', words = { 'hl%.' } },
+      },
+    },
   },
 }
