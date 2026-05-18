@@ -25,5 +25,7 @@
     yarn
     haskellPackages.greenclip
     lldb
+    luajitPackages.luarocks
+    luajit
   ];
 }
