@@ -22,7 +22,8 @@ return {
         ft = 'lua',
         opts = {
           libary = {
-            { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
+            { path = '${3rd}/luv/library',                      words = { 'vim%.uv' } },
+            { path = '/run/current-system/sw/share/hypr/stubs', words = { 'hl%.' } },
           },
         },
       },
@@ -140,7 +141,7 @@ return {
           draw = {
             columns = {
               { 'kind_icon' },
-              { 'label', 'label_description', gap = 1 },
+              { 'label',      'label_description', gap = 1 },
               { 'source_name' },
             },
             components = {
