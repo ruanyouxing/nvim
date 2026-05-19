@@ -17,6 +17,7 @@ return {
       { 'erooke/blink-cmp-latex' },
       { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
       { 'joelazar/blink-calc' },
+      { 'yutkat/cmp-mocword' }
     },
 
     opts = {
@@ -36,11 +37,15 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc', 'lazydev' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc', 'lazydev', 'mocword' },
         per_filetype = {
           markdown = { inherit_defaults = true, 'render-markdown', 'emoji' },
         },
         providers = {
+          mocword = {
+            name = 'mocword',
+            module = 'blink.compat.source'
+          },
           buffer = {
             name = 'Buffer',
             opts = {
@@ -238,7 +243,7 @@ return {
     ft = 'lua',
     opts = {
       library = {
-        { path = '${3rd}/luv/library',                      words = { 'vim%.uv' } },
+        { path = '${3rd}/luv/library',                       words = { 'vim%.uv' } },
         { path = '/run/current-system/sw/share/hypr/stubs/', words = { 'hl%.' } },
       },
     },
