@@ -1,5 +1,8 @@
 local function devicons_highlight(ctx)
   local hl = ctx.kind_hl
+  if ctx.source_name == 'mocword' then
+    return 'BlinkCmpKindText'
+  end
   if vim.tbl_contains({ 'Path' }, ctx.source_name) then
     local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
     if dev_icon then
@@ -44,7 +47,8 @@ return {
         providers = {
           mocword = {
             name = 'mocword',
-            module = 'blink.compat.source'
+            module = 'blink.compat.source',
+            score_offset = -1,
           },
           buffer = {
             name = 'Buffer',
@@ -143,7 +147,11 @@ return {
               kind_icon = {
                 text = function(ctx)
                   local icon = ctx.kind_icon
-                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                  local kind = ctx.kind
+                  if ctx.source_name == 'mocword' then
+                    ctx.kind = 'Text'
+                    icon = require('lspkind').symbol_map[ctx.kind] or ''
+                  elseif vim.tbl_contains({ 'Path' }, ctx.source_name) then
                     local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
                     if dev_icon then
                       icon = dev_icon
