@@ -89,3 +89,23 @@ autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
   end,
 })
+
+
+autocmd({ "InsertLeave", "BufLeave", "FocusLost" }, {
+  group = vim.api.nvim_create_augroup("SmartAutoSave", { clear = true }),
+  pattern = all,
+  callback = function()
+    local buf = vim.api.nvim_get_current_buf()
+    if vim.bo[buf].buftype ~= "" then
+      return
+    end
+    if vim.bo[buf].modifiable and not vim.bo[buf].readonly and vim.bo[buf].modified then
+      vim.cmd("silent! update")
+      local filename = vim.fn.expand("%:t")
+      vim.notify("Saved: " .. filename, vim.log.levels.INFO, {
+        title = "Auto Save",
+        timeout = 1500
+      })
+    end
+  end,
+})

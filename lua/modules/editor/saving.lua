@@ -1,9 +1,9 @@
 return {
-  {
-    'Pocco81/AutoSave.nvim',
-    event = 'VeryLazy',
-    opts = {},
-  },
+  -- {
+  --   'Pocco81/AutoSave.nvim',
+  --   event = 'VeryLazy',
+  --   opts = {},
+  -- },
   {
     'olimorris/persisted.nvim',
     event = 'VeryLazy',
@@ -12,9 +12,7 @@ return {
       autosave = true,
       should_autosave = true,
       use_git_branch = true,
-      telescope = {
-        reset_prompt_after_deletion = true,
-      },
+      follow_cwd = false,
     },
   },
   {
