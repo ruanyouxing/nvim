@@ -335,13 +335,13 @@ local menu_items = {
   {
     text = 'Undo tree',
     action = function()
-      vim.cmd 'UndotreeShow'
+      vim.cmd 'UndotreeToggle'
     end,
   },
   {
     text = 'Yank history',
     action = function()
-      Snacks.picker.registers()
+      Snacks.picker.yanky()
     end,
   },
 }
