@@ -27,4 +27,5 @@ return {
     cmd = { 'WrappedNvim' },
     opts = { path = '/home/hungz/.dotfiles/nvim/' },
   },
+  { 'nvim-lua/plenary.nvim', lazy = false }
 }

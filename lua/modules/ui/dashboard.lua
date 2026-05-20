@@ -23,8 +23,14 @@ return {
       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠾⠛⠂⢹⠀⠀⠀⢡⠀⠀⠀⠀⠀⠙⠛⠿⢿
       ]],
         keys = {
-          { icon = '󰈞 ', key = 'f', desc = 'Find file', action = ':Telescope find_files' },
-          { icon = '󰈢 ', key = 'e', desc = 'Recent files', action = ':Telescope oldfiles' },
+          {
+            icon = '󰈢 ',
+            key = 'e',
+            desc = 'Recent files',
+            action = function()
+              Snacks.picker.recent()
+            end
+          },
           {
             icon = ' ',
             key = '<C-S-n>',
@@ -39,8 +45,22 @@ return {
             end,
           },
           { icon = '󰙅 ', key = '<C-n>', desc = 'Open file tree', action = ':Neotree toggle' },
-          { icon = ' ', key = 'T', desc = 'Telescope', action = ':Telescope' },
-          { icon = ' ', key = 'S', desc = 'List available sessions', action = ':Telescope persisted' },
+          {
+            icon = ' ',
+            key = 'T',
+            desc = 'Picker',
+            action = function()
+              Snacks.picker()
+            end
+          },
+          {
+            icon = ' ',
+            key = 'S',
+            desc = 'List available sessions',
+            action = function()
+              vim.cmd [[Persisted select]]
+            end
+          },
           {
             icon = ' ',
             key = '<leader>s',

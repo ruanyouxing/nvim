@@ -10,7 +10,7 @@ local menu_items = {
   {
     text = 'Colorschemes',
     action = function()
-      vim.cmd 'Telescope colorscheme'
+      Snacks.picker.colorschemes()
     end,
   },
   {
@@ -285,15 +285,15 @@ local menu_items = {
     end,
   },
   {
-    text = 'Telescope',
+    text = 'Telescope (pickers)',
     action = function()
-      vim.cmd 'Telescope'
+      Snacks.picker()
     end,
   },
   {
-    text = 'Telescope: Find in buffer',
+    text = 'Pickers: Find in buffer',
     action = function()
-      vim.cmd 'Telescope current_buffer_fuzzy_find'
+      Snacks.picker.lines()
     end,
   },
   {
@@ -341,7 +341,7 @@ local menu_items = {
   {
     text = 'Yank history',
     action = function()
-      require('telescope').extensions.yank_history.yank_history()
+      Snacks.picker.registers()
     end,
   },
 }
@@ -355,9 +355,6 @@ M.trigger_menu = function()
     title = 'Command Menu',
     items = menu_items,
     format = 'text',
-    layout = {
-      preset = 'vscode',
-    },
     confirm = function(picker, item)
       picker:close()
       if item and item.action then
