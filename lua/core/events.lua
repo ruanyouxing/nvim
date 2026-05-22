@@ -91,7 +91,7 @@ autocmd('ColorScheme', {
 })
 
 
-autocmd({ "InsertLeave", "BufLeave", "FocusLost" }, {
+autocmd({ "InsertLeave", "BufLeave", "FocusLost", "TextChanged" }, {
   group = vim.api.nvim_create_augroup("SmartAutoSave", { clear = true }),
   pattern = all,
   callback = function()
