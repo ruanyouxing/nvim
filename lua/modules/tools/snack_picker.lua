@@ -10,6 +10,9 @@ return {
           hidden = true,
           exclude = { ".git/*", "node_modules/*", "__pycache__/*" },
         },
+        zoxide = {
+          confirm = { "cd", "close" }
+        },
       },
       layout = {
         preset = 'telescope',

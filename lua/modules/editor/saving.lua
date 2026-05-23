@@ -1,9 +1,4 @@
 return {
-  -- {
-  --   'Pocco81/AutoSave.nvim',
-  --   event = 'VeryLazy',
-  --   opts = {},
-  -- },
   {
     'olimorris/persisted.nvim',
     event = 'VeryLazy',
