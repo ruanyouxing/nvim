@@ -5,7 +5,7 @@ return {
   lazy = false,
   priority = 1000,
   opts = {
-    flavour = 'macchiato',
+    flavour = 'mocha',
     compile_path = vim.fn.stdpath 'cache' .. '/catppuccin',
     compile_check = false,
 

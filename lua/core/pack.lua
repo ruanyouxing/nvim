@@ -14,7 +14,7 @@ require('lazy').setup {
 
   install = {
     missing = true,
-    colorscheme = { 'catppuccin-macchiato' },
+    colorscheme = { 'catppuccin-mocha' },
   },
 
   spec = {
