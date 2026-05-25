@@ -28,6 +28,6 @@
     luajitPackages.luarocks
     luajit
     rust-analyzer
-    bash-language-server
+    opencode
   ];
 }
