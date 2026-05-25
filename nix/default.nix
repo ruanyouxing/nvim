@@ -1,4 +1,4 @@
-{
+{pkgs,...}:{
   imports = [
     ./dependencies.nix
     ./plugins.nix
