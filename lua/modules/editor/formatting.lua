@@ -1,8 +1,7 @@
-config_dir = mnw.configDir
 return {
   'stevearc/conform.nvim',
   cmd = { 'ConformInfo' },
-  setup = {
+  opts = {
     formatters_by_ft = {
       lua = { 'stylua' },
       c = { 'clang_format' },
@@ -20,17 +19,12 @@ return {
     },
     formatters = {
       stylua = {
-        prepend_args = { '--config-path', vim.fn.expand(config_dir .. '/pack/mnw/start/nvim/stylua.toml') },
+        prepend_args = { '--config-path', mnw.configDir .. '/pack/mnw/start/nvim/stylua.toml' },
       },
       clang_format = {
-        prepend_args = { '-style=file:' .. vim.fn.expand(config_dir .. '/.clang_format') },
+        prepend_args = { '-style=file:' .. mnw.configDir .. '/pack/mnw/start/nvim/.clang_format' },
       },
     },
-
-    -- format_on_save = {
-    --   timeout_ms = 500,
-    --   lsp_fallback = true, -- Nếu conform không tìm thấy formatter, sẽ dùng LSP mặc định
-    -- },
   },
   keys = {
     {
@@ -38,7 +32,6 @@ return {
       '<leader>f',
       function()
         require('conform').format {
-          lsp_fallback = true,
           async = false,
           timeout_ms = 1000,
         }
