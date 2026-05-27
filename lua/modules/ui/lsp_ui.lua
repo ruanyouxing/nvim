@@ -135,8 +135,7 @@ return {
     opts = {},
     event = 'LspAttach',
   },
-  { 'onsails/lspkind.nvim', lazy = true }  -- This shit has bugs
-  --   'gorbit99/codewindow.nvim',
+  { 'onsails/lspkind.nvim', lazy = true }  --   'gorbit99/codewindow.nvim',
   --   opts = {
   --       auto_enable = false,
   --       exclude_filetypes = { 'NvimTree', 'UndoTree', 'Trouble', 'dashboard', 'tsplayground', 'Outline', 'spectre_panel' },
@@ -161,7 +160,7 @@ return {
   -- },
   --   }
   -- }
-, -- , {
+, -- , { -- This shit has bugs
   {
     'hasansujon786/nvim-navbuddy',
     opts = {

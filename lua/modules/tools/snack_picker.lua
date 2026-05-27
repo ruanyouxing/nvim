@@ -8,19 +8,19 @@ return {
       sources = {
         files = {
           hidden = true,
-          exclude = { ".git/*", "node_modules/*", "__pycache__/*" },
+          exclude = { '.git/*', 'node_modules/*', '__pycache__/*' },
         },
         zoxide = {
-          confirm = { "cd", "close" }
+          confirm = { 'cd', 'close' },
         },
       },
       layout = {
         preset = 'telescope',
-        hidden = { "preview" },
+        hidden = { 'preview' },
         layout = {
-          width  = 0.6,
-          height = 0.8
-        }
+          width = 0.6,
+          height = 0.8,
+        },
       },
     },
   },
@@ -30,21 +30,21 @@ return {
       function()
         Snacks.picker.grep()
       end,
-      desc = "Live grep"
+      desc = 'Live grep',
     },
     {
       '<C-t>',
       function()
         Snacks.picker.files()
       end,
-      desc = "Open files"
+      desc = 'Open files',
     },
     {
       '<leader>z',
       function()
         Snacks.picker.zoxide()
       end,
-      desc = "Jump to directory"
-    }
-  }
+      desc = 'Jump to directory',
+    },
+  },
 }

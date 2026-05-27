@@ -29,7 +29,7 @@ return {
             desc = 'Recent files',
             action = function()
               Snacks.picker.recent()
-            end
+            end,
           },
           {
             icon = ' ',
@@ -51,7 +51,7 @@ return {
             desc = 'Picker',
             action = function()
               Snacks.picker()
-            end
+            end,
           },
           {
             icon = ' ',
@@ -59,7 +59,7 @@ return {
             desc = 'List available sessions',
             action = function()
               vim.cmd [[Persisted select]]
-            end
+            end,
           },
           {
             icon = ' ',

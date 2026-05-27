@@ -20,7 +20,7 @@ return {
       { 'erooke/blink-cmp-latex' },
       { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
       { 'joelazar/blink-calc' },
-      { 'yutkat/cmp-mocword' }
+      { 'yutkat/cmp-mocword' },
     },
 
     opts = {
@@ -140,7 +140,7 @@ return {
           draw = {
             columns = {
               { 'kind_icon' },
-              { 'label',      'label_description', gap = 1 },
+              { 'label', 'label_description', gap = 1 },
               { 'source_name' },
             },
             components = {
@@ -251,7 +251,7 @@ return {
     ft = 'lua',
     opts = {
       library = {
-        { path = '${3rd}/luv/library',                       words = { 'vim%.uv' } },
+        { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
         { path = '/run/current-system/sw/share/hypr/stubs/', words = { 'hl%.' } },
       },
     },

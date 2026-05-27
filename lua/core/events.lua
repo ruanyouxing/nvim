@@ -90,21 +90,20 @@ autocmd('ColorScheme', {
   end,
 })
 
-
-autocmd({ "InsertLeave", "BufLeave", "FocusLost", "TextChanged" }, {
-  group = vim.api.nvim_create_augroup("SmartAutoSave", { clear = true }),
+autocmd({ 'InsertLeave', 'BufLeave', 'FocusLost', 'TextChanged' }, {
+  group = vim.api.nvim_create_augroup('SmartAutoSave', { clear = true }),
   pattern = all,
   callback = function()
     local buf = vim.api.nvim_get_current_buf()
-    if vim.bo[buf].buftype ~= "" then
+    if vim.bo[buf].buftype ~= '' then
       return
     end
     if vim.bo[buf].modifiable and not vim.bo[buf].readonly and vim.bo[buf].modified then
-      vim.cmd("silent! update")
-      local filename = vim.fn.expand("%:t")
-      vim.notify("Saved: " .. filename, vim.log.levels.INFO, {
-        title = "Auto Save",
-        timeout = 1500
+      vim.cmd 'silent! update'
+      local filename = vim.fn.expand '%:t'
+      vim.notify('Saved: ' .. filename, vim.log.levels.INFO, {
+        title = 'Auto Save',
+        timeout = 1500,
       })
     end
   end,

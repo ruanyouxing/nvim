@@ -43,7 +43,7 @@ function M.set_keybinds()
   xmap { { ' ', '' } }
 
   nmap {
-    { 'Y',     'y$',   desc = 'Yank to end of line' },
+    { 'Y', 'y$', desc = 'Yank to end of line' },
     { '<C-a>', 'ggVG', desc = 'Select all text' },
     {
       'T',
@@ -59,7 +59,7 @@ function M.set_keybinds()
       end,
       desc = 'Update Lazy plugins',
     },
-    { '<C-q>', cmd 'q!',   desc = 'Force quit' },
+    { '<C-q>', cmd 'q!', desc = 'Force quit' },
     {
       '<C-S-p>',
       function()
@@ -68,7 +68,7 @@ function M.set_keybinds()
       desc = 'Trigger Command Menu',
     },
     { '<C-y>', cmd 'redo', desc = 'Redo action' },
-    { '<C-z>', cmd 'u',    desc = 'Undo action' },
+    { '<C-z>', cmd 'u', desc = 'Undo action' },
     {
       '<leader>cc',
       function()
@@ -76,7 +76,7 @@ function M.set_keybinds()
       end,
       desc = 'Toggle conceal level',
     },
-    { 'R',     buf.rename,                 desc = 'LSP Rename variable' },
+    { 'R', buf.rename, desc = 'LSP Rename variable' },
 
     { '<C-]>', plug 'cokeline-focus-next', desc = 'Focus next tab' },
     { '<C-[>', plug 'cokeline-focus-prev', desc = 'Focus previous tab' },
