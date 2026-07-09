@@ -32,20 +32,6 @@ return {
             end,
           },
           {
-            icon = ' ',
-            key = '<C-S-n>',
-            desc = 'New file',
-            action = function()
-              vim.ui.input({ prompt = 'File name:' }, function(input)
-                if input == nil or input == '' then
-                  return
-                end
-                vim.cmd('e ' .. input)
-              end)
-            end,
-          },
-          { icon = '󰙅 ', key = '<C-n>', desc = 'Open file tree', action = ':Neotree toggle' },
-          {
             icon = ' ',
             key = 'T',
             desc = 'Picker',
