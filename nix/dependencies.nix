@@ -6,7 +6,6 @@
     pyright
     python313Packages.debugpy
     python313Packages.pip
-    black
     pylint
     nixd
     alejandra
@@ -20,10 +19,8 @@
     gnumake
     fzf
     lazygit
-    luajit
     nodejs
     yarn
-    haskellPackages.greenclip
     lldb
     luajitPackages.luarocks
     luajit

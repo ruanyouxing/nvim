@@ -33,7 +33,7 @@
           inherit system;
           config.allowUnfree = true;
         };
-        legacyPackages.nvimDepedencies = depsAttr.extraBinPath;
+        legacyPackages.nvimDependencies = depsAttr.extraBinPath;
         packages = {
           inherit neovim;
           inherit (neovim) devMode;

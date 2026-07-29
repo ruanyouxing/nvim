@@ -37,7 +37,6 @@ local xmap = bind 'x'
 
 function M.set_keybinds()
   local buf = vim.lsp.buf
-  _G.OnFocus = 0
 
   nmap { { ' ', '' } }
   xmap { { ' ', '' } }

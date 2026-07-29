@@ -17,7 +17,6 @@ end
 vim.lsp.config('*', {
   capabilities = capabilities,
   on_attach = on_attach,
-  flags = { debounce_text_changes = 500 },
 })
 
 local files = vim.api.nvim_get_runtime_file('after/lsp/*.lua', true)

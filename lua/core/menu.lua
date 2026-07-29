@@ -168,56 +168,6 @@ local menu_items = {
     end,
   },
   {
-    text = 'Hop: Select lines',
-    action = function()
-      vim.cmd 'normal! v'
-      require('hop').hint_lines()
-    end,
-  },
-  {
-    text = 'Hop: Select words',
-    action = function()
-      vim.cmd 'normal! v'
-      require('hop').hint_words()
-    end,
-  },
-  {
-    text = 'Hop: Start edit after selected line',
-    action = function()
-      require('hop').hint_lines()
-      vim.schedule(function()
-        vim.fn.feedkeys 'o'
-      end)
-    end,
-  },
-  {
-    text = 'Hop: Start edit before selected line',
-    action = function()
-      require('hop').hint_lines()
-      vim.schedule(function()
-        vim.fn.feedkeys 'O'
-      end)
-    end,
-  },
-  {
-    text = 'Hop: Yank/Paste after selected line',
-    action = function()
-      require('hop').hint_lines()
-      vim.schedule(function()
-        vim.fn.feedkeys 'p'
-      end)
-    end,
-  },
-  {
-    text = 'Hop: Yank/Paste before selected line',
-    action = function()
-      require('hop').hint_lines()
-      vim.schedule(function()
-        vim.fn.feedkeys 'P'
-      end)
-    end,
-  },
-  {
     text = 'Lazy',
     action = function()
       require('lazy').show()
@@ -303,33 +253,129 @@ local menu_items = {
     end,
   },
   {
+    text = 'Flash: Jump to line',
+    action = function()
+      require('flash').jump {
+        search = { mode = 'search', max_length = 0 },
+        label = { after = { 0, 0 } },
+        pattern = '^',
+      }
+    end,
+  },
+  {
+    text = 'Flash: Jump to word',
+    action = function()
+      require('flash').jump()
+    end,
+  },
+  {
+    text = 'Flash: Select lines',
+    action = function()
+      local flash = require 'flash'
+      vim.cmd 'normal! v'
+      flash.jump {
+        search = { mode = 'search', max_length = 0 },
+        label = { after = { 0, 0 } },
+        pattern = '^',
+      }
+    end,
+  },
+  {
+    text = 'Flash: Select words',
+    action = function()
+      local flash = require 'flash'
+      vim.cmd 'normal! v'
+      flash.jump()
+    end,
+  },
+  {
+    text = 'Flash: Jump to line and insert below',
+    action = function()
+      local group = vim.api.nvim_create_augroup('FlashMenuJump', { clear = true })
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'FlashComplete',
+        group = group,
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            vim.fn.feedkeys('o', 'n')
+          end)
+        end,
+      })
+      require('flash').jump {
+        search = { mode = 'search', max_length = 0 },
+        label = { after = { 0, 0 } },
+        pattern = '^',
+      }
+    end,
+  },
+  {
+    text = 'Flash: Jump to line and insert above',
+    action = function()
+      local group = vim.api.nvim_create_augroup('FlashMenuJump', { clear = true })
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'FlashComplete',
+        group = group,
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            vim.fn.feedkeys('O', 'n')
+          end)
+        end,
+      })
+      require('flash').jump {
+        search = { mode = 'search', max_length = 0 },
+        label = { after = { 0, 0 } },
+        pattern = '^',
+      }
+    end,
+  },
+  {
+    text = 'Flash: Jump to line and paste below',
+    action = function()
+      local group = vim.api.nvim_create_augroup('FlashMenuJump', { clear = true })
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'FlashComplete',
+        group = group,
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            vim.fn.feedkeys('p', 'n')
+          end)
+        end,
+      })
+      require('flash').jump {
+        search = { mode = 'search', max_length = 0 },
+        label = { after = { 0, 0 } },
+        pattern = '^',
+      }
+    end,
+  },
+  {
+    text = 'Flash: Jump to line and paste above',
+    action = function()
+      local group = vim.api.nvim_create_augroup('FlashMenuJump', { clear = true })
+      vim.api.nvim_create_autocmd('User', {
+        pattern = 'FlashComplete',
+        group = group,
+        once = true,
+        callback = function()
+          vim.schedule(function()
+            vim.fn.feedkeys('P', 'n')
+          end)
+        end,
+      })
+      require('flash').jump {
+        search = { mode = 'search', max_length = 0 },
+        label = { after = { 0, 0 } },
+        pattern = '^',
+      }
+    end,
+  },
+  {
     text = 'Toggle conceal',
     action = function()
       vim.o.conceallevel = vim.o.conceallevel > 0 and 0 or 2
-    end,
-  },
-  {
-    text = 'Toggle minimap',
-    action = function()
-      require('codewindow').toggle_minimap()
-    end,
-  },
-  {
-    text = 'Treesitter Playground',
-    action = function()
-      require('nvim-treesitter-playground.internal').toggle()
-    end,
-  },
-  {
-    text = 'Treesitter: Capture node under cursor',
-    action = function()
-      require('nvim-treesitter-playground.hl-info').show_hl_captures()
-    end,
-  },
-  {
-    text = 'Treesitter: Node under cursor',
-    action = function()
-      require('nvim-treesitter-playground.hl-info').show_ts_node()
     end,
   },
   {

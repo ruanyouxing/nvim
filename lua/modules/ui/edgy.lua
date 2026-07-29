@@ -47,7 +47,7 @@ return {
         size = { height = 0.3 },
         filter = function(_, win)
           return vim.w[win].snacks_win
-            and vim.w[win].snacks_win.position == pos
+            and vim.w[win].snacks_win.position == 'bottom'
             and vim.w[win].snacks_win.relative == 'editor'
             and not vim.w[win].trouble_preview
         end,

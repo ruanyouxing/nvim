@@ -25,7 +25,7 @@ return {
     'aikhe/wrapped.nvim',
     dependencies = { 'nvzone/volt' },
     cmd = { 'WrappedNvim' },
-    opts = { path = '/home/hungz/.dotfiles/nvim/' },
+    opts = { path = mnw.configDir },
   },
-  { 'nvim-lua/plenary.nvim', lazy = false },
+  { 'nvim-lua/plenary.nvim' },
 }

@@ -6,7 +6,7 @@ return {
     local mappings = require 'cokeline/mappings'
     local errors_fg = get_hex('DiagnosticError', 'fg')
     local warnings_fg = get_hex('DiagnosticWarn', 'fg')
-    local hints_fg = get_hex('Diagnostichint', 'fg')
+    local hints_fg = get_hex('DiagnosticHint', 'fg')
     local red = vim.g.terminal_color_1
     local green = vim.g.terminal_color_2
     local yellow = vim.g.terminal_color_3

@@ -3,7 +3,7 @@ local function devicons_highlight(ctx)
   if ctx.source_name == 'mocword' then
     return 'BlinkCmpKindText'
   end
-  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
+  if ctx.source_name == 'Path' then
     local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
     if dev_icon then
       hl = dev_hl
