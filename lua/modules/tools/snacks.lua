@@ -5,7 +5,7 @@ return {
     bufdelete = { enabled = true },
     terminal = {
       enabled = true,
-      shell = 'zsh',
+      shell = 'nu',
       win = {
         position = 'bottom',
         height = 7,
