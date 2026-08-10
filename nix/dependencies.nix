@@ -25,7 +25,8 @@
     luajitPackages.luarocks
     luajit
     rust-analyzer
-    opencode
+    rustfmt
     cargo
+    opencode
   ];
 }

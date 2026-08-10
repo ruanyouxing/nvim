@@ -89,5 +89,12 @@ autocmd('ColorScheme', {
     vim.api.nvim_set_hl(0, 'RainbowCyan', { fg = '#56B6C2' })
   end,
 })
+autocmd({ "InsertLeave", "TextChanged", "FocusLost" }, {
+  callback = function()
+    if vim.bo.modified and vim.bo.buftype == "" and vim.bo.modifiable then
+      vim.cmd("silent! update")
+    end
+  end,
+})
 
 

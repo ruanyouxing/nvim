@@ -15,6 +15,7 @@ return {
       html = { 'prettier' },
       css = { 'prettier' },
       markdown = { 'prettier' },
+      rust = {'rustfmt', lsp_format = 'fallback'},
       yaml = { 'prettier' },
     },
     formatters = {
