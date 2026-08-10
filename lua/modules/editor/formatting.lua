@@ -15,13 +15,10 @@ return {
       html = { 'prettier' },
       css = { 'prettier' },
       markdown = { 'prettier' },
-      rust = {'rustfmt', lsp_format = 'fallback'},
+      rust = { 'rustfmt', lsp_format = 'fallback' },
       yaml = { 'prettier' },
     },
     formatters = {
-      -- stylua = {
-      --   prepend_args = { '--config-path', mnw.configDir .. '/stylua.toml' },
-      -- },
       clang_format = {
         prepend_args = { '-style=file:' .. mnw.configDir .. '/.clang_format' },
       },

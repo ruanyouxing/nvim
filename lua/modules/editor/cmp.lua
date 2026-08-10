@@ -1,8 +1,5 @@
 local function devicons_highlight(ctx)
   local hl = ctx.kind_hl
-  if ctx.source_name == 'mocword' then
-    return 'BlinkCmpKindText'
-  end
   if ctx.source_name == 'Path' then
     local dev_icon, dev_hl = require('nvim-web-devicons').get_icon(ctx.label)
     if dev_icon then
@@ -20,7 +17,6 @@ return {
       { 'erooke/blink-cmp-latex' },
       { 'moyiz/blink-emoji.nvim', ft = 'markdown' },
       { 'joelazar/blink-calc' },
-      { 'yutkat/cmp-mocword' },
     },
 
     opts = {
@@ -40,16 +36,11 @@ return {
       },
 
       sources = {
-        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc', 'lazydev', 'mocword' },
+        default = { 'lsp', 'path', 'snippets', 'buffer', 'latex', 'calc', 'lazydev' },
         per_filetype = {
           markdown = { inherit_defaults = true, 'render-markdown', 'emoji' },
         },
         providers = {
-          mocword = {
-            name = 'mocword',
-            module = 'blink.compat.source',
-            score_offset = -1,
-          },
           buffer = {
             name = 'Buffer',
             opts = {
@@ -148,10 +139,7 @@ return {
                 text = function(ctx)
                   local icon = ctx.kind_icon
                   local kind = ctx.kind
-                  if ctx.source_name == 'mocword' then
-                    ctx.kind = 'Text'
-                    icon = require('lspkind').symbol_map[ctx.kind] or ''
-                  elseif vim.tbl_contains({ 'Path' }, ctx.source_name) then
+                  if vim.tbl_contains({ 'Path' }, ctx.source_name) then
                     local dev_icon, _ = require('nvim-web-devicons').get_icon(ctx.label)
                     if dev_icon then
                       icon = dev_icon
