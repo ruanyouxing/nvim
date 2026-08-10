@@ -19,9 +19,9 @@ return {
       yaml = { 'prettier' },
     },
     formatters = {
-      stylua = {
-        prepend_args = { '--config-path', mnw.configDir .. '/stylua.toml' },
-      },
+      -- stylua = {
+      --   prepend_args = { '--config-path', mnw.configDir .. '/stylua.toml' },
+      -- },
       clang_format = {
         prepend_args = { '-style=file:' .. mnw.configDir .. '/.clang_format' },
       },
