@@ -26,5 +26,6 @@
     luajit
     rust-analyzer
     opencode
+    cargo
   ];
 }
