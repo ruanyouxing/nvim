@@ -19,7 +19,7 @@
     gnumake
     fzf
     lazygit
-    nodejs
+    pnpm
     yarn
     lldb
     luajitPackages.luarocks
