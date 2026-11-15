@@ -25,17 +25,6 @@ return {
     },
   },
   keys = {
-    {
-      mode = { 'n', 'v' },
-      '<leader>f',
-      function()
-        require('conform').format {
-          async = false,
-          timeout_ms = 1000,
-        }
-      end,
-      { desc = 'Format file or range' },
-    },
   },
   event = 'BufWritePre',
 }

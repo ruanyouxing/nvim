@@ -69,8 +69,8 @@ local options = {
   listchars = 'tab:»·,nbsp:+,trail:·,extends:→,precedes:←',
   pumblend = 10,
   signcolumn = 'yes',
-  conceallevel = 2,
-  concealcursor = 'nv',
+  -- conceallevel = 2,
+  -- concealcursor = 'nv',
 
   foldlevelstart = 99,
   foldmethod = 'expr',

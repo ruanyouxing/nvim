@@ -50,6 +50,7 @@ return {
         function()
           require('outline').toggle { focus_outline = false }
         end,
+        desc = 'Symbols Outline',
       },
     },
     cmd = 'Outline',
@@ -114,17 +115,17 @@ return {
         priority = 10,
       },
       float = {
-        enabled = false,
+        enabled = true,
         text = '',
         win_opts = {},
       },
       virtual_text = {
-        enabled = false,
+        enabled = true,
         text = '💡',
         hl_mode = 'replace',
       },
       status_text = {
-        enabled = false,
+        enabled = true,
         text = '💡',
         text_unavailable = '',
       },
