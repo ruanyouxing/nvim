@@ -36,7 +36,8 @@ return {
   ---@type "Flash.Config"
   {
     'folke/flash.nvim',
-    event = 'VeryLazy',
+    lazy = true,
+    -- event = 'VeryLazy',
     opts = {
       modes = {
         char = {
@@ -50,64 +51,6 @@ return {
           shade = 9,
         },
         uppercase = false,
-      },
-    },
-    keys = {
-      {
-        's',
-        mode = jump_modes,
-        function()
-          require('flash').jump()
-        end,
-        desc = 'Flash Jump',
-      },
-
-      {
-        'S',
-        mode = jump_modes,
-        function()
-          require('flash').treesitter()
-        end,
-        desc = 'Flash Treesitter',
-      },
-      {
-        'H',
-        mode = jump_modes,
-        function()
-          require('flash').jump {
-            search = {
-              forward = false,
-              wrap = false,
-              multi_window = false,
-            },
-          }
-        end,
-      },
-      {
-        'L',
-        mode = jump_modes,
-        function()
-          require('flash').jump {
-            search = {
-              forward = true,
-              wrap = false,
-              multi_window = false,
-            },
-          }
-        end,
-      },
-
-      {
-        '<S-Space>',
-        mode = jump_modes,
-        function()
-          require('flash').jump {
-            search = { mode = 'search', max_length = 0 },
-            label = { after = { 0, 0 } },
-            pattern = '^',
-          }
-        end,
-        desc = 'Flash Lines',
       },
     },
   },

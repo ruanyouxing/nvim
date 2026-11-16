@@ -2,13 +2,6 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function()
     local buf = vim.lsp.buf
     require('which-key').add {
-      {
-        '<leader>l',
-        function()
-          require('which-key').show { keys = '<leader>L', loop = true }
-        end,
-        desc = 'LSP Hydra',
-      },
       { '<leader>Lda', buf.declaration, desc = 'LSP Declration', mode = 'n' },
       { '<leader>Lde', buf.definition, desc = 'LSP Definitions', mode = 'n' },
       { '<leader>Lds', buf.document_symbol, desc = 'LSP Document symbols', mode = 'n' },
@@ -24,7 +17,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             timeout_ms = 1000,
           }
         end,
-        { desc = 'Format file or range' },
+        desc = 'Format file',
         mode = { 'n', 'v' },
       },
       {
@@ -35,7 +28,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
             timeout_ms = 1000,
           }
         end,
-        { desc = 'Format file or range' },
+        desc = 'Format file',
         mode = { 'n', 'v' },
       },
     }

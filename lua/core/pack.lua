@@ -22,5 +22,6 @@ require('lazy').setup {
     { import = 'modules.tools' },
     { import = 'modules.ui' },
     { import = 'modules.lang' },
+    { import = 'modules.keymaps.which-key' },
   },
 }
