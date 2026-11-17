@@ -32,12 +32,31 @@ return {
       },
       {
         mode = 'n',
-        '<S-f>',
+        '<leader>F',
         function()
           require 'modules.keymaps.ufo'
           require('which-key').show { keys = '<M-F>' }
         end,
-        desc = 'Fold mode'
+        desc = 'Fold mode',
+      },
+      {
+        '<leader>g',
+        function()
+          require 'modules.keymaps.git'
+          require('which-key').show {
+            keys = '<leader>G',
+          }
+        end,
+        desc = 'Git',
+      },
+      {
+        '<leader>m',
+        function()
+          require 'modules.keymaps.mark'
+          require('which-key').show {
+            keys = '<leader>M',
+          }
+        end,
       },
     },
   },

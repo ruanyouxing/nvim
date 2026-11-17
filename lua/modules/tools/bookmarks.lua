@@ -12,13 +12,5 @@ return {
     custom_session_storage_dir = vim.fn.stdpath 'data' .. '/trailblazer/',
     mappings = {},
   },
-  keys = {
-    {
-      'mm',
-      function()
-        require('trailblazer').new_trail_mark()
-      end,
-    },
-  },
   lazy = true,
 }
