@@ -5,7 +5,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
       { '<leader>Lda', buf.declaration, desc = 'LSP Declration', mode = 'n' },
       { '<leader>Lde', buf.definition, desc = 'LSP Definitions', mode = 'n' },
       { '<leader>Lds', buf.document_symbol, desc = 'LSP Document symbols', mode = 'n' },
-      { '<leader>Lh', buf.hover, desc = 'LSP Hover', mode = 'n' },
+      { '<leader>LK', buf.hover, desc = 'LSP Hover', mode = 'n' },
       { '<leader>Lc', buf.code_action, desc = 'LSP Code Actions', mode = 'n' },
       { '<leader>Lr', buf.references, desc = 'LSP References', mode = 'n' },
       { '<leader>Li', buf.implementation, desc = 'LSP Implementations', mode = 'n' },

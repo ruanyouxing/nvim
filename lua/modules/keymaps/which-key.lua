@@ -21,6 +21,7 @@ return {
             keys = '<leader>S',
           }
         end,
+        desc = 'Flash mode',
       },
       {
         '<leader>l',
@@ -28,6 +29,15 @@ return {
           require('which-key').show { keys = '<leader>L' }
         end,
         desc = 'LSP Hydra',
+      },
+      {
+        mode = 'n',
+        '<S-f>',
+        function()
+          require 'modules.keymaps.ufo'
+          require('which-key').show { keys = '<M-F>' }
+        end,
+        desc = 'Fold mode'
       },
     },
   },
