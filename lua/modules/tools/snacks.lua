@@ -88,10 +88,38 @@ return {
       ⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⢷⠾⠛⠂⢹⠀⠀⠀⢡⠀⠀⠀⠀⠀⠙⠛⠿⢿
       ]],
         keys = {
-          { icon = '󰈢 ', key = 'e', desc = 'Recent files', action = function() Snacks.picker.recent() end },
-          { icon = ' ', key = 'T', desc = 'Picker', action = function() Snacks.picker() end },
-          { icon = ' ', key = 'S', desc = 'List available sessions', action = function() vim.cmd [[Persisted select]] end },
-          { icon = ' ', key = '<leader>s', desc = 'Load latest saved session', action = function() require('persisted').load { last = true } end },
+          {
+            icon = '󰈢 ',
+            key = 'e',
+            desc = 'Recent files',
+            action = function()
+              Snacks.picker.recent()
+            end,
+          },
+          {
+            icon = ' ',
+            key = 'T',
+            desc = 'Picker',
+            action = function()
+              Snacks.picker()
+            end,
+          },
+          {
+            icon = ' ',
+            key = 'S',
+            desc = 'List available sessions',
+            action = function()
+              vim.cmd [[Persisted select]]
+            end,
+          },
+          {
+            icon = ' ',
+            key = '<leader>s',
+            desc = 'Load latest saved session',
+            action = function()
+              require('persisted').load { last = true }
+            end,
+          },
           { icon = '󰗼 ', key = '<C-q>', desc = 'Exit Neovim', action = ':qa' },
         },
       },
@@ -118,15 +146,29 @@ return {
       filter = function(buf)
         local bo = vim.bo[buf]
         local exclude_filetypes = {
-          ['log'] = true, ['fugitive'] = true, ['gitcommit'] = true,
-          ['vimwiki'] = true, ['markdown'] = true, ['txt'] = true,
-          ['vista'] = true, ['help'] = true, ['todoist'] = true,
-          ['NvimTree'] = true, ['peekaboo'] = true, ['git'] = true,
-          ['TelescopePrompt'] = true, ['undotree'] = true,
-          ['flutterToolsOutline'] = true, ['lspinfo'] = true, ['neo-tree'] = true,
+          ['log'] = true,
+          ['fugitive'] = true,
+          ['gitcommit'] = true,
+          ['vimwiki'] = true,
+          ['markdown'] = true,
+          ['txt'] = true,
+          ['vista'] = true,
+          ['help'] = true,
+          ['todoist'] = true,
+          ['NvimTree'] = true,
+          ['peekaboo'] = true,
+          ['git'] = true,
+          ['TelescopePrompt'] = true,
+          ['undotree'] = true,
+          ['flutterToolsOutline'] = true,
+          ['lspinfo'] = true,
+          ['neo-tree'] = true,
         }
         local exclude_buftypes = {
-          ['terminal'] = true, ['nofile'] = true, ['quickfix'] = true, ['prompt'] = true,
+          ['terminal'] = true,
+          ['nofile'] = true,
+          ['quickfix'] = true,
+          ['prompt'] = true,
         }
         if exclude_filetypes[bo.filetype] or exclude_buftypes[bo.buftype] then
           return false
@@ -136,11 +178,61 @@ return {
     },
   },
   keys = {
-    { '<C-w>', function() Snacks.bufdelete() end, desc = 'Delete buffer' },
-    { 'lg', function() Snacks.lazygit.open() end, desc = 'Open Lazygit' },
-    { '<leader>t', function() Snacks.terminal.toggle() end, desc = 'Open toggle terminal' },
-    { '<C-f>', function() Snacks.picker.grep() end, desc = 'Live grep' },
-    { '<C-t>', function() Snacks.picker.files() end, desc = 'Open files' },
-    { '<leader>z', function() Snacks.picker.zoxide() end, desc = 'Jump to directory' },
+    {
+      '<C-w>',
+      function()
+        Snacks.bufdelete()
+      end,
+      desc = 'Delete buffer',
+    },
+    {
+      'lg',
+      function()
+        Snacks.lazygit.open()
+      end,
+      desc = 'Open Lazygit',
+    },
+    {
+      '<leader>t',
+      function()
+        Snacks.terminal.toggle()
+      end,
+      desc = 'Open toggle terminal',
+    },
+    {
+      '<C-f>',
+      function()
+        Snacks.picker.grep()
+      end,
+      desc = 'Live grep',
+    },
+    {
+      '<C-S-f>',
+      function()
+        Snacks.picker.lines()
+      end,
+      desc = 'Find in file',
+    },
+    {
+      '<C-S-p>',
+      function()
+        Snacks.picker()
+      end,
+      desc = 'Palette',
+    },
+    {
+      '<C-t>',
+      function()
+        Snacks.picker.files()
+      end,
+      desc = 'Open files',
+    },
+    {
+      '<leader>z',
+      function()
+        Snacks.picker.zoxide()
+      end,
+      desc = 'Jump to directory',
+    },
   },
 }

@@ -59,7 +59,7 @@ return {
       {
         '<C-S-y>',
         function()
-          require('telescope').extensions.yank_history.yank_history()
+          Snacks.picker.yanky()
         end,
       },
     },

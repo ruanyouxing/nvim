@@ -2,13 +2,21 @@ vim.api.nvim_create_autocmd('LspAttach', {
   callback = function()
     local buf = vim.lsp.buf
     require('which-key').add {
-      { '<leader>Lda', buf.declaration, desc = 'LSP Declration', mode = 'n' },
-      { '<leader>Lde', buf.definition, desc = 'LSP Definitions', mode = 'n' },
-      { '<leader>Lds', buf.document_symbol, desc = 'LSP Document symbols', mode = 'n' },
-      { '<leader>LK', buf.hover, desc = 'LSP Hover', mode = 'n' },
-      { '<leader>Lc', buf.code_action, desc = 'LSP Code Actions', mode = 'n' },
-      { '<leader>Lr', buf.references, desc = 'LSP References', mode = 'n' },
-      { '<leader>Li', buf.implementation, desc = 'LSP Implementations', mode = 'n' },
+      { '<leader>lda', buf.declaration, desc = 'LSP Declration', mode = 'n' },
+      { '<leader>lde', buf.definition, desc = 'LSP Definitions', mode = 'n' },
+      { '<leader>lds', buf.document_symbol, desc = 'LSP Document symbols', mode = 'n' },
+      { '<leader>lK', buf.hover, desc = 'LSP Hover', mode = 'n' },
+      { '<leader>lc', buf.code_action, desc = 'LSP Code Actions', mode = 'n' },
+      { '<leader>lr', buf.references, desc = 'LSP References', mode = 'n' },
+      { '<leader>li', buf.implementation, desc = 'LSP Implementations', mode = 'n' },
+      {
+        '<leader>ln',
+        function()
+          require('nvim-navbuddy').open()
+        end,
+        desc = 'Navigation',
+        mode = 'n',
+      },
       {
         '<leader>f',
         function()
@@ -21,7 +29,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
         mode = { 'n', 'v' },
       },
       {
-        '<leader>Lf',
+        '<leader>lf',
         function()
           require('conform').format {
             async = false,

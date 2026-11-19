@@ -18,7 +18,7 @@ return {
         function()
           require 'modules.keymaps.flash'
           require('which-key').show {
-            keys = '<leader>S',
+            keys = '<leader>s',
           }
         end,
         desc = 'Flash mode',
@@ -26,16 +26,16 @@ return {
       {
         '<leader>l',
         function()
-          require('which-key').show { keys = '<leader>L' }
+          require('which-key').show { keys = '<leader>l' }
         end,
-        desc = 'LSP Hydra',
+        desc = 'LSP',
       },
       {
         mode = 'n',
         '<leader>F',
         function()
           require 'modules.keymaps.ufo'
-          require('which-key').show { keys = '<M-F>' }
+          require('which-key').show { keys = '<leader>F' }
         end,
         desc = 'Fold mode',
       },
@@ -44,7 +44,7 @@ return {
         function()
           require 'modules.keymaps.git'
           require('which-key').show {
-            keys = '<leader>G',
+            keys = '<leader>g',
           }
         end,
         desc = 'Git',
@@ -54,7 +54,44 @@ return {
         function()
           require 'modules.keymaps.mark'
           require('which-key').show {
-            keys = '<leader>M',
+            keys = '<leader>m',
+          }
+        end,
+        desc = 'Marks',
+      },
+      {
+        '<M-l>',
+        function()
+          require 'modules.keymaps.lazy'
+          require('which-key').show {
+            keys = '<M-l>',
+          }
+        end,
+        desc = 'Lazy.nvim',
+      },
+      {
+        '<M-c>',
+        function()
+          require 'modules.keymaps.competitest'
+          require('which-key').show { keys = '<M-c>' }
+        end,
+        desc = 'Competitest',
+      },
+      {
+        '<leader>S',
+        function()
+          require('which-key').add {
+            {
+              '<leader>Ss',
+              function()
+                require('persisted').save { override = true }
+                require('trailblazer').save_trailblazer_state_to_file()
+              end,
+            },
+            desc = 'Save session',
+          }
+          require('which-key').show {
+            keys = '<leader>S',
           }
         end,
       },

@@ -54,12 +54,6 @@ local function lazy_updates()
 end
 
 local function custom_filename()
-  if package.loaded['hydra.statusline'] then
-    local hydra = require 'hydra.statusline'
-    if hydra.is_active() then
-      return '(' .. hydra.get_color() .. ') ' .. hydra.get_name()
-    end
-  end
   if vim.bo.filetype == 'CompetiTest' and not vim.fn.pumvisible() then
     local ok, title = pcall(vim.api.nvim_buf_get_var, 0, 'competitest_title')
     if ok then

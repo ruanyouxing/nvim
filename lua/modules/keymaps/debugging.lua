@@ -1,1 +1,3 @@
-return {}
+require('which-key').add { {
+  { '<M-d>' },
+} }

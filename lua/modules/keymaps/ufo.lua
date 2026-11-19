@@ -1,7 +1,7 @@
 local wk = require 'which-key'
 wk.add {
   {
-    '<M-F><leader>',
+    '<leader>F<leader>',
     function()
       if vim.fn.foldclosed '.' == -1 then
         vim.cmd [[foldclose]]
@@ -12,21 +12,21 @@ wk.add {
     desc = 'Toggle fold',
   },
   {
-    '<M-F>o',
+    '<leader>Fo',
     function()
       require('ufo').openAllFolds()
     end,
     desc = 'Open all folds',
   },
   {
-    '<M-F>c',
+    '<leader>Fc',
     function()
       require('ufo').closeAllFolds()
     end,
     desc = 'Close all folds',
   },
   {
-    '<M-F>K',
+    '<leader>FK',
     function()
       local winid = require('ufo').peekFoldedLinesUnderCursor()
       if not winid then

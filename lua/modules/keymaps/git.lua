@@ -1,98 +1,139 @@
 require('which-key').add {
   {
-    '<leader>Gdo',
+    '<leader>gd',
+    function()
+      require('which-key').show {
+        keys = '<leader>gd',
+      }
+    end,
+    desc = 'Diff',
+  },
+  {
+    '<leader>gdo',
     function()
       vim.cmd [[DiffviewOpen]]
     end,
     desc = 'Diffview: Open',
   },
   {
-    '<leader>Gdc',
+    '<leader>gdc',
     function()
       vim.cmd [[DiffviewClose]]
     end,
     desc = 'Diffview: Close',
   },
   {
-    '<leader>Gdh',
+    '<leader>gdh',
     function()
       vim.cmd [[DiffviewFileHistory]]
     end,
     desc = 'Diffview: File history',
   },
   {
-    '<leader>Gdt',
+    '<leader>gdt',
     function()
       require('gitsigns').diffthis()
     end,
     desc = 'Diff this',
   },
   {
-    '<leader>Gb<leader>',
+    '<leader>gdw',
+    function()
+      require('gitsigns').toggle_word_diff()
+    end,
+    desc = 'Word diff',
+  },
+  {
+    '<leader>gbl',
+    function()
+      require('which-key').show {
+        keys = '<leader>gbl',
+      }
+    end,
+    desc = 'Blame',
+  },
+  {
+    '<leader>gbl<leader>',
     function()
       require('gitsigns').toggle_current_line_blame()
     end,
     desc = 'Toggle blame current line',
   },
   {
-    '<leader>Gbl',
+    '<leader>gbll',
     function()
       require('gitsigns').blame_line { full = true }
     end,
     desc = 'Blame current line',
   },
   {
-    '<leader>Gbd',
+    '<leader>gbld',
     function()
       require('gitsigns').toggle_deleted()
     end,
-    desc = 'Git blame deleted',
+    desc = 'Blame deleted',
   },
   {
-    '<leader>Ghp',
+    '<leader>gh',
+    function()
+      require('which-key').show { keys = '<leader>gh' }
+    end,
+    desc = 'Hunk',
+  },
+  {
+    '<leader>ghp',
     function()
       require('gitsigns').preview_hunk()
     end,
-    desc = 'Git preview hunk',
+    desc = 'Preview hunk',
   },
   {
-    '<leader>Ghs',
+    '<leader>ghs',
     function()
       require('gitsigns').stage_hunk()
     end,
-    desc = 'Git stage hunk',
+    desc = 'Stage hunk',
   },
   {
-    '<leader>GhS',
+    '<leader>ghS',
     function()
       require('gitsigns').undo_stage_hunk()
     end,
-    desc = 'Git undo stage hunk',
+    desc = 'Undo stage hunk',
   },
   {
-    '<leader>Ghr',
+    '<leader>ghr',
     function()
       require('gitsigns').reset_hunk()
     end,
-    desc = 'Git reset hunk',
+    desc = 'Reset hunk',
   },
   {
-    '<leader>Gs',
+    '<leader>gs',
     desc = 'Gitsigns show',
     function()
       require('gitsigns').show()
     end,
   },
   {
-    '<leader>Gbr',
-    desc = 'Git reset buffer',
+    '<leader>gbf',
+    desc = 'Buffer',
+    function()
+      require('which-key').show {
+        keys = '<leader>gbf',
+      }
+    end,
+  },
+  {
+    '<leader>gbfr',
+    desc = 'Reset buffer',
     function()
       require('gitsigns').reset_buffer()
     end,
   },
   {
-    '<leader>Gbs',
-    desc = 'Git stage buffer',
+    '<leader>gbfs',
+    desc = 'Stage buffer',
     function()
       require('gitsigns').stage_buffer()
     end,

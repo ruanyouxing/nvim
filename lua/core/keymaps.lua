@@ -51,21 +51,7 @@ function M.set_keybinds()
       end,
       desc = 'Toggle Trouble Diagnostics',
     },
-    {
-      '<leader>p',
-      function()
-        require('lazy').update()
-      end,
-      desc = 'Update Lazy plugins',
-    },
     { '<C-q>', cmd 'q!', desc = 'Force quit' },
-    {
-      '<C-S-p>',
-      function()
-        require('core.menu').trigger_menu()
-      end,
-      desc = 'Trigger Command Menu',
-    },
     { '<C-y>', cmd 'redo', desc = 'Redo action' },
     { '<C-z>', cmd 'u', desc = 'Undo action' },
     {
