@@ -55,7 +55,7 @@ return {
       {
         ft = 'trouble',
         title = 'Trouble.nvim',
-        size = { height = 0.25 },
+        size = { height = 0.2 },
       },
       {
         ft = 'help',

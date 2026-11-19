@@ -131,4 +131,8 @@ return {
       },
     }
   end,
+  keys = {
+    { '<C-]>', '<Plug>(cokeline-focus-next)', desc = 'Focus next tab' },
+    { '<C-[>', '<Plug>(cokeline-focus-prev)', desc = 'Focus previous tab' },
+  },
 }

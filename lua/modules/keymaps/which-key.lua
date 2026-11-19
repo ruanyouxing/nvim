@@ -4,7 +4,8 @@ return {
     'folke/which-key.nvim',
     event = 'VeryLazy',
     opts = {
-      preset = 'helix',
+      preset = 'modern',
+      delay = 300,
     },
     keys = {
       {
@@ -94,6 +95,7 @@ return {
             keys = '<leader>S',
           }
         end,
+        desc = 'Sessions'
       },
     },
   },

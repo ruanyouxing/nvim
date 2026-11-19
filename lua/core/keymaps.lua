@@ -36,7 +36,6 @@ local vmap = bind 'v'
 local xmap = bind 'x'
 
 function M.set_keybinds()
-  local buf = vim.lsp.buf
 
   nmap { { ' ', '' } }
   xmap { { ' ', '' } }
@@ -44,13 +43,6 @@ function M.set_keybinds()
   nmap {
     { 'Y', 'y$', desc = 'Yank to end of line' },
     { '<C-a>', 'ggVG', desc = 'Select all text' },
-    {
-      'T',
-      function()
-        vim.cmd 'Trouble diagnostics toggle'
-      end,
-      desc = 'Toggle Trouble Diagnostics',
-    },
     { '<C-q>', cmd 'q!', desc = 'Force quit' },
     { '<C-y>', cmd 'redo', desc = 'Redo action' },
     { '<C-z>', cmd 'u', desc = 'Undo action' },
@@ -61,10 +53,8 @@ function M.set_keybinds()
       end,
       desc = 'Toggle conceal level',
     },
-    { 'R', buf.rename, desc = 'LSP Rename variable' },
+    { 'R', vim.lsp.buf.rename, desc = 'LSP Rename variable' },
 
-    { '<C-]>', plug 'cokeline-focus-next', desc = 'Focus next tab' },
-    { '<C-[>', plug 'cokeline-focus-prev', desc = 'Focus previous tab' },
   }
 
   vmap {
