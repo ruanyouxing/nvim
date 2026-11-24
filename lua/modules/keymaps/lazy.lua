@@ -1,6 +1,6 @@
 require('which-key').add {
   {
-    '<M-l>l',
+    '<M-l><leader>',
     function()
       require('lazy').show()
     end,
@@ -8,28 +8,28 @@ require('which-key').add {
   },
   {
     '<M-l>x',
-    desc = 'Lazy: clean/uninstall',
+    desc = 'Clean/uninstall',
     function()
       require('lazy').clean()
     end,
   },
   {
     '<M-l>p',
-    desc = 'Lazy: profile',
+    desc = 'Profile',
     function()
       require('lazy').profile()
     end,
   },
   {
     '<M-l>s',
-    desc = 'Lazy: sync',
+    desc = 'Sync',
     function()
       require('lazy').sync()
     end,
   },
   {
     '<M-l>u',
-    desc = 'Lazy: update',
+    desc = 'Update',
     function()
       require('lazy').update()
     end,
